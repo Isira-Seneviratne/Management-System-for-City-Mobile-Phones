@@ -5,6 +5,7 @@
  */
 package financialsystem;
 
+import java.sql.*;
 import javafx.geometry.Insets;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -19,6 +20,8 @@ import javafx.stage.Stage;
  * @author hp
  */
 public class FinancialSystem extends Application {
+    
+    private static Connection conn = null;
     
     @Override
     public void start(Stage primaryStage) {
@@ -176,6 +179,10 @@ public class FinancialSystem extends Application {
         GridPane.setFillWidth(calc_results, true);
         calc_results.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         GridPane.setConstraints(calc_results, 2, 20);
+        calc_results.setOnAction((ActionEvent event) ->
+        {
+            calculateResults();
+        });
         grid.getChildren().add(calc_results);
 
         Button generate = new Button("Generate report");
@@ -184,16 +191,11 @@ public class FinancialSystem extends Application {
         GridPane.setConstraints(generate, 3, 20);
         generate.setOnAction((ActionEvent event) ->
         {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Success");
-            alert.setHeaderText("Success!");
-            alert.setContentText("A monthly financial report has been generated.");
-            
-            alert.showAndWait();
+            generateReport();
         });
         grid.getChildren().add(generate);
         
-        Scene scene = new Scene(grid, 900, 500);
+        Scene scene = new Scene(grid, 1300, 675);
         
         primaryStage.resizableProperty().setValue(Boolean.FALSE);
         primaryStage.setTitle("Financial System");
@@ -205,4 +207,40 @@ public class FinancialSystem extends Application {
         launch(args);
     }
     
+    public static void dbConnect()
+    {
+        try
+        {
+            Class.forName("com.mysql.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/database", "user", "password");
+        }
+        catch(ClassNotFoundException ce)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Database Driver Error");
+            alert.setHeaderText("Error");
+            alert.setContentText("Unable to load the database driver.");
+            
+            alert.showAndWait();
+        }
+        catch(SQLException se)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Database Connection Error");
+            alert.setHeaderText("Error");
+            alert.setContentText("Unable to connect to the database.");
+            
+            alert.showAndWait();
+        }
+    }
+    
+    public static void calculateResults()
+    {
+        dbConnect();
+    }
+    
+    public static void generateReport()
+    {
+        dbConnect();
+    }
 }
