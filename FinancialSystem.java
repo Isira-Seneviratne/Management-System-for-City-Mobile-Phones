@@ -9,13 +9,13 @@ import java.awt.Color;
 import javax.swing.*;
 import javafx.embed.swing.JFXPanel;
 import java.sql.*;
+import java.util.Calendar;
 import javafx.geometry.Insets;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import java.util.Calendar;
 
 /**
  *
@@ -34,9 +34,10 @@ public class FinancialSystem extends JFrame {
         this.setVisible(true);
         cent = new JFXPanel();
         initJFXPanel();
-        this.add(cent);
         cent.setScene(scene);
         initComponents();
+        this.remove(center);
+        this.add(cent, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1090, 760));
         
         setColor(topic6);   //set the colour to FinancialSystem bar
         bar6.setOpaque(true);
@@ -55,7 +56,6 @@ public class FinancialSystem extends JFrame {
             alert.setTitle("Database Driver Error");
             alert.setHeaderText("Error");
             alert.setContentText("Unable to load the database driver.");
-            
             alert.showAndWait();
         }
         catch(SQLException se)
@@ -64,7 +64,6 @@ public class FinancialSystem extends JFrame {
             alert.setTitle("Database Connection Error");
             alert.setHeaderText("Error");
             alert.setContentText("Unable to connect to the database.");
-            
             alert.showAndWait();
         }
     }
@@ -85,6 +84,7 @@ public class FinancialSystem extends JFrame {
         grid.setPadding(new Insets(10, 10, 10, 10));
         grid.setVgap(10);
         grid.setHgap(10);
+        grid.setStyle("-fx-background-color: #c7eeee;");
         
         final Label lrepair_rev = new Label("Repair revenue: ");
         GridPane.setConstraints(lrepair_rev, 0, 0);
@@ -673,8 +673,7 @@ public class FinancialSystem extends JFrame {
     }//GEN-LAST:event_closeMouseClicked
 
     private void minimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeMouseClicked
-        JFrame frame = new JFrame("test");   //minimize label
-        frame.setExtendedState(JFrame.ICONIFIED);
+        this.setExtendedState(JFrame.ICONIFIED);
 
     }//GEN-LAST:event_minimizeMouseClicked
 
