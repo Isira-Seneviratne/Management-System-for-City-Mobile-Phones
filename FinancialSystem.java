@@ -46,7 +46,7 @@ public class FinancialSystem extends JFrame {
         try
         {
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/database", "user", "password");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ManagementSystem", "Admin", "abcd1234");
         }
         catch(ClassNotFoundException ce)
         {
