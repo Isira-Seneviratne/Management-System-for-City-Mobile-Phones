@@ -15,6 +15,7 @@ import javafx.geometry.HPos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import java.util.Calendar;
 
 /**
  *
@@ -651,7 +652,7 @@ public class FinancialSystem extends JFrame {
         time.setText("Time");
         topbar.add(time, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 0, 120, 50));
 
-        date.setText("Date with calender");
+        date.setText(getDate());
         topbar.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, 130, 50));
 
         getContentPane().add(topbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 1110, 50));
@@ -660,6 +661,13 @@ public class FinancialSystem extends JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private String getDate()
+    {
+        Calendar cal = Calendar.getInstance();
+        String months[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"}, month = months[cal.get(Calendar.MONTH)];
+        return cal.get(Calendar.DATE)+" "+month+" "+cal.get(Calendar.YEAR);
+    }
+    
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
         System.exit(0); // cancel button
     }//GEN-LAST:event_closeMouseClicked
