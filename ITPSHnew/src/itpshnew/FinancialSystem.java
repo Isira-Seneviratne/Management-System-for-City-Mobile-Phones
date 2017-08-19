@@ -277,6 +277,7 @@ public class FinancialSystem extends JFrame {
         {
             calculateResults();
         });
+        calc_results.setStyle("-fx-base: #36b0b0;");
         grid.getChildren().add(calc_results);
 
         Button generate = new Button("Generate report");
@@ -287,6 +288,7 @@ public class FinancialSystem extends JFrame {
         {
             generateReport();
         });
+        generate.setStyle("-fx-base: #36b0b0;");
         grid.getChildren().add(generate);
         
         scene = new Scene(grid, 500, 500);
