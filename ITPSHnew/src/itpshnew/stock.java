@@ -413,8 +413,8 @@ public class stock extends javax.swing.JFrame {
     }//GEN-LAST:event_closeMouseClicked
 
     private void minimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeMouseClicked
-        JFrame frame = new JFrame("test");   //minimize label
-        frame.setExtendedState(JFrame.ICONIFIED);
+          //minimize label
+        this.setExtendedState(JFrame.ICONIFIED);
 
     }//GEN-LAST:event_minimizeMouseClicked
 
