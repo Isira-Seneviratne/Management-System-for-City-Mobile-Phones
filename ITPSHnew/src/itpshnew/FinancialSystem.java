@@ -20,14 +20,14 @@ import java.text.SimpleDateFormat;
 
 /**
  *
- * @author Thareendra
+ * @author Isira
  */
 public class FinancialSystem extends JFrame {
 
     /**
      * Creates new form FinancialSystem
      */
-    private static float RepRev, RepCost, RepProf, TotalRev, TotalCost, TotalProf;
+    private static float RepRev, RepCost, RepProf, TotalRev = 0, TotalCost = 0, TotalProf = 0;
     
     public FinancialSystem() {
         
@@ -90,7 +90,15 @@ public class FinancialSystem extends JFrame {
     
     private static void generateReport()
     {
-        dbConnect();
+        if(TotalCost == 0 && TotalRev == 0 && TotalProf == 0)
+        {
+            Alert al = new Alert(Alert.AlertType.ERROR);
+            al.setTitle("No Financial Values");
+            al.setHeaderText("Financial values nonexistent");
+            al.setContentText("Click the Calculate Results button before clicking the Generate Report button, to calculate financial values.");
+            al.showAndWait();
+            return;
+        }
         String month = getMonth();
         int year = Calendar.getInstance().get(Calendar.YEAR);
         try
