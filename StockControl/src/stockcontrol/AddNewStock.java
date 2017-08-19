@@ -5,6 +5,8 @@
  */
 package stockcontrol;
 
+import java.awt.Color;
+
 /**
  *
  * @author ITSD
@@ -15,6 +17,7 @@ public class AddNewStock extends javax.swing.JFrame {
      * Creates new form AddNewStock
      */
     public AddNewStock() {
+        this.setBackground(new Color(0, 153, 153));
         initComponents();
     }
 
@@ -43,6 +46,7 @@ public class AddNewStock extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Add New Stock");
 
         jLabel1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 24)); // NOI18N
         jLabel1.setText("Add New Stock");

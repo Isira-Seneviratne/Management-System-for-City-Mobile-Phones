@@ -6,252 +6,39 @@
 package itpshnew;
 
 import java.awt.Color;
-import javax.swing.*;
-import javafx.embed.swing.JFXPanel;
-import java.sql.*;
-import java.util.Calendar;
-import javafx.geometry.Insets;
-import javafx.event.ActionEvent;
-import javafx.geometry.HPos;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
+import java.awt.Frame;
+import java.awt.Toolkit;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Thareendra
  */
-public class FinancialSystem extends JFrame {
+public class purchase extends javax.swing.JFrame {
 
     /**
-     * Creates new form FinancialSystem
+     * Creates new form purchase
      */
-    public FinancialSystem() {
-        
+    public purchase() {
         this.setUndecorated(true);
         //this.setAlwaysOnTop(true);
         this.setResizable(true);
         this.setVisible(true);
-        cent = new JFXPanel();
-        initJFXPanel();
-        cent.setScene(scene);
+        
         initComponents();
-        this.remove(center);
-        this.add(cent, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1090, 760));
         
-        setColor(topic6);   //set the colour to FinancialSystem bar
-        bar6.setOpaque(true);
+        setColor(topic2);   //set the colour to purchase bar
+        bar2.setOpaque(true);
+        
+        /*Toolkit tk = Toolkit.getDefaultToolkit();
+            int xsize = (int) tk.getScreenSize().getWidth();
+            int ysize = (int) tk.getScreenSize().getWidth();
+        this.setSize(xsize, ysize);*/
+        
+        
     }
-    
-    private static void dbConnect()
-    {
-        try
-        {
-            Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ManagementSystem", "Admin", "abcd1234");
-        }
-        catch(ClassNotFoundException ce)
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Database Driver Error");
-            alert.setHeaderText("Error");
-            alert.setContentText("Unable to load the database driver.");
-            alert.showAndWait();
-        }
-        catch(SQLException se)
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Database Connection Error");
-            alert.setHeaderText("Error");
-            alert.setContentText("Unable to connect to the database.");
-            alert.showAndWait();
-        }
-    }
-    
-    private static void calculateResults()
-    {
-        dbConnect();
-    }
-    
-    private static void generateReport()
-    {
-        dbConnect();
-    }
-    
-    private void initJFXPanel()
-    {
-        GridPane grid = new GridPane();
-        grid.setPadding(new Insets(10, 10, 10, 10));
-        grid.setVgap(10);
-        grid.setHgap(10);
-        grid.setStyle("-fx-background-color: #c7eeee;");
-        
-        final Label lrepair_rev = new Label("Repair revenue: ");
-        GridPane.setConstraints(lrepair_rev, 0, 0);
-        GridPane.setHalignment(lrepair_rev, HPos.RIGHT);
-        grid.getChildren().add(lrepair_rev);
-        
-        final TextField repair_rev = new TextField();
-        GridPane.setConstraints(repair_rev, 1, 0);
-        grid.getChildren().add(repair_rev);
-        
-        final Label lrepair_cost = new Label("Repair costs: ");
-        GridPane.setConstraints(lrepair_cost, 0, 1);
-        GridPane.setHalignment(lrepair_cost, HPos.RIGHT);
-        grid.getChildren().add(lrepair_cost);
-        
-        final TextField repair_cost = new TextField();
-        GridPane.setConstraints(repair_cost, 1, 1);
-        grid.getChildren().add(repair_cost);
 
-        final Label lrepair_prof = new Label("Repair profit: ");
-        GridPane.setConstraints(lrepair_prof, 0, 2);
-        GridPane.setHalignment(lrepair_prof, HPos.RIGHT);
-        grid.getChildren().add(lrepair_prof);
-        
-        final TextField repair_profit = new TextField();
-        GridPane.setConstraints(repair_profit, 1, 2);
-        grid.getChildren().add(repair_profit);
-
-        final Label lsales_rev = new Label("Sales revenue: ");
-        GridPane.setConstraints(lsales_rev, 2, 0);
-        GridPane.setHalignment(lsales_rev, HPos.RIGHT);
-        grid.getChildren().add(lsales_rev);
-        
-        final TextField sales_rev = new TextField();
-        GridPane.setConstraints(sales_rev, 3, 0);
-        grid.getChildren().add(sales_rev);
-        
-        final Label lsales_cost = new Label("Sales costs: ");
-        GridPane.setConstraints(lsales_cost, 2, 1);
-        GridPane.setHalignment(lsales_cost, HPos.RIGHT);
-        grid.getChildren().add(lsales_cost);
-        
-        final TextField sales_loss = new TextField();
-        GridPane.setConstraints(sales_loss, 3, 1);
-        grid.getChildren().add(sales_loss);
-        
-        final Label lsales_prof = new Label("Sales profit: ");
-        GridPane.setConstraints(lsales_prof, 2, 2);
-        GridPane.setHalignment(lsales_prof, HPos.RIGHT);
-        grid.getChildren().add(lsales_prof);
-        
-        final TextField sales_prof = new TextField();
-        GridPane.setConstraints(sales_prof, 3, 2);
-        grid.getChildren().add(sales_prof);
-        
-        final Label ldis_rev = new Label("Distribution revenue: ");
-        GridPane.setConstraints(ldis_rev, 4, 0);
-        GridPane.setHalignment(ldis_rev, HPos.RIGHT);
-        grid.getChildren().add(ldis_rev);
-        
-        final TextField dis_rev = new TextField();
-        GridPane.setConstraints(dis_rev, 5, 0);
-        grid.getChildren().add(dis_rev);
-        
-        final Label ldis_cost = new Label("Distribution costs: ");
-        GridPane.setConstraints(ldis_cost, 4, 1);
-        GridPane.setHalignment(ldis_cost, HPos.RIGHT);
-        grid.getChildren().add(ldis_cost);
-        
-        final TextField dis_cost = new TextField();
-        GridPane.setConstraints(dis_cost, 5, 1);
-        grid.getChildren().add(dis_cost);
-        
-        final Label ldis_prof = new Label("Distribution profit: ");
-        GridPane.setConstraints(ldis_prof, 4, 2);
-        GridPane.setHalignment(ldis_prof, HPos.RIGHT);
-        grid.getChildren().add(ldis_prof);
-        
-        final TextField dis_prof = new TextField();
-        GridPane.setConstraints(dis_prof, 5, 2);
-        grid.getChildren().add(dis_prof);
-        
-        final Label lord_rev = new Label("Order revenue: ");
-        GridPane.setConstraints(lord_rev, 1, 4);
-        GridPane.setHalignment(lord_rev, HPos.RIGHT);
-        grid.getChildren().add(lord_rev);
-        
-        final TextField ord_rev = new TextField();
-        GridPane.setConstraints(ord_rev, 2, 4);
-        grid.getChildren().add(ord_rev);
-        
-        final Label lord_cos = new Label("Order costs: ");
-        GridPane.setConstraints(lord_cos, 1, 5);
-        GridPane.setHalignment(lord_cos, HPos.RIGHT);
-        grid.getChildren().add(lord_cos);
-        
-        final TextField ord_cos = new TextField();
-        GridPane.setConstraints(ord_cos, 2, 5);
-        grid.getChildren().add(ord_cos);
-        
-        final Label lord_prof = new Label("Order profit: ");
-        GridPane.setConstraints(lord_prof, 1, 6);
-        GridPane.setHalignment(lord_prof, HPos.RIGHT);
-        grid.getChildren().add(lord_prof);
-        
-        final TextField ord_prof = new TextField();
-        GridPane.setConstraints(ord_prof, 2, 6);
-        grid.getChildren().add(ord_prof);
-        
-        final Label lother_costs = new Label("Other costs: ");
-        GridPane.setConstraints(lother_costs, 3, 4);
-        GridPane.setHalignment(lother_costs, HPos.RIGHT);
-        grid.getChildren().add(lother_costs);
-        
-        final TextField other_costs = new TextField();
-        GridPane.setConstraints(other_costs, 4, 4);
-        grid.getChildren().add(other_costs);
-        
-        final Label ltot_rev = new Label("Total monthly revenue: ");
-        GridPane.setConstraints(ltot_rev, 2, 13);
-        GridPane.setHalignment(ltot_rev, HPos.RIGHT);
-        grid.getChildren().add(ltot_rev);
-        
-        final TextField tot_rev = new TextField();
-        GridPane.setConstraints(tot_rev, 3, 13);
-        grid.getChildren().add(tot_rev);
-        
-        final Label ltot_cost = new Label("Total monthly costs: ");
-        GridPane.setConstraints(ltot_cost, 2, 14);
-        GridPane.setHalignment(ltot_cost, HPos.RIGHT);
-        grid.getChildren().add(ltot_cost);
-        
-        final TextField tot_loss = new TextField();
-        GridPane.setConstraints(tot_loss, 3, 14);
-        grid.getChildren().add(tot_loss);
-        
-        final Label ltot_prof = new Label("Total monthly profit: ");
-        GridPane.setConstraints(ltot_prof, 2, 15);
-        GridPane.setHalignment(ltot_prof, HPos.RIGHT);
-        grid.getChildren().add(ltot_prof);
-        
-        final TextField tot_prof = new TextField();
-        GridPane.setConstraints(tot_prof, 3, 15);
-        grid.getChildren().add(tot_prof);
-        
-        Button calc_results = new Button("Calculate results");
-        GridPane.setFillWidth(calc_results, true);
-        calc_results.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        GridPane.setConstraints(calc_results, 2, 20);
-        calc_results.setOnAction((ActionEvent event) ->
-        {
-            calculateResults();
-        });
-        grid.getChildren().add(calc_results);
-
-        Button generate = new Button("Generate report");
-        GridPane.setFillWidth(generate, true);
-        generate.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        GridPane.setConstraints(generate, 3, 20);
-        generate.setOnAction((ActionEvent event) ->
-        {
-            generateReport();
-        });
-        grid.getChildren().add(generate);
-        
-        scene = new Scene(grid, 500, 500);
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -298,14 +85,18 @@ public class FinancialSystem extends JFrame {
         name7 = new javax.swing.JLabel();
         pic7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        center = new javax.swing.JPanel();
         topbar = new javax.swing.JPanel();
         close = new javax.swing.JLabel();
         minimize = new javax.swing.JLabel();
         time = new javax.swing.JLabel();
         date = new javax.swing.JLabel();
+        center = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 153, 153));
+        setPreferredSize(new java.awt.Dimension(1366, 768));
+        setResizable(false);
+        setSize(new java.awt.Dimension(1366, 768));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         sidepanel.setBackground(new java.awt.Color(0, 153, 153));
@@ -314,7 +105,7 @@ public class FinancialSystem extends JFrame {
         topic1.setBackground(new java.awt.Color(0, 153, 153));
         topic1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                topic1MousePressed(evt);
+                bar1MousePressed(evt);
             }
         });
         topic1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -322,7 +113,7 @@ public class FinancialSystem extends JFrame {
         bar1.setOpaque(false);
         bar1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                topic1MousePressed(evt);
+                bar1MousePressed(evt);
             }
         });
 
@@ -345,17 +136,12 @@ public class FinancialSystem extends JFrame {
         name.setText(" Home");
         name.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                topic1MousePressed(evt);
+                bar1MousePressed(evt);
             }
         });
         topic1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 9, 260, 40));
 
         pic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Home_48px.png"))); // NOI18N
-        pic.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                topic1MousePressed(evt);
-            }
-        });
         topic1.add(pic, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 50, 40));
 
         sidepanel.add(topic1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 290, 60));
@@ -615,21 +401,6 @@ public class FinancialSystem extends JFrame {
 
         getContentPane().add(sidepanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 810));
 
-        center.setBackground(new java.awt.Color(199, 238, 238));
-
-        javax.swing.GroupLayout centerLayout = new javax.swing.GroupLayout(center);
-        center.setLayout(centerLayout);
-        centerLayout.setHorizontalGroup(
-            centerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1090, Short.MAX_VALUE)
-        );
-        centerLayout.setVerticalGroup(
-            centerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 760, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(center, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1090, 760));
-
         topbar.setBackground(new java.awt.Color(0, 204, 204));
         topbar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -652,51 +423,73 @@ public class FinancialSystem extends JFrame {
         time.setText("Time");
         topbar.add(time, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 0, 120, 50));
 
-        date.setText(getDate());
+        date.setText("Date with calender");
         topbar.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, 130, 50));
 
-        getContentPane().add(topbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 1110, 50));
+        getContentPane().add(topbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 1080, 50));
 
-        setSize(new java.awt.Dimension(1366, 768));
+        center.setBackground(new java.awt.Color(199, 238, 238));
+
+        javax.swing.GroupLayout centerLayout = new javax.swing.GroupLayout(center);
+        center.setLayout(centerLayout);
+        centerLayout.setHorizontalGroup(
+            centerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        centerLayout.setVerticalGroup(
+            centerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(center, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1090, 760));
+
+        setSize(new java.awt.Dimension(1374, 806));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private String getDate()
-    {
-        Calendar cal = Calendar.getInstance();
-        String months[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"}, month = months[cal.get(Calendar.MONTH)];
-        return cal.get(Calendar.DATE)+" "+month+" "+cal.get(Calendar.YEAR);
-    }
-    
-    private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
-        System.exit(0); // cancel button
-    }//GEN-LAST:event_closeMouseClicked
-
-    private void minimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeMouseClicked
-        this.setExtendedState(JFrame.ICONIFIED);
-
-    }//GEN-LAST:event_minimizeMouseClicked
-
-    private void topic6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topic6MousePressed
-        /*setColor(topic6);   //set the colour
-        bar6.setOpaque(true);*/
-    }//GEN-LAST:event_topic6MousePressed
-
-    private void topic1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topic1MousePressed
+    private void bar1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bar1MousePressed
+        
+        
         home h1 = new home(); // go to home page
         h1.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_topic1MousePressed
+    }//GEN-LAST:event_bar1MousePressed
 
     private void topic2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topic2MousePressed
-        purchase p1 = new purchase(); // go to home page
-        p1.setVisible(true);
-        this.dispose();
+       /* setColor(topic2);   //set the colour
+        bar2.setOpaque(true);  */
+        
+        
     }//GEN-LAST:event_topic2MousePressed
-    void setColor(JPanel pl) //set the colour after  click
+
+    private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
+       System.exit(0); // cancel button
+    }//GEN-LAST:event_closeMouseClicked
+
+    private void minimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeMouseClicked
+        JFrame frame = new JFrame("test");   //minimize label
+         frame.setExtendedState(JFrame.ICONIFIED);
+         
+         
+         
+         
+    }//GEN-LAST:event_minimizeMouseClicked
+
+    private void topic6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topic6MousePressed
+        FinancialSystem h1 = new FinancialSystem(); // go to FinancialSystem
+        h1.setVisible(true);
+        this.dispose(); //dispose the current form
+    }//GEN-LAST:event_topic6MousePressed
+    
+        void setColor(JPanel pl) //set the colour after  click
         {
             pl.setBackground(new Color (0,204,204));
         }
+        
+        /*void resetColour (JPanel pl)
+        {
+            pl.setBackground(new Color(0,153,153));
+        }*/
     /**
      * @param args the command line arguments
      */
@@ -714,20 +507,20 @@ public class FinancialSystem extends JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FinancialSystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(purchase.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FinancialSystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(purchase.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FinancialSystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(purchase.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FinancialSystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(purchase.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FinancialSystem().setVisible(true);
+                new purchase().setVisible(true);
             }
         });
     }
@@ -777,7 +570,4 @@ public class FinancialSystem extends JFrame {
     private javax.swing.JPanel topic7;
     private javax.swing.JPanel topic8;
     // End of variables declaration//GEN-END:variables
-    private JFXPanel cent;
-    private Scene scene;
-    private static Connection conn;
 }
