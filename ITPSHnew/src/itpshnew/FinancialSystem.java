@@ -724,10 +724,11 @@ public class FinancialSystem extends JFrame {
         });
         topbar.add(minimize, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 0, -1, 50));
 
-        time.setText("Time");
         topbar.add(time, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 0, 120, 50));
-
-        date.setText("Date with calender");
+        timer = new TimerThread(time);
+        timer.start();
+        
+        date.setText(getDate());
         topbar.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, 130, 50));
 
         getContentPane().add(topbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 1110, 50));
