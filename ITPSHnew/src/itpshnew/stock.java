@@ -206,9 +206,19 @@ public class stock extends javax.swing.JFrame {
         sidepanel.add(topic4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 290, 60));
 
         topic5.setBackground(new java.awt.Color(0, 153, 153));
+        topic5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                topic5MousePressed(evt);
+            }
+        });
         topic5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         bar5.setOpaque(false);
+        bar5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                topic5MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout bar5Layout = new javax.swing.GroupLayout(bar5);
         bar5.setLayout(bar5Layout);
@@ -227,9 +237,19 @@ public class stock extends javax.swing.JFrame {
         name4.setForeground(new java.awt.Color(255, 255, 255));
         name4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         name4.setText("           Distribution");
+        name4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                topic5MousePressed(evt);
+            }
+        });
         topic5.add(name4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 9, 260, 40));
 
         pic4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Delivered_40px.png"))); // NOI18N
+        pic4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                topic5MousePressed(evt);
+            }
+        });
         topic5.add(pic4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 50, 40));
 
         sidepanel.add(topic5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 290, 60));
@@ -417,6 +437,10 @@ public class stock extends javax.swing.JFrame {
         this.setExtendedState(JFrame.ICONIFIED);
 
     }//GEN-LAST:event_minimizeMouseClicked
+
+    private void topic5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topic5MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_topic5MousePressed
 
     /**
      * @param args the command line arguments
