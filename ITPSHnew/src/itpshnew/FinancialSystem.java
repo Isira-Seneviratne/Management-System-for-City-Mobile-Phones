@@ -156,9 +156,9 @@ public class FinancialSystem extends JFrame {
         GridPane.setHalignment(lrepair_prof, HPos.RIGHT);
         grid.getChildren().add(lrepair_prof);
         
-        final TextField repair_profit = new TextField();
-        GridPane.setConstraints(repair_profit, 1, 2);
-        grid.getChildren().add(repair_profit);
+        final TextField repair_prof = new TextField();
+        GridPane.setConstraints(repair_prof, 1, 2);
+        grid.getChildren().add(repair_prof);
 
         final Label lsales_rev = new Label("Sales revenue: ");
         GridPane.setConstraints(lsales_rev, 2, 0);
@@ -174,9 +174,9 @@ public class FinancialSystem extends JFrame {
         GridPane.setHalignment(lsales_cost, HPos.RIGHT);
         grid.getChildren().add(lsales_cost);
         
-        final TextField sales_loss = new TextField();
-        GridPane.setConstraints(sales_loss, 3, 1);
-        grid.getChildren().add(sales_loss);
+        final TextField sales_cost = new TextField();
+        GridPane.setConstraints(sales_cost, 3, 1);
+        grid.getChildren().add(sales_cost);
         
         final Label lsales_prof = new Label("Sales profit: ");
         GridPane.setConstraints(lsales_prof, 2, 2);
@@ -215,72 +215,72 @@ public class FinancialSystem extends JFrame {
         grid.getChildren().add(dis_prof);
         
         final Label lord_rev = new Label("Order revenue: ");
-        GridPane.setConstraints(lord_rev, 1, 4);
+        GridPane.setConstraints(lord_rev, 1, 8);
         GridPane.setHalignment(lord_rev, HPos.RIGHT);
         grid.getChildren().add(lord_rev);
         
         final TextField ord_rev = new TextField();
-        GridPane.setConstraints(ord_rev, 2, 4);
+        GridPane.setConstraints(ord_rev, 2, 8);
         grid.getChildren().add(ord_rev);
         
         final Label lord_cos = new Label("Order costs: ");
-        GridPane.setConstraints(lord_cos, 1, 5);
+        GridPane.setConstraints(lord_cos, 1, 9);
         GridPane.setHalignment(lord_cos, HPos.RIGHT);
         grid.getChildren().add(lord_cos);
         
-        final TextField ord_cos = new TextField();
-        GridPane.setConstraints(ord_cos, 2, 5);
-        grid.getChildren().add(ord_cos);
+        final TextField ord_cost = new TextField();
+        GridPane.setConstraints(ord_cost, 2, 9);
+        grid.getChildren().add(ord_cost);
         
         final Label lord_prof = new Label("Order profit: ");
-        GridPane.setConstraints(lord_prof, 1, 6);
+        GridPane.setConstraints(lord_prof, 1, 10);
         GridPane.setHalignment(lord_prof, HPos.RIGHT);
         grid.getChildren().add(lord_prof);
         
         final TextField ord_prof = new TextField();
-        GridPane.setConstraints(ord_prof, 2, 6);
+        GridPane.setConstraints(ord_prof, 2, 10);
         grid.getChildren().add(ord_prof);
         
         final Label lother_costs = new Label("Other costs: ");
-        GridPane.setConstraints(lother_costs, 3, 4);
+        GridPane.setConstraints(lother_costs, 3, 8);
         GridPane.setHalignment(lother_costs, HPos.RIGHT);
         grid.getChildren().add(lother_costs);
         
         final TextField other_costs = new TextField();
-        GridPane.setConstraints(other_costs, 4, 4);
+        GridPane.setConstraints(other_costs, 4, 8);
         grid.getChildren().add(other_costs);
         
         final Label ltot_rev = new Label("Total monthly revenue: ");
-        GridPane.setConstraints(ltot_rev, 2, 13);
+        GridPane.setConstraints(ltot_rev, 2, 18);
         GridPane.setHalignment(ltot_rev, HPos.RIGHT);
         grid.getChildren().add(ltot_rev);
         
         final TextField tot_rev = new TextField();
-        GridPane.setConstraints(tot_rev, 3, 13);
+        GridPane.setConstraints(tot_rev, 3, 18);
         grid.getChildren().add(tot_rev);
         
         final Label ltot_cost = new Label("Total monthly costs: ");
-        GridPane.setConstraints(ltot_cost, 2, 14);
+        GridPane.setConstraints(ltot_cost, 2, 19);
         GridPane.setHalignment(ltot_cost, HPos.RIGHT);
         grid.getChildren().add(ltot_cost);
         
-        final TextField tot_loss = new TextField();
-        GridPane.setConstraints(tot_loss, 3, 14);
-        grid.getChildren().add(tot_loss);
+        final TextField tot_cost = new TextField();
+        GridPane.setConstraints(tot_cost, 3, 19);
+        grid.getChildren().add(tot_cost);
         
         final Label ltot_prof = new Label("Total monthly profit: ");
-        GridPane.setConstraints(ltot_prof, 2, 15);
+        GridPane.setConstraints(ltot_prof, 2, 20);
         GridPane.setHalignment(ltot_prof, HPos.RIGHT);
         grid.getChildren().add(ltot_prof);
         
         final TextField tot_prof = new TextField();
-        GridPane.setConstraints(tot_prof, 3, 15);
+        GridPane.setConstraints(tot_prof, 3, 20);
         grid.getChildren().add(tot_prof);
         
         Button calc_results = new Button("Calculate results");
         GridPane.setFillWidth(calc_results, true);
         calc_results.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        GridPane.setConstraints(calc_results, 2, 20);
+        GridPane.setConstraints(calc_results, 2, 30);
         calc_results.setOnAction((ActionEvent event) ->
         {
             calculateResults();
@@ -291,7 +291,7 @@ public class FinancialSystem extends JFrame {
         Button generate = new Button("Generate report");
         GridPane.setFillWidth(generate, true);
         generate.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        GridPane.setConstraints(generate, 3, 20);
+        GridPane.setConstraints(generate, 3, 30);
         generate.setOnAction((ActionEvent event) ->
         {
             generateReport();
@@ -299,6 +299,32 @@ public class FinancialSystem extends JFrame {
         generate.setStyle("-fx-base: #36b0b0;");
         grid.getChildren().add(generate);
         
+	Button clear = new Button("Clear");
+        GridPane.setFillWidth(clear, true);
+        clear.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        GridPane.setConstraints(clear, 4, 30);
+        clear.setOnAction((ActionEvent event) ->
+        {
+            other_costs.setText("");
+            repair_rev.setText("");
+            repair_cost.setText("");
+            repair_prof.setText("");
+            sales_rev.setText("");
+            sales_cost.setText("");
+            sales_prof.setText("");
+            dis_rev.setText("");
+            dis_cost.setText("");
+            dis_prof.setText("");
+            ord_rev.setText("");
+            ord_cost.setText("");
+            ord_prof.setText("");
+            tot_rev.setText("");
+            tot_cost.setText("");
+            tot_prof.setText("");
+        });
+        clear.setStyle("-fx-base: #36b0b0;");
+        grid.getChildren().add(clear);
+		
         scene = new Scene(grid, 500, 500);
     }
     /**
