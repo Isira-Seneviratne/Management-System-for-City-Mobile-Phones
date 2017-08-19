@@ -1,5 +1,7 @@
 CREATE DATABASE ManagementSystem;
 
+USE ManagementSystem;
+
 CREATE TABLE Financial_Reports
 (
 	Month_issued	char(10),

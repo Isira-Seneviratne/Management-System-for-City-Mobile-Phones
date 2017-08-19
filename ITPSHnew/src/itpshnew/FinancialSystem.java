@@ -27,6 +27,8 @@ public class FinancialSystem extends JFrame {
     /**
      * Creates new form FinancialSystem
      */
+    private static float RepRev, RepCost, RepProf, TotalRev, TotalCost, TotalProf;
+    
     public FinancialSystem() {
         
         this.setUndecorated(true);
@@ -72,11 +74,47 @@ public class FinancialSystem extends JFrame {
     private static void calculateResults()
     {
         dbConnect();
+        try
+        {
+            Statement s = conn.createStatement();
+        }
+        catch(SQLException se)
+        {
+            Alert al = new Alert(Alert.AlertType.ERROR);
+            al.setTitle("Record Retrieval Issue");
+            al.setHeaderText("Error");
+            al.setContentText("Unable to retrieve the records or calculate the needed values.");
+            al.showAndWait();
+        }
     }
     
     private static void generateReport()
     {
         dbConnect();
+        String month = getMonth();
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        try
+        {
+            Statement s = conn.createStatement();
+            if(s.execute("SELECT 1 FROM Financial_Reports WHERE Month_issued="+month+"AND Year_issued="+year))
+            {
+                Alert al = new Alert(Alert.AlertType.ERROR);
+                al.setTitle("Existing Monthly Financial Record");
+                al.setHeaderText("Error");
+                al.setContentText("Unable to insert record: duplicate exists.");
+                al.showAndWait();
+            }
+            else
+                s.executeUpdate("INSERT INTO Financial_Reports VALUES("+month+","+year+","+TotalRev+","+TotalCost+","+TotalProf+")");
+        }
+        catch(SQLException se)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Database Insertion Error");
+            alert.setHeaderText("Error");
+            alert.setContentText("There was an issue with inserting or updating records in the database.");
+            alert.showAndWait();
+        }
     }
     
     private void initJFXPanel()
@@ -700,16 +738,22 @@ public class FinancialSystem extends JFrame {
             }
         }
     };
-	
+
+    private static String getMonth()
+    {
+        String months[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        return months[Calendar.getInstance().get(Calendar.MONTH)];
+    }
+    
     private String getDate()
     {
         Calendar cal = Calendar.getInstance();
-        String months[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"}, month = months[cal.get(Calendar.MONTH)];
-        return cal.get(Calendar.DATE)+" "+month+" "+cal.get(Calendar.YEAR);
+        
+        return cal.get(Calendar.DATE)+" "+getMonth()+" "+cal.get(Calendar.YEAR);
     }
     
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
-		timer.setRunning(false);
+        timer.setRunning(false);
         System.exit(0); // cancel button
     }//GEN-LAST:event_closeMouseClicked
 
