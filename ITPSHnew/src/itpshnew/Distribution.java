@@ -679,6 +679,7 @@ public class Distribution extends javax.swing.JFrame {
         getContentPane().add(center, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 56, 1080, 754));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
