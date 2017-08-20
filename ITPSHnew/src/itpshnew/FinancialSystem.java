@@ -766,7 +766,7 @@ public class FinancialSystem extends JFrame {
         topbar.add(time, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 0, 120, 50));
         timer = new TimerThread(time);
         timer.start();
-        
+
         date.setText(getDate());
         topbar.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, 130, 50));
 
