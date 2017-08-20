@@ -27,7 +27,7 @@ public class FinancialSystem extends JFrame {
     /**
      * Creates new form FinancialSystem
      */
-    private static float TotCost = 0, TotRev = 0, TotProf = 0;
+    private static float TotCost = 1, TotRev = 1, TotProf = 1;
     
     public FinancialSystem() {
         
@@ -59,7 +59,6 @@ public class FinancialSystem extends JFrame {
             alert.setTitle("Database Driver Error");
             alert.setHeaderText("Error");
             alert.setContentText("Unable to load the database driver.");
-            
             alert.showAndWait();
         }
         catch(SQLException se)
@@ -68,7 +67,6 @@ public class FinancialSystem extends JFrame {
             alert.setTitle("Database Connection Error");
             alert.setHeaderText("Error");
             alert.setContentText("Unable to connect to the database.");
-            
             alert.showAndWait();
         }
     }
@@ -92,6 +90,7 @@ public class FinancialSystem extends JFrame {
     
     private static void generateReport()
     {
+        dbConnect();
         if(TotProf == 0 && TotRev == 0 && TotCost == 0)
         {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -108,16 +107,17 @@ public class FinancialSystem extends JFrame {
             Statement s = conn.createStatement();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success!");
-            if(s.execute("SELECT 1 FROM Financial_Reports WHERE Month_issued="+month+" AND Year_issued="+year))
+            s.execute("SELECT * FROM Financial_Reports WHERE Month_issued='"+month+"' AND Year_issued="+year);
+            if(s.getResultSet().next())
             {
                 s.execute("UPDATE Financial_Reports SET Total_revenue="+TotRev+", Total_costs="+TotCost+", Total_profit="+TotProf
-                        +" WHERE Month_issued="+month+" AND Year_issued="+year+";");
+                        +" WHERE Month_issued='"+month+"' AND Year_issued="+year);
                 alert.setHeaderText("Update successful");
                 alert.setContentText("The financial report for the current month and year has been updated.");
             }
             else
             {
-                s.execute("INSERT INTO Financial_Reports VALUES("+month+","+year+","+TotRev+","+TotCost+","+TotProf+");");
+                s.execute("INSERT INTO Financial_Reports VALUES('"+month+"',"+year+","+TotRev+","+TotCost+","+TotProf+")");
                 alert.setHeaderText("Insertion successful");
                 alert.setContentText("The financial report for the current month and year has been inserted.");
             }
