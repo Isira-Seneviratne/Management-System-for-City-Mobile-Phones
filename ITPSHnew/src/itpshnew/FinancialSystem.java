@@ -286,6 +286,30 @@ public class FinancialSystem extends JFrame {
         GridPane.setConstraints(tot_prof, 3, 20);
         grid.getChildren().add(tot_prof);
         
+        Button update_results = new Button("Update Results");
+        GridPane.setFillWidth(update_results, true);
+        update_results.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        GridPane.setConstraints(update_results, 1, 30);
+        update_results.setOnAction((ActionEvent event) ->
+        {
+            try
+            {
+                TotRev = Float.parseFloat(tot_rev.getText());
+                TotCost = Float.parseFloat(tot_cost.getText());
+                TotProf = Float.parseFloat(tot_prof.getText());
+            }
+            catch(NumberFormatException e)
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Invalid numbers");
+                alert.setContentText("You have attempted to store invalid numbers. Please enter valid numbers.");
+                alert.showAndWait();
+            }
+        });
+        grid.getChildren().add(update_results);
+        update_results.setStyle("-fx-base: #309c9c;");
+        
         Button calc_results = new Button("Calculate Results");
         GridPane.setFillWidth(calc_results, true);
         calc_results.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
