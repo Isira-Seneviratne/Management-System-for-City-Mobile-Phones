@@ -5,7 +5,12 @@
  */
 package itpshnew;
 
+import static java.lang.Thread.sleep;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -383,10 +388,11 @@ public class stock extends javax.swing.JFrame {
         });
         topbar.add(minimize, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 0, -1, 50));
 
-        time.setText("Time");
         topbar.add(time, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 0, 120, 50));
-
-        date.setText("Date with calender");
+        timer = new TimerThread(time);
+        timer.start();
+        
+        date.setText(getDate());
         topbar.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, 130, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -429,6 +435,7 @@ public class stock extends javax.swing.JFrame {
     }//GEN-LAST:event_bar2topic2MousePressed
 
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
+        timer.setRunning(false);
         System.exit(0); // cancel button
     }//GEN-LAST:event_closeMouseClicked
 
@@ -477,6 +484,55 @@ public class stock extends javax.swing.JFrame {
         });
     }
 
+    public class TimerThread extends Thread
+    {
+        private JLabel time;
+        private boolean running;
+        private SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
+        
+        public TimerThread(JLabel time)
+        {
+            this.time = time;
+            running = true;
+        }
+        
+        public void setRunning(boolean running)
+        {
+            this.running = running;
+        }
+        
+        public void run()
+        {
+            while(running)
+            {
+                SwingUtilities.invokeLater(new Runnable()
+                {
+                    public void run()
+                    {
+                        time.setText(timeFormat.format(Calendar.getInstance().getTime()));
+                    }
+                });
+                try
+                {
+                    sleep(1000);
+                }
+                catch(InterruptedException e){}
+            }
+        }
+    }
+    
+    private String getDate()
+    {
+        Calendar cal = Calendar.getInstance();
+        return cal.get(Calendar.DATE)+" "+getMonth()+" "+cal.get(Calendar.YEAR);
+    }
+    
+    private static String getMonth()
+    {
+        String months[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        return months[Calendar.getInstance().get(Calendar.MONTH)];
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bar1;
     private javax.swing.JPanel bar2;
@@ -522,4 +578,5 @@ public class stock extends javax.swing.JFrame {
     private javax.swing.JPanel topic7;
     private javax.swing.JPanel topic8;
     // End of variables declaration//GEN-END:variables
+    private TimerThread timer;
 }

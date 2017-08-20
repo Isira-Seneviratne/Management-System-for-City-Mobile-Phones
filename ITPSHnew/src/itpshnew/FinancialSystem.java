@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import java.util.Calendar;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -664,9 +665,10 @@ public class FinancialSystem extends JFrame {
         });
         topbar.add(minimize, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 0, -1, 50));
 
-        time.setText("Time");
         topbar.add(time, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 0, 120, 50));
-
+        timer = new TimerThread(time);
+        timer.start();
+        
         date.setText(getDate());
         topbar.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, 130, 50));
 
@@ -676,20 +678,63 @@ public class FinancialSystem extends JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    public class TimerThread extends Thread
+    {
+        private JLabel time;
+        private boolean running;
+        private SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
+        
+        public TimerThread(JLabel time)
+        {
+            this.time = time;
+            running = true;
+        }
+        
+        public void setRunning(boolean running)
+        {
+            this.running = running;
+        }
+        
+        public void run()
+        {
+            while(running)
+            {
+                SwingUtilities.invokeLater(new Runnable()
+                {
+                    public void run()
+                    {
+                        time.setText(timeFormat.format(Calendar.getInstance().getTime()));
+                    }
+                });
+                try
+                {
+                    sleep(1000);
+                }
+                catch(InterruptedException e){}
+            }
+        }
+    }
+
     private String getDate()
     {
         Calendar cal = Calendar.getInstance();
-        String months[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"}, month = months[cal.get(Calendar.MONTH)];
-        return cal.get(Calendar.DATE)+" "+month+" "+cal.get(Calendar.YEAR);
+        return cal.get(Calendar.DATE)+" "+getMonth()+" "+cal.get(Calendar.YEAR);
+    }
+    
+    private static String getMonth()
+    {
+        String months[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        return months[Calendar.getInstance().get(Calendar.MONTH)];
     }
     
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
+        timer.setRunning(false);
         System.exit(0); // cancel button
     }//GEN-LAST:event_closeMouseClicked
 
     private void minimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeMouseClicked
-        JFrame frame = new JFrame("test");   //minimize label
-        frame.setExtendedState(JFrame.ICONIFIED);
+
+        this.setExtendedState(JFrame.ICONIFIED);
 
     }//GEN-LAST:event_minimizeMouseClicked
 
@@ -796,4 +841,5 @@ public class FinancialSystem extends JFrame {
     private JFXPanel cent;
     private Scene scene;
     private static Connection conn;
+    private TimerThread timer;
 }

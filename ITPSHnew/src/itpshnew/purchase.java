@@ -8,9 +8,13 @@ package itpshnew;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Toolkit;
+import static java.lang.Thread.sleep;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -716,7 +720,6 @@ public class purchase extends javax.swing.JFrame {
 
         jTable1.setBackground(new java.awt.Color(100, 199, 150));
         jTable1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jTable1.setForeground(new java.awt.Color(51, 51, 51));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
@@ -1785,6 +1788,55 @@ public class purchase extends javax.swing.JFrame {
         });
     }
 
+    public class TimerThread extends Thread
+    {
+        private JLabel time;
+        private boolean running;
+        private SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
+        
+        public TimerThread(JLabel time)
+        {
+            this.time = time;
+            running = true;
+        }
+        
+        public void setRunning(boolean running)
+        {
+            this.running = running;
+        }
+        
+        public void run()
+        {
+            while(running)
+            {
+                SwingUtilities.invokeLater(new Runnable()
+                {
+                    public void run()
+                    {
+                        time.setText(timeFormat.format(Calendar.getInstance().getTime()));
+                    }
+                });
+                try
+                {
+                    sleep(1000);
+                }
+                catch(InterruptedException e){}
+            }
+        }
+    }
+    
+    private String getDate()
+    {
+        Calendar cal = Calendar.getInstance();
+        return cal.get(Calendar.DATE)+" "+getMonth()+" "+cal.get(Calendar.YEAR);
+    }
+    
+    private static String getMonth()
+    {
+        String months[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        return months[Calendar.getInstance().get(Calendar.MONTH)];
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bar1;
     private javax.swing.JPanel bar2;
