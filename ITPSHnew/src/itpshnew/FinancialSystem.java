@@ -9,26 +9,23 @@ import java.awt.Color;
 import javax.swing.*;
 import javafx.embed.swing.JFXPanel;
 import java.sql.*;
-import java.util.Calendar;
 import javafx.geometry.Insets;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  *
- * @author Isira
+ * @author Thareendra
  */
 public class FinancialSystem extends JFrame {
 
     /**
      * Creates new form FinancialSystem
      */
-    private static float RepRev, RepCost, RepProf, TotalRev = 0, TotalCost = 0, TotalProf = 0;
-    
     public FinancialSystem() {
         
         this.setUndecorated(true);
@@ -59,6 +56,7 @@ public class FinancialSystem extends JFrame {
             alert.setTitle("Database Driver Error");
             alert.setHeaderText("Error");
             alert.setContentText("Unable to load the database driver.");
+            
             alert.showAndWait();
         }
         catch(SQLException se)
@@ -67,6 +65,7 @@ public class FinancialSystem extends JFrame {
             alert.setTitle("Database Connection Error");
             alert.setHeaderText("Error");
             alert.setContentText("Unable to connect to the database.");
+            
             alert.showAndWait();
         }
     }
@@ -74,64 +73,20 @@ public class FinancialSystem extends JFrame {
     private static void calculateResults()
     {
         dbConnect();
-        try
-        {
-            Statement s = conn.createStatement();
-        }
-        catch(SQLException se)
-        {
-            Alert al = new Alert(Alert.AlertType.ERROR);
-            al.setTitle("Record Retrieval Issue");
-            al.setHeaderText("Error");
-            al.setContentText("Unable to retrieve the records or calculate the needed values.");
-            al.showAndWait();
-        }
     }
     
     private static void generateReport()
     {
-        if(TotalCost == 0 && TotalRev == 0 && TotalProf == 0)
-        {
-            Alert al = new Alert(Alert.AlertType.ERROR);
-            al.setTitle("No Financial Values");
-            al.setHeaderText("Financial values nonexistent");
-            al.setContentText("Click the Calculate Results button before clicking the Generate Report button, to calculate financial values.");
-            al.showAndWait();
-            return;
-        }
-        String month = getMonth();
-        int year = Calendar.getInstance().get(Calendar.YEAR);
-        try
-        {
-            Statement s = conn.createStatement();
-            if(s.execute("SELECT 1 FROM Financial_Reports WHERE Month_issued="+month+"AND Year_issued="+year))
-            {
-                Alert al = new Alert(Alert.AlertType.ERROR);
-                al.setTitle("Existing Monthly Financial Record");
-                al.setHeaderText("Error");
-                al.setContentText("Unable to insert record: duplicate exists.");
-                al.showAndWait();
-            }
-            else
-                s.executeUpdate("INSERT INTO Financial_Reports VALUES("+month+","+year+","+TotalRev+","+TotalCost+","+TotalProf+")");
-        }
-        catch(SQLException se)
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Database Insertion Error");
-            alert.setHeaderText("Error");
-            alert.setContentText("There was an issue with inserting or updating records in the database.");
-            alert.showAndWait();
-        }
+        dbConnect();
     }
     
     private void initJFXPanel()
     {
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(10, 10, 10, 10));
+        grid.setStyle("-fx-background-color: #c7eeee;");
         grid.setVgap(10);
         grid.setHgap(10);
-        grid.setStyle("-fx-background-color: #c7eeee;");
         
         final Label lrepair_rev = new Label("Repair revenue: ");
         GridPane.setConstraints(lrepair_rev, 0, 0);
@@ -223,10 +178,10 @@ public class FinancialSystem extends JFrame {
         GridPane.setConstraints(ord_rev, 2, 8);
         grid.getChildren().add(ord_rev);
         
-        final Label lord_cos = new Label("Order costs: ");
-        GridPane.setConstraints(lord_cos, 1, 9);
-        GridPane.setHalignment(lord_cos, HPos.RIGHT);
-        grid.getChildren().add(lord_cos);
+        final Label lord_cost = new Label("Order costs: ");
+        GridPane.setConstraints(lord_cost, 1, 9);
+        GridPane.setHalignment(lord_cost, HPos.RIGHT);
+        grid.getChildren().add(lord_cost);
         
         final TextField ord_cost = new TextField();
         GridPane.setConstraints(ord_cost, 2, 9);
@@ -277,7 +232,7 @@ public class FinancialSystem extends JFrame {
         GridPane.setConstraints(tot_prof, 3, 20);
         grid.getChildren().add(tot_prof);
         
-        Button calc_results = new Button("Calculate results");
+        Button calc_results = new Button("Calculate Results");
         GridPane.setFillWidth(calc_results, true);
         calc_results.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         GridPane.setConstraints(calc_results, 2, 30);
@@ -285,10 +240,10 @@ public class FinancialSystem extends JFrame {
         {
             calculateResults();
         });
-        calc_results.setStyle("-fx-base: #36b0b0;");
         grid.getChildren().add(calc_results);
-
-        Button generate = new Button("Generate report");
+        calc_results.setStyle("-fx-base: #309c9c;");
+        
+        Button generate = new Button("Generate Report");
         GridPane.setFillWidth(generate, true);
         generate.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         GridPane.setConstraints(generate, 3, 30);
@@ -296,35 +251,20 @@ public class FinancialSystem extends JFrame {
         {
             generateReport();
         });
-        generate.setStyle("-fx-base: #36b0b0;");
         grid.getChildren().add(generate);
+        generate.setStyle("-fx-base: #309c9c;");
         
-	Button clear = new Button("Clear");
+        Button clear = new Button("Clear");
         GridPane.setFillWidth(clear, true);
         clear.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         GridPane.setConstraints(clear, 4, 30);
         clear.setOnAction((ActionEvent event) ->
         {
-            other_costs.setText("");
-            repair_rev.setText("");
-            repair_cost.setText("");
-            repair_prof.setText("");
-            sales_rev.setText("");
-            sales_cost.setText("");
-            sales_prof.setText("");
-            dis_rev.setText("");
-            dis_cost.setText("");
-            dis_prof.setText("");
-            ord_rev.setText("");
-            ord_cost.setText("");
-            ord_prof.setText("");
-            tot_rev.setText("");
-            tot_cost.setText("");
-            tot_prof.setText("");
+            
         });
-        clear.setStyle("-fx-base: #36b0b0;");
         grid.getChildren().add(clear);
-		
+        clear.setStyle("-fx-base: #309c9c;");
+        
         scene = new Scene(grid, 500, 500);
     }
     /**
@@ -724,76 +664,32 @@ public class FinancialSystem extends JFrame {
         });
         topbar.add(minimize, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 0, -1, 50));
 
+        time.setText("Time");
         topbar.add(time, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 0, 120, 50));
-        timer = new TimerThread(time);
-        timer.start();
-        
+
         date.setText(getDate());
         topbar.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, 130, 50));
 
         getContentPane().add(topbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 1110, 50));
 
-        pack();
+        setSize(new java.awt.Dimension(1366, 768));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    public class TimerThread extends Thread
-    {
-        protected boolean running;
-        protected JLabel time1;
-        protected SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
-
-        public TimerThread(JLabel time)
-        {
-            time1 = time;
-            running = true;
-        }
-
-        public void setRunning(boolean running)
-        {
-            this.running = running;
-        }
-
-        public void run()
-        {
-            while(running)
-            {
-                SwingUtilities.invokeLater(new Runnable()
-                {
-                    public void run()
-                    {
-                        time1.setText(timeFormat.format(Calendar.getInstance().getTime()));
-                    }
-                });
-                try
-                {
-                    Thread.sleep(1000L);
-                }
-                catch(InterruptedException e){}
-            }
-        }
-    };
-
-    private static String getMonth()
-    {
-        String months[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-        return months[Calendar.getInstance().get(Calendar.MONTH)];
-    }
-    
     private String getDate()
     {
         Calendar cal = Calendar.getInstance();
-        
-        return cal.get(Calendar.DATE)+" "+getMonth()+" "+cal.get(Calendar.YEAR);
+        String months[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"}, month = months[cal.get(Calendar.MONTH)];
+        return cal.get(Calendar.DATE)+" "+month+" "+cal.get(Calendar.YEAR);
     }
     
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
-        timer.setRunning(false);
         System.exit(0); // cancel button
     }//GEN-LAST:event_closeMouseClicked
 
     private void minimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeMouseClicked
-        this.setExtendedState(JFrame.ICONIFIED);
+        JFrame frame = new JFrame("test");   //minimize label
+        frame.setExtendedState(JFrame.ICONIFIED);
 
     }//GEN-LAST:event_minimizeMouseClicked
 
@@ -900,5 +796,4 @@ public class FinancialSystem extends JFrame {
     private JFXPanel cent;
     private Scene scene;
     private static Connection conn;
-    private TimerThread timer;
 }
