@@ -20,13 +20,15 @@ import java.text.SimpleDateFormat;
 
 /**
  *
- * @author Thareendra
+ * @author Isira
  */
 public class FinancialSystem extends JFrame {
 
     /**
      * Creates new form FinancialSystem
      */
+    private static float TotCost = 0, TotRev = 0, TotProf = 0;
+    
     public FinancialSystem() {
         
         this.setUndecorated(true);
@@ -74,11 +76,62 @@ public class FinancialSystem extends JFrame {
     private static void calculateResults()
     {
         dbConnect();
+        try
+        {
+            Statement s = conn.createStatement();
+        }
+        catch(SQLException e)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Calculation Error");
+            alert.setHeaderText("Error while calculating results");
+            alert.setContentText("There was an error while retrieving financial values to calculate results.");
+            alert.showAndWait();
+        }
     }
     
     private static void generateReport()
     {
-        dbConnect();
+        if(TotProf == 0 && TotRev == 0 && TotCost == 0)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Nonexistent Financial Values");
+            alert.setHeaderText("Financial Values Not Generated");
+            alert.setContentText("You have not generated the required financial values. Please click the \"Calculate Results\" button to do so.");
+            alert.getDialogPane().setPrefSize(400, 200);
+            alert.showAndWait();
+        }
+        String month = getMonth();
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        try
+        {
+            Statement s = conn.createStatement();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success!");
+            if(s.execute("SELECT 1 FROM Financial_Reports WHERE Month_issued="+month+" AND Year_issued="+year))
+            {
+                s.execute("UPDATE Financial_Reports SET Total_revenue="+TotRev+", Total_costs="+TotCost+", Total_profit="+TotProf
+                        +" WHERE Month_issued="+month+" AND Year_issued="+year+";");
+                alert.setHeaderText("Update successful");
+                alert.setContentText("The financial report for the current month and year has been updated.");
+            }
+            else
+            {
+                s.execute("INSERT INTO Financial_Reports VALUES("+month+","+year+","+TotRev+","+TotCost+","+TotProf+");");
+                alert.setHeaderText("Insertion successful");
+                alert.setContentText("The financial report for the current month and year has been inserted.");
+            }
+            alert.getDialogPane().setPrefSize(400, 200);
+            alert.showAndWait();
+        }
+        catch(SQLException e)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Database Insert/Update Error");
+            alert.setHeaderText("There was an unexpected issue");
+            alert.setContentText("An error occurred while writing the financial report to the database.");
+            alert.showAndWait();
+        }
     }
     
     private void initJFXPanel()
@@ -261,7 +314,22 @@ public class FinancialSystem extends JFrame {
         GridPane.setConstraints(clear, 4, 30);
         clear.setOnAction((ActionEvent event) ->
         {
-            
+            repair_rev.setText("");
+            repair_cost.setText("");
+            repair_prof.setText("");
+            sales_rev.setText("");
+            sales_cost.setText("");
+            sales_prof.setText("");
+            dis_rev.setText("");
+            dis_cost.setText("");
+            dis_prof.setText("");
+            ord_rev.setText("");
+            ord_cost.setText("");
+            ord_prof.setText("");
+            other_costs.setText("");
+            tot_rev.setText("");
+            tot_cost.setText("");
+            tot_prof.setText("");
         });
         grid.getChildren().add(clear);
         clear.setStyle("-fx-base: #309c9c;");
