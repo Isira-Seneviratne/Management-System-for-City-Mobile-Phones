@@ -27,7 +27,7 @@ public class FinancialSystem extends JFrame {
     /**
      * Creates new form FinancialSystem
      */
-    private static float TotCost = 1, TotRev = 1, TotProf = 1;
+    private static float TotCost = 0, TotRev = 0, TotProf = 0;
     
     public FinancialSystem() {
         
@@ -56,16 +56,16 @@ public class FinancialSystem extends JFrame {
         catch(ClassNotFoundException ce)
         {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Database Driver Error");
-            alert.setHeaderText("Error");
+            alert.setTitle("Error");
+            alert.setHeaderText("Database Driver Error");
             alert.setContentText("Unable to load the database driver.");
             alert.showAndWait();
         }
         catch(SQLException se)
         {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Database Connection Error");
-            alert.setHeaderText("Error");
+            alert.setTitle("Error");
+            alert.setHeaderText("Database Connection Error");
             alert.setContentText("Unable to connect to the database.");
             alert.showAndWait();
         }
@@ -90,15 +90,15 @@ public class FinancialSystem extends JFrame {
     
     private static void generateReport()
     {
-        dbConnect();
         if(TotProf == 0 && TotRev == 0 && TotCost == 0)
         {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Nonexistent Financial Values");
+            alert.setTitle("Error");
             alert.setHeaderText("Financial Values Not Generated");
             alert.setContentText("You have not generated the required financial values. Please click the \"Calculate Results\" button to do so.");
             alert.getDialogPane().setPrefSize(400, 200);
             alert.showAndWait();
+            return; //prevents NullPointerException if calculateResults() has not been executed, due to the Connection variable having a null value
         }
         String month = getMonth();
         int year = Calendar.getInstance().get(Calendar.YEAR);
@@ -127,8 +127,8 @@ public class FinancialSystem extends JFrame {
         catch(SQLException e)
         {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Database Insert/Update Error");
-            alert.setHeaderText("There was an unexpected issue");
+            alert.setTitle("Error");
+            alert.setHeaderText("There was an unexpected database issue");
             alert.setContentText("An error occurred while writing the financial report to the database.");
             alert.showAndWait();
         }
@@ -297,12 +297,18 @@ public class FinancialSystem extends JFrame {
                 TotRev = Float.parseFloat(tot_rev.getText());
                 TotCost = Float.parseFloat(tot_cost.getText());
                 TotProf = Float.parseFloat(tot_prof.getText());
+                
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error");
+                alert.setHeaderText("Financial values updated");
+                alert.setContentText("The financial values have been successfully updated.");
+                alert.showAndWait();
             }
             catch(NumberFormatException e)
             {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
-                alert.setHeaderText("Invalid numbers");
+                alert.setHeaderText("Invalid numbers entered");
                 alert.setContentText("You have attempted to store invalid numbers. Please enter valid numbers.");
                 alert.showAndWait();
             }
@@ -787,12 +793,14 @@ public class FinancialSystem extends JFrame {
             this.running = running;
         }
         
+        @Override
         public void run()
         {
             while(running)
             {
                 SwingUtilities.invokeLater(new Runnable()
                 {
+                    @Override
                     public void run()
                     {
                         time.setText(timeFormat.format(Calendar.getInstance().getTime()));
