@@ -106,7 +106,7 @@ public class FinancialSystem extends JFrame {
         {
             Statement s = conn.createStatement();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Success!");
+            alert.setTitle("Success");
             s.execute("SELECT * FROM Financial_Reports WHERE Month_issued='"+month+"' AND Year_issued="+year);
             if(s.getResultSet().next())
             {
@@ -299,7 +299,7 @@ public class FinancialSystem extends JFrame {
                 TotProf = Float.parseFloat(tot_prof.getText());
                 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Error");
+                alert.setTitle("Success");
                 alert.setHeaderText("Financial values updated");
                 alert.setContentText("The financial values have been successfully updated.");
                 alert.showAndWait();
