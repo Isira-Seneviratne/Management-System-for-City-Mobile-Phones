@@ -314,7 +314,7 @@ public class FinancialSystem extends JFrame {
             }
         });
         grid.getChildren().add(update_results);
-        update_results.setStyle("-fx-base: #309c9c;");
+        update_results.setStyle("-fx-base: #309c9d;");
         
         Button calc_results = new Button("Calculate Results");
         GridPane.setFillWidth(calc_results, true);
