@@ -6,6 +6,7 @@
 package itpshnew;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Toolkit;
 import static java.lang.Thread.sleep;
@@ -14,7 +15,11 @@ import java.util.Calendar;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -43,8 +48,33 @@ public class purchase extends javax.swing.JFrame {
             int ysize = (int) tk.getScreenSize().getWidth();
         this.setSize(xsize, ysize);*/
         
+        TimerThread timer = new TimerThread(time); // create timer object and set the time on time label
+        timer.start();
+        date.setText(getDate()); // call getdate method on date label
+        
+        
+        JTableHeader thead = purchase_table.getTableHeader();
+        thead.setBackground(new Color (100,199,150));
+        thead.setFont(new Font("Tahome", Font.BOLD, 18));
+        
+        
+       
+        
+       // JTableScroll tscroll = new jTableScroll(purchase_table);
+        //tscroll.setBackground(new Color (100,199,150));
+        
+        //tscroll.getVerticalScrollBar().setBackground(Color.red);
+        /*
+        scrollPane.getVerticalScrollBar().setUI(new MyScrollBarUI());
+        frame.add(scrollPane);
+        frame.pack();
+        frame.setSize(frame.getWidth(), frame.getHeight()-50); // Forces the vertical scroll bar to show up
+        frame.setVisible(true)
+        */
+        
         
     }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -93,6 +123,8 @@ public class purchase extends javax.swing.JFrame {
         bar8 = new javax.swing.JPanel();
         name7 = new javax.swing.JLabel();
         pic7 = new javax.swing.JLabel();
+        emp_name = new javax.swing.JLabel();
+        emp_id = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         topbar = new javax.swing.JPanel();
         close = new javax.swing.JLabel();
@@ -123,7 +155,7 @@ public class purchase extends javax.swing.JFrame {
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        purchase_table = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -535,8 +567,18 @@ public class purchase extends javax.swing.JFrame {
 
         sidepanel.add(topic8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 570, 290, 60));
 
-        jLabel6.setText("Empid16428685662");
-        sidepanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 680, 170, 50));
+        emp_name.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        emp_name.setForeground(new java.awt.Color(255, 255, 255));
+        emp_name.setText("E.N. Employee Name ");
+        sidepanel.add(emp_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 660, 210, 50));
+
+        emp_id.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        emp_id.setForeground(new java.awt.Color(255, 255, 255));
+        emp_id.setText("EI1725478963");
+        sidepanel.add(emp_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 710, 210, 50));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Employee_Card_80px.png"))); // NOI18N
+        sidepanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 660, 80, 100));
 
         getContentPane().add(sidepanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 810));
 
@@ -559,11 +601,15 @@ public class purchase extends javax.swing.JFrame {
         });
         topbar.add(minimize, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 0, -1, 50));
 
+        time.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        time.setForeground(new java.awt.Color(255, 255, 255));
         time.setText("Time");
-        topbar.add(time, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 0, 120, 50));
+        topbar.add(time, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 0, 90, 50));
 
+        date.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        date.setForeground(new java.awt.Color(255, 255, 255));
         date.setText("Date with calender");
-        topbar.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, 130, 50));
+        topbar.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, 170, 50));
 
         purchase.setBackground(new java.awt.Color(0, 204, 204));
         purchase.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -612,7 +658,7 @@ public class purchase extends javax.swing.JFrame {
         center.setBackground(new java.awt.Color(199, 238, 238));
         center.setLayout(new java.awt.CardLayout());
 
-        purchase_panel.setBackground(new java.awt.Color(187, 237, 211));
+        purchase_panel.setBackground(new java.awt.Color(202, 254, 227));
         purchase_panel.setToolTipText("");
         purchase_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -624,7 +670,6 @@ public class purchase extends javax.swing.JFrame {
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 15, -1, -1));
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jTextField1.setText("                ");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -636,7 +681,6 @@ public class purchase extends javax.swing.JFrame {
         jLabel3.setText("Item Id");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
-        jTextField2.setText("                            ");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
@@ -648,7 +692,6 @@ public class purchase extends javax.swing.JFrame {
         jLabel4.setText("Item Name");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
-        jTextField3.setText("                                      ");
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField3ActionPerformed(evt);
@@ -656,7 +699,7 @@ public class purchase extends javax.swing.JFrame {
         });
         jPanel2.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 220, 25));
 
-        jButton4.setBackground(new java.awt.Color(100, 199, 150));
+        jButton4.setBackground(new java.awt.Color(31, 233, 133));
         jButton4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         jButton4.setText("Add");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -687,7 +730,7 @@ public class purchase extends javax.swing.JFrame {
         jLabel9.setText("Contact Number");
         jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
 
-        newcus_btn.setBackground(new java.awt.Color(100, 199, 150));
+        newcus_btn.setBackground(new java.awt.Color(31, 233, 133));
         newcus_btn.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         newcus_btn.setText("New");
         newcus_btn.addActionListener(new java.awt.event.ActionListener() {
@@ -697,7 +740,7 @@ public class purchase extends javax.swing.JFrame {
         });
         jPanel3.add(newcus_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, 100, 30));
 
-        searchcus_btn.setBackground(new java.awt.Color(100, 199, 150));
+        searchcus_btn.setBackground(new java.awt.Color(31, 233, 133));
         searchcus_btn.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         searchcus_btn.setText("Search");
         searchcus_btn.addActionListener(new java.awt.event.ActionListener() {
@@ -718,9 +761,8 @@ public class purchase extends javax.swing.JFrame {
 
         purchase_panel.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 20, 500, 190));
 
-        jTable1.setBackground(new java.awt.Color(100, 199, 150));
-        jTable1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        purchase_table.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        purchase_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -747,8 +789,8 @@ public class purchase extends javax.swing.JFrame {
                 "Item Id", "Item Name", "Brand", "Manu. date", "Warranty", "Discount", "Vat", "Amount"
             }
         ));
-        jTable1.setGridColor(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setViewportView(jTable1);
+        purchase_table.setGridColor(new java.awt.Color(100, 199, 150));
+        jScrollPane1.setViewportView(purchase_table);
 
         purchase_panel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 1040, 190));
 
@@ -770,8 +812,6 @@ public class purchase extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         jLabel13.setText("Total Vat");
         jPanel4.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
-
-        jTextField7.setText("                          ");
         jPanel4.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 220, 25));
         jPanel4.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 220, 25));
 
@@ -843,7 +883,7 @@ public class purchase extends javax.swing.JFrame {
 
         purchase_panel.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 470, 490, 170));
 
-        jButton1.setBackground(new java.awt.Color(71, 179, 71));
+        jButton1.setBackground(new java.awt.Color(48, 214, 48));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Print_40px.png"))); // NOI18N
         jButton1.setText("  Print");
@@ -854,7 +894,7 @@ public class purchase extends javax.swing.JFrame {
         });
         purchase_panel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 660, 200, 50));
 
-        jButton2.setBackground(new java.awt.Color(71, 179, 71));
+        jButton2.setBackground(new java.awt.Color(48, 214, 48));
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Save_40px.png"))); // NOI18N
         jButton2.setText("  Save");
@@ -865,7 +905,7 @@ public class purchase extends javax.swing.JFrame {
         });
         purchase_panel.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 660, 200, 50));
 
-        jButton3.setBackground(new java.awt.Color(71, 179, 71));
+        jButton3.setBackground(new java.awt.Color(48, 214, 48));
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Reset_40px.png"))); // NOI18N
         jButton3.setText("  Reset");
@@ -876,7 +916,7 @@ public class purchase extends javax.swing.JFrame {
         });
         purchase_panel.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 660, 200, 50));
 
-        jButton7.setBackground(new java.awt.Color(100, 199, 150));
+        jButton7.setBackground(new java.awt.Color(31, 233, 133));
         jButton7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jButton7.setText("Edit");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -886,23 +926,23 @@ public class purchase extends javax.swing.JFrame {
         });
         purchase_panel.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 430, 100, 30));
 
-        jButton8.setBackground(new java.awt.Color(100, 199, 150));
+        jButton8.setBackground(new java.awt.Color(31, 233, 133));
         jButton8.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jButton8.setText("Remove");
         purchase_panel.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 430, 100, 30));
 
-        jButton9.setBackground(new java.awt.Color(100, 199, 150));
+        jButton9.setBackground(new java.awt.Color(31, 233, 133));
         jButton9.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jButton9.setText("Done");
         purchase_panel.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 430, 100, 30));
 
         center.add(purchase_panel, "card2");
 
-        warranty_panel.setBackground(new java.awt.Color(238, 238, 206));
+        warranty_panel.setBackground(new java.awt.Color(202, 254, 227));
         warranty_panel.setAutoscrolls(true);
         warranty_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(226, 159, 93));
+        jPanel1.setBackground(new java.awt.Color(100, 199, 150));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel18.setFont(new java.awt.Font("Segoe UI Semibold", 0, 20)); // NOI18N
@@ -914,7 +954,6 @@ public class purchase extends javax.swing.JFrame {
         jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, -1, -1));
 
         jTextField14.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jTextField14.setText("                   ");
         jTextField14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField14ActionPerformed(evt);
@@ -922,7 +961,6 @@ public class purchase extends javax.swing.JFrame {
         });
         jPanel1.add(jTextField14, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 200, 30));
 
-        jTextField15.setText("               ");
         jTextField15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField15ActionPerformed(evt);
@@ -930,7 +968,7 @@ public class purchase extends javax.swing.JFrame {
         });
         jPanel1.add(jTextField15, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 20, 200, 30));
 
-        jButton10.setBackground(new java.awt.Color(226, 159, 93));
+        jButton10.setBackground(new java.awt.Color(31, 233, 133));
         jButton10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton10.setText("Add");
         jPanel1.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 20, 90, 30));
@@ -939,7 +977,7 @@ public class purchase extends javax.swing.JFrame {
 
         jScrollPane2.setAutoscrolls(true);
 
-        jTable2.setBackground(new java.awt.Color(226, 159, 93));
+        jTable2.setBackground(new java.awt.Color(100, 199, 150));
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null},
@@ -979,18 +1017,18 @@ public class purchase extends javax.swing.JFrame {
         warranty_panel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 1040, 170));
 
         jLabel20.setFont(new java.awt.Font("Segoe UI Black", 2, 36)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(255, 102, 0));
+        jLabel20.setForeground(new java.awt.Color(0, 153, 0));
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel20.setText("Warranty");
         warranty_panel.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 0, 200, 50));
 
         jLabel21.setFont(new java.awt.Font("Segoe UI Black", 2, 36)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(255, 102, 0));
+        jLabel21.setForeground(new java.awt.Color(0, 153, 0));
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel21.setText("Replace");
         warranty_panel.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 330, 200, 50));
 
-        jPanel6.setBackground(new java.awt.Color(226, 159, 93));
+        jPanel6.setBackground(new java.awt.Color(100, 199, 150));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel22.setFont(new java.awt.Font("Segoe UI Semibold", 0, 20)); // NOI18N
@@ -1002,7 +1040,6 @@ public class purchase extends javax.swing.JFrame {
         jPanel6.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, -1, -1));
 
         jTextField16.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jTextField16.setText("                   ");
         jTextField16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField16ActionPerformed(evt);
@@ -1010,7 +1047,6 @@ public class purchase extends javax.swing.JFrame {
         });
         jPanel6.add(jTextField16, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 200, 30));
 
-        jTextField17.setText("               ");
         jTextField17.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField17ActionPerformed(evt);
@@ -1018,7 +1054,7 @@ public class purchase extends javax.swing.JFrame {
         });
         jPanel6.add(jTextField17, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 20, 200, 30));
 
-        jButton11.setBackground(new java.awt.Color(226, 159, 93));
+        jButton11.setBackground(new java.awt.Color(100, 199, 150));
         jButton11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton11.setText("Add");
         jPanel6.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 20, 90, 30));
@@ -1027,7 +1063,7 @@ public class purchase extends javax.swing.JFrame {
 
         jScrollPane3.setAutoscrolls(true);
 
-        jTable3.setBackground(new java.awt.Color(226, 159, 93));
+        jTable3.setBackground(new java.awt.Color(100, 199, 150));
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -1050,52 +1086,51 @@ public class purchase extends javax.swing.JFrame {
 
         warranty_panel.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 1040, 170));
 
-        jButton12.setBackground(new java.awt.Color(218, 112, 41));
+        jButton12.setBackground(new java.awt.Color(48, 214, 48));
         jButton12.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Print_40px.png"))); // NOI18N
         jButton12.setText("  Print");
         warranty_panel.add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 660, 200, 50));
 
-        jButton13.setBackground(new java.awt.Color(218, 112, 41));
+        jButton13.setBackground(new java.awt.Color(48, 214, 48));
         jButton13.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Save_40px.png"))); // NOI18N
         jButton13.setText("  Save");
         warranty_panel.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 660, 200, 50));
 
-        jButton14.setBackground(new java.awt.Color(218, 112, 41));
+        jButton14.setBackground(new java.awt.Color(48, 214, 48));
         jButton14.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Reset_40px.png"))); // NOI18N
         jButton14.setText("  Reset");
         warranty_panel.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 660, 200, 50));
 
-        jButton15.setBackground(new java.awt.Color(226, 159, 93));
+        jButton15.setBackground(new java.awt.Color(31, 233, 133));
         jButton15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton15.setText("Edit");
         warranty_panel.add(jButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 310, 110, 30));
 
-        jButton16.setBackground(new java.awt.Color(226, 159, 93));
+        jButton16.setBackground(new java.awt.Color(31, 233, 133));
         jButton16.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton16.setText("Remove");
         warranty_panel.add(jButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 310, 110, 30));
 
         center.add(warranty_panel, "card3");
 
-        customer_panel.setBackground(new java.awt.Color(200, 217, 234));
+        customer_panel.setBackground(new java.awt.Color(202, 254, 227));
         customer_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel24.setFont(new java.awt.Font("Segoe UI Black", 2, 36)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(55, 55, 189));
+        jLabel24.setForeground(new java.awt.Color(0, 153, 0));
         jLabel24.setText("Customer Details");
         customer_panel.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 0, -1, -1));
 
-        jPanel7.setBackground(new java.awt.Color(114, 167, 220));
+        jPanel7.setBackground(new java.awt.Color(100, 199, 150));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel25.setText("Search");
         jPanel7.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 120, -1));
 
-        jTextField18.setText(" ");
         jTextField18.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField18ActionPerformed(evt);
@@ -1108,14 +1143,12 @@ public class purchase extends javax.swing.JFrame {
 
         customer_panel.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 1040, 50));
 
-        jPanel8.setBackground(new java.awt.Color(114, 167, 220));
+        jPanel8.setBackground(new java.awt.Color(100, 199, 150));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel27.setText("Customer Id");
         jPanel8.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 110, 30));
-
-        jTextField19.setText("           ");
         jPanel8.add(jTextField19, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 220, 25));
 
         jLabel28.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -1153,25 +1186,17 @@ public class purchase extends javax.swing.JFrame {
         jLabel36.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel36.setText("Loyalty Discount");
         jPanel8.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, 150, 30));
-
-        jTextField20.setText("           ");
         jPanel8.add(jTextField20, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 220, 25));
-
-        jTextField21.setText("           ");
         jPanel8.add(jTextField21, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 220, 25));
 
-        jTextField22.setText("           ");
         jTextField22.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField22ActionPerformed(evt);
             }
         });
         jPanel8.add(jTextField22, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 220, 25));
-
-        jTextField23.setText("           ");
         jPanel8.add(jTextField23, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 220, 25));
 
-        jTextField24.setText("           ");
         jTextField24.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField24ActionPerformed(evt);
@@ -1179,18 +1204,14 @@ public class purchase extends javax.swing.JFrame {
         });
         jPanel8.add(jTextField24, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 330, 220, 25));
 
-        jTextField25.setText("           ");
         jTextField25.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField25ActionPerformed(evt);
             }
         });
         jPanel8.add(jTextField25, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 380, 220, 25));
-
-        jTextField26.setText("           ");
         jPanel8.add(jTextField26, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 440, 220, 25));
 
-        jTextField27.setText("           ");
         jTextField27.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField27ActionPerformed(evt);
@@ -1198,19 +1219,19 @@ public class purchase extends javax.swing.JFrame {
         });
         jPanel8.add(jTextField27, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 500, 220, 25));
 
-        jRadioButton3.setBackground(new java.awt.Color(114, 167, 220));
+        jRadioButton3.setBackground(new java.awt.Color(100, 199, 150));
         bg_cusdet_gender.add(jRadioButton3);
         jRadioButton3.setText("Male");
         jPanel8.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, -1, -1));
 
-        jRadioButton4.setBackground(new java.awt.Color(114, 167, 220));
+        jRadioButton4.setBackground(new java.awt.Color(100, 199, 150));
         bg_cusdet_gender.add(jRadioButton4);
         jRadioButton4.setText("Female");
         jPanel8.add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 280, -1, -1));
 
         customer_panel.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 420, 580));
 
-        jTable4.setBackground(new java.awt.Color(114, 167, 220));
+        jTable4.setBackground(new java.awt.Color(100, 199, 150));
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null},
@@ -1334,7 +1355,7 @@ public class purchase extends javax.swing.JFrame {
         jLabel39.setText("Repaired items");
         customer_panel.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 510, 320, 30));
 
-        jTable5.setBackground(new java.awt.Color(114, 167, 220));
+        jTable5.setBackground(new java.awt.Color(100, 199, 150));
         jTable5.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -1446,7 +1467,7 @@ public class purchase extends javax.swing.JFrame {
 
         customer_panel.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 390, 610, 100));
 
-        jTable6.setBackground(new java.awt.Color(114, 167, 220));
+        jTable6.setBackground(new java.awt.Color(100, 199, 150));
         jTable6.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null},
@@ -1652,6 +1673,8 @@ public class purchase extends javax.swing.JFrame {
     private void newcus_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newcus_btnActionPerformed
         newcus nc1 = new newcus();
         nc1.setVisible(true);
+       /* purchase p2 = new purchase();
+        p2.setOpacity(0.5F); */
     }//GEN-LAST:event_newcus_btnActionPerformed
 
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
@@ -1764,7 +1787,7 @@ public class purchase extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows Classic".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -1788,6 +1811,7 @@ public class purchase extends javax.swing.JFrame {
         });
     }
 
+    
     public class TimerThread extends Thread
     {
         private JLabel time;
@@ -1852,6 +1876,8 @@ public class purchase extends javax.swing.JFrame {
     private javax.swing.JLabel customer;
     private javax.swing.JPanel customer_panel;
     private javax.swing.JLabel date;
+    private javax.swing.JLabel emp_id;
+    private javax.swing.JLabel emp_name;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -1925,7 +1951,6 @@ public class purchase extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
@@ -1979,6 +2004,7 @@ public class purchase extends javax.swing.JFrame {
     private javax.swing.ButtonGroup puchase_paytype;
     private javax.swing.JLabel purchase;
     private javax.swing.JPanel purchase_panel;
+    private javax.swing.JTable purchase_table;
     private javax.swing.JButton searchcus_btn;
     private javax.swing.JPanel sidepanel;
     private javax.swing.JLabel time;
