@@ -33,6 +33,7 @@ public class FinancialSystem extends JFrame {
         
         this.setUndecorated(true);
         //this.setAlwaysOnTop(true);
+        this.setTitle("Financial System");
         this.setResizable(true);
         this.setVisible(true);
         cent = new JFXPanel();
@@ -310,11 +311,12 @@ public class FinancialSystem extends JFrame {
                 alert.setTitle("Error");
                 alert.setHeaderText("Invalid numbers entered");
                 alert.setContentText("You have attempted to store invalid numbers. Please enter valid numbers.");
+                alert.getDialogPane().setPrefSize(400, 200);
                 alert.showAndWait();
             }
         });
         grid.getChildren().add(update_results);
-        update_results.setStyle("-fx-base: #309c9d;");
+        update_results.setStyle("-fx-base: #309c9c;");
         
         Button calc_results = new Button("Calculate Results");
         GridPane.setFillWidth(calc_results, true);
