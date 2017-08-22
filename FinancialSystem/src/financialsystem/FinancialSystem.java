@@ -14,9 +14,7 @@ import javafx.geometry.HPos;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.scene.shape.Rectangle;
 
 /**
  *
@@ -25,7 +23,14 @@ import javafx.scene.shape.Rectangle;
 public class FinancialSystem extends Application {
     
     private static Connection conn = null;
+    
+    private static float RepRev, RepCost, RepProf, SalesRev, SalesCost, SalesProf;
+    private static float DisRev, DisCost, DisProf, OrdRev, OrdCost, OrdProf, OtherCost;
     private static float TotCost = 0, TotRev = 0, TotProf = 0;
+    
+    private static TextField repair_rev, repair_cost, repair_prof, sales_rev, sales_cost, sales_prof;
+    private static TextField dis_rev, dis_cost, dis_prof, ord_rev, ord_cost, ord_prof, other_costs;
+    private static TextField tot_rev, tot_cost, tot_prof;
     
     private static void dbConnect()
     {
@@ -65,6 +70,56 @@ public class FinancialSystem extends Application {
             alert.setTitle("Calculation Error");
             alert.setHeaderText("Error while calculating results");
             alert.setContentText("There was an error while retrieving financial values to calculate results.");
+            alert.showAndWait();
+        }
+    }
+    
+    private static void updateResults()
+    {
+        try
+        {
+            RepRev = Float.parseFloat(repair_rev.getText());
+            RepCost = Float.parseFloat(repair_cost.getText());
+            RepProf = RepRev - RepCost;
+            repair_prof.setText(Float.toString(RepProf));
+            
+            SalesRev = Float.parseFloat(sales_rev.getText());
+            SalesCost = Float.parseFloat(sales_cost.getText());
+            SalesProf = SalesRev - SalesCost;
+            sales_prof.setText(Float.toString(SalesProf));
+            
+            DisRev = Float.parseFloat(dis_rev.getText());
+            DisCost = Float.parseFloat(sales_cost.getText());
+            DisProf = DisRev - DisCost;
+            dis_prof.setText(Float.toString(DisProf));
+            
+            OrdRev = Float.parseFloat(ord_rev.getText());
+            OrdCost = Float.parseFloat(ord_cost.getText());
+            OrdProf = OrdRev - OrdCost;
+            ord_prof.setText(Float.toString(OrdProf));
+            
+            OtherCost = Float.parseFloat(other_costs.getText());
+            
+            TotRev = RepRev + SalesRev + DisRev + OrdRev;
+            TotCost = RepCost + SalesCost + DisCost + OrdCost + OtherCost;
+            TotProf = TotRev - TotCost;
+            tot_rev.setText(Float.toString(TotRev));
+            tot_cost.setText(Float.toString(TotCost));
+            tot_prof.setText(Float.toString(TotProf));
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText("Financial values updated");
+            alert.setContentText("The financial values have been successfully updated.");
+            alert.showAndWait();
+        }
+        catch(NumberFormatException e)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Invalid numbers entered");
+            alert.setContentText("You have attempted to store invalid numbers. Please enter valid numbers.");
+            alert.getDialogPane().setPrefSize(400, 200);
             alert.showAndWait();
         }
     }
@@ -115,6 +170,26 @@ public class FinancialSystem extends Application {
         }
     }
     
+    private static void clear()
+    {
+        repair_rev.setText("");
+        repair_cost.setText("");
+        repair_prof.setText("");
+        sales_rev.setText("");
+        sales_cost.setText("");
+        sales_prof.setText("");
+        dis_rev.setText("");
+        dis_cost.setText("");
+        dis_prof.setText("");
+        ord_rev.setText("");
+        ord_cost.setText("");
+        ord_prof.setText("");
+        other_costs.setText("");
+        tot_rev.setText("");
+        tot_cost.setText("");
+        tot_prof.setText("");
+    }
+    
     @Override
     public void start(Stage primaryStage) {
         
@@ -129,7 +204,7 @@ public class FinancialSystem extends Application {
         GridPane.setHalignment(lrepair_rev, HPos.RIGHT);
         grid.getChildren().add(lrepair_rev);
         
-        final TextField repair_rev = new TextField();
+        repair_rev = new TextField();
         GridPane.setConstraints(repair_rev, 1, 0);
         grid.getChildren().add(repair_rev);
         
@@ -138,7 +213,7 @@ public class FinancialSystem extends Application {
         GridPane.setHalignment(lrepair_cost, HPos.RIGHT);
         grid.getChildren().add(lrepair_cost);
         
-        final TextField repair_cost = new TextField();
+        repair_cost = new TextField();
         GridPane.setConstraints(repair_cost, 1, 1);
         grid.getChildren().add(repair_cost);
 
@@ -147,7 +222,7 @@ public class FinancialSystem extends Application {
         GridPane.setHalignment(lrepair_prof, HPos.RIGHT);
         grid.getChildren().add(lrepair_prof);
         
-        final TextField repair_prof = new TextField();
+        repair_prof = new TextField();
         GridPane.setConstraints(repair_prof, 1, 2);
         grid.getChildren().add(repair_prof);
 
@@ -156,7 +231,7 @@ public class FinancialSystem extends Application {
         GridPane.setHalignment(lsales_rev, HPos.RIGHT);
         grid.getChildren().add(lsales_rev);
         
-        final TextField sales_rev = new TextField();
+        sales_rev = new TextField();
         GridPane.setConstraints(sales_rev, 3, 0);
         grid.getChildren().add(sales_rev);
         
@@ -165,7 +240,7 @@ public class FinancialSystem extends Application {
         GridPane.setHalignment(lsales_cost, HPos.RIGHT);
         grid.getChildren().add(lsales_cost);
         
-        final TextField sales_cost = new TextField();
+        sales_cost = new TextField();
         GridPane.setConstraints(sales_cost, 3, 1);
         grid.getChildren().add(sales_cost);
         
@@ -174,7 +249,7 @@ public class FinancialSystem extends Application {
         GridPane.setHalignment(lsales_prof, HPos.RIGHT);
         grid.getChildren().add(lsales_prof);
         
-        final TextField sales_prof = new TextField();
+        sales_prof = new TextField();
         GridPane.setConstraints(sales_prof, 3, 2);
         grid.getChildren().add(sales_prof);
         
@@ -183,7 +258,7 @@ public class FinancialSystem extends Application {
         GridPane.setHalignment(ldis_rev, HPos.RIGHT);
         grid.getChildren().add(ldis_rev);
         
-        final TextField dis_rev = new TextField();
+        dis_rev = new TextField();
         GridPane.setConstraints(dis_rev, 5, 0);
         grid.getChildren().add(dis_rev);
         
@@ -192,7 +267,7 @@ public class FinancialSystem extends Application {
         GridPane.setHalignment(ldis_cost, HPos.RIGHT);
         grid.getChildren().add(ldis_cost);
         
-        final TextField dis_cost = new TextField();
+        dis_cost = new TextField();
         GridPane.setConstraints(dis_cost, 5, 1);
         grid.getChildren().add(dis_cost);
         
@@ -201,7 +276,7 @@ public class FinancialSystem extends Application {
         GridPane.setHalignment(ldis_prof, HPos.RIGHT);
         grid.getChildren().add(ldis_prof);
         
-        final TextField dis_prof = new TextField();
+        dis_prof = new TextField();
         GridPane.setConstraints(dis_prof, 5, 2);
         grid.getChildren().add(dis_prof);
         
@@ -210,7 +285,7 @@ public class FinancialSystem extends Application {
         GridPane.setHalignment(lord_rev, HPos.RIGHT);
         grid.getChildren().add(lord_rev);
         
-        final TextField ord_rev = new TextField();
+        ord_rev = new TextField();
         GridPane.setConstraints(ord_rev, 2, 8);
         grid.getChildren().add(ord_rev);
         
@@ -219,7 +294,7 @@ public class FinancialSystem extends Application {
         GridPane.setHalignment(lord_cost, HPos.RIGHT);
         grid.getChildren().add(lord_cost);
         
-        final TextField ord_cost = new TextField();
+        ord_cost = new TextField();
         GridPane.setConstraints(ord_cost, 2, 9);
         grid.getChildren().add(ord_cost);
         
@@ -228,7 +303,7 @@ public class FinancialSystem extends Application {
         GridPane.setHalignment(lord_prof, HPos.RIGHT);
         grid.getChildren().add(lord_prof);
         
-        final TextField ord_prof = new TextField();
+        ord_prof = new TextField();
         GridPane.setConstraints(ord_prof, 2, 10);
         grid.getChildren().add(ord_prof);
         
@@ -237,7 +312,7 @@ public class FinancialSystem extends Application {
         GridPane.setHalignment(lother_costs, HPos.RIGHT);
         grid.getChildren().add(lother_costs);
         
-        final TextField other_costs = new TextField();
+        other_costs = new TextField();
         GridPane.setConstraints(other_costs, 4, 8);
         grid.getChildren().add(other_costs);
         
@@ -246,7 +321,7 @@ public class FinancialSystem extends Application {
         GridPane.setHalignment(ltot_rev, HPos.RIGHT);
         grid.getChildren().add(ltot_rev);
         
-        final TextField tot_rev = new TextField();
+        tot_rev = new TextField();
         GridPane.setConstraints(tot_rev, 3, 18);
         grid.getChildren().add(tot_rev);
         
@@ -255,7 +330,7 @@ public class FinancialSystem extends Application {
         GridPane.setHalignment(ltot_cost, HPos.RIGHT);
         grid.getChildren().add(ltot_cost);
         
-        final TextField tot_cost = new TextField();
+        tot_cost = new TextField();
         GridPane.setConstraints(tot_cost, 3, 19);
         grid.getChildren().add(tot_cost);
         
@@ -264,7 +339,7 @@ public class FinancialSystem extends Application {
         GridPane.setHalignment(ltot_prof, HPos.RIGHT);
         grid.getChildren().add(ltot_prof);
         
-        final TextField tot_prof = new TextField();
+        tot_prof = new TextField();
         GridPane.setConstraints(tot_prof, 3, 20);
         grid.getChildren().add(tot_prof);
         
@@ -274,27 +349,7 @@ public class FinancialSystem extends Application {
         GridPane.setConstraints(update_results, 1, 30);
         update_results.setOnAction((ActionEvent event) ->
         {
-            try
-            {
-                TotRev = Float.parseFloat(tot_rev.getText());
-                TotCost = Float.parseFloat(tot_cost.getText());
-                TotProf = Float.parseFloat(tot_prof.getText());
-                
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Success");
-                alert.setHeaderText("Financial values updated");
-                alert.setContentText("The financial values have been successfully updated.");
-                alert.showAndWait();
-            }
-            catch(NumberFormatException e)
-            {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Invalid numbers entered");
-                alert.setContentText("You have attempted to store invalid numbers. Please enter valid numbers.");
-                alert.getDialogPane().setPrefSize(400, 200);
-                alert.showAndWait();
-            }
+            updateResults();
         });
         grid.getChildren().add(update_results);
         update_results.setStyle("-fx-base: #309c9c;");
@@ -327,22 +382,7 @@ public class FinancialSystem extends Application {
         GridPane.setConstraints(clear, 4, 30);
         clear.setOnAction((ActionEvent event) ->
         {
-            repair_rev.setText("");
-            repair_cost.setText("");
-            repair_prof.setText("");
-            sales_rev.setText("");
-            sales_cost.setText("");
-            sales_prof.setText("");
-            dis_rev.setText("");
-            dis_cost.setText("");
-            dis_prof.setText("");
-            ord_rev.setText("");
-            ord_cost.setText("");
-            ord_prof.setText("");
-            other_costs.setText("");
-            tot_rev.setText("");
-            tot_cost.setText("");
-            tot_prof.setText("");
+            clear();
         });
         grid.getChildren().add(clear);
         clear.setStyle("-fx-base: #309c9c;");
