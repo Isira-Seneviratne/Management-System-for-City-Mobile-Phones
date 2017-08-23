@@ -14,6 +14,7 @@ import javafx.geometry.HPos;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
@@ -37,7 +38,7 @@ public class FinancialSystem extends Application {
         try
         {
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ManagementSystem", "Admin", "abcd1234");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ManagementSystem", "root", "abcd1234");
         }
         catch(ClassNotFoundException ce)
         {
@@ -81,36 +82,44 @@ public class FinancialSystem extends Application {
             RepRev = Float.parseFloat(repair_rev.getText());
             RepCost = Float.parseFloat(repair_cost.getText());
             RepProf = RepRev - RepCost;
-            repair_prof.setText(Float.toString(RepProf));
+            repair_prof.setText("");
+            repair_prof.setText(Float.toString(RepProf).replaceAll("\\.0$", ""));
             
             SalesRev = Float.parseFloat(sales_rev.getText());
             SalesCost = Float.parseFloat(sales_cost.getText());
             SalesProf = SalesRev - SalesCost;
-            sales_prof.setText(Float.toString(SalesProf));
+            sales_prof.setText("");
+            sales_prof.setText(Float.toString(SalesProf).replaceAll("\\.0$", ""));
             
             DisRev = Float.parseFloat(dis_rev.getText());
             DisCost = Float.parseFloat(sales_cost.getText());
             DisProf = DisRev - DisCost;
-            dis_prof.setText(Float.toString(DisProf));
+            dis_prof.setText("");
+            dis_prof.setText(Float.toString(DisProf).replaceAll("\\.0$", ""));
             
             OrdRev = Float.parseFloat(ord_rev.getText());
             OrdCost = Float.parseFloat(ord_cost.getText());
             OrdProf = OrdRev - OrdCost;
-            ord_prof.setText(Float.toString(OrdProf));
+            ord_prof.setText("");
+            ord_prof.setText(Float.toString(OrdProf).replaceAll("\\.0$", ""));
             
             OtherCost = Float.parseFloat(other_costs.getText());
             
             TotRev = RepRev + SalesRev + DisRev + OrdRev;
             TotCost = RepCost + SalesCost + DisCost + OrdCost + OtherCost;
             TotProf = TotRev - TotCost;
-            tot_rev.setText(Float.toString(TotRev));
-            tot_cost.setText(Float.toString(TotCost));
-            tot_prof.setText(Float.toString(TotProf));
+            tot_rev.setText("");
+            tot_rev.setText(Float.toString(TotRev).replaceAll("\\.0$", ""));
+            tot_cost.setText("");
+            tot_cost.setText(Float.toString(TotCost).replaceAll("\\.0$", ""));
+            tot_prof.setText("");
+            tot_prof.setText(Float.toString(TotProf).replaceAll("\\.0$", ""));
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setHeaderText("Financial values updated");
             alert.setContentText("The financial values have been successfully updated.");
+            alert.getDialogPane().setPrefSize(400, 200);
             alert.showAndWait();
         }
         catch(NumberFormatException e)
@@ -126,6 +135,7 @@ public class FinancialSystem extends Application {
     
     private static void generateReport()
     {
+        dbConnect();
         if(TotProf == 0 && TotRev == 0 && TotCost == 0)
         {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -134,7 +144,7 @@ public class FinancialSystem extends Application {
             alert.setContentText("You have not generated the required financial values. Please click the \"Calculate Results\" button to do so.");
             alert.getDialogPane().setPrefSize(400, 200);
             alert.showAndWait();
-            return; //prevents NullPointerException if calculateResults() has not been executed, due to the Connection variable having a null value
+            return;
         }
         String month = getMonth();
         int year = Calendar.getInstance().get(Calendar.YEAR);
@@ -200,6 +210,7 @@ public class FinancialSystem extends Application {
         grid.setHgap(10);
         
         final Label lrepair_rev = new Label("Repair revenue: ");
+        lrepair_rev.setFont(Font.font("Tahoma", 18));
         GridPane.setConstraints(lrepair_rev, 0, 0);
         GridPane.setHalignment(lrepair_rev, HPos.RIGHT);
         grid.getChildren().add(lrepair_rev);
@@ -209,6 +220,7 @@ public class FinancialSystem extends Application {
         grid.getChildren().add(repair_rev);
         
         final Label lrepair_cost = new Label("Repair costs: ");
+        lrepair_cost.setFont(Font.font("Tahoma", 18));
         GridPane.setConstraints(lrepair_cost, 0, 1);
         GridPane.setHalignment(lrepair_cost, HPos.RIGHT);
         grid.getChildren().add(lrepair_cost);
@@ -218,6 +230,7 @@ public class FinancialSystem extends Application {
         grid.getChildren().add(repair_cost);
 
         final Label lrepair_prof = new Label("Repair profit: ");
+        lrepair_prof.setFont(Font.font("Tahoma", 18));
         GridPane.setConstraints(lrepair_prof, 0, 2);
         GridPane.setHalignment(lrepair_prof, HPos.RIGHT);
         grid.getChildren().add(lrepair_prof);
@@ -227,6 +240,7 @@ public class FinancialSystem extends Application {
         grid.getChildren().add(repair_prof);
 
         final Label lsales_rev = new Label("Sales revenue: ");
+        lsales_rev.setFont(Font.font("Tahoma", 18));
         GridPane.setConstraints(lsales_rev, 2, 0);
         GridPane.setHalignment(lsales_rev, HPos.RIGHT);
         grid.getChildren().add(lsales_rev);
@@ -236,6 +250,7 @@ public class FinancialSystem extends Application {
         grid.getChildren().add(sales_rev);
         
         final Label lsales_cost = new Label("Sales costs: ");
+        lsales_cost.setFont(Font.font("Tahoma", 18));
         GridPane.setConstraints(lsales_cost, 2, 1);
         GridPane.setHalignment(lsales_cost, HPos.RIGHT);
         grid.getChildren().add(lsales_cost);
@@ -245,6 +260,7 @@ public class FinancialSystem extends Application {
         grid.getChildren().add(sales_cost);
         
         final Label lsales_prof = new Label("Sales profit: ");
+        lsales_prof.setFont(Font.font("Tahoma", 18));
         GridPane.setConstraints(lsales_prof, 2, 2);
         GridPane.setHalignment(lsales_prof, HPos.RIGHT);
         grid.getChildren().add(lsales_prof);
@@ -254,6 +270,7 @@ public class FinancialSystem extends Application {
         grid.getChildren().add(sales_prof);
         
         final Label ldis_rev = new Label("Distribution revenue: ");
+        ldis_rev.setFont(Font.font("Tahoma", 18));
         GridPane.setConstraints(ldis_rev, 4, 0);
         GridPane.setHalignment(ldis_rev, HPos.RIGHT);
         grid.getChildren().add(ldis_rev);
@@ -263,6 +280,7 @@ public class FinancialSystem extends Application {
         grid.getChildren().add(dis_rev);
         
         final Label ldis_cost = new Label("Distribution costs: ");
+        ldis_cost.setFont(Font.font("Tahoma", 18));
         GridPane.setConstraints(ldis_cost, 4, 1);
         GridPane.setHalignment(ldis_cost, HPos.RIGHT);
         grid.getChildren().add(ldis_cost);
@@ -272,6 +290,7 @@ public class FinancialSystem extends Application {
         grid.getChildren().add(dis_cost);
         
         final Label ldis_prof = new Label("Distribution profit: ");
+        ldis_prof.setFont(Font.font("Tahoma", 18));
         GridPane.setConstraints(ldis_prof, 4, 2);
         GridPane.setHalignment(ldis_prof, HPos.RIGHT);
         grid.getChildren().add(ldis_prof);
@@ -281,6 +300,7 @@ public class FinancialSystem extends Application {
         grid.getChildren().add(dis_prof);
         
         final Label lord_rev = new Label("Order revenue: ");
+        lord_rev.setFont(Font.font("Tahoma", 18));
         GridPane.setConstraints(lord_rev, 1, 8);
         GridPane.setHalignment(lord_rev, HPos.RIGHT);
         grid.getChildren().add(lord_rev);
@@ -290,6 +310,7 @@ public class FinancialSystem extends Application {
         grid.getChildren().add(ord_rev);
         
         final Label lord_cost = new Label("Order costs: ");
+        lord_cost.setFont(Font.font("Tahoma", 18));
         GridPane.setConstraints(lord_cost, 1, 9);
         GridPane.setHalignment(lord_cost, HPos.RIGHT);
         grid.getChildren().add(lord_cost);
@@ -299,6 +320,7 @@ public class FinancialSystem extends Application {
         grid.getChildren().add(ord_cost);
         
         final Label lord_prof = new Label("Order profit: ");
+        lord_prof.setFont(Font.font("Tahoma", 18));
         GridPane.setConstraints(lord_prof, 1, 10);
         GridPane.setHalignment(lord_prof, HPos.RIGHT);
         grid.getChildren().add(lord_prof);
@@ -308,6 +330,7 @@ public class FinancialSystem extends Application {
         grid.getChildren().add(ord_prof);
         
         final Label lother_costs = new Label("Other costs: ");
+        lother_costs.setFont(Font.font("Tahoma", 18));
         GridPane.setConstraints(lother_costs, 3, 8);
         GridPane.setHalignment(lother_costs, HPos.RIGHT);
         grid.getChildren().add(lother_costs);
@@ -317,6 +340,7 @@ public class FinancialSystem extends Application {
         grid.getChildren().add(other_costs);
         
         final Label ltot_rev = new Label("Total monthly revenue: ");
+        ltot_rev.setFont(Font.font("Tahoma", 18));
         GridPane.setConstraints(ltot_rev, 2, 18);
         GridPane.setHalignment(ltot_rev, HPos.RIGHT);
         grid.getChildren().add(ltot_rev);
@@ -326,6 +350,7 @@ public class FinancialSystem extends Application {
         grid.getChildren().add(tot_rev);
         
         final Label ltot_cost = new Label("Total monthly costs: ");
+        ltot_cost.setFont(Font.font("Tahoma", 18));
         GridPane.setConstraints(ltot_cost, 2, 19);
         GridPane.setHalignment(ltot_cost, HPos.RIGHT);
         grid.getChildren().add(ltot_cost);
@@ -335,6 +360,7 @@ public class FinancialSystem extends Application {
         grid.getChildren().add(tot_cost);
         
         final Label ltot_prof = new Label("Total monthly profit: ");
+        ltot_prof.setFont(Font.font("Tahoma", 18));
         GridPane.setConstraints(ltot_prof, 2, 20);
         GridPane.setHalignment(ltot_prof, HPos.RIGHT);
         grid.getChildren().add(ltot_prof);
@@ -344,6 +370,7 @@ public class FinancialSystem extends Application {
         grid.getChildren().add(tot_prof);
         
         Button update_results = new Button("Update Results");
+        update_results.setFont(Font.font("Tahoma", 18));
         GridPane.setFillWidth(update_results, true);
         update_results.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         GridPane.setConstraints(update_results, 1, 30);
@@ -355,6 +382,7 @@ public class FinancialSystem extends Application {
         update_results.setStyle("-fx-base: #309c9c;");
         
         Button calc_results = new Button("Calculate Results");
+        calc_results.setFont(Font.font("Tahoma", 18));
         GridPane.setFillWidth(calc_results, true);
         calc_results.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         GridPane.setConstraints(calc_results, 2, 30);
@@ -366,6 +394,7 @@ public class FinancialSystem extends Application {
         calc_results.setStyle("-fx-base: #309c9c;");
         
         Button generate = new Button("Generate Report");
+        generate.setFont(Font.font("Tahoma", 18));
         GridPane.setFillWidth(generate, true);
         generate.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         GridPane.setConstraints(generate, 3, 30);
@@ -377,6 +406,7 @@ public class FinancialSystem extends Application {
         generate.setStyle("-fx-base: #309c9c;");
         
         Button clear = new Button("Clear");
+        clear.setFont(Font.font("Tahoma", 18));
         GridPane.setFillWidth(clear, true);
         clear.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         GridPane.setConstraints(clear, 4, 30);
