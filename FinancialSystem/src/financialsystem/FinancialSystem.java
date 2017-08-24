@@ -592,7 +592,7 @@ public class FinancialSystem extends javax.swing.JFrame {
         try
         {
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ManagementSystem", "Admin", "abcd1234");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ManagementSystem?verifyServerCertificate=false&useSSL=true", "root", "abcd1234");
         }
         catch(ClassNotFoundException ce)
         {
