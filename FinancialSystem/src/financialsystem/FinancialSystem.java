@@ -783,6 +783,14 @@ public class FinancialSystem extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     
     private Connection conn = null;
+
+    public Connection getConn() {
+        return conn;
+    }
+
+    public void setConn(Connection conn) {
+        this.conn = conn;
+    }
     
     private float RepRev, RepCost, RepProf, SalesRev, SalesCost, SalesProf;
     private float DisRev, DisCost, DisProf, OrdRev, HRCost, OtherCost;
