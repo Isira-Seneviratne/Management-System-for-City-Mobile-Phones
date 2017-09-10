@@ -17,11 +17,12 @@ CREATE TABLE Daily_Finances
         Dis_cost        float,
         Dis_prof        float,
         HR_cost         float,
+        Other_cost		float,
         Tot_inc         float,
         Tot_cost        float,
         Tot_prof        float,
         PRIMARY KEY(Day, Month, Year)
-)
+);
 
 CREATE TABLE Financial_Reports
 (
@@ -124,3 +125,5 @@ CREATE TABLE Order_Details
 (
 
 );
+
+DROP TABLE Daily_Finances;
