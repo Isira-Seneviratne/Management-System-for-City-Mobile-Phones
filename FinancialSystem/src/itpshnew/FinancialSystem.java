@@ -23,21 +23,25 @@ public class FinancialSystem extends JFrame {
     /**
      * Creates new form FinancialSystem
      */
-    private float RepMonRev, RepMonCost, RepMonProf, SalesRev, SalesCost, SalesProf;
-    private float DisRev, DisCost, DisProf, OrdRev, HRCost, OtherCost;
-    private float TotMonCost = 0, TotMonRev = 0, TotMonProf = 0;
+    private float MonthRepRev, MonthRepCost, MonthRepProf, MonthSalesRev, MonthSalesCost, MonthSalesProf, 
+            MonthDisRev, MonthDisCost, MonthDisProf, MonthHRCost, MonthOtherCost;
+    private float TodayRepRev, TodayRepCost, TodayRepProf, TodaySalesRev, TodaySalesCost, TodaySalesProf,
+            TodayDisRev, TodayDisCost, TodayDisProf, TodayHRCost, TodayOtherCost;
+    private float TodayTotCost = 0, MonthTotCost = 0, TodayTotRev = 0,
+            MonthTotRev = 0, TodayTotProf = 0, MonthTotProf = 0;
     
     private Connection conn;
     private TimerThread timer;
     
     public FinancialSystem() {
         
-        this.setUndecorated(true);
+        setUndecorated(true);
         //this.setAlwaysOnTop(true);
-        this.setResizable(true);
-        this.setVisible(true);
+        setResizable(true);
+        setVisible(true);
         initComponents();
         month_pan.setVisible(false);
+        initToday();
         
         setColor(topic6);   //set the colour to FinancialSystem bar
         bar6.setOpaque(true);
@@ -61,7 +65,7 @@ public class FinancialSystem extends JFrame {
     
     private void dbConnect()
     {
-       try
+        try
         {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ManagementSystem?verifyServerCertificate=false&useSSL=true", "root", "abcd1234");
@@ -76,9 +80,49 @@ public class FinancialSystem extends JFrame {
         }
     }
     
+    private void initToday()
+    {
+        if(conn == null)
+            dbConnect();
+        TodayRepRev = 300;
+        TodayRepCost = 300;
+        TodayRepProf = TodayRepRev - TodayRepCost;
+        TodaySalesRev = 300;
+        TodaySalesCost = 300;
+        TodaySalesProf = TodaySalesRev - TodaySalesCost;
+        TodayDisRev = 300;
+        TodayDisCost = 300;
+        TodayDisProf = TodayDisRev - TodayDisCost;
+        TodayHRCost = 300;
+        TodayTotRev = TodayRepRev + TodaySalesRev + TodayDisRev;
+        TodayTotCost = TodayRepCost + TodaySalesCost + TodayDisCost + TodayHRCost;
+        TodayTotProf = TodayTotRev - TodayTotCost;
+        repair_rev.setText(Float.toString(TodayRepRev).replaceAll("\\.0*$", ""));
+        repair_cost.setText(Float.toString(TodayRepCost).replaceAll("\\.0*$", ""));
+        repair_prof.setText(Float.toString(TodayRepProf).replaceAll("\\.0*$", ""));
+        sales_rev.setText(Float.toString(TodaySalesRev).replaceAll("\\.0*$", ""));
+        sales_cost.setText(Float.toString(TodaySalesCost).replaceAll("\\.0*$", ""));
+        sales_prof.setText(Float.toString(TodaySalesProf).replaceAll("\\.0*$", ""));
+        dis_rev.setText(Float.toString(TodayDisRev).replaceAll("\\.0*$", ""));
+        dis_cost.setText(Float.toString(TodayDisCost).replaceAll("\\.0*$", ""));
+        dis_prof.setText(Float.toString(TodayDisProf).replaceAll("\\.0*$", ""));
+        hr_cost.setText(Float.toString(TodayHRCost).replaceAll("\\.0*$", ""));
+        tot_rev.setText(Float.toString(TodayTotRev).replaceAll("\\.0*$", ""));
+        tot_cost.setText(Float.toString(TodayTotCost).replaceAll("\\.0*$", ""));
+        tot_prof.setText(Float.toString(TodayTotProf).replaceAll("\\.0*$", ""));
+        try
+        {
+            conn.close();
+        }
+        catch(SQLException se)
+        {
+            JOptionPane.showMessageDialog(this, "Unable to close database connection.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
     private void calculateResults()
     {
-         if(conn == null)
+        if(conn == null)
             dbConnect();
         try
         {
@@ -108,31 +152,31 @@ public class FinancialSystem extends JFrame {
     {
         try
         {
-            RepMonRev = Float.parseFloat(repair_rev1.getText());
-            RepMonCost = Float.parseFloat(repair_cost1.getText());
-            RepMonProf = RepMonRev - RepMonCost;
-            repair_prof1.setText(Float.toString(RepMonProf).replaceAll("\\.0*$", ""));
+            MonthRepRev = Float.parseFloat(repair_rev1.getText());
+            MonthRepCost = Float.parseFloat(repair_cost1.getText());
+            MonthRepProf = MonthRepRev - MonthRepCost;
+            repair_prof1.setText(Float.toString(MonthRepProf).replaceAll("\\.0*$", ""));
             
-            SalesRev = Float.parseFloat(sales_rev1.getText());
-            SalesCost = Float.parseFloat(sales_cost1.getText());
-            SalesProf = SalesRev - SalesCost;
-            sales_prof1.setText(Float.toString(SalesProf).replaceAll("\\.0*$", ""));
+            MonthSalesRev = Float.parseFloat(sales_rev1.getText());
+            MonthSalesCost = Float.parseFloat(sales_cost1.getText());
+            MonthSalesProf = MonthSalesRev - MonthSalesCost;
+            sales_prof1.setText(Float.toString(MonthSalesProf).replaceAll("\\.0*$", ""));
             
-            DisRev = Float.parseFloat(dis_rev1.getText());
-            DisCost = Float.parseFloat(dis_cost1.getText());
-            DisProf = DisRev - DisCost;
-            dis_prof1.setText(Float.toString(DisProf).replaceAll("\\.0*$", ""));
+            MonthDisRev = Float.parseFloat(dis_rev1.getText());
+            MonthDisCost = Float.parseFloat(dis_cost1.getText());
+            MonthDisProf = MonthDisRev - MonthDisCost;
+            dis_prof1.setText(Float.toString(MonthDisProf).replaceAll("\\.0*$", ""));
             
-            HRCost = Float.parseFloat(hr_cost1.getText());
+            MonthHRCost = Float.parseFloat(hr_cost1.getText());
             
-            OtherCost = Float.parseFloat(other_costs1.getText());
+            MonthOtherCost = Float.parseFloat(other_costs1.getText());
             
-            TotMonRev = RepMonRev + SalesRev + DisRev + OrdRev;
-            TotMonCost = RepMonCost + SalesCost + DisCost + HRCost + OtherCost;
-            TotMonProf = TotMonRev - TotMonCost;
-            search_year.setText(Float.toString(TotMonRev).replaceAll("\\.0*$", ""));
-            search_month.setText(Float.toString(TotMonCost).replaceAll("\\.0*$", ""));
-            tot_prof.setText(Float.toString(TotMonProf).replaceAll("\\.0*$", ""));
+            MonthTotRev = MonthRepRev + MonthSalesRev + MonthDisRev;
+            MonthTotCost = MonthRepCost + MonthSalesCost + MonthDisCost + MonthHRCost + MonthOtherCost;
+            MonthTotProf = MonthTotRev - MonthTotCost;
+            search_year.setText(Float.toString(MonthTotRev).replaceAll("\\.0*$", ""));
+            search_month.setText(Float.toString(MonthTotCost).replaceAll("\\.0*$", ""));
+            tot_prof.setText(Float.toString(MonthTotProf).replaceAll("\\.0*$", ""));
 
             JOptionPane.showMessageDialog(this, "The financial values have been successfully updated.",
                     "Financial values updated", JOptionPane.INFORMATION_MESSAGE);
@@ -148,7 +192,7 @@ public class FinancialSystem extends JFrame {
     {
         if(conn == null)
             dbConnect();
-        if(TotMonProf == 0 && TotMonRev == 0 && TotMonCost == 0)
+        if(MonthTotProf == 0 && MonthTotRev == 0 && MonthTotCost == 0)
         {
             JOptionPane.showMessageDialog(this, "You have not generated the required financial values. Please click the \"Calculate Results\" button to do so.",
                     "Error", JOptionPane.ERROR_MESSAGE);
@@ -163,14 +207,14 @@ public class FinancialSystem extends JFrame {
             s.execute("SELECT * FROM Financial_Reports WHERE Month_issued='"+month+"' AND Year_issued="+year);
             if(s.getResultSet().next())
             {
-                s.execute("UPDATE Financial_Reports SET Total_revenue="+TotMonRev+", Total_costs="+TotMonCost+", Total_profit="+TotMonProf
+                s.execute("UPDATE Financial_Reports SET Total_revenue="+MonthTotRev+", Total_costs="+MonthTotCost+", Total_profit="+MonthTotProf
                         +" WHERE Month_issued='"+month+"' AND Year_issued="+year);
                 title = "Update successful";
                 message = "The financial report for the current month and year has been updated.";
             }
             else
             {
-                s.execute("INSERT INTO Financial_Reports VALUES('"+month+"',"+year+","+TotMonRev+","+TotMonCost+","+TotMonProf+")");
+                s.execute("INSERT INTO Financial_Reports VALUES('"+month+"',"+year+","+MonthTotRev+","+MonthTotCost+","+MonthTotProf+")");
                 title = "Insertion successful";
                 message = "The financial report for the current month and year has been inserted.";
             }
@@ -604,7 +648,7 @@ public class FinancialSystem extends JFrame {
         date.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         date.setForeground(new java.awt.Color(255, 255, 255));
         date.setText(getDate());
-        topbar.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, 170, 50));
+        topbar.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 0, 200, 50));
 
         month_fin.setBackground(new java.awt.Color(0, 204, 204));
         month_fin.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
