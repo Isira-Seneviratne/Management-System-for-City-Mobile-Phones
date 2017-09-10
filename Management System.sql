@@ -21,7 +21,7 @@ CREATE TABLE Daily_Finances
         Tot_cost        float,
         Tot_prof        float,
         PRIMARY KEY(Day, Month, Year)
-)
+);
 
 CREATE TABLE Financial_Reports
 (
