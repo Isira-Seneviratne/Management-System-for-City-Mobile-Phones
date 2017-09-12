@@ -17,7 +17,7 @@ CREATE TABLE Daily_Finances
         Dis_cost        float,
         Dis_prof        float,
         HR_cost         float,
-        Other_cost		float,
+        Other_cost	float,
         Tot_inc         float,
         Tot_cost        float,
         Tot_prof        float,
@@ -27,9 +27,9 @@ CREATE TABLE Daily_Finances
 CREATE TABLE Financial_Reports
 (
 	Month_issued	char(10),
-	Year_issued		int,
+	Year_issued	int,
 	Total_revenue	float,
-	Total_costs		float,
+	Total_costs	float,
 	Total_profit	float,
 	PRIMARY KEY(Month_issued, Year_issued)
 );
@@ -68,27 +68,23 @@ CREATE TABLE Shipping_rec
 (
 	Shipping_ID	varchar(10),
 	Vendor_ID	varchar(10),
-	Item_ID	varchar(10),
-	ship_type		string,
-	item_cost		float,
+	Item_ID         varchar(10),
+	ship_type	varchar(10),
+	item_cost	float,
 	Shipping_Cost	float,
 	PRIMARY KEY(Vendor_ID, Item_ID)
 );
-
-
 
 CREATE TABLE Vendor
 (
 	Vendor_ID	varchar(10),
 	Vendor_name	varchar(10),
-	Address		string,
-	Email		string,
+	Address		varchar(30),
+	Email		varchar(20),
 	Telephone	int,
 	Shipping_Cost_ph	float,
 	PRIMARY KEY(Vendor_ID)
 );
-
-
 
 CREATE TABLE Distribution_Item
 (
@@ -98,8 +94,6 @@ CREATE TABLE Distribution_Item
 	Item_Costs	int,
 	PRIMARY KEY(Vendor_ID, Item_ID)
 );
-
-
 
 CREATE TABLE Device
 (
@@ -123,5 +117,5 @@ CREATE TABLE HR
 
 CREATE TABLE Order_Details
 (
-
+        
 );
