@@ -36,7 +36,23 @@ CREATE TABLE IF NOT EXISTS Financial_Reports
 
 CREATE TABLE IF NOT EXISTS Bill
 (
-	
+	Bill_Number varchar(10) NOT NULL,
+        Customer_ID varchar(10) NOT NULL,
+        Time time NOT NULL,
+        Date date NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Customer
+(
+        `customer_id` varchar(10) DEFAULT NULL,
+        `fname` varchar(50) DEFAULT NULL,
+        `lname` varchar(50) DEFAULT NULL,
+        `phone_num1` int(10) DEFAULT NULL,
+        `phone_num2` int(10) DEFAULT NULL,
+        `gender` varchar(10) DEFAULT NULL,
+        `address` varchar(100) DEFAULT NULL,
+        `city` varchar(50) DEFAULT NULL,
+        `tot_spent_money` double DEFAULT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Warranty
@@ -166,7 +182,7 @@ CREATE TABLE IF NOT EXISTS Sold_item
         bill_number varchar(10) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS Loyalty customer
+CREATE TABLE IF NOT EXISTS Loyalty_customer
 (
         customer_Id varchar(10) NOT NULL,
         loyalty_level varchar(20) NOT NULL,
