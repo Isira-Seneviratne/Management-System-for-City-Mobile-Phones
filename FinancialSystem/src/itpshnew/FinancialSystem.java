@@ -84,32 +84,44 @@ public class FinancialSystem extends JFrame {
     {
         if(conn == null)
             dbConnect();
-        TodayRepRev = 300;
-        TodayRepCost = 300;
-        TodayRepProf = TodayRepRev - TodayRepCost;
-        TodaySalesRev = 300;
-        TodaySalesCost = 300;
-        TodaySalesProf = TodaySalesRev - TodaySalesCost;
-        TodayDisRev = 300;
-        TodayDisCost = 300;
-        TodayDisProf = TodayDisRev - TodayDisCost;
-        TodayHRCost = 300;
-        TodayTotRev = TodayRepRev + TodaySalesRev + TodayDisRev;
-        TodayTotCost = TodayRepCost + TodaySalesCost + TodayDisCost + TodayHRCost;
-        TodayTotProf = TodayTotRev - TodayTotCost;
-        repair_rev.setText(Float.toString(TodayRepRev).replaceAll("\\.0*$", ""));
-        repair_cost.setText(Float.toString(TodayRepCost).replaceAll("\\.0*$", ""));
-        repair_prof.setText(Float.toString(TodayRepProf).replaceAll("\\.0*$", ""));
-        sales_rev.setText(Float.toString(TodaySalesRev).replaceAll("\\.0*$", ""));
-        sales_cost.setText(Float.toString(TodaySalesCost).replaceAll("\\.0*$", ""));
-        sales_prof.setText(Float.toString(TodaySalesProf).replaceAll("\\.0*$", ""));
-        dis_rev.setText(Float.toString(TodayDisRev).replaceAll("\\.0*$", ""));
-        dis_cost.setText(Float.toString(TodayDisCost).replaceAll("\\.0*$", ""));
-        dis_prof.setText(Float.toString(TodayDisProf).replaceAll("\\.0*$", ""));
-        hr_cost.setText(Float.toString(TodayHRCost).replaceAll("\\.0*$", ""));
-        tot_rev.setText(Float.toString(TodayTotRev).replaceAll("\\.0*$", ""));
-        tot_cost.setText(Float.toString(TodayTotCost).replaceAll("\\.0*$", ""));
-        tot_prof.setText(Float.toString(TodayTotProf).replaceAll("\\.0*$", ""));
+        try
+        {
+            Statement s = conn.createStatement();
+            ResultSet rs;
+            TodayRepRev = 300;
+            TodayRepCost = 300;
+            TodayRepProf = TodayRepRev - TodayRepCost;
+            TodaySalesRev = 300;
+            TodaySalesCost = 300;
+            TodaySalesProf = TodaySalesRev - TodaySalesCost;
+            s.execute("SELECT item_cost, Shipping_Cost FROM Shipping_rec WHERE Day="+getDay()+" AND Month='"+getMonth()+"' AND Year="+getYear());
+            rs = s.getResultSet();
+            TodayDisRev = 300;
+            while(rs.next())
+                TodayDisCost += rs.getFloat("item_cost") + rs.getFloat("Shipping_Cost");
+            TodayDisProf = TodayDisRev - TodayDisCost;
+            TodayHRCost = 300;
+            TodayTotRev = TodayRepRev + TodaySalesRev + TodayDisRev;
+            TodayTotCost = TodayRepCost + TodaySalesCost + TodayDisCost + TodayHRCost;
+            TodayTotProf = TodayTotRev - TodayTotCost;
+            repair_rev.setText(Float.toString(TodayRepRev).replaceAll("\\.0*$", ""));
+            repair_cost.setText(Float.toString(TodayRepCost).replaceAll("\\.0*$", ""));
+            repair_prof.setText(Float.toString(TodayRepProf).replaceAll("\\.0*$", ""));
+            sales_rev.setText(Float.toString(TodaySalesRev).replaceAll("\\.0*$", ""));
+            sales_cost.setText(Float.toString(TodaySalesCost).replaceAll("\\.0*$", ""));
+            sales_prof.setText(Float.toString(TodaySalesProf).replaceAll("\\.0*$", ""));
+            dis_rev.setText(Float.toString(TodayDisRev).replaceAll("\\.0*$", ""));
+            dis_cost.setText(Float.toString(TodayDisCost).replaceAll("\\.0*$", ""));
+            dis_prof.setText(Float.toString(TodayDisProf).replaceAll("\\.0*$", ""));
+            hr_cost.setText(Float.toString(TodayHRCost).replaceAll("\\.0*$", ""));
+            tot_rev.setText(Float.toString(TodayTotRev).replaceAll("\\.0*$", ""));
+            tot_cost.setText(Float.toString(TodayTotCost).replaceAll("\\.0*$", ""));
+            tot_prof.setText(Float.toString(TodayTotProf).replaceAll("\\.0*$", ""));
+        }
+        catch(SQLException e)
+        {
+            JOptionPane.showMessageDialog(this, "Unable to retrieve values from database.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
         try
         {
             conn.close();
@@ -127,11 +139,39 @@ public class FinancialSystem extends JFrame {
         try
         {
             Statement s = conn.createStatement();
-        }
-        catch(NullPointerException npe)
-        {
-            JOptionPane.showMessageDialog(this, "A database connection was not properly established.",
-                    "Error", JOptionPane.ERROR_MESSAGE);
+            s.execute("SELECT * FROM Daily_Finances WHERE Month='"+getMonth()+"' AND Year="+getYear());
+            ResultSet rs = s.getResultSet();
+            while(rs.next())
+            {
+                MonthRepRev += rs.getFloat("Rep_inc");
+                MonthRepCost += rs.getFloat("Rep_cost");
+                MonthRepProf += rs.getFloat("Rep_prof");
+                MonthSalesRev += rs.getFloat("Sales_inc");
+                MonthSalesCost += rs.getFloat("Sales_cost");
+                MonthSalesProf += rs.getFloat("Sales_prof");
+                MonthDisRev += rs.getFloat("Dis_inc");
+                MonthDisCost += rs.getFloat("Dis_cost");
+                MonthDisProf += rs.getFloat("Dis_prof");
+                MonthHRCost += rs.getFloat("HR_cost");
+                MonthOtherCost += rs.getFloat("Other_cost");
+            }
+            MonthTotRev = MonthRepRev + MonthSalesRev + MonthDisRev;
+            MonthTotCost = MonthRepCost + MonthSalesCost + MonthDisRev + MonthHRCost + MonthOtherCost;
+            MonthTotProf = MonthTotRev - MonthTotCost;
+            repair_rev1.setText(Float.toString(MonthRepRev).replace("\\.0*$", ""));
+            repair_cost1.setText(Float.toString(MonthRepCost).replace("\\.0*$", ""));
+            repair_prof1.setText(Float.toString(MonthRepProf).replace("\\.0*$", ""));
+            sales_rev1.setText(Float.toString(MonthSalesRev));
+            sales_cost1.setText(Float.toString(MonthSalesCost));
+            sales_prof1.setText(Float.toString(MonthSalesProf));
+            dis_rev1.setText(Float.toString(MonthDisRev).replace("\\.0*$", ""));
+            dis_cost1.setText(Float.toString(MonthDisCost));
+            dis_prof1.setText(Float.toString(MonthDisProf));
+            hr_cost1.setText(Float.toString(MonthHRCost));
+            other_costs1.setText(Float.toString(MonthOtherCost));
+            tot_rev1.setText(Float.toString(MonthTotRev));
+            tot_cost1.setText(Float.toString(MonthTotCost));
+            tot_prof1.setText(Float.toString(MonthTotProf));
         }
         catch(SQLException se)
         {
@@ -323,7 +363,7 @@ public class FinancialSystem extends JFrame {
         jLabel14 = new javax.swing.JLabel();
         hr_cost = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
-        oth_cost = new javax.swing.JTextField();
+        other_costs = new javax.swing.JTextField();
         updateToday = new javax.swing.JButton();
         month_pan = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
@@ -909,6 +949,12 @@ public class FinancialSystem extends JFrame {
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel16.setText("Today's other costs:");
 
+        other_costs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                other_costsActionPerformed(evt);
+            }
+        });
+
         updateToday.setBackground(new java.awt.Color(48, 214, 48));
         updateToday.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         updateToday.setText("Update");
@@ -930,7 +976,7 @@ public class FinancialSystem extends JFrame {
                 .addGap(37, 37, 37)
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(oth_cost, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(other_costs, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(69, 69, 69)
                 .addComponent(updateToday, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(213, Short.MAX_VALUE))
@@ -948,7 +994,7 @@ public class FinancialSystem extends JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(oth_cost)
+                                .addComponent(other_costs)
                                 .addGap(3, 3, 3))
                             .addComponent(jLabel16))
                         .addGap(3, 3, 3)))
@@ -1362,14 +1408,23 @@ public class FinancialSystem extends JFrame {
 
     private String getDate()
     {
-        Calendar cal = Calendar.getInstance();
-        return cal.get(Calendar.DATE)+" "+getMonth()+" "+cal.get(Calendar.YEAR);
+        return getDay()+" "+getMonth()+" "+getYear();
+    }
+    
+    private int getDay()
+    {
+        return Calendar.getInstance().get(Calendar.DATE);
     }
     
     private String getMonth()
     {
         String months[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         return months[Calendar.getInstance().get(Calendar.MONTH)];
+    }
+    
+    private int getYear()
+    {
+        return Calendar.getInstance().get(Calendar.YEAR);
     }
     
     private void setlabelcolor(JLabel label) //set the colour after  click
@@ -1456,6 +1511,10 @@ public class FinancialSystem extends JFrame {
     private void updateTodayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateTodayActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_updateTodayActionPerformed
+
+    private void other_costsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_other_costsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_other_costsActionPerformed
     
     void setColor(JPanel pl) //set the colour after  click
     {
@@ -1573,7 +1632,7 @@ public class FinancialSystem extends JFrame {
     private javax.swing.JLabel name5;
     private javax.swing.JLabel name6;
     private javax.swing.JLabel name7;
-    private javax.swing.JTextField oth_cost;
+    private javax.swing.JTextField other_costs;
     private javax.swing.JTextField other_costs1;
     private javax.swing.JLabel pic;
     private javax.swing.JLabel pic1;

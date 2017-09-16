@@ -5,7 +5,7 @@ USE ManagementSystem;
 CREATE TABLE IF NOT EXISTS Daily_Finances
 (
         Day             int,
-        Month           char(10),
+        Month           varchar(10),
         Year            int,
         Rep_inc         float,
         Rep_cost        float,
@@ -63,16 +63,19 @@ CREATE TABLE IF NOT EXISTS Shipping_rec
 	ship_type	varchar(10),
 	item_cost	float,
 	Shipping_Cost	float,
+	Day             int,
+	Month           varchar(10),
+	Year            int,
 	PRIMARY KEY(Vendor_ID, Item_ID)
 );
 
 CREATE TABLE IF NOT EXISTS Vendor
 (
-	Vendor_ID	varchar(10),
-	Vendor_name	varchar(10),
-	Address		varchar(30),
-	Email		varchar(20),
-	Telephone	int,
+	Vendor_ID	        varchar(10),
+	Vendor_name	        varchar(10),
+	Address		        varchar(30),
+	Email		        varchar(20),
+	Telephone	        int,
 	Shipping_Cost_ph	float,
 	PRIMARY KEY(Vendor_ID)
 );
@@ -83,6 +86,9 @@ CREATE TABLE IF NOT EXISTS Distribution_Item
 	Item_ID		varchar(10),
 	Qty		int,
 	Item_Costs	int,
+	Day             int,
+	Month           varchar(10),
+	Year            int,
 	PRIMARY KEY(Vendor_ID, Item_ID)
 );
 

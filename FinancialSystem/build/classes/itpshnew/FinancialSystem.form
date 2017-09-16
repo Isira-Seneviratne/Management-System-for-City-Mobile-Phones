@@ -1205,7 +1205,7 @@
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="oth_cost" min="-2" pref="97" max="-2" attributes="0"/>
+                      <Component id="other_costs" min="-2" pref="97" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                       <Component id="updateToday" min="-2" pref="108" max="-2" attributes="0"/>
                       <EmptySpace pref="213" max="32767" attributes="0"/>
@@ -1227,7 +1227,7 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="oth_cost" max="32767" attributes="0"/>
+                                      <Component id="other_costs" max="32767" attributes="0"/>
                                       <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="jLabel16" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -1267,7 +1267,10 @@
                 <Property name="text" type="java.lang.String" value="Today&apos;s other costs:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="oth_cost">
+            <Component class="javax.swing.JTextField" name="other_costs">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="other_costsActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="updateToday">
               <Properties>
