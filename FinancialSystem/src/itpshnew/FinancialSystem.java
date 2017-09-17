@@ -93,9 +93,9 @@ public class FinancialSystem extends JFrame {
             TodaySalesRev = 300;
             TodaySalesCost = 300;
             TodaySalesProf = TodaySalesRev - TodaySalesCost;
+            TodayDisRev = 300;
             s.execute("SELECT item_cost, Shipping_Cost FROM Shipping_rec WHERE Day="+getDay()+" AND Month='"+getMonth()+"' AND Year="+getYear());
             rs = s.getResultSet();
-            TodayDisRev = 300;
             while(rs.next())
                 TodayDisCost += rs.getFloat("item_cost") + rs.getFloat("Shipping_Cost");
             TodayDisProf = TodayDisRev - TodayDisCost;
