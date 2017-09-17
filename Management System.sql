@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS Daily_Finances
         Dis_cost        float,
         Dis_prof        float,
         HR_cost         float,
-        Other_cost	float,
+        Other_cost		float,
         Tot_inc         float,
         Tot_cost        float,
         Tot_prof        float,
@@ -26,17 +26,17 @@ CREATE TABLE IF NOT EXISTS Daily_Finances
 
 CREATE TABLE IF NOT EXISTS Financial_Reports
 (
-	Month_issued	char(10),
-	Year_issued	int,
-	Total_revenue	float,
-	Total_costs	float,
-	Total_profit	float,
-	PRIMARY KEY(Month_issued, Year_issued)
+		Month_issued	char(10),
+		Year_issued	int,
+		Total_revenue	float,
+		Total_costs	float,
+		Total_profit	float,
+		PRIMARY KEY(Month_issued, Year_issued)
 );
 
 CREATE TABLE IF NOT EXISTS Bill
 (
-	Bill_Number varchar(10) NOT NULL,
+		Bill_Number varchar(10) NOT NULL,
         Customer_ID varchar(10) NOT NULL,
         Time time NOT NULL,
         Date date NOT NULL
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS Warranty
 
 CREATE TABLE IF NOT EXISTS Replace_Item
 (
-	previous_item_code varchar(10) NOT NULL,
+		previous_item_code varchar(10) NOT NULL,
         new_Item_code varchar(10) NOT NULL
 );
 
@@ -73,39 +73,39 @@ CREATE TABLE IF NOT EXISTS Repair_Item
 
 CREATE TABLE IF NOT EXISTS Shipping_rec
 (
-	Shipping_ID	varchar(10),
-	Vendor_ID	varchar(10),
-	Item_ID         varchar(10),
-	ship_type	varchar(10),
-	item_cost	float,
-	Shipping_Cost	float,
-	Day             int,
-	Month           varchar(10),
-	Year            int,
-	PRIMARY KEY(Vendor_ID, Item_ID)
+		Shipping_ID	varchar(10),
+		Vendor_ID	varchar(10),
+		Item_ID         varchar(10),
+		ship_type	varchar(10),
+		item_cost	float,
+		Shipping_Cost	float,
+		Day             int,
+		Month           varchar(10),
+		Year            int,
+		PRIMARY KEY(Vendor_ID, Item_ID)
 );
 
 CREATE TABLE IF NOT EXISTS Vendor
 (
-	Vendor_ID	        varchar(10),
-	Vendor_name	        varchar(10),
-	Address		        varchar(30),
-	Email		        varchar(20),
-	Telephone	        int,
-	Shipping_Cost_ph	float,
-	PRIMARY KEY(Vendor_ID)
+		Vendor_ID	        varchar(10),
+		Vendor_name	        varchar(10),
+		Address		        varchar(30),
+		Email		        varchar(20),
+		Telephone	        int,
+		Shipping_Cost_ph	float,
+		PRIMARY KEY(Vendor_ID)
 );
 
 CREATE TABLE IF NOT EXISTS Distribution_Item
 (
-	Vendor_ID	varchar(10),
-	Item_ID		varchar(10),
-	Qty		int,
-	Item_Costs	int,
-	Day             int,
-	Month           varchar(10),
-	Year            int,
-	PRIMARY KEY(Vendor_ID, Item_ID)
+		Vendor_ID		varchar(10),
+		Item_ID			varchar(10),
+		Qty				int,
+		Item_Costs		int,
+		Day             int,
+		Month           varchar(10),
+		Year            int,
+		PRIMARY KEY(Vendor_ID, Item_ID)
 );
 
 CREATE TABLE IF NOT EXISTS Device
@@ -199,3 +199,29 @@ CREATE TABLE IF NOT EXISTS Reorder
         requestedDate date NOT NULL,
         PRIMARY KEY (reOrderID)
 );
+
+CREATE TABLE IF NOT EXISTS `UserAccount`
+(
+	  `EmpID` int(11) NOT NULL,
+	  `Name` varchar(50) NOT NULL,
+	  `UserName` varchar(10) NOT NULL,
+	  `Password` varchar(10) NOT NULL,
+	  `Email` varchar(50) NOT NULL,
+	  PRIMARY KEY (`EmpID`),
+	  UNIQUE KEY `UserName` (`UserName`)
+);
+
+CREATE TABLE IF NOT EXISTS `CurrentEmployee`
+(
+	  `EmpID` int(11) NOT NULL,
+	  `EmpName` varchar(50) NOT NULL,
+	  `DOB` date NOT NULL,
+	  `EmpAddress` varchar(50) NOT NULL,
+	  `EmpEmail` varchar(50) NOT NULL,
+	  `EmpPhone` int(10) NOT NULL,
+	  `JobID` char(5) NOT NULL,
+	  `JobS_date` date NOT NULL,
+	  PRIMARY KEY(`EmpID`)
+);
+
+
