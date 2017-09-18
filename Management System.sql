@@ -27,9 +27,9 @@ CREATE TABLE IF NOT EXISTS Daily_Finances
 CREATE TABLE IF NOT EXISTS Financial_Reports
 (
 		Month_issued	char(10),
-		Year_issued	int,
+		Year_issued		int,
 		Total_revenue	float,
-		Total_costs	float,
+		Total_costs		float,
 		Total_profit	float,
 		PRIMARY KEY(Month_issued, Year_issued)
 );

@@ -1508,7 +1508,41 @@ public class FinancialSystem extends JFrame {
     }//GEN-LAST:event_month_finMouseClicked
 
     private void updateTodayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateTodayActionPerformed
-        // TODO add your handling code here:
+        try
+        {
+            TodayOtherCost = Float.parseFloat(other_costs.getText());
+            TodayTotCost = TodayRepCost + TodaySalesCost + TodayDisCost + TodayHRCost + TodayOtherCost;
+            TodayTotProf = TodayTotRev - TodayTotCost;
+            Statement s = conn.createStatement();
+            if(s.getResultSet().next())
+            {
+                s.execute("UPDATE Daily_Finances SET Rep_inc="+TodayRepRev+", Rep_cost="+TodayRepCost+", Rep_prof="+TodayRepProf
+                +", Sales_inc="+TodaySalesRev+", Sales_cost="+TodaySalesCost+", Sales_prof="+TodaySalesProf
+                +", Dis_inc="+TodayDisRev+", Dis_cost="+TodayDisCost+"Dis_prof="+TodayDisProf
+                +", HR_cost="+TodayHRCost+", Other_cost="+TodayOtherCost+", Tot_inc="+TodayTotRev
+                +", Tot_cost="+TodayTotCost+", Tot_prof="+TodayTotProf
+                +" WHERE Day="+getDay()+" AND Month='"+getMonth()+"' AND Year="+getYear());
+                JOptionPane.showMessageDialog(this, "Successfully inserted record for "+getDate()+" to database.", "Insertion successful", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else
+            {
+                s.execute("INSERT INTO Daily_Finances VALUES("+getDay()+", '"+getMonth()+"', "+getYear()+", "
+                +TodayRepRev+", "+TodayRepCost+", "+TodayRepProf+", "+TodaySalesRev+", "+TodaySalesCost+", "+TodaySalesProf
+                +", "+TodayDisRev+", "+TodayDisCost+", "+TodayDisProf+", "+TodayHRCost+", "+TodayOtherCost
+                +", "+TodayTotRev+", "+TodayTotCost+", "+TodayTotProf+")");
+                JOptionPane.showMessageDialog(this, "Successfully updated record for "+getDate()+".", "Update successful", JOptionPane.INFORMATION_MESSAGE);
+            }
+            tot_cost.setText(Float.toString(TodayTotCost).replace("\\.0*$", ""));
+            tot_prof.setText(Float.toString(TodayTotProf).replace("\\.0*$", ""));
+        }
+        catch(NumberFormatException ne)
+        {
+            JOptionPane.showMessageDialog(this, "Enter a valid numeric value for Other Costs.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        catch(SQLException se)
+        {
+            JOptionPane.showMessageDialog(this, "Unable to insert record for "+getDate()+" to database.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_updateTodayActionPerformed
 
     private void other_costsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_other_costsActionPerformed
