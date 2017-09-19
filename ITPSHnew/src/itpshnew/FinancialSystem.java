@@ -1498,10 +1498,14 @@ public class FinancialSystem extends JFrame {
             TodayTotCost = TodayRepCost + TodaySalesCost + TodayDisCost + TodayHRCost + TodayOtherCost;
             TodayTotProf = TodayTotRev - TodayTotCost;
             Statement s = conn.createStatement();
-            s.execute("SELECT * FROM Daily_Finances WHERE Day="+getDay()+" AND Month='"+getMonth()+"' AND Year="+getYear());
+            s.execute("SELECT 1 FROM Daily_Finances WHERE Day="+getDay()+" AND Month='"+getMonth()+"' AND Year="+getYear());
             if(s.getResultSet().next())
             {
-                s.execute("UPDATE Daily_Finances SET Other_cost="+TodayOtherCost
+                s.execute("UPDATE Daily_Finances SET Rep_inc="+TodayRepRev+", Rep_cost="+TodayRepCost
+                +", Rep_prof="+TodayRepProf+", Sales_inc="+TodaySalesRev+", Sales_cost="+TodaySalesCost
+                +", Sales_prof="+TodaySalesCost+", Dis_inc="+TodayDisRev+", Dis_cost="+TodayDisCost
+                +", Dis_prof="+TodayDisProf+", HR_cost="+TodayHRCost
+                +", Other_cost="+TodayOtherCost
                 +", Tot_cost="+TodayTotCost+", Tot_prof="+TodayTotProf
                 +" WHERE Day="+getDay()+" AND Month='"+getMonth()+"' AND Year="+getYear());
                 JOptionPane.showMessageDialog(this, "Successfully updated record for "+getDate()+" to database.", "Update successful", JOptionPane.INFORMATION_MESSAGE);
