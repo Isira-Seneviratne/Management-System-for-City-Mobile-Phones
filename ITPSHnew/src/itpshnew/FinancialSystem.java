@@ -22,8 +22,9 @@ public class FinancialSystem extends JFrame {
     /**
      * Creates new form FinancialSystem
      */
-    private float MonthRepRev = 0, MonthRepCost = 0, MonthRepProf = 0, MonthSalesRev = 0, MonthSalesCost = 0, MonthSalesProf = 0, 
-            MonthDisRev = 0, MonthDisCost = 0, MonthDisProf = 0, MonthHRCost = 0 , MonthOtherCost = 0;
+    private float MonthRepRev = 0, MonthRepCost = 0, MonthRepProf = 0, MonthSalesRev = 0, MonthSalesCost = 0,
+            MonthSalesProf = 0, MonthDisRev = 0, MonthDisCost = 0, MonthDisProf = 0, MonthHRCost = 0,
+            MonthOtherCost = 0;
     private float TodayRepRev, TodayRepCost, TodayRepProf, TodaySalesRev, TodaySalesCost, TodaySalesProf,
             TodayDisRev, TodayDisCost, TodayDisProf, TodayHRCost, TodayOtherCost;
     private float TodayTotCost = 0, MonthTotCost = 0, TodayTotRev = 0,
@@ -94,9 +95,10 @@ public class FinancialSystem extends JFrame {
             TodaySalesRev = 300;
             TodaySalesCost = 300;
             TodaySalesProf = TodaySalesRev - TodaySalesCost;
-            TodayDisRev = 300;
-            s.execute("SELECT item_cost, Shipping_Cost FROM Shipping_rec WHERE Day="+getDay()+" AND Month='"+getMonth()+"' AND Year="+getYear());
-            rs = s.getResultSet();
+            rs = s.executeQuery("SELECT item_cost FROM Shipping_rec WHERE Day="+getDay()+" AND Month='"+getMonth()+"' AND Year="+getYear()+" AND ship_type='Retail'");
+            while(rs.next())
+                TodayDisRev += rs.getFloat("item_cost");
+            rs = s.executeQuery("SELECT item_cost, Shipping_Cost FROM Shipping_rec WHERE Day="+getDay()+" AND Month='"+getMonth()+"' AND Year="+getYear()+" AND ship_type='Vendor'");
             while(rs.next())
                 TodayDisCost += rs.getFloat("item_cost") + rs.getFloat("Shipping_Cost");
             TodayDisProf = TodayDisRev - TodayDisCost;
@@ -104,7 +106,9 @@ public class FinancialSystem extends JFrame {
             TodayTotRev = TodayRepRev + TodaySalesRev + TodayDisRev;
             TodayTotCost = TodayRepCost + TodaySalesCost + TodayDisCost + TodayHRCost;
             TodayTotProf = TodayTotRev - TodayTotCost;
-            s.execute("SELECT 1 FROM Daily_Finances WHERE Day="+getDay()+" AND Month='"+getMonth()+"' AND Year="+getYear());
+            rs = s.executeQuery("SELECT Other_cost FROM Daily_Finances WHERE Day="+getDay()+" AND Month='"+getMonth()+"' AND Year="+getYear());
+            if(rs.next() && rs.getFloat("Other_Cost") != 0)
+                TodayOtherCost = rs.getFloat("Other_Cost");
             repair_rev.setText(Float.toString(TodayRepRev).replaceAll("\\.0*$", ""));
             repair_cost.setText(Float.toString(TodayRepCost).replaceAll("\\.0*$", ""));
             repair_prof.setText(Float.toString(TodayRepProf).replaceAll("\\.0*$", ""));
@@ -115,6 +119,7 @@ public class FinancialSystem extends JFrame {
             dis_cost.setText(Float.toString(TodayDisCost).replaceAll("\\.0*$", ""));
             dis_prof.setText(Float.toString(TodayDisProf).replaceAll("\\.0*$", ""));
             hr_cost.setText(Float.toString(TodayHRCost).replaceAll("\\.0*$", ""));
+            other_costs.setText(Float.toString(TodayOtherCost).replaceAll("\\.0*$", ""));
             tot_rev.setText(Float.toString(TodayTotRev).replaceAll("\\.0*$", ""));
             tot_cost.setText(Float.toString(TodayTotCost).replaceAll("\\.0*$", ""));
             tot_prof.setText(Float.toString(TodayTotProf).replaceAll("\\.0*$", ""));
@@ -1469,10 +1474,9 @@ public class FinancialSystem extends JFrame {
             s.execute("SELECT 1 FROM Financial_Reports WHERE Month_issued='"+month+"' AND Year_issued="+year);
             if(s.getResultSet().next())
             {
-                s.execute("SELECT * FROM Financial_Reports WHERE Month_issued='"+month+"' AND Year_issued="+year);
-                ResultSet r = s.getResultSet();
-                r.next();
-                double s_totrev = r.getDouble("Total_revenue"), s_totcost = r.getDouble("Total_costs"), s_totprof = r.getDouble("Total_profit");
+                ResultSet rs = s.executeQuery("SELECT * FROM Financial_Reports WHERE Month_issued='"+month+"' AND Year_issued="+year);
+                rs.next();
+                double s_totrev = rs.getDouble("Total_revenue"), s_totcost = rs.getDouble("Total_costs"), s_totprof = rs.getDouble("Total_profit");
                 JOptionPane.showMessageDialog(this, "<html><b>Financial values for "+month+" "+year+"</b></html>\n\nTotal income: "
                         +s_totrev+"\nTotal costs: "+s_totcost+"\nTotal profit: "+s_totprof,
                         "Results found", JOptionPane.INFORMATION_MESSAGE);
@@ -1540,7 +1544,7 @@ public class FinancialSystem extends JFrame {
         }
         catch(NumberFormatException ne)
         {
-            JOptionPane.showMessageDialog(this, "Enter a valid numeric value for Other Costs.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "You have attempted to store a blank or invalid number. Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         catch(SQLException se)
         {
