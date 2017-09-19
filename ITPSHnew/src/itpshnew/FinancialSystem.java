@@ -22,8 +22,8 @@ public class FinancialSystem extends JFrame {
     /**
      * Creates new form FinancialSystem
      */
-    private float MonthRepRev, MonthRepCost, MonthRepProf, MonthSalesRev, MonthSalesCost, MonthSalesProf, 
-            MonthDisRev, MonthDisCost, MonthDisProf, MonthHRCost, MonthOtherCost;
+    private float MonthRepRev = 0, MonthRepCost = 0, MonthRepProf = 0, MonthSalesRev = 0, MonthSalesCost = 0, MonthSalesProf = 0, 
+            MonthDisRev = 0, MonthDisCost = 0, MonthDisProf = 0, MonthHRCost = 0 , MonthOtherCost = 0;
     private float TodayRepRev, TodayRepCost, TodayRepProf, TodaySalesRev, TodaySalesCost, TodaySalesProf,
             TodayDisRev, TodayDisCost, TodayDisProf, TodayHRCost, TodayOtherCost;
     private float TodayTotCost = 0, MonthTotCost = 0, TodayTotRev = 0,
@@ -40,6 +40,7 @@ public class FinancialSystem extends JFrame {
         setVisible(true);
         initComponents();
         month_pan.setVisible(false);
+        setlabelcolor(today_fin);
         initToday();
         
         setColor(topic6);   //set the colour to FinancialSystem bar
@@ -1388,7 +1389,8 @@ public class FinancialSystem extends JFrame {
             }
         }
     }
-     private void clear()
+    
+    private void clear()
     {
         repair_rev.setText("");
         repair_cost.setText("");
