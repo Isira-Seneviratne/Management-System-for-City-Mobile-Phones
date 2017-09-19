@@ -98,6 +98,15 @@ public class Distribution extends javax.swing.JFrame {
         Calendar cal = Calendar.getInstance();
         return cal.get(Calendar.DATE)+" "+getMonth()+" "+cal.get(Calendar.YEAR);
     }
+    private int getDay()
+    {
+        return Calendar.getInstance().get(Calendar.DATE);
+    }
+    
+    private int getYear()
+    {
+        return Calendar.getInstance().get(Calendar.YEAR);
+    }
     
     private static String getMonth()
     {
@@ -189,9 +198,8 @@ public class Distribution extends javax.swing.JFrame {
         });
         topbar.add(minimize, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 0, -1, 50));
 
-        timer = new TimerThread(time);
+        time.setText("Time");
         topbar.add(time, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 0, 120, 50));
-        timer.start();
 
         date.setText("Date with calender");
         topbar.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, 130, 50));
@@ -319,7 +327,7 @@ public class Distribution extends javax.swing.JFrame {
         jPanel9.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 150, 30));
 
         jLabel36.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel36.setText("Item");
+        jLabel36.setText("Item ID");
         jPanel9.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 150, 30));
 
         jTextField25.setText("           ");
@@ -367,10 +375,6 @@ public class Distribution extends javax.swing.JFrame {
             }
         });
         jPanel9.add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 350, -1, -1));
-
-       ButtonGroup group = new ButtonGroup();
-       group.add(jRadioButton4);
-       group.add(jRadioButton3);
 
         jLabel39.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel39.setText("Cost");
@@ -492,7 +496,8 @@ public class Distribution extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField22ActionPerformed
 
     private void save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_btnActionPerformed
-        dbConnect();
+        if(con == null)
+            dbConnect();
         
         String Vname = jTextField19.getText();
         String VID = jTextField31.getText();
@@ -535,7 +540,8 @@ public class Distribution extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField27ActionPerformed
 
     private void save_btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_btn1ActionPerformed
-        dbConnect();
+        if(con == null)
+            dbConnect();
         String SID = jTextField1.getText();
         String VID = jTextField24.getText();
         String Date = jTextField25.getText();
@@ -578,15 +584,20 @@ public class Distribution extends javax.swing.JFrame {
     }//GEN-LAST:event_cancel_btn1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        dbConnect();
+        if(con == null)
+            dbConnect();
         String VID = jTextField24.getText();
-        String time = jTextField26.getText();
+        int timetaken = Integer.parseInt(jTextField26.getText());
+        String item=jTextField28.getText();
         try
         {
         Statement stmt1 = con.createStatement( );
         ResultSet rsd = stmt1.executeQuery("select shipping_cost_ph from Vendor where vendor_ID='"+VID+"'");
         int c = rsd.getInt("Shipping_Cost_ph");
-        jTextField30.setText(String.valueOf(c));
+        jTextField27.setText(Integer.toString(c*timetaken));
+        ResultSet a = stmt1.executeQuery("select price from Stock where item_ID='"+item+"'");
+        int price = a.getInt("price");
+        jTextField30.setText(Integer.toString(price*Integer.parseInt(jTextField29.getText())));
         }
         catch(SQLException se)
         {
@@ -612,6 +623,7 @@ public class Distribution extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton3ActionPerformed
 
+    
     /**
      * @param args the command line arguments
      */
