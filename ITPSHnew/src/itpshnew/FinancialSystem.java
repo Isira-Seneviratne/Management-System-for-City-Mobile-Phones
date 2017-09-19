@@ -128,14 +128,6 @@ public class FinancialSystem extends JFrame {
         {
             JOptionPane.showMessageDialog(this, "Unable to retrieve values from database.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        try
-        {
-            conn.close();
-        }
-        catch(SQLException se)
-        {
-            JOptionPane.showMessageDialog(this, "Unable to close database connection.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
     }
     
     private void calculateResults()
@@ -145,8 +137,7 @@ public class FinancialSystem extends JFrame {
         try
         {
             Statement s = conn.createStatement();
-            s.execute("SELECT * FROM Daily_Finances WHERE Month='"+getMonth()+"' AND Year="+getYear());
-            ResultSet rs = s.getResultSet();
+            ResultSet rs = s.executeQuery("SELECT * FROM Daily_Finances WHERE Month='"+getMonth()+"' AND Year="+getYear());
             while(rs.next())
             {
                 MonthRepRev += rs.getFloat("Rep_inc");
@@ -183,14 +174,6 @@ public class FinancialSystem extends JFrame {
         {
             JOptionPane.showMessageDialog(this, "There was an error while retrieving financial values to calculate results.",
                     "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        try
-        {
-            conn.close();
-        }
-        catch(SQLException se)
-        {
-            JOptionPane.showMessageDialog(this, "Unable to close database connection.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     
@@ -275,14 +258,6 @@ public class FinancialSystem extends JFrame {
         {
             JOptionPane.showMessageDialog(this, "An error occurred while writing the financial report to the database.",
                     "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        try
-        {
-            conn.close();
-        }
-        catch(SQLException se)
-        {
-            JOptionPane.showMessageDialog(this, "Unable to close database connection.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     /**
@@ -1446,6 +1421,14 @@ public class FinancialSystem extends JFrame {
     
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
         timer.setRunning(false);
+        try
+        {
+            conn.close();
+        }
+        catch(SQLException e)
+        {
+            JOptionPane.showMessageDialog(this, "Unable to close database connection.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
         System.exit(0); // cancel button
     }//GEN-LAST:event_closeMouseClicked
 
@@ -1490,14 +1473,6 @@ public class FinancialSystem extends JFrame {
         {
             JOptionPane.showMessageDialog(this, "An error occurred while searching.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        try
-        {
-            conn.close();
-        }
-        catch(SQLException e)
-        {
-            JOptionPane.showMessageDialog(this, "Unable to close database connection.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
     }//GEN-LAST:event_searchActionPerformed
 
     private void today_finMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_today_finMouseClicked
@@ -1515,21 +1490,21 @@ public class FinancialSystem extends JFrame {
     }//GEN-LAST:event_month_finMouseClicked
 
     private void updateTodayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateTodayActionPerformed
+        if(conn == null)
+            dbConnect();
         try
         {
             TodayOtherCost = Float.parseFloat(other_costs.getText());
             TodayTotCost = TodayRepCost + TodaySalesCost + TodayDisCost + TodayHRCost + TodayOtherCost;
             TodayTotProf = TodayTotRev - TodayTotCost;
             Statement s = conn.createStatement();
+            s.execute("SELECT * FROM Daily_Finances WHERE Day="+getDay()+" AND Month='"+getMonth()+"' AND Year="+getYear());
             if(s.getResultSet().next())
             {
-                s.execute("UPDATE Daily_Finances SET Rep_inc="+TodayRepRev+", Rep_cost="+TodayRepCost+", Rep_prof="+TodayRepProf
-                +", Sales_inc="+TodaySalesRev+", Sales_cost="+TodaySalesCost+", Sales_prof="+TodaySalesProf
-                +", Dis_inc="+TodayDisRev+", Dis_cost="+TodayDisCost+"Dis_prof="+TodayDisProf
-                +", HR_cost="+TodayHRCost+", Other_cost="+TodayOtherCost+", Tot_inc="+TodayTotRev
+                s.execute("UPDATE Daily_Finances SET Other_cost="+TodayOtherCost
                 +", Tot_cost="+TodayTotCost+", Tot_prof="+TodayTotProf
                 +" WHERE Day="+getDay()+" AND Month='"+getMonth()+"' AND Year="+getYear());
-                JOptionPane.showMessageDialog(this, "Successfully inserted record for "+getDate()+" to database.", "Insertion successful", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Successfully updated record for "+getDate()+" to database.", "Update successful", JOptionPane.INFORMATION_MESSAGE);
             }
             else
             {
@@ -1537,7 +1512,7 @@ public class FinancialSystem extends JFrame {
                 +TodayRepRev+", "+TodayRepCost+", "+TodayRepProf+", "+TodaySalesRev+", "+TodaySalesCost+", "+TodaySalesProf
                 +", "+TodayDisRev+", "+TodayDisCost+", "+TodayDisProf+", "+TodayHRCost+", "+TodayOtherCost
                 +", "+TodayTotRev+", "+TodayTotCost+", "+TodayTotProf+")");
-                JOptionPane.showMessageDialog(this, "Successfully updated record for "+getDate()+".", "Update successful", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Successfully inserted record for "+getDate()+".", "Insertion successful", JOptionPane.INFORMATION_MESSAGE);
             }
             tot_cost.setText(Float.toString(TodayTotCost).replace("\\.0*$", ""));
             tot_prof.setText(Float.toString(TodayTotProf).replace("\\.0*$", ""));
@@ -1548,7 +1523,8 @@ public class FinancialSystem extends JFrame {
         }
         catch(SQLException se)
         {
-            JOptionPane.showMessageDialog(this, "Unable to insert record for "+getDate()+" to database.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Unable to insert/update record for "+getDate()+" to database.", "Error", JOptionPane.ERROR_MESSAGE);
+            se.printStackTrace();
         }
     }//GEN-LAST:event_updateTodayActionPerformed
 
