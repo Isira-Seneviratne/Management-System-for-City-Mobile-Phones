@@ -92,8 +92,13 @@ public class FinancialSystem extends JFrame {
             TodayRepRev = 300;
             TodayRepCost = 300;
             TodayRepProf = TodayRepRev - TodayRepCost;
-            TodaySalesRev = 300;
-            TodaySalesCost = 300;
+            rs = s.executeQuery("SELECT selling_price, loyalty_discount FROM Item i, Sold_item si, Bill b, Payment p"
+                    + " WHERE i.item_code=si.item_code AND si.bill_number=b.Bill_Number AND b.Customer_ID=p.customer_Id");
+            while(rs.next())
+                TodaySalesRev += rs.getFloat("selling_price") - rs.getFloat("loyalty_discount");
+            rs = s.executeQuery("SELECT totalCost FROM Reorder");
+            while(rs.next())
+                TodaySalesCost += rs.getFloat("totalCost");
             TodaySalesProf = TodaySalesRev - TodaySalesCost;
             rs = s.executeQuery("SELECT item_cost FROM Shipping_rec WHERE Day="+getDay()+" AND Month='"+getMonth()+"' AND Year="+getYear()+" AND ship_type='Retail'");
             while(rs.next())
@@ -127,6 +132,7 @@ public class FinancialSystem extends JFrame {
         catch(SQLException e)
         {
             JOptionPane.showMessageDialog(this, "Unable to retrieve values from database.", "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
         }
     }
     

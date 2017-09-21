@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS Customer
 
 CREATE TABLE IF NOT EXISTS Warranty
 (
-	
+		
 );
 
 CREATE TABLE IF NOT EXISTS Replace_Item
@@ -110,22 +110,22 @@ CREATE TABLE IF NOT EXISTS Distribution_Item
 
 CREATE TABLE IF NOT EXISTS Device
 (
-	
+		
 );
 
 CREATE TABLE IF NOT EXISTS Device_Storage
 (
-	
+		
 );
 
 CREATE TABLE IF NOT EXISTS Overtime
 (
-	
+		
 );
 
 CREATE TABLE IF NOT EXISTS HR
 (
-	
+		
 );
 
 CREATE TABLE IF NOT EXISTS Order_Details
