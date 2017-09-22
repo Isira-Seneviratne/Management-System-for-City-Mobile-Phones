@@ -88,14 +88,13 @@ public class FinancialSystem extends JFrame {
         try
         {
             Statement s = conn.createStatement();
-            ResultSet rs;
+            ResultSet rs/* = s.executeQuery("SELECT * FROM Repair_Checkout")*/;
             TodayRepRev = 300;
             TodayRepCost = 300;
             TodayRepProf = TodayRepRev - TodayRepCost;
-            rs = s.executeQuery("SELECT selling_price, loyalty_discount FROM Item i, Sold_item si, Bill b, Payment p"
-                    + " WHERE i.item_code=si.item_code AND si.bill_number=b.Bill_Number AND b.Customer_ID=p.customer_Id");
+            rs = s.executeQuery("SELECT net_amount FROM Payment p, Bill b WHERE b.Bill_Number=p.bill_number AND Date = CURDATE()");
             while(rs.next())
-                TodaySalesRev += rs.getFloat("selling_price") - rs.getFloat("loyalty_discount");
+                TodaySalesRev += rs.getFloat("net_amount");
             rs = s.executeQuery("SELECT totalCost FROM Reorder");
             while(rs.next())
                 TodaySalesCost += rs.getFloat("totalCost");
@@ -107,7 +106,11 @@ public class FinancialSystem extends JFrame {
             while(rs.next())
                 TodayDisCost += rs.getFloat("item_cost") + rs.getFloat("Shipping_Cost");
             TodayDisProf = TodayDisRev - TodayDisCost;
-            TodayHRCost = 300;
+            rs = s.executeQuery("SELECT hour(ExitTime-Shift_eTime) AS Overtime_hours, dailyRate, otRate"
+                    + " FROM Daily_Attendance da, Current_Employee ce, Salary_Rate sr"
+                    + " WHERE da.EmpID=ce.EmpID AND ce.JobID=sr.JobID AND Date=STR_TO_DATE('"+getDate()+"', '%d %m %y')");
+            while(rs.next())
+                TodayHRCost += rs.getInt("Overtime_hours") * rs.getFloat("otRate") + rs.getFloat("dailyRate");
             TodayTotRev = TodayRepRev + TodaySalesRev + TodayDisRev;
             TodayTotCost = TodayRepCost + TodaySalesCost + TodayDisCost + TodayHRCost;
             TodayTotProf = TodayTotRev - TodayTotCost;
@@ -132,6 +135,7 @@ public class FinancialSystem extends JFrame {
         catch(SQLException e)
         {
             JOptionPane.showMessageDialog(this, "Unable to retrieve values from database.", "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
         }
     }
     
@@ -156,24 +160,29 @@ public class FinancialSystem extends JFrame {
                 MonthDisProf += rs.getFloat("Dis_prof");
                 MonthHRCost += rs.getFloat("HR_cost");
                 MonthOtherCost += rs.getFloat("Other_cost");
-                MonthTotRev = MonthRepRev + MonthSalesRev + MonthDisRev;
-                MonthTotCost = MonthRepCost + MonthSalesCost + MonthDisRev + MonthHRCost;
-                MonthTotProf = MonthTotRev - MonthTotCost;
-                repair_rev1.setText(Float.toString(MonthRepRev).replaceAll("\\.0*$", ""));
-                repair_cost1.setText(Float.toString(MonthRepCost).replaceAll("\\.0*$", ""));
-                repair_prof1.setText(Float.toString(MonthRepProf).replaceAll("\\.0*$", ""));
-                sales_rev1.setText(Float.toString(MonthSalesRev).replaceAll("\\.0*$", ""));
-                sales_cost1.setText(Float.toString(MonthSalesCost).replaceAll("\\.0*$", ""));
-                sales_prof1.setText(Float.toString(MonthSalesProf).replaceAll("\\.0*$", ""));
-                dis_rev1.setText(Float.toString(MonthDisRev).replaceAll("\\.0*$", ""));
-                dis_cost1.setText(Float.toString(MonthDisCost).replaceAll("\\.0*$", ""));
-                dis_prof1.setText(Float.toString(MonthDisProf).replaceAll("\\.0*$", ""));
-                hr_cost1.setText(Float.toString(MonthHRCost).replaceAll("\\.0*$", ""));
-                other_costs1.setText(Float.toString(MonthOtherCost).replaceAll("\\.0*$", ""));
-                tot_rev1.setText(Float.toString(MonthTotRev).replaceAll("\\.0*$", ""));
-                tot_cost1.setText(Float.toString(MonthTotCost).replaceAll("\\.0*$", ""));
-                tot_prof1.setText(Float.toString(MonthTotProf).replaceAll("\\.0*$", ""));
             }
+            rs = s.executeQuery("SELECT Salary FROM Monthly_Salary WHERE Month='"+getMonth()+"'");
+            while(rs.next())
+                MonthHRCost += rs.getFloat("Salary");
+            
+            MonthTotRev = MonthRepRev + MonthSalesRev + MonthDisRev;
+            MonthTotCost = MonthRepCost + MonthSalesCost + MonthDisRev + MonthHRCost + MonthOtherCost;
+            MonthTotProf = MonthTotRev - MonthTotCost;
+            
+            repair_rev1.setText(Float.toString(MonthRepRev).replaceAll("\\.0*$", ""));
+            repair_cost1.setText(Float.toString(MonthRepCost).replaceAll("\\.0*$", ""));
+            repair_prof1.setText(Float.toString(MonthRepProf).replaceAll("\\.0*$", ""));
+            sales_rev1.setText(Float.toString(MonthSalesRev).replaceAll("\\.0*$", ""));
+            sales_cost1.setText(Float.toString(MonthSalesCost).replaceAll("\\.0*$", ""));
+            sales_prof1.setText(Float.toString(MonthSalesProf).replaceAll("\\.0*$", ""));
+            dis_rev1.setText(Float.toString(MonthDisRev).replaceAll("\\.0*$", ""));
+            dis_cost1.setText(Float.toString(MonthDisCost).replaceAll("\\.0*$", ""));
+            dis_prof1.setText(Float.toString(MonthDisProf).replaceAll("\\.0*$", ""));
+            hr_cost1.setText(Float.toString(MonthHRCost).replaceAll("\\.0*$", ""));
+            other_costs1.setText(Float.toString(MonthOtherCost).replaceAll("\\.0*$", ""));
+            tot_rev1.setText(Float.toString(MonthTotRev).replaceAll("\\.0*$", ""));
+            tot_cost1.setText(Float.toString(MonthTotCost).replaceAll("\\.0*$", ""));
+            tot_prof1.setText(Float.toString(MonthTotProf).replaceAll("\\.0*$", ""));
         }
         catch(SQLException se)
         {
@@ -1407,6 +1416,11 @@ public class FinancialSystem extends JFrame {
     {
         String months[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         return months[Calendar.getInstance().get(Calendar.MONTH)];
+    }
+    
+    private int getMonthVal()
+    {
+        return Calendar.getInstance().get(Calendar.MONTH)+1;
     }
     
     private int getYear()
