@@ -132,7 +132,6 @@ public class FinancialSystem extends JFrame {
         catch(SQLException e)
         {
             JOptionPane.showMessageDialog(this, "Unable to retrieve values from database.", "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
         }
     }
     
@@ -157,24 +156,24 @@ public class FinancialSystem extends JFrame {
                 MonthDisProf += rs.getFloat("Dis_prof");
                 MonthHRCost += rs.getFloat("HR_cost");
                 MonthOtherCost += rs.getFloat("Other_cost");
+                MonthTotRev = MonthRepRev + MonthSalesRev + MonthDisRev;
+                MonthTotCost = MonthRepCost + MonthSalesCost + MonthDisRev + MonthHRCost;
+                MonthTotProf = MonthTotRev - MonthTotCost;
+                repair_rev1.setText(Float.toString(MonthRepRev).replaceAll("\\.0*$", ""));
+                repair_cost1.setText(Float.toString(MonthRepCost).replaceAll("\\.0*$", ""));
+                repair_prof1.setText(Float.toString(MonthRepProf).replaceAll("\\.0*$", ""));
+                sales_rev1.setText(Float.toString(MonthSalesRev).replaceAll("\\.0*$", ""));
+                sales_cost1.setText(Float.toString(MonthSalesCost).replaceAll("\\.0*$", ""));
+                sales_prof1.setText(Float.toString(MonthSalesProf).replaceAll("\\.0*$", ""));
+                dis_rev1.setText(Float.toString(MonthDisRev).replaceAll("\\.0*$", ""));
+                dis_cost1.setText(Float.toString(MonthDisCost).replaceAll("\\.0*$", ""));
+                dis_prof1.setText(Float.toString(MonthDisProf).replaceAll("\\.0*$", ""));
+                hr_cost1.setText(Float.toString(MonthHRCost).replaceAll("\\.0*$", ""));
+                other_costs1.setText(Float.toString(MonthOtherCost).replaceAll("\\.0*$", ""));
+                tot_rev1.setText(Float.toString(MonthTotRev).replaceAll("\\.0*$", ""));
+                tot_cost1.setText(Float.toString(MonthTotCost).replaceAll("\\.0*$", ""));
+                tot_prof1.setText(Float.toString(MonthTotProf).replaceAll("\\.0*$", ""));
             }
-            MonthTotRev = MonthRepRev + MonthSalesRev + MonthDisRev;
-            MonthTotCost = MonthRepCost + MonthSalesCost + MonthDisRev + MonthHRCost;
-            MonthTotProf = MonthTotRev - MonthTotCost;
-            repair_rev1.setText(Float.toString(MonthRepRev).replace("\\.0*$", ""));
-            repair_cost1.setText(Float.toString(MonthRepCost).replace("\\.0*$", ""));
-            repair_prof1.setText(Float.toString(MonthRepProf).replace("\\.0*$", ""));
-            sales_rev1.setText(Float.toString(MonthSalesRev));
-            sales_cost1.setText(Float.toString(MonthSalesCost));
-            sales_prof1.setText(Float.toString(MonthSalesProf));
-            dis_rev1.setText(Float.toString(MonthDisRev).replace("\\.0*$", ""));
-            dis_cost1.setText(Float.toString(MonthDisCost));
-            dis_prof1.setText(Float.toString(MonthDisProf));
-            hr_cost1.setText(Float.toString(MonthHRCost));
-            other_costs1.setText(Float.toString(MonthOtherCost));
-            tot_rev1.setText(Float.toString(MonthTotRev));
-            tot_cost1.setText(Float.toString(MonthTotCost));
-            tot_prof1.setText(Float.toString(MonthTotProf));
         }
         catch(SQLException se)
         {
@@ -209,9 +208,9 @@ public class FinancialSystem extends JFrame {
             MonthTotRev = MonthRepRev + MonthSalesRev + MonthDisRev;
             MonthTotCost = MonthRepCost + MonthSalesCost + MonthDisCost + MonthHRCost + MonthOtherCost;
             MonthTotProf = MonthTotRev - MonthTotCost;
-            search_year.setText(Float.toString(MonthTotRev).replaceAll("\\.0*$", ""));
-            search_month.setText(Float.toString(MonthTotCost).replaceAll("\\.0*$", ""));
-            tot_prof.setText(Float.toString(MonthTotProf).replaceAll("\\.0*$", ""));
+            tot_rev1.setText(Float.toString(MonthTotRev).replaceAll("\\.0*$", ""));
+            tot_cost1.setText(Float.toString(MonthTotCost).replaceAll("\\.0*$", ""));
+            tot_prof1.setText(Float.toString(MonthTotProf).replaceAll("\\.0*$", ""));
 
             JOptionPane.showMessageDialog(this, "The financial values have been successfully updated.",
                     "Financial values updated", JOptionPane.INFORMATION_MESSAGE);
@@ -1524,8 +1523,8 @@ public class FinancialSystem extends JFrame {
                 +", "+TodayTotRev+", "+TodayTotCost+", "+TodayTotProf+")");
                 JOptionPane.showMessageDialog(this, "Successfully inserted record for "+getDate()+".", "Insertion successful", JOptionPane.INFORMATION_MESSAGE);
             }
-            tot_cost.setText(Float.toString(TodayTotCost).replace("\\.0*$", ""));
-            tot_prof.setText(Float.toString(TodayTotProf).replace("\\.0*$", ""));
+            tot_cost.setText(Float.toString(TodayTotCost).replaceAll("\\.0*$", ""));
+            tot_prof.setText(Float.toString(TodayTotProf).replaceAll("\\.0*$", ""));
         }
         catch(NumberFormatException ne)
         {
@@ -1534,7 +1533,6 @@ public class FinancialSystem extends JFrame {
         catch(SQLException se)
         {
             JOptionPane.showMessageDialog(this, "Unable to insert/update record for "+getDate()+" to database.", "Error", JOptionPane.ERROR_MESSAGE);
-            se.printStackTrace();
         }
     }//GEN-LAST:event_updateTodayActionPerformed
 
