@@ -1309,7 +1309,6 @@ public class Distribution extends javax.swing.JFrame {
         String recdate = jTextField41.getText();
         String itemID = jTextField44.getText();
         String qty = jTextField45.getText();
-        String timetaken = jTextField42.getText();
         String shipcost = jTextField47.getText();
         String itemcost = jTextField46.getText();
         String type = "Vendor"; 
@@ -1318,7 +1317,7 @@ public class Distribution extends javax.swing.JFrame {
         Statement add_vendor = con.createStatement();
          Alert alert = new Alert(Alert.AlertType.INFORMATION);
          alert.setTitle("Success");
-         add_vendor.executeQuery("Insert into Ship_Rec values('"+SID+"','"+VID+"','"+recdate+"','"+itemID+"','"+qty+"','"+timetaken+"','"+shipcost+"','"+itemcost+"','"+type+"')");
+         add_vendor.executeQuery("Insert into Ship_Rec values('"+SID+"','"+VID+"','"+recdate+"','"+itemID+"','"+qty+"','"+shipcost+"','"+itemcost+"','"+type+"')");
          alert.setHeaderText("Insertion successful");
          alert.setContentText("The financial report for the current month and year has been inserted.");
          alert.getDialogPane().setPrefSize(400, 200);

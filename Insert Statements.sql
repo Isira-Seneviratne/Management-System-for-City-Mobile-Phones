@@ -30,4 +30,12 @@ INSERT INTO `Financial_Reports`
 ('August',2017,400,60,340),
 ('September',2017,900,1500,-600);
 
+INSERT INTO Shipping_Rec (`shippingID`, `vendorID`, `recDate`, `modelCode`, `Qty`, `shipCost`, `itemCost`, `type`) VALUES
+('SH0001', 'V0001', '2 Sep 2017', 'L0xAf', 12, 5000, 30000, 'Vendor'),
+('SH0002', 'V0001', '14 Aug 2017', 'L0xAf', 42, 5000, 60000, 'Vendor'),
+('SH0003', NULL, '15 Sep 2017', 'L0xAf', 12, NULL, 30000, 'Retail'),
 
+INSERT INTO Vendor (`vendorID`, `vendorName`, `address`, `email`, `phone`, `shipCostPh`) VALUES
+( 'V0001', 'Amazin', '12, Galle rd, Colombo 3', 'amazin@gmail.com', '0112594028', 300),
+( 'V0002', 'Appule', '142, Chakkindarama rd, Colombo 6', 'appule@gmail.com', '0112839204', 400),
+( 'V0003', 'Macrosoft', '7, 5th lane, Colombo 7', 'macrosoft@gmail.com', '0112483927', 250),
