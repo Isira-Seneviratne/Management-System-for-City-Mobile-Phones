@@ -1250,18 +1250,34 @@ public class Distribution extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField31ActionPerformed
 
     private void save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_btnActionPerformed
-
-        String key = jTextField40.getText();
-        String search = "select vendorID,vendor_name,shipcost,address,email,telephone FROM vendor "
-        +"where vendorID LIKE '%"+key+"%'";
-        try {
-            pst = con.prepareStatement(search);
-            rs = pst.executeQuery();
-            vendoradd_table.setModel(DbUtils.resultSetToTableModel(rs));
-
-        } catch (Exception e1) {}
-        tableload();
-
+        if(con == null)
+            dbConnect();
+        
+        String VID = jTextField40.getText();
+        String vName = jTextField50.getText();
+        String address = jTextField29.getText();
+        String email = jTextField30.getText();
+        String phone = jTextField31.getText();
+        String shipcost = jTextField32.getText();
+        try
+        {
+        Statement add_vendor = con.createStatement();
+         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+         alert.setTitle("Success");
+         add_vendor.executeQuery("Insert into Vendor values('"+VID+"','"+vName+"','"+address+"','"+email+"','"+phone+"','"+shipcost+"')");
+         alert.setHeaderText("Insertion successful");
+         alert.setContentText("Vendor has been inserted.");
+         alert.getDialogPane().setPrefSize(400, 200);
+         alert.showAndWait();
+        }
+        catch(SQLException se)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Database Insert Error");
+            alert.setContentText("Unable to Insert into DB");
+            alert.showAndWait();
+        }
     }//GEN-LAST:event_save_btnActionPerformed
 
     private void clear_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clear_btnActionPerformed
@@ -1279,7 +1295,16 @@ public class Distribution extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField36ActionPerformed
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
-        // TODO add your handling code here:
+        String key = jTextField40.getText();
+        String search = "select vendorID,vendor_name,shipcost,address,email,telephone FROM vendor "
+        +"where vendorID LIKE '%"+key+"%'";
+        try {
+            pst = con.prepareStatement(search);
+            rs = pst.executeQuery();
+            vendoradd_table.setModel(DbUtils.resultSetToTableModel(rs));
+
+        } catch (Exception e1) {}
+        tableload();
     }//GEN-LAST:event_searchActionPerformed
 
     private void reset_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_btnActionPerformed
@@ -1297,7 +1322,34 @@ public class Distribution extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField38ActionPerformed
 
     private void edit_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edit_btnActionPerformed
-        // TODO add your handling code here:
+        if(con == null)
+            dbConnect();
+        String VID = jTextField38.getText();
+        String vName = jTextField33.getText();
+        String address = jTextField34.getText();
+        String email = jTextField35.getText();
+        String phone = jTextField36.getText();
+        String shipcost = jTextField37.getText();
+        try
+        {
+        Statement add_vendor = con.createStatement();
+         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+         alert.setTitle("Success");
+         add_vendor.execute("update Vendor set vName='"+vName+"',address='"+address+"',email='"+email+"',"
+                 + "phone='"+phone+"',shipcost='"+shipcost+"' where VID='"+VID+"'");
+         alert.setHeaderText("Insertion successful");
+         alert.setContentText("Vendor has been updated.");
+         alert.getDialogPane().setPrefSize(400, 200);
+         alert.showAndWait();
+        }
+        catch(SQLException se)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Database Insert Error");
+            alert.setContentText("Unable to Insert into DB");
+            alert.showAndWait();
+        }
     }//GEN-LAST:event_edit_btnActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -1307,19 +1359,19 @@ public class Distribution extends javax.swing.JFrame {
         String SID = jTextField43.getText();
         String VID = jTextField39.getText();
         String recdate = jTextField41.getText();
-        String itemID = jTextField44.getText();
+        String modelCode = jTextField44.getText();
         String qty = jTextField45.getText();
         String shipcost = jTextField47.getText();
         String itemcost = jTextField46.getText();
         String type = "Vendor"; 
         try
         {
-        Statement add_vendor = con.createStatement();
+        Statement add_vendorrec = con.createStatement();
          Alert alert = new Alert(Alert.AlertType.INFORMATION);
          alert.setTitle("Success");
-         add_vendor.executeQuery("Insert into Ship_Rec values('"+SID+"','"+VID+"','"+recdate+"','"+itemID+"','"+qty+"','"+shipcost+"','"+itemcost+"','"+type+"')");
+         add_vendorrec.executeQuery("Insert into Ship_Rec values('"+SID+"','"+VID+"','"+recdate+"','"+modelCode+"','"+qty+"','"+shipcost+"','"+itemcost+"','"+type+"')");
          alert.setHeaderText("Insertion successful");
-         alert.setContentText("The financial report for the current month and year has been inserted.");
+         alert.setContentText("The vendor shipping record has been inserted.");
          alert.getDialogPane().setPrefSize(400, 200);
          alert.showAndWait();
         }
@@ -1372,15 +1424,65 @@ public class Distribution extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        // TODO add your handling code here:
+        if(con == null)
+            dbConnect();
+        
+        String SID = jTextField54.getText();
+        String RID = jTextField48.getText();
+        String recdate = jTextField49.getText();
+        String modelCode = jTextField51.getText();
+        String qty = jTextField52.getText();
+        String itemcost = jTextField53.getText();
+        String type = "Retail"; 
+        try
+        {
+        Statement add_vendorrec = con.createStatement();
+         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+         alert.setTitle("Success");
+         add_vendorrec.executeQuery("Insert into Ship_Rec values('"+SID+"','"+RID+"','"+recdate+"','"+modelCode+"','"+qty+"','"+itemcost+"','"+type+"')");
+         alert.setHeaderText("Insertion successful");
+         alert.setContentText("The retail shipping record has been inserted.");
+         alert.getDialogPane().setPrefSize(400, 200);
+         alert.showAndWait();
+        }
+        catch(SQLException se)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Database Insert Error");
+            alert.setContentText("Unable to Insert into DB");
+            alert.showAndWait();
+        }
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        // TODO add your handling code here:
+        jTextField54.setText("");
+        jTextField48.setText("");
+        jTextField49.setText("");
+        jTextField51.setText("");
+        jTextField52.setText("");
+        jTextField53.setText("");
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        // TODO add your handling code here:
+        if(con == null)
+            dbConnect();
+        String item=jTextField51.getText();
+        try
+        {
+        Statement stmt1 = con.createStatement( );
+        ResultSet a = stmt1.executeQuery("select price from Stock where item_ID='"+item+"'");
+        int price = a.getInt("price");
+        jTextField53.setText(Integer.toString(price*Integer.parseInt(jTextField52.getText())));
+        }
+        catch(SQLException se)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Database Retrieve Error");
+            alert.setContentText("Unable to Retrieve into DB");
+            alert.showAndWait();
+        }
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void print1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print1ActionPerformed
