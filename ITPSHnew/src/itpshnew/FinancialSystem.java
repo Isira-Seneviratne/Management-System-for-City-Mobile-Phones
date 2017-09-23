@@ -135,7 +135,6 @@ public class FinancialSystem extends JFrame {
         catch(SQLException e)
         {
             JOptionPane.showMessageDialog(this, "Unable to retrieve values from database.", "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
         }
     }
     
@@ -1249,13 +1248,23 @@ public class FinancialSystem extends JFrame {
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel17.setText("Monthly total income:");
 
+        tot_rev1.setEditable(false);
         tot_rev1.setName(""); // NOI18N
+        tot_rev1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tot_rev1ActionPerformed(evt);
+            }
+        });
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel18.setText("Monthly total costs:");
 
+        tot_cost1.setEditable(false);
+
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel19.setText("Monthly total profit:");
+
+        tot_prof1.setEditable(false);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -1553,6 +1562,10 @@ public class FinancialSystem extends JFrame {
     private void other_costsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_other_costsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_other_costsActionPerformed
+
+    private void tot_rev1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tot_rev1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tot_rev1ActionPerformed
     
     void setColor(JPanel pl) //set the colour after  click
     {

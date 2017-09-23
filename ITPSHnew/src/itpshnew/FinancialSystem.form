@@ -1800,8 +1800,12 @@
             </Component>
             <Component class="javax.swing.JTextField" name="tot_rev1">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tot_rev1ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel18">
               <Properties>
@@ -1812,6 +1816,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tot_cost1">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel19">
               <Properties>
@@ -1822,6 +1829,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tot_prof1">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
