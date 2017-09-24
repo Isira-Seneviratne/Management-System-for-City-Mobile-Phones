@@ -1187,7 +1187,7 @@ public class Distribution extends javax.swing.JFrame {
     }//GEN-LAST:event_topic2MousePressed
 
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
-       System.exit(0); // cancel button
+       this.dispose();
     }//GEN-LAST:event_closeMouseClicked
 
     private void minimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeMouseClicked
@@ -1206,9 +1206,7 @@ public class Distribution extends javax.swing.JFrame {
     }//GEN-LAST:event_topic6MousePressed
 
     private void name3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_name3MousePressed
-        stock s1 = new stock(); // go to stock
-        s1.setVisible(true);
-        this.dispose(); //dispose the current form
+
     }//GEN-LAST:event_name3MousePressed
 
     private void vendorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vendorMouseClicked

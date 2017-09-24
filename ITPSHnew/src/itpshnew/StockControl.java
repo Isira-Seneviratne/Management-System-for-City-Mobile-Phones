@@ -1,9 +1,7 @@
 package itpshnew;
 
-import com.mysql.jdbc.Connection;
+import java.sql.Connection;
 import com.mysql.jdbc.PreparedStatement;
-import com.toedter.calendar.JDateChooser;
-import itpshnew.dbCon;
 import java.awt.Color;
 import static java.lang.Thread.sleep;
 import java.sql.ResultSet;
@@ -1502,9 +1500,7 @@ public class StockControl extends javax.swing.JFrame {
     }//GEN-LAST:event_topic6MousePressed
 
     private void name3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_name3MousePressed
-        stock s1 = new stock(); // go to stock
-        s1.setVisible(true);
-        this.dispose(); //dispose the current form
+        
     }//GEN-LAST:event_name3MousePressed
 
     private void vendorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vendorMouseClicked
