@@ -1,9 +1,5 @@
 --Create table statements
 
-CREATE DATABASE IF NOT EXISTS ManagementSystem;
-
-USE ManagementSystem;
-
 CREATE TABLE IF NOT EXISTS Available_Stock
 (
 		`modelCode` varchar(20) NOT NULL,
@@ -333,9 +329,13 @@ INSERT INTO Phone_Repair (`repairID`, `itemName`, `modelCode`, `problem`, `EmpID
 
 INSERT INTO `Daily_Finances`
 (`Day`,`Month`,`Year`,`Rep_inc`,`Rep_cost`,`Rep_prof`,`Sales_inc`,`Sales_cost`,`Sales_prof`,`Dis_inc`,`Dis_cost`,`Dis_prof`,`HR_cost`,`Other_cost`,`Tot_inc`,`Tot_cost`,`Tot_prof`) VALUES
+(18,'September',2017,1000,550,450,3000,2000,1000,2750,1000,1750,200,0,6750,3750,3000),
 (19,'September',2017,300,300,0,300,300,0,0,0,0,300,50,600,950,-350),
+(20,'September',2017,1000,250,750,3000,2000,1000,2750,1000,1750,200,0,6750,3450,3300),
+(21,'September',2017,2000,250,1750,3000,2000,1000,2750,1000,1750,200,0,7750,3450,4300),
 (22,'September',2017,500,300,200,0,0,0,0,0,0,300,50,500,650,-150),
-(23,'September',2017,600,350,0,0,0,0,0,0,0,0,100,600,450,150);
+(23,'September',2017,600,350,0,0,0,0,0,0,0,0,100,600,450,150),
+(24,'September',2017,300,300,0,0,0,0,0,0,0,0,150,300,450,-150);
 
 INSERT INTO `Financial_Reports`
 (`Month_issued`,`Year_issued`,`Total_revenue`,`Total_costs`,`Total_profit`) VALUES
