@@ -1,0 +1,200 @@
+
+<html>
+<style>
+
+section {
+    margin-left:160px;
+    border-left: 1px solid gray;
+    padding: 4em;
+    overflow: hidden;
+    text-align: left;
+}
+select {
+    width: 100%;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 3px;
+    background-color: #f1f1f1;
+}
+    input[type=text] {
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: white;
+    background-image: url('searchicon.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+}
+
+ input[type=Submit] {
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+ input[type=text1] {
+    width: 30%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 11px;
+    background-color: white;
+    background-image: url('searchicon.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+     padding: 8px 20px 8px 40px;
+}
+    
+    </style>
+
+<body>
+<section>
+<form>
+<form>
+         <fieldset style="width:500;height:120">
+    <legend>Find Items:</legend>
+    <br>
+    <input type="text" name="Devices" placeholder="Enter keywords" >
+    <br>
+    
+    <br>
+    <input type="Submit" value="Search">
+  </fieldset>
+  <br>
+  </form>
+<form>
+ <fieldset style="width:500;height:80">
+  <legend>Condition:</legend>
+  <br>
+    <input type="radio"  name="a" checked >New</input>
+        <input type="radio"  name="a">Used</input>
+        <input type="radio" name="a">Not Specified</input>
+    </fieldset>
+</form>
+    <br>
+  <form>  
+ <fieldset style="width:500;height:80">
+  <legend>OS Version:</legend>
+  <br>
+    <input type="radio"  name="a" checked >Android</input>
+        <input type="radio"  name="a">iOS</input>
+        <input type="radio" name="a">Windows</input>
+    </fieldset>
+    </form>
+    <br>
+    <form>
+    <fieldset style="width:500;height:80">
+  <legend>Storage:</legend>
+  <br>
+    <input type="radio"  name="a" checked >16GB</input>
+        <input type="radio"  name="a">32GB</input>
+        <input type="radio" name="a">64GB</input>
+    </fieldset>
+        </form>
+    <br>
+    <form>
+      <fieldset style="width:500;height:160">
+  <legend>Processor:</legend>
+  <br>
+    <input type="radio"  name="a" checked >Single Core</input><br>
+        <input type="radio"  name="a">Dual Core</input><br>
+        <input type="radio" name="a">Quad Core</input><br>
+         <input type="radio"  name="a" checked >Hexa Core</input><br>
+        <input type="radio"  name="a">Deca Core</input><br>
+        <input type="radio"  name="a"> Not Specified</input><br>
+        
+    </fieldset>
+    </form>
+
+    <br>
+    <form>
+      <fieldset style="width:500;height:200">
+  <legend>Camera Resolution:</legend>
+  <br>
+    <input type="radio"  name="a" checked >Less than 2.0MP</input><br>
+        <input type="radio"  name="a">2.0 - 4.9MP</input><br>
+        <input type="radio" name="a">5.0 - 7.9MP</input><br>
+         <input type="radio"  name="a" checked > 8.0 - 11.9MP</input><br>
+        <input type="radio"  name="a">12.0 - 15.9MP</input><br>
+         <input type="radio"  name="a" checked >  16.0 - 19.9MP</input><br>
+        <input type="radio"  name="a"> 20.0MP or More</input><br>
+         <input type="radio"  name="a">  Not Specified</input><br>
+        
+    </fieldset>
+        </form>
+
+    <br>
+    <form>
+    <fieldset style="width:500;height:80">
+  <legend>Price:</legend>
+  <br>
+    From:  Rs
+    <input type="text1" placeholder="Enter the amount"</input>       To:  Rs  <input type="text1" placeholder="Enter the amount"</input>
+      
+    </fieldset>
+    </form>
+
+    <br>
+    <form>
+    <fieldset style="width:500;height:100">
+  <legend>Sort by:</legend>
+  <br>
+   <select id="match" name="sort">
+    <option value="bm">Best Match</option>
+    <option value="lf">Price:Lowest first</option>
+    <option value="hf">Price:Highest first</option>
+    <option value="lf">Newly Added</option>
+    <option value="lf">Best Rates</option>
+  </select>
+    </fieldset>
+    </form>
+    <br>
+        <form>
+  <fieldset style="width:500;height:140">
+  <legend>Features:</legend>
+  <br>
+<input type="checkbox">Bluetooth</input><br>
+        <input type="checkbox">Fingerprint</input><br>
+        <input type="checkbox">Duel Sim</input><br>
+         <input type="checkbox">Touch screen</input><br>
+        <input type="checkbox">Iris scanner</input><br>
+</fieldset>
+<br>
+<br>
+<style>
+button[type=submit] {
+    width: 50%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+button[type=reset] {
+    width: 50%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+</style>
+<button type="submit" value="Submit">Search</button>
+<br>
+<br>
+<br>
+<button type="reset" value="Reset">Reset</button>
+
+</form>
+
+
+
+
+</form>
+</section>
+</body>
+</html>
