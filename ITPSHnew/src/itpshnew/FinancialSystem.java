@@ -386,10 +386,10 @@ public class FinancialSystem extends JFrame {
         dis_prof1 = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
-        search_year = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
-        search_month = new javax.swing.JTextField();
         search = new javax.swing.JButton();
+        search_month = new com.toedter.calendar.JMonthChooser();
+        search_year = new com.toedter.calendar.JYearChooser();
         jPanel4 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         tot_rev1 = new javax.swing.JTextField();
@@ -1190,8 +1190,6 @@ public class FinancialSystem extends JFrame {
         jLabel20.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel20.setText("Year:");
 
-        search_year.setName(""); // NOI18N
-
         jLabel21.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel21.setText("Month:");
 
@@ -1209,33 +1207,32 @@ public class FinancialSystem extends JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel21)
+                .addContainerGap(67, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel20)
+                            .addComponent(jLabel21))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(search_month, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel20)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(search_year, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(96, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(search)
-                .addGap(121, 121, 121))
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(search_month, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(search_year, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(71, 71, 71))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(search)
+                        .addGap(121, 121, 121))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(search_year)
-                    .addComponent(jLabel20))
-                .addGap(12, 12, 12)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(search_month)
-                    .addComponent(jLabel21))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel20)
+                    .addComponent(search_year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel21)
+                    .addComponent(search_month, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(search)
                 .addGap(99, 99, 99))
@@ -1457,7 +1454,7 @@ public class FinancialSystem extends JFrame {
         {
             JOptionPane.showMessageDialog(this, "Unable to close database connection.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        System.exit(0); // cancel button
+        this.dispose(); // cancel button
     }//GEN-LAST:event_closeMouseClicked
 
     private void minimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeMouseClicked
@@ -1467,18 +1464,11 @@ public class FinancialSystem extends JFrame {
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
         if(conn == null)
             dbConnect();
-        String month, year;
-        if(!search_month.getText().equals("") && !search_year.getText().equals(""))
-        {
-            month = search_month.getText();
-            year = search_year.getText();
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(this, "Enter values for the \"Month\" and \"Year\" fields.", 
-                    "Blank search attempted", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+        String month = new String[]{"January", "February", "March",
+            "April", "May", "June", "July",
+            "August", "September", "October", "November", "December"}[search_month.getMonth()];
+        String year = ""+search_year.getYear();
+
         try
         {
             Statement s = conn.createStatement();
@@ -1500,6 +1490,7 @@ public class FinancialSystem extends JFrame {
         catch(SQLException e)
         {
             JOptionPane.showMessageDialog(this, "An error occurred while searching.", "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
         }
     }//GEN-LAST:event_searchActionPerformed
 
@@ -1706,8 +1697,8 @@ public class FinancialSystem extends JFrame {
     private javax.swing.JTextField sales_rev;
     private javax.swing.JTextField sales_rev1;
     private javax.swing.JButton search;
-    private javax.swing.JTextField search_month;
-    private javax.swing.JTextField search_year;
+    private com.toedter.calendar.JMonthChooser search_month;
+    private com.toedter.calendar.JYearChooser search_year;
     private javax.swing.JPanel sidepanel;
     private javax.swing.JLabel time;
     private javax.swing.JLabel today_fin;

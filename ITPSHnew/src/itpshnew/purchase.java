@@ -8,8 +8,6 @@ package itpshnew;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Frame;
-import java.awt.Toolkit;
 import static java.lang.Thread.sleep;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,8 +18,6 @@ import java.util.Calendar;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -2217,8 +2213,7 @@ public class purchase extends javax.swing.JFrame {
     }//GEN-LAST:event_save_btnActionPerformed
 
     private void topic1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topic1MousePressed
-         homenew h1 = new homenew(); // go to home page
-        h1.setVisible(true);
+
         this.setVisible(false);//dispose the current form 
     }//GEN-LAST:event_topic1MousePressed
 
