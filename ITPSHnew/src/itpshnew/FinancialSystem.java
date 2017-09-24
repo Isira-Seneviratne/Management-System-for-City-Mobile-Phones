@@ -1420,8 +1420,9 @@ public class FinancialSystem extends JFrame {
     
     private String getMonth()
     {
-        String months[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-        return months[Calendar.getInstance().get(Calendar.MONTH)];
+        return new String[]{"January", "February", "March",
+            "April", "May", "June", "July", "August", "September",
+            "October", "November", "December"}[Calendar.getInstance().get(Calendar.MONTH)];
     }
     
     private int getMonthVal()
@@ -1490,7 +1491,6 @@ public class FinancialSystem extends JFrame {
         catch(SQLException e)
         {
             JOptionPane.showMessageDialog(this, "An error occurred while searching.", "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
         }
     }//GEN-LAST:event_searchActionPerformed
 
