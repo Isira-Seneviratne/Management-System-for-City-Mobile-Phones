@@ -10,7 +10,7 @@ import java.awt.Color;
 import static java.lang.Thread.sleep;
 import java.sql.*;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.*;
 import javafx.scene.control.Alert;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -39,8 +39,9 @@ public class Distribution extends javax.swing.JFrame {
         //this.setAlwaysOnTop(true);
         this.setResizable(true);
         
-        
+        //initToday();
         initComponents();
+        
         
         setColor(topic5);   //set the colour to purchase bar
         bar5.setOpaque(true);
@@ -79,7 +80,39 @@ public class Distribution extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Unable to connect to the database.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+   /*private void initToday()
+   {
+       if(con==null)
+           dbConnect();
+       Vector v1 =new Vector();
+       v1.addElement("Vendor ID");
+       v1.addElement("Vendor Name");
+       v1.addElement("Shipping Cost(per hour)");
+       v1.addElement("Address");
+       v1.addElement("Email");
+       v1.addElement("Telephone");
+       Vector v3 = new Vector();
+       try
+       {
+           pst = con.prepareStatement("select * from Vendor");
+           rs = pst.executeQuery();
+           while(rs.next())
+           {
+               Vector v2 = new Vector();
+               v2.addElement(rs.getString(1));
+               v2.addElement(rs.getString(2));
+               v2.addElement(rs.getString(3));
+               v2.addElement(rs.getString(4));
+               v2.addElement(rs.getString(5));
+               v2.addElement(rs.getString(6));
+               v3.add(v2);
+           }
+       }
+       catch(SQLException se)
+       {
+        JOptionPane.showMessageDialog(this, "Unable to connect to the database.", "Error", JOptionPane.ERROR_MESSAGE);
+       }
+   }*/
    public void tableload()
     {
           try {
@@ -740,46 +773,10 @@ public class Distribution extends javax.swing.JFrame {
 
         addvendor.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 460, 370));
 
-        vendoradd_table.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        vendoradd_table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Vendor ID", "Vendor Name", "Shipping Cost(per hour)", "Address", "Email", "Telephone"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
         vendoradd_table.setGridColor(new java.awt.Color(100, 199, 150));
         jScrollPane1.setViewportView(vendoradd_table);
 
-        addvendor.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, 1040, 190));
+        addvendor.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, 1040, 180));
 
         jPanel10.setBackground(new java.awt.Color(100, 199, 150));
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1252,15 +1249,15 @@ public class Distribution extends javax.swing.JFrame {
     private void save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_btnActionPerformed
         if(con == null)
             dbConnect();
-        
+        try
+        {
         String VID = jTextField40.getText();
         String vName = jTextField50.getText();
         String address = jTextField29.getText();
         String email = jTextField30.getText();
         String phone = jTextField31.getText();
         String shipcost = jTextField32.getText();
-        try
-        {
+        
         Statement add_vendor = con.createStatement();
          Alert alert = new Alert(Alert.AlertType.INFORMATION);
          alert.setTitle("Success");
@@ -1277,6 +1274,16 @@ public class Distribution extends javax.swing.JFrame {
             alert.setHeaderText("Database Insert Error");
             alert.setContentText("Unable to Insert into DB");
             alert.showAndWait();
+        }
+        catch(NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(this, "You have attempted to store blank or invalid numbers. Please enter valid numbers.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        catch(NullPointerException npe)
+        {
+            JOptionPane.showMessageDialog(this, "A database connection was not properly established.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_save_btnActionPerformed
 
@@ -1303,7 +1310,17 @@ public class Distribution extends javax.swing.JFrame {
             rs = pst.executeQuery();
             vendoradd_table.setModel(DbUtils.resultSetToTableModel(rs));
 
-        } catch (Exception e1) {}
+        } 
+        catch(NullPointerException npe)
+        {
+            JOptionPane.showMessageDialog(this, "A database connection was not properly established.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        catch(SQLException se)
+        {
+            JOptionPane.showMessageDialog(this, "An error occurred while writing the financial report to the database.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
         tableload();
     }//GEN-LAST:event_searchActionPerformed
 
@@ -1324,14 +1341,14 @@ public class Distribution extends javax.swing.JFrame {
     private void edit_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edit_btnActionPerformed
         if(con == null)
             dbConnect();
+        try{
         String VID = jTextField38.getText();
         String vName = jTextField33.getText();
         String address = jTextField34.getText();
         String email = jTextField35.getText();
         String phone = jTextField36.getText();
         String shipcost = jTextField37.getText();
-        try
-        {
+        
         Statement add_vendor = con.createStatement();
          Alert alert = new Alert(Alert.AlertType.INFORMATION);
          alert.setTitle("Success");
@@ -1350,12 +1367,17 @@ public class Distribution extends javax.swing.JFrame {
             alert.setContentText("Unable to Insert into DB");
             alert.showAndWait();
         }
+        catch(NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(this, "You have attempted to store blank or invalid numbers. Please enter valid numbers.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_edit_btnActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         if(con == null)
             dbConnect();
-        
+        try{
         String SID = jTextField43.getText();
         String VID = jTextField39.getText();
         String recdate = jTextField41.getText();
@@ -1364,8 +1386,7 @@ public class Distribution extends javax.swing.JFrame {
         String shipcost = jTextField47.getText();
         String itemcost = jTextField46.getText();
         String type = "Vendor"; 
-        try
-        {
+
         Statement add_vendorrec = con.createStatement();
          Alert alert = new Alert(Alert.AlertType.INFORMATION);
          alert.setTitle("Success");
@@ -1383,6 +1404,16 @@ public class Distribution extends javax.swing.JFrame {
             alert.setContentText("Unable to Insert into DB");
             alert.showAndWait();
         }
+        catch(NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(this, "You have attempted to store blank or invalid numbers. Please enter valid numbers.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        catch(NullPointerException npe)
+        {
+            JOptionPane.showMessageDialog(this, "A database connection was not properly established.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -1399,11 +1430,11 @@ public class Distribution extends javax.swing.JFrame {
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         if(con == null)
             dbConnect();
+        try{
         String VID = jTextField39.getText();
         int timetaken = Integer.parseInt(jTextField42.getText());
         String item=jTextField44.getText();
-        try
-        {
+        
         Statement stmt1 = con.createStatement( );
         ResultSet rsd = stmt1.executeQuery("select shipping_cost_ph from Vendor where vendor_ID='"+VID+"'");
         int c = rsd.getInt("Shipping_Cost_ph");
@@ -1420,13 +1451,18 @@ public class Distribution extends javax.swing.JFrame {
             alert.setContentText("Unable to Retrieve into DB");
             alert.showAndWait();
         }
+        catch(NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(this, "You have attempted to store blank or invalid numbers. Please enter valid numbers.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
         
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         if(con == null)
             dbConnect();
-        
+        try{
         String SID = jTextField54.getText();
         String RID = jTextField48.getText();
         String recdate = jTextField49.getText();
@@ -1434,8 +1470,7 @@ public class Distribution extends javax.swing.JFrame {
         String qty = jTextField52.getText();
         String itemcost = jTextField53.getText();
         String type = "Retail"; 
-        try
-        {
+        
         Statement add_vendorrec = con.createStatement();
          Alert alert = new Alert(Alert.AlertType.INFORMATION);
          alert.setTitle("Success");
@@ -1453,6 +1488,11 @@ public class Distribution extends javax.swing.JFrame {
             alert.setContentText("Unable to Insert into DB");
             alert.showAndWait();
         }
+        catch(NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(this, "You have attempted to store blank or invalid numbers. Please enter valid numbers.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
@@ -1467,9 +1507,8 @@ public class Distribution extends javax.swing.JFrame {
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         if(con == null)
             dbConnect();
+        try{
         String item=jTextField51.getText();
-        try
-        {
         Statement stmt1 = con.createStatement( );
         ResultSet a = stmt1.executeQuery("select price from Stock where item_ID='"+item+"'");
         int price = a.getInt("price");
@@ -1483,6 +1522,12 @@ public class Distribution extends javax.swing.JFrame {
             alert.setContentText("Unable to Retrieve into DB");
             alert.showAndWait();
         }
+        catch(NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(this, "You have attempted to store blank or invalid numbers. Please enter valid numbers.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void print1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print1ActionPerformed
@@ -1582,7 +1627,10 @@ public class Distribution extends javax.swing.JFrame {
                 {
                     sleep(1000);
                 }
-                catch(InterruptedException e){}
+                catch(InterruptedException e){
+                
+                    JOptionPane.showMessageDialog(null, "There was an issue with the time system.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
     }
