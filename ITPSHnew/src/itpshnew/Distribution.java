@@ -5,124 +5,24 @@
  */
 package itpshnew;
 
-
-import java.awt.Color;
-import static java.lang.Thread.sleep;
-import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import javafx.scene.control.Alert;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-import javax.swing.JOptionPane;
-import net.proteanit.sql.DbUtils;
-import sales_package.dbconnect;
 /**
  *
- * @author Thareendra
+ * @author Bhanu
  */
-
+import static java.lang.Thread.sleep;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
 
 public class Distribution extends javax.swing.JFrame {
 
-    Connection con = null;
-    PreparedStatement pst = null;
-    ResultSet rs = null;
-    
     /**
-     * Creates new form purchase
+     * Creates new form Distribution
      */
     public Distribution() {
-        this.setUndecorated(true);
-        //this.setAlwaysOnTop(true);
-        this.setResizable(true);
-        
-        //initToday();
         initComponents();
-        
-        
-        setColor(topic5);   //set the colour to purchase bar
-        bar5.setOpaque(true);
-        
-        setlabelcolor(vendor); // set the purchase label colour as default one
-        
-        /*Toolkit tk = Toolkit.getDefaultToolkit();
-            int xsize = (int) tk.getScreenSize().getWidth();
-            int ysize = (int) tk.getScreenSize().getWidth();
-        this.setSize(xsize, ysize);*/
-        
-        //time
-        TimerThread timer = new TimerThread(time); // create timer object and set the time on time label
-        timer.start();
-        date.setText(getDate()); // call getdate method on date label
-
-        
-        con = dbconnect.connect();
-        
-        
-        
-    }
-    private void dbConnect()
-    {
-        try
-        {
-            Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ManagementSystem?verifyServerCertificate=false&useSSL=true", "root", "abcd1234");
-        }
-        catch(ClassNotFoundException ce)
-        {
-            JOptionPane.showMessageDialog(this, "Unable to load the database driver.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        catch(SQLException se)
-        {
-            JOptionPane.showMessageDialog(this, "Unable to connect to the database.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-   /*private void initToday()
-   {
-       if(con==null)
-           dbConnect();
-       Vector v1 =new Vector();
-       v1.addElement("Vendor ID");
-       v1.addElement("Vendor Name");
-       v1.addElement("Shipping Cost(per hour)");
-       v1.addElement("Address");
-       v1.addElement("Email");
-       v1.addElement("Telephone");
-       Vector v3 = new Vector();
-       try
-       {
-           pst = con.prepareStatement("select * from Vendor");
-           rs = pst.executeQuery();
-           while(rs.next())
-           {
-               Vector v2 = new Vector();
-               v2.addElement(rs.getString(1));
-               v2.addElement(rs.getString(2));
-               v2.addElement(rs.getString(3));
-               v2.addElement(rs.getString(4));
-               v2.addElement(rs.getString(5));
-               v2.addElement(rs.getString(6));
-               v3.add(v2);
-           }
-       }
-       catch(SQLException se)
-       {
-        JOptionPane.showMessageDialog(this, "Unable to connect to the database.", "Error", JOptionPane.ERROR_MESSAGE);
-       }
-   }*/
-   public void tableload()
-    {
-          try {
-              String q = "select * FROM vendor";
-              pst = con.prepareStatement(q);
-         
-              rs = pst.executeQuery();
-              vendoradd_table.setModel(DbUtils.resultSetToTableModel(rs));
-        } catch (Exception e1) {
-        }
     }
 
     /**
@@ -134,9 +34,11 @@ public class Distribution extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        bg_cusdet_gender = new javax.swing.ButtonGroup();
-        puchase_paytype = new javax.swing.ButtonGroup();
-        solution_combo = new javax.swing.JComboBox<>();
+        topbar = new javax.swing.JPanel();
+        close = new javax.swing.JLabel();
+        minimize = new javax.swing.JLabel();
+        time = new javax.swing.JLabel();
+        date = new javax.swing.JLabel();
         sidepanel = new javax.swing.JPanel();
         topic1 = new javax.swing.JPanel();
         bar1 = new javax.swing.JPanel();
@@ -173,127 +75,91 @@ public class Distribution extends javax.swing.JFrame {
         bar8 = new javax.swing.JPanel();
         name7 = new javax.swing.JLabel();
         pic7 = new javax.swing.JLabel();
-        emp_name = new javax.swing.JLabel();
-        emp_id = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        topbar = new javax.swing.JPanel();
-        close = new javax.swing.JLabel();
-        minimize = new javax.swing.JLabel();
-        time = new javax.swing.JLabel();
-        date = new javax.swing.JLabel();
-        vendor = new javax.swing.JLabel();
-        retail = new javax.swing.JLabel();
-        adddetail = new javax.swing.JLabel();
         center = new javax.swing.JPanel();
-        addvendor = new javax.swing.JPanel();
-        print = new javax.swing.JButton();
-        jPanel9 = new javax.swing.JPanel();
-        jLabel51 = new javax.swing.JLabel();
-        jLabel39 = new javax.swing.JLabel();
-        jLabel40 = new javax.swing.JLabel();
-        jLabel41 = new javax.swing.JLabel();
-        jLabel42 = new javax.swing.JLabel();
-        jLabel43 = new javax.swing.JLabel();
-        jTextField40 = new javax.swing.JTextField();
-        jTextField50 = new javax.swing.JTextField();
-        jTextField29 = new javax.swing.JTextField();
-        jTextField30 = new javax.swing.JTextField();
-        jTextField31 = new javax.swing.JTextField();
-        jTextField32 = new javax.swing.JTextField();
-        save_btn = new javax.swing.JButton();
-        clear_btn = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        vendoradd_table = new javax.swing.JTable();
-        jPanel10 = new javax.swing.JPanel();
-        jLabel44 = new javax.swing.JLabel();
-        jTextField33 = new javax.swing.JTextField();
-        jLabel45 = new javax.swing.JLabel();
-        jLabel46 = new javax.swing.JLabel();
-        jLabel47 = new javax.swing.JLabel();
-        jLabel48 = new javax.swing.JLabel();
-        jTextField34 = new javax.swing.JTextField();
-        jTextField35 = new javax.swing.JTextField();
-        jTextField36 = new javax.swing.JTextField();
-        jTextField37 = new javax.swing.JTextField();
-        search = new javax.swing.JButton();
-        reset_btn = new javax.swing.JButton();
-        jLabel49 = new javax.swing.JLabel();
-        jTextField38 = new javax.swing.JTextField();
-        edit_btn = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        vendorrecord = new javax.swing.JPanel();
-        jPanel11 = new javax.swing.JPanel();
-        jLabel50 = new javax.swing.JLabel();
-        jTextField39 = new javax.swing.JTextField();
-        jLabel52 = new javax.swing.JLabel();
-        jLabel53 = new javax.swing.JLabel();
-        jLabel55 = new javax.swing.JLabel();
-        jTextField41 = new javax.swing.JTextField();
-        jTextField42 = new javax.swing.JTextField();
-        jTextField44 = new javax.swing.JTextField();
-        jLabel56 = new javax.swing.JLabel();
-        jTextField45 = new javax.swing.JTextField();
-        jLabel58 = new javax.swing.JLabel();
-        jTextField46 = new javax.swing.JTextField();
-        jLabel54 = new javax.swing.JLabel();
-        jTextField43 = new javax.swing.JTextField();
-        jTextField47 = new javax.swing.JTextField();
-        jLabel59 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel27 = new javax.swing.JLabel();
+        jTextField19 = new javax.swing.JTextField();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jTextField20 = new javax.swing.JTextField();
+        jTextField21 = new javax.swing.JTextField();
+        jTextField22 = new javax.swing.JTextField();
+        jTextField23 = new javax.swing.JTextField();
+        save_btn = new javax.swing.JButton();
+        cancel_btn = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel32 = new javax.swing.JLabel();
+        jTextField24 = new javax.swing.JTextField();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        jTextField25 = new javax.swing.JTextField();
+        jTextField26 = new javax.swing.JTextField();
+        jTextField27 = new javax.swing.JTextField();
+        jTextField28 = new javax.swing.JTextField();
+        jLabel37 = new javax.swing.JLabel();
+        jTextField29 = new javax.swing.JTextField();
+        jLabel38 = new javax.swing.JLabel();
+        jRadioButton3 = new javax.swing.JRadioButton();
+        jRadioButton4 = new javax.swing.JRadioButton();
+        jLabel39 = new javax.swing.JLabel();
+        jTextField30 = new javax.swing.JTextField();
+        save_btn1 = new javax.swing.JButton();
+        cancel_btn1 = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        purchase_table1 = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
-        print1 = new javax.swing.JButton();
-        retailrecord = new javax.swing.JPanel();
-        jPanel12 = new javax.swing.JPanel();
-        jLabel57 = new javax.swing.JLabel();
-        jTextField48 = new javax.swing.JTextField();
-        jLabel60 = new javax.swing.JLabel();
-        jLabel62 = new javax.swing.JLabel();
-        jTextField49 = new javax.swing.JTextField();
-        jTextField51 = new javax.swing.JTextField();
-        jLabel63 = new javax.swing.JLabel();
-        jTextField52 = new javax.swing.JTextField();
-        jLabel64 = new javax.swing.JLabel();
-        jTextField53 = new javax.swing.JTextField();
-        jLabel65 = new javax.swing.JLabel();
-        jTextField54 = new javax.swing.JTextField();
-        jButton11 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        purchase_table2 = new javax.swing.JTable();
-        jLabel4 = new javax.swing.JLabel();
-        print2 = new javax.swing.JButton();
-
-        solution_combo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        solution_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Replace", "Repair", " " }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(0, 153, 153));
-        setResizable(false);
-        setSize(new java.awt.Dimension(1366, 768));
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        topbar.setBackground(new java.awt.Color(0, 204, 204));
+        topbar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Close_Window_40px.png"))); // NOI18N
+        close.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                closeMouseClicked(evt);
+            }
+        });
+        topbar.add(close, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 0, -1, 49));
+
+        minimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Minimize_Window_40px.png"))); // NOI18N
+        minimize.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                minimizeMouseClicked(evt);
+            }
+        });
+        topbar.add(minimize, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 0, -1, 50));
+
+        time.setText("Time");
+        topbar.add(time, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 0, 120, 50));
+
+        date.setText("Date with calender");
+        topbar.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, 130, 50));
+
+        getContentPane().add(topbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 1080, -1));
 
         sidepanel.setBackground(new java.awt.Color(0, 153, 153));
         sidepanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         topic1.setBackground(new java.awt.Color(0, 153, 153));
-        topic1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                bar1MousePressed(evt);
-            }
-        });
         topic1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         bar1.setOpaque(false);
-        bar1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                bar1MousePressed(evt);
-            }
-        });
 
         javax.swing.GroupLayout bar1Layout = new javax.swing.GroupLayout(bar1);
         bar1.setLayout(bar1Layout);
@@ -303,7 +169,7 @@ public class Distribution extends javax.swing.JFrame {
         );
         bar1Layout.setVerticalGroup(
             bar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 60, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         topic1.add(bar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 60));
@@ -312,11 +178,6 @@ public class Distribution extends javax.swing.JFrame {
         name.setForeground(new java.awt.Color(255, 255, 255));
         name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         name.setText(" Home");
-        name.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                bar1MousePressed(evt);
-            }
-        });
         topic1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 9, 260, 40));
 
         pic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Home_48px.png"))); // NOI18N
@@ -325,18 +186,12 @@ public class Distribution extends javax.swing.JFrame {
         sidepanel.add(topic1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 290, 60));
 
         topic2.setBackground(new java.awt.Color(0, 153, 153));
-        topic2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                topic2MousePressed(evt);
-            }
-        });
         topic2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        bar2.setBackground(new java.awt.Color(255, 255, 255));
         bar2.setOpaque(false);
         bar2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                topic2MousePressed(evt);
+                bar2topic2MousePressed(evt);
             }
         });
 
@@ -348,7 +203,7 @@ public class Distribution extends javax.swing.JFrame {
         );
         bar2Layout.setVerticalGroup(
             bar2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 60, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         topic2.add(bar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 60));
@@ -357,19 +212,9 @@ public class Distribution extends javax.swing.JFrame {
         name1.setForeground(new java.awt.Color(255, 255, 255));
         name1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         name1.setText("Sales");
-        name1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                topic2MousePressed(evt);
-            }
-        });
         topic2.add(name1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 9, 260, 40));
 
         pic1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Cash_Register_40px_1.png"))); // NOI18N
-        pic1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                topic2MousePressed(evt);
-            }
-        });
         topic2.add(pic1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 50, 40));
 
         sidepanel.add(topic2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 290, 60));
@@ -387,7 +232,7 @@ public class Distribution extends javax.swing.JFrame {
         );
         bar3Layout.setVerticalGroup(
             bar3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 60, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         topic3.add(bar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 60));
@@ -404,19 +249,9 @@ public class Distribution extends javax.swing.JFrame {
         sidepanel.add(topic3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 290, 60));
 
         topic4.setBackground(new java.awt.Color(0, 153, 153));
-        topic4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                name3MousePressed(evt);
-            }
-        });
         topic4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         bar4.setOpaque(false);
-        bar4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                name3MousePressed(evt);
-            }
-        });
 
         javax.swing.GroupLayout bar4Layout = new javax.swing.GroupLayout(bar4);
         bar4.setLayout(bar4Layout);
@@ -426,7 +261,7 @@ public class Distribution extends javax.swing.JFrame {
         );
         bar4Layout.setVerticalGroup(
             bar4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 60, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         topic4.add(bar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 60));
@@ -435,27 +270,27 @@ public class Distribution extends javax.swing.JFrame {
         name3.setForeground(new java.awt.Color(255, 255, 255));
         name3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         name3.setText(" Stock");
-        name3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                name3MousePressed(evt);
-            }
-        });
         topic4.add(name3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 9, 260, 40));
 
         pic3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Warehouse_40px.png"))); // NOI18N
-        pic3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                name3MousePressed(evt);
-            }
-        });
         topic4.add(pic3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 50, 40));
 
         sidepanel.add(topic4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 290, 60));
 
         topic5.setBackground(new java.awt.Color(0, 153, 153));
+        topic5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                topic5MousePressed(evt);
+            }
+        });
         topic5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         bar5.setOpaque(false);
+        bar5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                bar5topic5MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout bar5Layout = new javax.swing.GroupLayout(bar5);
         bar5.setLayout(bar5Layout);
@@ -465,7 +300,7 @@ public class Distribution extends javax.swing.JFrame {
         );
         bar5Layout.setVerticalGroup(
             bar5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 60, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         topic5.add(bar5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 60));
@@ -474,27 +309,27 @@ public class Distribution extends javax.swing.JFrame {
         name4.setForeground(new java.awt.Color(255, 255, 255));
         name4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         name4.setText("           Distribution");
+        name4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                name4topic5MousePressed(evt);
+            }
+        });
         topic5.add(name4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 9, 260, 40));
 
         pic4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Delivered_40px.png"))); // NOI18N
+        pic4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pic4topic5MousePressed(evt);
+            }
+        });
         topic5.add(pic4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 50, 40));
 
         sidepanel.add(topic5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 290, 60));
 
         topic6.setBackground(new java.awt.Color(0, 153, 153));
-        topic6.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                topic6MousePressed(evt);
-            }
-        });
         topic6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         bar6.setOpaque(false);
-        bar6.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                topic6MousePressed(evt);
-            }
-        });
 
         javax.swing.GroupLayout bar6Layout = new javax.swing.GroupLayout(bar6);
         bar6.setLayout(bar6Layout);
@@ -504,7 +339,7 @@ public class Distribution extends javax.swing.JFrame {
         );
         bar6Layout.setVerticalGroup(
             bar6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 60, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         topic6.add(bar6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 60));
@@ -513,19 +348,9 @@ public class Distribution extends javax.swing.JFrame {
         name5.setForeground(new java.awt.Color(255, 255, 255));
         name5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         name5.setText("    Finance");
-        name5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                topic6MousePressed(evt);
-            }
-        });
         topic6.add(name5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 9, 260, 40));
 
         pic5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Money_Bag_40px.png"))); // NOI18N
-        pic5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                topic6MousePressed(evt);
-            }
-        });
         topic6.add(pic5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 50, 40));
 
         sidepanel.add(topic6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 290, 60));
@@ -543,7 +368,7 @@ public class Distribution extends javax.swing.JFrame {
         );
         bar7Layout.setVerticalGroup(
             bar7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 60, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         topic7.add(bar7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 60));
@@ -579,7 +404,7 @@ public class Distribution extends javax.swing.JFrame {
         );
         bar8Layout.setVerticalGroup(
             bar8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 60, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         topic8.add(bar8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 60));
@@ -595,968 +420,346 @@ public class Distribution extends javax.swing.JFrame {
 
         sidepanel.add(topic8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 570, 290, 60));
 
-        emp_name.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        emp_name.setForeground(new java.awt.Color(255, 255, 255));
-        emp_name.setText("E.N. Employee Name ");
-        sidepanel.add(emp_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 660, 210, 50));
+        jLabel6.setText("Empid16428685662");
+        sidepanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 670, 170, 50));
 
-        emp_id.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        emp_id.setForeground(new java.awt.Color(255, 255, 255));
-        emp_id.setText("EI1725478963");
-        sidepanel.add(emp_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 710, 210, 50));
-
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Employee_Card_80px.png"))); // NOI18N
-        sidepanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 660, 80, 100));
-
-        getContentPane().add(sidepanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 810));
-
-        topbar.setBackground(new java.awt.Color(0, 204, 204));
-        topbar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Close_Window_40px.png"))); // NOI18N
-        close.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                closeMouseClicked(evt);
-            }
-        });
-        topbar.add(close, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 0, -1, 49));
-
-        minimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Minimize_Window_40px.png"))); // NOI18N
-        minimize.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                minimizeMouseClicked(evt);
-            }
-        });
-        topbar.add(minimize, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 0, -1, 50));
-
-        time.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        time.setForeground(new java.awt.Color(255, 255, 255));
-        time.setText("Time");
-        topbar.add(time, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 0, 90, 50));
-
-        date.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        date.setForeground(new java.awt.Color(255, 255, 255));
-        date.setText("Date with calender");
-        topbar.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, 170, 50));
-
-        vendor.setBackground(new java.awt.Color(0, 204, 204));
-        vendor.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        vendor.setForeground(new java.awt.Color(255, 255, 255));
-        vendor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        vendor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_User_Group_Man_Man_40px.png"))); // NOI18N
-        vendor.setText("  Add Vendor");
-        vendor.setOpaque(true);
-        vendor.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                vendorMouseClicked(evt);
-            }
-        });
-        topbar.add(vendor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 50));
-
-        retail.setBackground(new java.awt.Color(0, 204, 204));
-        retail.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        retail.setForeground(new java.awt.Color(255, 255, 255));
-        retail.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        retail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Warranty_Card_30px_2.png"))); // NOI18N
-        retail.setText("  Vendor Record");
-        retail.setOpaque(true);
-        retail.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                retailMouseClicked(evt);
-            }
-        });
-        topbar.add(retail, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 180, 50));
-
-        adddetail.setBackground(new java.awt.Color(0, 204, 204));
-        adddetail.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        adddetail.setForeground(new java.awt.Color(255, 255, 255));
-        adddetail.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        adddetail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Warranty_Card_30px_2.png"))); // NOI18N
-        adddetail.setText("  Retail Record");
-        adddetail.setOpaque(true);
-        adddetail.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                adddetailMouseClicked(evt);
-            }
-        });
-        topbar.add(adddetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, 230, 50));
-
-        getContentPane().add(topbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 1090, 50));
+        getContentPane().add(sidepanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 810));
 
         center.setBackground(new java.awt.Color(199, 238, 238));
-        center.setLayout(new java.awt.CardLayout());
+        center.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        addvendor.setBackground(new java.awt.Color(202, 254, 227));
-        addvendor.setToolTipText("");
-        addvendor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel3.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        print.setBackground(new java.awt.Color(48, 214, 48));
-        print.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        print.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Print_40px.png"))); // NOI18N
-        print.setText("  Print");
-        print.addActionListener(new java.awt.event.ActionListener() {
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("  Add Vendor Details");
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 50));
+
+        center.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 500, 50));
+
+        jPanel1.setBackground(new java.awt.Color(187, 237, 211));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel8.setBackground(new java.awt.Color(100, 199, 150));
+        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel27.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel27.setText("Vendor Name");
+        jPanel8.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 110, 30));
+
+        jTextField19.setText("           ");
+        jPanel8.add(jTextField19, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 220, 25));
+
+        jLabel28.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel28.setText("Address");
+        jPanel8.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 110, 30));
+
+        jLabel29.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel29.setText("Email ");
+        jPanel8.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 110, 30));
+
+        jLabel30.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel30.setText("Phone Number");
+        jPanel8.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 150, 30));
+
+        jLabel31.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel31.setText("Shipping Costs");
+        jPanel8.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 150, 30));
+
+        jTextField20.setText("           ");
+        jPanel8.add(jTextField20, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 220, 25));
+
+        jTextField21.setText("           ");
+        jPanel8.add(jTextField21, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 220, 25));
+
+        jTextField22.setText("           ");
+        jTextField22.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                printActionPerformed(evt);
+                jTextField22ActionPerformed(evt);
             }
         });
-        addvendor.add(print, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 660, 200, 50));
+        jPanel8.add(jTextField22, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 220, 25));
 
-        jPanel9.setBackground(new java.awt.Color(100, 199, 150));
-        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jTextField23.setText("           ");
+        jPanel8.add(jTextField23, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, 220, 25));
 
-        jLabel51.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel51.setText("Vendor ID");
-        jPanel9.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 110, 30));
+        jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 460, 270));
 
-        jLabel39.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel39.setText("Vendor Name");
-        jPanel9.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 110, 30));
-
-        jLabel40.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel40.setText("Address");
-        jPanel9.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 110, 30));
-
-        jLabel41.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel41.setText("Email ");
-        jPanel9.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 110, 30));
-
-        jLabel42.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel42.setText("Phone Number");
-        jPanel9.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 150, 30));
-
-        jLabel43.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel43.setText("Shipping Costs");
-        jPanel9.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 150, 30));
-
-        jTextField40.setText("           ");
-        jPanel9.add(jTextField40, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 220, 25));
-
-        jTextField50.setText("           ");
-        jPanel9.add(jTextField50, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 220, 25));
-
-        jTextField29.setText("           ");
-        jPanel9.add(jTextField29, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 220, 25));
-
-        jTextField30.setText("           ");
-        jPanel9.add(jTextField30, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 220, 25));
-
-        jTextField31.setText("           ");
-        jTextField31.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField31ActionPerformed(evt);
-            }
-        });
-        jPanel9.add(jTextField31, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 220, 25));
-
-        jTextField32.setText("           ");
-        jPanel9.add(jTextField32, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 220, 25));
-
-        save_btn.setBackground(new java.awt.Color(31, 233, 133));
-        save_btn.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        save_btn.setText("Save");
+        save_btn.setBackground(new java.awt.Color(71, 179, 71));
+        save_btn.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        save_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Save_40px.png"))); // NOI18N
+        save_btn.setText("  Save");
         save_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 save_btnActionPerformed(evt);
             }
         });
-        jPanel9.add(save_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, 110, 35));
+        jPanel1.add(save_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 170, 45));
 
-        clear_btn.setBackground(new java.awt.Color(31, 233, 133));
-        clear_btn.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        clear_btn.setText("Clear");
-        clear_btn.addActionListener(new java.awt.event.ActionListener() {
+        cancel_btn.setBackground(new java.awt.Color(71, 179, 71));
+        cancel_btn.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        cancel_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Cancel_Subscription_30px.png"))); // NOI18N
+        cancel_btn.setText("Clear");
+        cancel_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clear_btnActionPerformed(evt);
+                cancel_btnActionPerformed(evt);
             }
         });
-        jPanel9.add(clear_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 320, 110, 35));
+        jPanel1.add(cancel_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, 170, 45));
 
-        addvendor.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 460, 370));
+        center.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 500, 360));
 
-        vendoradd_table.setGridColor(new java.awt.Color(100, 199, 150));
-        jScrollPane1.setViewportView(vendoradd_table);
+        jPanel2.setBackground(new java.awt.Color(187, 237, 211));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        addvendor.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, 1040, 180));
+        jPanel9.setBackground(new java.awt.Color(100, 199, 150));
+        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel10.setBackground(new java.awt.Color(100, 199, 150));
-        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jLabel32.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel32.setText("Name");
+        jPanel9.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 110, 30));
 
-        jLabel44.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel44.setText("Vendor Name");
-        jPanel10.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 110, 30));
+        jTextField24.setText("           ");
+        jPanel9.add(jTextField24, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 220, 25));
 
-        jTextField33.setText("           ");
-        jPanel10.add(jTextField33, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 220, 25));
+        jLabel33.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel33.setText("Date");
+        jPanel9.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 110, 30));
 
-        jLabel45.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel45.setText("Address");
-        jPanel10.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 110, 30));
+        jLabel34.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel34.setText("Time");
+        jPanel9.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 110, 30));
 
-        jLabel46.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel46.setText("Email ");
-        jPanel10.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 110, 30));
+        jLabel35.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel35.setText("Shipping Costs");
+        jPanel9.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 150, 30));
 
-        jLabel47.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel47.setText("Phone Number");
-        jPanel10.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 150, 30));
+        jLabel36.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel36.setText("Item");
+        jPanel9.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 150, 30));
 
-        jLabel48.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel48.setText("Shipping Costs");
-        jPanel10.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 150, 30));
+        jTextField25.setText("           ");
+        jPanel9.add(jTextField25, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 220, 25));
 
-        jTextField34.setText("           ");
-        jPanel10.add(jTextField34, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 220, 25));
+        jTextField26.setText("           ");
+        jPanel9.add(jTextField26, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 220, 25));
 
-        jTextField35.setText("           ");
-        jPanel10.add(jTextField35, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 220, 25));
-
-        jTextField36.setText("           ");
-        jTextField36.addActionListener(new java.awt.event.ActionListener() {
+        jTextField27.setText("           ");
+        jTextField27.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField36ActionPerformed(evt);
+                jTextField27ActionPerformed(evt);
             }
         });
-        jPanel10.add(jTextField36, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, 220, 25));
+        jPanel9.add(jTextField27, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 220, 25));
 
-        jTextField37.setText("           ");
-        jPanel10.add(jTextField37, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 220, 25));
+        jTextField28.setText("           ");
+        jPanel9.add(jTextField28, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 220, 25));
 
-        search.setBackground(new java.awt.Color(31, 233, 133));
-        search.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        search.setText("Search");
-        search.addActionListener(new java.awt.event.ActionListener() {
+        jLabel37.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel37.setText("Quantity");
+        jPanel9.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 150, 30));
+
+        jTextField29.setText("           ");
+        jPanel9.add(jTextField29, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 220, 25));
+
+        jLabel38.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel38.setText("Type");
+        jPanel9.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 150, 30));
+
+        jRadioButton3.setBackground(new java.awt.Color(100, 199, 150));
+        jRadioButton3.setText("Vendor");
+        jPanel9.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 330, -1, -1));
+
+        jRadioButton4.setBackground(new java.awt.Color(100, 199, 150));
+        jRadioButton4.setText("Retailer");
+        jPanel9.add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 330, -1, -1));
+
+        jLabel39.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel39.setText("Cost");
+        jPanel9.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 150, 30));
+
+        jTextField30.setText("           ");
+        jPanel9.add(jTextField30, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, 220, 25));
+
+        jPanel2.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 460, 430));
+
+        save_btn1.setBackground(new java.awt.Color(71, 179, 71));
+        save_btn1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        save_btn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Save_40px.png"))); // NOI18N
+        save_btn1.setText("  Save");
+        save_btn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchActionPerformed(evt);
+                save_btn1ActionPerformed(evt);
             }
         });
-        jPanel10.add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, 110, 35));
+        jPanel2.add(save_btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 450, 170, 45));
 
-        reset_btn.setBackground(new java.awt.Color(31, 233, 133));
-        reset_btn.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        reset_btn.setText("Reset");
-        reset_btn.addActionListener(new java.awt.event.ActionListener() {
+        cancel_btn1.setBackground(new java.awt.Color(71, 179, 71));
+        cancel_btn1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        cancel_btn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Cancel_Subscription_30px.png"))); // NOI18N
+        cancel_btn1.setText("Clear");
+        cancel_btn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                reset_btnActionPerformed(evt);
+                cancel_btn1ActionPerformed(evt);
             }
         });
-        jPanel10.add(reset_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 320, 110, 35));
+        jPanel2.add(cancel_btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 450, 170, 45));
 
-        jLabel49.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel49.setText("Search ID");
-        jPanel10.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 90, 40));
+        center.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 50, 500, 520));
 
-        jTextField38.setText("           ");
-        jTextField38.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField38ActionPerformed(evt);
+        jPanel4.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Register Shipping");
+        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 50));
+
+        center.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 0, 500, -1));
+
+        jTable1.setBackground(new java.awt.Color(100, 199, 150));
+        jTable1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jTable1.setForeground(new java.awt.Color(51, 51, 51));
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Name", "Date", "Time", "Shipping Cost", "Item", "Quantity", "Type", "Cost"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Float.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
             }
         });
-        jPanel10.add(jTextField38, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 220, 30));
+        jTable1.setGridColor(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setViewportView(jTable1);
 
-        edit_btn.setBackground(new java.awt.Color(31, 233, 133));
-        edit_btn.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        edit_btn.setText("Edit");
-        edit_btn.addActionListener(new java.awt.event.ActionListener() {
+        center.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 580, 1010, 90));
+
+        jButton7.setBackground(new java.awt.Color(100, 199, 150));
+        jButton7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jButton7.setText("Edit");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                edit_btnActionPerformed(evt);
+                jButton7ActionPerformed(evt);
             }
         });
-        jPanel10.add(edit_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, 110, 35));
+        center.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 680, 70, 30));
 
-        addvendor.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 70, 470, 370));
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 2, 36)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 153, 0));
-        jLabel2.setText("Add Vendor");
-        addvendor.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 4, 220, 60));
-
-        center.add(addvendor, "card2");
-
-        vendorrecord.setBackground(new java.awt.Color(202, 254, 227));
-        vendorrecord.setAutoscrolls(true);
-        vendorrecord.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel11.setBackground(new java.awt.Color(100, 199, 150));
-        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel50.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel50.setText("Vendor ID");
-        jPanel11.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 110, 30));
-
-        jTextField39.setText("           ");
-        jPanel11.add(jTextField39, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 220, 25));
-
-        jLabel52.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel52.setText("Date");
-        jPanel11.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 110, 30));
-
-        jLabel53.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel53.setText("Time Taken");
-        jPanel11.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 110, 30));
-
-        jLabel55.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel55.setText("Item Model");
-        jPanel11.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 150, 30));
-
-        jTextField41.setText("           ");
-        jPanel11.add(jTextField41, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 220, 25));
-
-        jTextField42.setText("           ");
-        jPanel11.add(jTextField42, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 80, 220, 25));
-
-        jTextField44.setText("           ");
-        jPanel11.add(jTextField44, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 220, 25));
-
-        jLabel56.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel56.setText("Quantity");
-        jPanel11.add(jLabel56, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 40, 150, 30));
-
-        jTextField45.setText("           ");
-        jPanel11.add(jTextField45, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 40, 220, 25));
-
-        jLabel58.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel58.setText("Cost");
-        jPanel11.add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 230, 150, 30));
-
-        jTextField46.setText("           ");
-        jPanel11.add(jTextField46, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 230, 220, 25));
-
-        jLabel54.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel54.setText("Shipping ID");
-        jPanel11.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 110, 30));
-
-        jTextField43.setText("           ");
-        jPanel11.add(jTextField43, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 220, 25));
-
-        jTextField47.setText("           ");
-        jPanel11.add(jTextField47, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 180, 220, 25));
-
-        jLabel59.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel59.setText("Shipping Cost");
-        jPanel11.add(jLabel59, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, 150, 30));
-
-        jButton8.setBackground(new java.awt.Color(31, 233, 133));
+        jButton8.setBackground(new java.awt.Color(100, 199, 150));
         jButton8.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jButton8.setText("Save");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
-            }
-        });
-        jPanel11.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 100, 30));
+        jButton8.setText("Remove");
+        center.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 680, 100, 30));
 
-        jButton9.setBackground(new java.awt.Color(31, 233, 133));
+        jButton9.setBackground(new java.awt.Color(100, 199, 150));
         jButton9.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jButton9.setText("Clear");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
-            }
-        });
-        jPanel11.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 100, 30));
+        jButton9.setText("Done");
+        center.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 680, 70, -1));
 
-        jButton10.setBackground(new java.awt.Color(31, 233, 133));
-        jButton10.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jButton10.setText("Calculate");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
-            }
-        });
-        jPanel11.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 130, 100, 30));
-
-        vendorrecord.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 1050, 280));
-
-        purchase_table1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        purchase_table1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Shipping ID", "Vendor ID", "Date", "Item Model", "Quantity", "Shipping Cost", "Cost"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        purchase_table1.setGridColor(new java.awt.Color(100, 199, 150));
-        jScrollPane2.setViewportView(purchase_table1);
-
-        vendorrecord.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 1040, 190));
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI Black", 2, 36)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 153, 0));
-        jLabel3.setText("Vendor Record");
-        vendorrecord.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 4, 270, 60));
-
-        print1.setBackground(new java.awt.Color(48, 214, 48));
-        print1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        print1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Print_40px.png"))); // NOI18N
-        print1.setText("  Print");
-        print1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                print1ActionPerformed(evt);
-            }
-        });
-        vendorrecord.add(print1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 570, 200, 50));
-
-        center.add(vendorrecord, "card3");
-
-        retailrecord.setBackground(new java.awt.Color(202, 254, 227));
-        retailrecord.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel12.setBackground(new java.awt.Color(100, 199, 150));
-        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel57.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jLabel57.setText("Retail ID");
-        jPanel12.add(jLabel57, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 110, 30));
-
-        jTextField48.setText("           ");
-        jPanel12.add(jTextField48, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 220, 25));
-
-        jLabel60.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel60.setText("Date");
-        jPanel12.add(jLabel60, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 110, 30));
-
-        jLabel62.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel62.setText("Item Model");
-        jPanel12.add(jLabel62, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 150, 30));
-
-        jTextField49.setText("           ");
-        jPanel12.add(jTextField49, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 220, 25));
-
-        jTextField51.setText("           ");
-        jPanel12.add(jTextField51, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 220, 25));
-
-        jLabel63.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jLabel63.setText("Quantity");
-        jPanel12.add(jLabel63, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 40, 150, 30));
-
-        jTextField52.setText("           ");
-        jPanel12.add(jTextField52, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 40, 220, 25));
-
-        jLabel64.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jLabel64.setText("Cost");
-        jPanel12.add(jLabel64, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, 150, 30));
-
-        jTextField53.setText("           ");
-        jPanel12.add(jTextField53, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 140, 220, 25));
-
-        jLabel65.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jLabel65.setText("Shipping ID");
-        jPanel12.add(jLabel65, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 110, 30));
-
-        jTextField54.setText("           ");
-        jPanel12.add(jTextField54, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 220, 25));
-
-        jButton11.setBackground(new java.awt.Color(31, 233, 133));
-        jButton11.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jButton11.setText("Save");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
-            }
-        });
-        jPanel12.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 100, 30));
-
-        jButton12.setBackground(new java.awt.Color(31, 233, 133));
-        jButton12.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jButton12.setText("Clear");
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
-            }
-        });
-        jPanel12.add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 100, 30));
-
-        jButton13.setBackground(new java.awt.Color(31, 233, 133));
-        jButton13.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jButton13.setText("Calculate");
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
-            }
-        });
-        jPanel12.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 90, 100, 30));
-
-        retailrecord.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 1050, 280));
-
-        purchase_table2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        purchase_table2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Shipping ID", "Retail ID", "Date", "Item Model", "Quantity", "Cost"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        purchase_table2.setGridColor(new java.awt.Color(100, 199, 150));
-        jScrollPane3.setViewportView(purchase_table2);
-
-        retailrecord.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 1040, 190));
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI Black", 2, 36)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 153, 0));
-        jLabel4.setText("Retail Record");
-        retailrecord.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 4, 250, 60));
-
-        print2.setBackground(new java.awt.Color(48, 214, 48));
-        print2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        print2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Print_40px.png"))); // NOI18N
-        print2.setText("  Print");
-        print2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                print2ActionPerformed(evt);
-            }
-        });
-        retailrecord.add(print2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 570, 200, 50));
-
-        center.add(retailrecord, "card4");
-
-        getContentPane().add(center, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1090, 760));
+        getContentPane().add(center, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 56, 1080, 754));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bar1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bar1MousePressed
-        
-        
-        home h1 = new home(); // go to home page
-        h1.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_bar1MousePressed
-
-    private void topic2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topic2MousePressed
-       /* setColor(topic2);   //set the colour
-        bar2.setOpaque(true);  */
-        
-        
-    }//GEN-LAST:event_topic2MousePressed
-
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
-       this.dispose();
+        System.exit(0); // cancel button
     }//GEN-LAST:event_closeMouseClicked
 
     private void minimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeMouseClicked
-        //JFrame frame = new JFrame("test");   //minimize label
-         this.setExtendedState(JFrame.ICONIFIED);
-         
-         
-         
-         
+        //minimize label
+        this.setExtendedState(JFrame.ICONIFIED);
     }//GEN-LAST:event_minimizeMouseClicked
 
-    private void topic6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topic6MousePressed
-        FinancialSystem h1 = new FinancialSystem(); // go to FinancialSystem
-        h1.setVisible(true);
-        this.setVisible(false);//dispose the current form 
-    }//GEN-LAST:event_topic6MousePressed
+    private void bar2topic2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bar2topic2MousePressed
+        /* setColor(topic2);   //set the colour
+        bar2.setOpaque(true);  */
+    }//GEN-LAST:event_bar2topic2MousePressed
 
-    private void name3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_name3MousePressed
-
-    }//GEN-LAST:event_name3MousePressed
-
-    private void vendorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vendorMouseClicked
-        setlabelcolor(vendor);
-        resettlabelcolor(retail);
-        resettlabelcolor(adddetail);
-        addvendor.setVisible(true);
-        vendorrecord.setVisible(false);
-        retailrecord.setVisible(false);
-    }//GEN-LAST:event_vendorMouseClicked
-
-    private void retailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_retailMouseClicked
-        setlabelcolor(retail);
-        resettlabelcolor(vendor);
-        resettlabelcolor(adddetail);
-        vendorrecord.setVisible(true);
-        addvendor.setVisible(false);
-        retailrecord.setVisible(false);
-    }//GEN-LAST:event_retailMouseClicked
-
-    private void adddetailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adddetailMouseClicked
-        setlabelcolor(adddetail);
-        resettlabelcolor(retail);
-        resettlabelcolor(vendor);
-        retailrecord.setVisible(true);
-        addvendor.setVisible(false);
-        vendorrecord.setVisible(false);
-    }//GEN-LAST:event_adddetailMouseClicked
-
-    private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
+    private void bar5topic5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bar5topic5MousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_printActionPerformed
+    }//GEN-LAST:event_bar5topic5MousePressed
 
-    private void jTextField31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField31ActionPerformed
+    private void name4topic5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_name4topic5MousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField31ActionPerformed
+    }//GEN-LAST:event_name4topic5MousePressed
+
+    private void pic4topic5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pic4topic5MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pic4topic5MousePressed
+
+    private void topic5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topic5MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_topic5MousePressed
+
+    private void jTextField22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField22ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField22ActionPerformed
 
     private void save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_btnActionPerformed
-        if(con == null)
-            dbConnect();
-        try
-        {
-        String VID = jTextField40.getText();
-        String vName = jTextField50.getText();
-        String address = jTextField29.getText();
-        String email = jTextField30.getText();
-        String phone = jTextField31.getText();
-        String shipcost = jTextField32.getText();
-        
-        Statement add_vendor = con.createStatement();
-         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-         alert.setTitle("Success");
-         add_vendor.executeQuery("Insert into Vendor values('"+VID+"','"+vName+"','"+address+"','"+email+"','"+phone+"','"+shipcost+"')");
-         alert.setHeaderText("Insertion successful");
-         alert.setContentText("Vendor has been inserted.");
-         alert.getDialogPane().setPrefSize(400, 200);
-         alert.showAndWait();
-        }
-        catch(SQLException se)
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Database Insert Error");
-            alert.setContentText("Unable to Insert into DB");
-            alert.showAndWait();
-        }
-        catch(NumberFormatException e)
-        {
-            JOptionPane.showMessageDialog(this, "You have attempted to store blank or invalid numbers. Please enter valid numbers.",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        catch(NullPointerException npe)
-        {
-            JOptionPane.showMessageDialog(this, "A database connection was not properly established.",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
+        // TODO add your handling code here:
     }//GEN-LAST:event_save_btnActionPerformed
 
-    private void clear_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clear_btnActionPerformed
-        jTextField40.setText("");
-        jTextField50.setText("");
+    private void cancel_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_btnActionPerformed
+        jTextField19.setText("");
+        jTextField20.setText("");
+        jTextField21.setText("");
+        jTextField22.setText("");
+        jTextField23.setText("");
+    }//GEN-LAST:event_cancel_btnActionPerformed
+
+    private void jTextField27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField27ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField27ActionPerformed
+
+    private void save_btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_btn1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_save_btn1ActionPerformed
+
+    private void cancel_btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_btn1ActionPerformed
+        jTextField24.setText("");
+        jTextField25.setText("");
+        jTextField26.setText("");
+        jTextField27.setText("");
+        jTextField28.setText("");
         jTextField29.setText("");
         jTextField30.setText("");
-        jTextField31.setText("");
-        jTextField32.setText("");
-        jTextField33.setText("");
-    }//GEN-LAST:event_clear_btnActionPerformed
+        jRadioButton3.setSelected(false);
+        jRadioButton4.setSelected(false);
+    }//GEN-LAST:event_cancel_btn1ActionPerformed
 
-    private void jTextField36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField36ActionPerformed
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField36ActionPerformed
+    }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
-        String key = jTextField40.getText();
-        String search = "select vendorID,vendor_name,shipcost,address,email,telephone FROM vendor "
-        +"where vendorID LIKE '%"+key+"%'";
-        try {
-            pst = con.prepareStatement(search);
-            rs = pst.executeQuery();
-            vendoradd_table.setModel(DbUtils.resultSetToTableModel(rs));
-
-        } 
-        catch(NullPointerException npe)
-        {
-            JOptionPane.showMessageDialog(this, "A database connection was not properly established.",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        catch(SQLException se)
-        {
-            JOptionPane.showMessageDialog(this, "An error occurred while writing the financial report to the database.",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        tableload();
-    }//GEN-LAST:event_searchActionPerformed
-
-    private void reset_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_btnActionPerformed
-        jTextField33.setText("");
-        jTextField34.setText("");
-        jTextField35.setText("");
-        jTextField36.setText("");
-        jTextField37.setText("");
-        jTextField38.setText("");
-        jTextField39.setText("");
-    }//GEN-LAST:event_reset_btnActionPerformed
-
-    private void jTextField38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField38ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField38ActionPerformed
-
-    private void edit_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edit_btnActionPerformed
-        if(con == null)
-            dbConnect();
-        try{
-        String VID = jTextField38.getText();
-        String vName = jTextField33.getText();
-        String address = jTextField34.getText();
-        String email = jTextField35.getText();
-        String phone = jTextField36.getText();
-        String shipcost = jTextField37.getText();
-        
-        Statement add_vendor = con.createStatement();
-         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-         alert.setTitle("Success");
-         add_vendor.execute("update Vendor set vName='"+vName+"',address='"+address+"',email='"+email+"',"
-                 + "phone='"+phone+"',shipcost='"+shipcost+"' where VID='"+VID+"'");
-         alert.setHeaderText("Insertion successful");
-         alert.setContentText("Vendor has been updated.");
-         alert.getDialogPane().setPrefSize(400, 200);
-         alert.showAndWait();
-        }
-        catch(SQLException se)
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Database Insert Error");
-            alert.setContentText("Unable to Insert into DB");
-            alert.showAndWait();
-        }
-        catch(NumberFormatException e)
-        {
-            JOptionPane.showMessageDialog(this, "You have attempted to store blank or invalid numbers. Please enter valid numbers.",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_edit_btnActionPerformed
-
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        if(con == null)
-            dbConnect();
-        try{
-        String SID = jTextField43.getText();
-        String VID = jTextField39.getText();
-        String recdate = jTextField41.getText();
-        String modelCode = jTextField44.getText();
-        String qty = jTextField45.getText();
-        String shipcost = jTextField47.getText();
-        String itemcost = jTextField46.getText();
-        String type = "Vendor"; 
-
-        Statement add_vendorrec = con.createStatement();
-         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-         alert.setTitle("Success");
-         add_vendorrec.executeQuery("Insert into Ship_Rec values('"+SID+"','"+VID+"','"+recdate+"','"+modelCode+"','"+qty+"','"+shipcost+"','"+itemcost+"','"+type+"')");
-         alert.setHeaderText("Insertion successful");
-         alert.setContentText("The vendor shipping record has been inserted.");
-         alert.getDialogPane().setPrefSize(400, 200);
-         alert.showAndWait();
-        }
-        catch(SQLException se)
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Database Insert Error");
-            alert.setContentText("Unable to Insert into DB");
-            alert.showAndWait();
-        }
-        catch(NumberFormatException e)
-        {
-            JOptionPane.showMessageDialog(this, "You have attempted to store blank or invalid numbers. Please enter valid numbers.",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        catch(NullPointerException npe)
-        {
-            JOptionPane.showMessageDialog(this, "A database connection was not properly established.",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_jButton8ActionPerformed
-
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        jTextField43.setText("");
-        jTextField39.setText("");
-        jTextField41.setText("");
-        jTextField44.setText("");
-        jTextField45.setText("");
-        jTextField42.setText("");
-        jTextField47.setText("");
-        jTextField46.setText("");        
-    }//GEN-LAST:event_jButton9ActionPerformed
-
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        if(con == null)
-            dbConnect();
-        try{
-        String VID = jTextField39.getText();
-        int timetaken = Integer.parseInt(jTextField42.getText());
-        String item=jTextField44.getText();
-        
-        Statement stmt1 = con.createStatement( );
-        ResultSet rsd = stmt1.executeQuery("select shipping_cost_ph from Vendor where vendor_ID='"+VID+"'");
-        int c = rsd.getInt("Shipping_Cost_ph");
-        jTextField47.setText(Integer.toString(c*timetaken));
-        ResultSet a = stmt1.executeQuery("select price from Stock where item_ID='"+item+"'");
-        int price = a.getInt("price");
-        jTextField46.setText(Integer.toString(price*Integer.parseInt(jTextField45.getText())));
-        }
-        catch(SQLException se)
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Database Retrieve Error");
-            alert.setContentText("Unable to Retrieve into DB");
-            alert.showAndWait();
-        }
-        catch(NumberFormatException e)
-        {
-            JOptionPane.showMessageDialog(this, "You have attempted to store blank or invalid numbers. Please enter valid numbers.",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        
-    }//GEN-LAST:event_jButton10ActionPerformed
-
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        if(con == null)
-            dbConnect();
-        try{
-        String SID = jTextField54.getText();
-        String RID = jTextField48.getText();
-        String recdate = jTextField49.getText();
-        String modelCode = jTextField51.getText();
-        String qty = jTextField52.getText();
-        String itemcost = jTextField53.getText();
-        String type = "Retail"; 
-        
-        Statement add_vendorrec = con.createStatement();
-         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-         alert.setTitle("Success");
-         add_vendorrec.executeQuery("Insert into Ship_Rec values('"+SID+"','"+RID+"','"+recdate+"','"+modelCode+"','"+qty+"','"+itemcost+"','"+type+"')");
-         alert.setHeaderText("Insertion successful");
-         alert.setContentText("The retail shipping record has been inserted.");
-         alert.getDialogPane().setPrefSize(400, 200);
-         alert.showAndWait();
-        }
-        catch(SQLException se)
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Database Insert Error");
-            alert.setContentText("Unable to Insert into DB");
-            alert.showAndWait();
-        }
-        catch(NumberFormatException e)
-        {
-            JOptionPane.showMessageDialog(this, "You have attempted to store blank or invalid numbers. Please enter valid numbers.",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_jButton11ActionPerformed
-
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        jTextField54.setText("");
-        jTextField48.setText("");
-        jTextField49.setText("");
-        jTextField51.setText("");
-        jTextField52.setText("");
-        jTextField53.setText("");
-    }//GEN-LAST:event_jButton12ActionPerformed
-
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        if(con == null)
-            dbConnect();
-        try{
-        String item=jTextField51.getText();
-        Statement stmt1 = con.createStatement( );
-        ResultSet a = stmt1.executeQuery("select price from Stock where item_ID='"+item+"'");
-        int price = a.getInt("price");
-        jTextField53.setText(Integer.toString(price*Integer.parseInt(jTextField52.getText())));
-        }
-        catch(SQLException se)
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Database Retrieve Error");
-            alert.setContentText("Unable to Retrieve into DB");
-            alert.showAndWait();
-        }
-        catch(NumberFormatException e)
-        {
-            JOptionPane.showMessageDialog(this, "You have attempted to store blank or invalid numbers. Please enter valid numbers.",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        
-    }//GEN-LAST:event_jButton13ActionPerformed
-
-    private void print1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_print1ActionPerformed
-
-    private void print2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_print2ActionPerformed
-    
-        void setColor(JPanel pl) //set the colour after  click
-        {
-            pl.setBackground(new Color (0,204,204));
-        }
-        
-        /*void resetColour (JPanel pl)
-        {
-            pl.setBackground(new Color(0,153,153));
-        }*/
-        void setlabelcolor(JLabel label) //set the colour after  click
-        {
-            label.setBackground(new Color (0,153,153));
-        }
-        void resettlabelcolor(JLabel label) //set the colour after  click
-        {
-            label.setBackground(new Color (0,204,204));
-        }
     /**
      * @param args the command line arguments
      */
-        //Nimbus or Windows
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1565,34 +768,24 @@ public class Distribution extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows Classic".equals(info.getName())) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Distribution.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Distribution.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Distribution.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Distribution.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+        
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Distribution().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Distribution().setVisible(true);
         });
     }
 
-    
     public class TimerThread extends Thread
     {
         private JLabel time;
@@ -1625,10 +818,7 @@ public class Distribution extends javax.swing.JFrame {
                 {
                     sleep(1000);
                 }
-                catch(InterruptedException e){
-                
-                    JOptionPane.showMessageDialog(null, "There was an issue with the time system.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
+                catch(InterruptedException e){}
             }
         }
     }
@@ -1646,8 +836,6 @@ public class Distribution extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel adddetail;
-    private javax.swing.JPanel addvendor;
     private javax.swing.JPanel bar1;
     private javax.swing.JPanel bar2;
     private javax.swing.JPanel bar3;
@@ -1656,86 +844,55 @@ public class Distribution extends javax.swing.JFrame {
     private javax.swing.JPanel bar6;
     private javax.swing.JPanel bar7;
     private javax.swing.JPanel bar8;
-    private javax.swing.ButtonGroup bg_cusdet_gender;
+    private javax.swing.JButton cancel_btn;
+    private javax.swing.JButton cancel_btn1;
     private javax.swing.JPanel center;
-    private javax.swing.JButton clear_btn;
     private javax.swing.JLabel close;
     private javax.swing.JLabel date;
-    private javax.swing.JButton edit_btn;
-    private javax.swing.JLabel emp_id;
-    private javax.swing.JLabel emp_name;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel44;
-    private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel48;
-    private javax.swing.JLabel jLabel49;
-    private javax.swing.JLabel jLabel50;
-    private javax.swing.JLabel jLabel51;
-    private javax.swing.JLabel jLabel52;
-    private javax.swing.JLabel jLabel53;
-    private javax.swing.JLabel jLabel54;
-    private javax.swing.JLabel jLabel55;
-    private javax.swing.JLabel jLabel56;
-    private javax.swing.JLabel jLabel57;
-    private javax.swing.JLabel jLabel58;
-    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel60;
-    private javax.swing.JLabel jLabel62;
-    private javax.swing.JLabel jLabel63;
-    private javax.swing.JLabel jLabel64;
-    private javax.swing.JLabel jLabel65;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField19;
+    private javax.swing.JTextField jTextField20;
+    private javax.swing.JTextField jTextField21;
+    private javax.swing.JTextField jTextField22;
+    private javax.swing.JTextField jTextField23;
+    private javax.swing.JTextField jTextField24;
+    private javax.swing.JTextField jTextField25;
+    private javax.swing.JTextField jTextField26;
+    private javax.swing.JTextField jTextField27;
+    private javax.swing.JTextField jTextField28;
     private javax.swing.JTextField jTextField29;
     private javax.swing.JTextField jTextField30;
-    private javax.swing.JTextField jTextField31;
-    private javax.swing.JTextField jTextField32;
-    private javax.swing.JTextField jTextField33;
-    private javax.swing.JTextField jTextField34;
-    private javax.swing.JTextField jTextField35;
-    private javax.swing.JTextField jTextField36;
-    private javax.swing.JTextField jTextField37;
-    private javax.swing.JTextField jTextField38;
-    private javax.swing.JTextField jTextField39;
-    private javax.swing.JTextField jTextField40;
-    private javax.swing.JTextField jTextField41;
-    private javax.swing.JTextField jTextField42;
-    private javax.swing.JTextField jTextField43;
-    private javax.swing.JTextField jTextField44;
-    private javax.swing.JTextField jTextField45;
-    private javax.swing.JTextField jTextField46;
-    private javax.swing.JTextField jTextField47;
-    private javax.swing.JTextField jTextField48;
-    private javax.swing.JTextField jTextField49;
-    private javax.swing.JTextField jTextField50;
-    private javax.swing.JTextField jTextField51;
-    private javax.swing.JTextField jTextField52;
-    private javax.swing.JTextField jTextField53;
-    private javax.swing.JTextField jTextField54;
     private javax.swing.JLabel minimize;
     private javax.swing.JLabel name;
     private javax.swing.JLabel name1;
@@ -1753,19 +910,9 @@ public class Distribution extends javax.swing.JFrame {
     private javax.swing.JLabel pic5;
     private javax.swing.JLabel pic6;
     private javax.swing.JLabel pic7;
-    private javax.swing.JButton print;
-    private javax.swing.JButton print1;
-    private javax.swing.JButton print2;
-    private javax.swing.ButtonGroup puchase_paytype;
-    private javax.swing.JTable purchase_table1;
-    private javax.swing.JTable purchase_table2;
-    private javax.swing.JButton reset_btn;
-    private javax.swing.JLabel retail;
-    private javax.swing.JPanel retailrecord;
     private javax.swing.JButton save_btn;
-    private javax.swing.JButton search;
+    private javax.swing.JButton save_btn1;
     private javax.swing.JPanel sidepanel;
-    private javax.swing.JComboBox<String> solution_combo;
     private javax.swing.JLabel time;
     private javax.swing.JPanel topbar;
     private javax.swing.JPanel topic1;
@@ -1776,8 +923,5 @@ public class Distribution extends javax.swing.JFrame {
     private javax.swing.JPanel topic6;
     private javax.swing.JPanel topic7;
     private javax.swing.JPanel topic8;
-    private javax.swing.JLabel vendor;
-    private javax.swing.JTable vendoradd_table;
-    private javax.swing.JPanel vendorrecord;
     // End of variables declaration//GEN-END:variables
 }

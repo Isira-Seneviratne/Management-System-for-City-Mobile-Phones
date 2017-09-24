@@ -1,7 +1,9 @@
 package itpshnew;
 
-import java.sql.Connection;
+import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
+import com.toedter.calendar.JDateChooser;
+import itpshnew.dbCon;
 import java.awt.Color;
 import static java.lang.Thread.sleep;
 import java.sql.ResultSet;
@@ -562,6 +564,11 @@ public class StockControl extends javax.swing.JFrame {
         name4.setForeground(new java.awt.Color(255, 255, 255));
         name4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         name4.setText("           Distribution");
+        name4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                name4MouseClicked(evt);
+            }
+        });
         topic5.add(name4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 9, 260, 40));
 
         pic4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Delivered_40px.png"))); // NOI18N
@@ -1177,6 +1184,11 @@ public class StockControl extends javax.swing.JFrame {
         jPanel5.add(txtvendor, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, 310, 25));
 
         txtbudget.setBorder(null);
+        txtbudget.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtbudgetActionPerformed(evt);
+            }
+        });
         jPanel5.add(txtbudget, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 310, 25));
 
         txtqty1.setBorder(null);
@@ -1481,7 +1493,7 @@ public class StockControl extends javax.swing.JFrame {
     }//GEN-LAST:event_topic2MousePressed
 
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
-       this.dispose();
+       System.exit(0); // cancel button
     }//GEN-LAST:event_closeMouseClicked
 
     private void minimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeMouseClicked
@@ -1500,7 +1512,9 @@ public class StockControl extends javax.swing.JFrame {
     }//GEN-LAST:event_topic6MousePressed
 
     private void name3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_name3MousePressed
-        
+        stock s1 = new stock(); // go to stock
+        s1.setVisible(true);
+        this.dispose(); //dispose the current form
     }//GEN-LAST:event_name3MousePressed
 
     private void vendorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vendorMouseClicked
@@ -1574,6 +1588,85 @@ public class StockControl extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Brand can only consist of letters");
             goal = true;
             }
+        
+        String CB = txtbudget.getText();
+        if (CB.equals("") && goal == false){
+            JOptionPane.showMessageDialog(null,"Company Budget cannot be Empty");
+            goal = true;
+        }
+        if (CB != null && goal == false){
+      try 
+         {
+             double val9 = Double.parseDouble(CB);
+             if(val9<0 || CB.equals("-0"))
+         {
+             JOptionPane.showMessageDialog(null,"Budget cannot be negative");
+             goal = true;
+             txtprice1.setText("");
+             
+         }
+         }
+    catch(NumberFormatException e) {
+        JOptionPane.showMessageDialog(null,"Please enter a valid Budget");
+        goal = true;
+        txtprice1.setText("");
+        }
+     
+     }
+        String qty = txtqty1.getText();
+        if (qty.equals("") && goal == false){
+            JOptionPane.showMessageDialog(null,"Quantity cannot be Empty");
+            goal = true;
+        }
+        if (qty != null && goal == false){
+      try 
+         {
+             double val9 = Double.parseDouble(qty);
+             if(val9<0 || qty.equals("-0"))
+         {
+             JOptionPane.showMessageDialog(null,"Quantity cannot be negative");
+             goal = true;
+             txtqty1.setText("");
+             
+         }
+         }
+    catch(NumberFormatException e) {
+        JOptionPane.showMessageDialog(null,"Please enter a valid Quantity");
+        goal = true;
+        txtprice1.setText("");
+        }
+     
+     }
+        
+        
+        
+        
+        
+        String Price = txtup2.getText();
+        if (Price.equals("") && goal == false){
+            JOptionPane.showMessageDialog(null,"Price cannot be Empty");
+            goal = true;
+        }
+        if (Price != null && goal == false){
+      try 
+         {
+             double val9 = Double.parseDouble(Price);
+             if(val9<0 || Price.equals("-0"))
+         {
+             JOptionPane.showMessageDialog(null,"Price cannot be negative");
+             goal = true;
+             txtup2.setText("");
+             
+         }
+         }
+    catch(NumberFormatException e) {
+        JOptionPane.showMessageDialog(null,"Please enter a valid Price");
+        goal = true;
+        txtprice1.setText("");
+        }
+     
+     }
+        
         boolean geo = false;
         String Model = txtmc.getText();
         if (Model.equals("") && goal == false){
@@ -1586,7 +1679,7 @@ public class StockControl extends javax.swing.JFrame {
         {
         try {
              
-             String SQL = "SELECT * FROM item";
+             String SQL = "SELECT * FROM availablestock";
              ResultSet rs = pst.executeQuery(SQL);
              while (rs.next()) {
              String mc = rs.getString("modelCode");
@@ -1602,6 +1695,8 @@ public class StockControl extends javax.swing.JFrame {
                     if (x == 0){
                         geo = false;
                     }
+                    else
+                        geo = true;
              }
              else
                  geo = false;
@@ -1615,21 +1710,14 @@ public class StockControl extends javax.swing.JFrame {
         
         }
         
-        String CB = txtbudget.getText();
-        if (CB.equals("") && goal == false){
-            JOptionPane.showMessageDialog(null,"Company Budget cannot be Empty");
-            goal = true;
-        }
-        String qty = txtqty1.getText();
-        if (qty.equals("") && goal == false){
-            JOptionPane.showMessageDialog(null,"Quantity cannot be Empty");
-            goal = true;
-        }
-        String Price = txtup2.getText();
-        if (Price.equals("") && goal == false){
-            JOptionPane.showMessageDialog(null,"Price cannot be Empty");
-            goal = true;
-        }
+        
+        
+        
+        
+        
+        
+        
+        
         
         String reorder = txtcb4.getText();
         if (goal == false && geo == false){
@@ -2129,6 +2217,15 @@ public class StockControl extends javax.swing.JFrame {
         {}
         
     }//GEN-LAST:event_jTable2MouseClicked
+
+    private void txtbudgetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbudgetActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtbudgetActionPerformed
+
+    private void name4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_name4MouseClicked
+        new FinancialSystem().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_name4MouseClicked
     
         void setColor(JPanel pl) //set the colour after  click
         {

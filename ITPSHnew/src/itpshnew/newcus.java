@@ -9,8 +9,6 @@ package itpshnew;
 import java.awt.Window;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import javax.swing.JOptionPane;
-import sales_package.customer_class;
 import sales_package.dbconnect;
 
 /**
@@ -32,9 +30,6 @@ public class newcus extends javax.swing.JFrame {
         initComponents();
         
         con = dbconnect.connect();
-        customer_class c1 = new customer_class();         //set cus id
-        cusid_box.setText(c1.cus_num());
-        
         
         
     }
@@ -86,8 +81,6 @@ public class newcus extends javax.swing.JFrame {
         jLabel27.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel27.setText("Customer Id");
         jPanel8.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 110, 30));
-
-        cusid_box.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jPanel8.add(cusid_box, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 220, 25));
 
         jLabel28.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -104,11 +97,11 @@ public class newcus extends javax.swing.JFrame {
 
         jLabel31.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel31.setText("Phone Number 2");
-        jPanel8.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 150, 30));
+        jPanel8.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 150, 30));
 
         jLabel32.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel32.setText("Gender");
-        jPanel8.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 110, 30));
+        jPanel8.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 110, 30));
 
         jLabel33.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel33.setText("Address");
@@ -117,25 +110,17 @@ public class newcus extends javax.swing.JFrame {
         jLabel34.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel34.setText("City");
         jPanel8.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 110, 30));
-
-        fname_box.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jPanel8.add(fname_box, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 220, 25));
-
-        lname_box.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jPanel8.add(lname_box, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 220, 25));
 
-        pnum1_box.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         pnum1_box.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pnum1_boxActionPerformed(evt);
             }
         });
-        jPanel8.add(pnum1_box, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 220, 25));
+        jPanel8.add(pnum1_box, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 220, 25));
+        jPanel8.add(pnum2_box, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 220, 25));
 
-        pnum2_box.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel8.add(pnum2_box, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, 220, 25));
-
-        address_box.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         address_box.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 address_boxActionPerformed(evt);
@@ -143,7 +128,6 @@ public class newcus extends javax.swing.JFrame {
         });
         jPanel8.add(address_box, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 330, 220, 25));
 
-        city_box.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         city_box.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 city_boxActionPerformed(evt);
@@ -171,9 +155,9 @@ public class newcus extends javax.swing.JFrame {
                 female_rbtnActionPerformed(evt);
             }
         });
-        jPanel8.add(female_rbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 280, -1, -1));
+        jPanel8.add(female_rbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 280, -1, -1));
 
-        jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 460, 440));
+        jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 460, 450));
 
         save_btn.setBackground(new java.awt.Color(48, 214, 48));
         save_btn.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -236,16 +220,6 @@ public class newcus extends javax.swing.JFrame {
 
     private void save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_btnActionPerformed
         
-        purchase p2 = new purchase();                               // set text on purchase panel
-        p2.purchase_cusid_box.setText(cusid_box.getText());
-        
-        String fname1 = fname_box.getText();
-        String lname1 = lname_box.getText();
-        String fullname = fname1 + " " + lname1;
-        p2.purchase_cusname_box.setText(fullname);
-        
-        p2.purchase_connum_box.setText(pnum1_box.getText());
-        
         String cus_id = cusid_box.getText();
         String fname = fname_box.getText();
         String lname = lname_box.getText();
@@ -259,53 +233,31 @@ public class newcus extends javax.swing.JFrame {
         String gender = add_newcus_gender.getSelection().getActionCommand();
         
         try{
-                String querry1 = "Insert INTO customer (customer_id,fname,lname,phone_num1,phone_num2,gender,address,city) values ('"+cus_id+"','"+fname+"','"+lname+"','"+pnum1+"','"+pnum2+"','"+gender+"','"+address+"','"+city+"')";
+                String querry1 = "Insert INTO customer (customer_id, fname,lname,phone_num1,phone_num2,gender,address,city) values ('"+cus_id+"','"+fname+"','"+lname+"','"+pnum1+"','"+pnum2+"','"+gender+"','"+address+"','"+city+"')";
                 pst = con.prepareStatement(querry1); 
                 pst.execute();
         }
-        catch (Exception e){
-        JOptionPane.showMessageDialog(null, "input process doesn't work properly.");
-        }
+        catch (Exception e){}
         
-        
-        customer_class c2 = new customer_class();           //increment the customer id
-        cusid_box.setText(c2.cus_num_increment());
-        
-        this.setVisible(false);//close only current window
+        this.dispose();//close only current window
         purchase p1 = new purchase();
         
-        //com.sun.awt.AWTUtilities.setWindowOpacity(p1, 1);  //reset main frame opacity
+        com.sun.awt.AWTUtilities.setWindowOpacity(p1, 1);  //reset main frame opacity
         p1.setVisible(true);
-        blur_frame bf1 = new blur_frame();
-        bf1.dispose();
-        
-        
-        
-        
-        
     }//GEN-LAST:event_save_btnActionPerformed
 
     private void cancel_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_btnActionPerformed
         this.dispose();//close only current window
         purchase p1 = new purchase();
-        //p1.setOpacity(1f);
-        //com.sun.awt.AWTUtilities.setWindowOpacity(p1, 1);//reset main frame opacity
+        com.sun.awt.AWTUtilities.setWindowOpacity(p1, 1);//reset main frame opacity
         p1.setVisible(true);
-        blur_frame bf1 = new blur_frame();
-        bf1.dispose();
-        
-       
     }//GEN-LAST:event_cancel_btnActionPerformed
 
     private void cancel_lblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancel_lblMouseClicked
         this.dispose();//close only current window
         purchase p1 = new purchase();
-        //p1.setOpacity(1f);
-        
-        //com.sun.awt.AWTUtilities.setWindowOpacity(p1, 1);//reset main frame opacity
+        com.sun.awt.AWTUtilities.setWindowOpacity(p1, 1);//reset main frame opacity
         p1.setVisible(true);
-        blur_frame bf1 = new blur_frame();
-        bf1.dispose();
     }//GEN-LAST:event_cancel_lblMouseClicked
 
     private void male_rbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_male_rbtnActionPerformed

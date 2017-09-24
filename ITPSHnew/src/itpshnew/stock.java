@@ -85,7 +85,6 @@ public class stock extends javax.swing.JFrame {
         date = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         sidepanel.setBackground(new java.awt.Color(0, 153, 153));
         sidepanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -357,12 +356,18 @@ public class stock extends javax.swing.JFrame {
         jLabel6.setText("Empid16428685662");
         sidepanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 670, 170, 50));
 
-        getContentPane().add(sidepanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 810));
-
         center.setBackground(new java.awt.Color(199, 238, 238));
-        center.setPreferredSize(new java.awt.Dimension(1060, 710));
-        center.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(center, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1080, 720));
+
+        javax.swing.GroupLayout centerLayout = new javax.swing.GroupLayout(center);
+        center.setLayout(centerLayout);
+        centerLayout.setHorizontalGroup(
+            centerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1090, Short.MAX_VALUE)
+        );
+        centerLayout.setVerticalGroup(
+            centerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 760, Short.MAX_VALUE)
+        );
 
         topbar.setBackground(new java.awt.Color(0, 204, 204));
         topbar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -383,15 +388,43 @@ public class stock extends javax.swing.JFrame {
         });
         topbar.add(minimize, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 0, -1, 50));
 
-        time.setText("Time");
         topbar.add(time, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 0, 120, 50));
-
-        date.setText("Date with calender");
+        timer = new TimerThread(time);
+        timer.start();
+        
+        date.setText(getDate());
         topbar.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, 130, 50));
 
-        getContentPane().add(topbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 1080, -1));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1380, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(sidepanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(topbar, javax.swing.GroupLayout.PREFERRED_SIZE, 1080, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(center, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 810, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(sidepanel, javax.swing.GroupLayout.PREFERRED_SIZE, 810, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(topbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(0, 0, 0)
+                            .addComponent(center, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
 
-        setSize(new java.awt.Dimension(1384, 815));
+        setSize(new java.awt.Dimension(1366, 768));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

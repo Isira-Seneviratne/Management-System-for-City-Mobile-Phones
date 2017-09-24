@@ -8,25 +8,26 @@ package itpshnew;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Frame;
+import java.awt.Toolkit;
 import static java.lang.Thread.sleep;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.DefaultCellEditor;
-import javax.swing.JOptionPane;
 import sales_package.bill_class;
 import net.proteanit.sql.DbUtils;
 import sales_package.dbconnect;
-
 /**
  *
  * @author Thareendra
@@ -46,7 +47,6 @@ public class purchase extends javax.swing.JFrame {
         this.setUndecorated(true);
         //this.setAlwaysOnTop(true);
         this.setResizable(true);
-        //this.setVisible(true);
         
         
         initComponents();
@@ -87,10 +87,6 @@ public class purchase extends javax.swing.JFrame {
         JTableHeader thead5 = replaceditem_table.getTableHeader();
         thead5.setBackground(new Color (100,199,150));
         thead5.setFont(new Font("Tahome", Font.BOLD, 18));
-        
-        JTableHeader thead6 = report_tabel.getTableHeader();
-        thead6.setBackground(new Color (100,199,150));
-        thead6.setFont(new Font("Tahome", Font.BOLD, 18));
        
         
        // JTableScroll tscroll = new jTableScroll(purchase_table);
@@ -111,11 +107,9 @@ public class purchase extends javax.swing.JFrame {
         
         
         
-        
-        
     }
     
-   /*public void tableload()
+   public void tableload()
     {
           try {
               String q = "select * FROM item";
@@ -125,7 +119,7 @@ public class purchase extends javax.swing.JFrame {
               purchase_table.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e1) {
         }
-    }*/
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -186,7 +180,6 @@ public class purchase extends javax.swing.JFrame {
         purchase = new javax.swing.JLabel();
         warranty = new javax.swing.JLabel();
         customer = new javax.swing.JLabel();
-        report = new javax.swing.JLabel();
         center = new javax.swing.JPanel();
         purchase_panel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -195,9 +188,8 @@ public class purchase extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         itemid_box = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        itemname_box = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
         additem_btn = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -205,9 +197,9 @@ public class purchase extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         newcus_btn = new javax.swing.JButton();
         searchcus_btn = new javax.swing.JButton();
-        purchase_cusid_box = new javax.swing.JTextField();
-        purchase_cusname_box = new javax.swing.JTextField();
-        purchase_connum_box = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
+        jTextField5 = new javax.swing.JTextField();
+        jTextField6 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         purchase_table = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
@@ -232,7 +224,7 @@ public class purchase extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         purchase_save_btn = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        remove_tablerow_btn = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         warranty_panel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -286,36 +278,12 @@ public class purchase extends javax.swing.JFrame {
         jTextField27 = new javax.swing.JTextField();
         jRadioButton3 = new javax.swing.JRadioButton();
         jRadioButton4 = new javax.swing.JRadioButton();
-        cancel_btn = new javax.swing.JButton();
-        cancel_btn1 = new javax.swing.JButton();
-        save_btn = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         purchaseditem_table = new javax.swing.JTable();
         jLabel37 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         replaceditem_table = new javax.swing.JTable();
-        report_panel = new javax.swing.JPanel();
-        jPanel9 = new javax.swing.JPanel();
-        jLabel39 = new javax.swing.JLabel();
-        jLabel40 = new javax.swing.JLabel();
-        jLabel41 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        jPanel10 = new javax.swing.JPanel();
-        jLabel42 = new javax.swing.JLabel();
-        jLabel43 = new javax.swing.JLabel();
-        jLabel44 = new javax.swing.JLabel();
-        jLabel45 = new javax.swing.JLabel();
-        jTextField28 = new javax.swing.JTextField();
-        jTextField29 = new javax.swing.JTextField();
-        jTextField30 = new javax.swing.JTextField();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        report_tabel = new javax.swing.JTable();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
 
         solution_combo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         solution_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Replace", "Repair", " " }));
@@ -332,7 +300,7 @@ public class purchase extends javax.swing.JFrame {
         topic1.setBackground(new java.awt.Color(0, 153, 153));
         topic1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                topic1MousePressed(evt);
+                bar1MousePressed(evt);
             }
         });
         topic1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -340,7 +308,7 @@ public class purchase extends javax.swing.JFrame {
         bar1.setOpaque(false);
         bar1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                topic1MousePressed(evt);
+                bar1MousePressed(evt);
             }
         });
 
@@ -363,17 +331,12 @@ public class purchase extends javax.swing.JFrame {
         name.setText(" Home");
         name.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                topic1MousePressed(evt);
+                bar1MousePressed(evt);
             }
         });
         topic1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 9, 260, 40));
 
         pic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Home_48px.png"))); // NOI18N
-        pic.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                topic1MousePressed(evt);
-            }
-        });
         topic1.add(pic, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 50, 40));
 
         sidepanel.add(topic1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 290, 60));
@@ -662,7 +625,7 @@ public class purchase extends javax.swing.JFrame {
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Employee_Card_80px.png"))); // NOI18N
         sidepanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 660, 80, 100));
 
-        getContentPane().add(sidepanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 768));
+        getContentPane().add(sidepanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 810));
 
         topbar.setBackground(new java.awt.Color(0, 204, 204));
         topbar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -685,15 +648,13 @@ public class purchase extends javax.swing.JFrame {
 
         time.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         time.setForeground(new java.awt.Color(255, 255, 255));
-        time.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         time.setText("Time");
-        topbar.add(time, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 0, 90, 50));
+        topbar.add(time, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 0, 90, 50));
 
         date.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         date.setForeground(new java.awt.Color(255, 255, 255));
-        date.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         date.setText("Date with calender");
-        topbar.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 0, 160, 50));
+        topbar.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, 170, 50));
 
         purchase.setBackground(new java.awt.Color(0, 204, 204));
         purchase.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -737,21 +698,7 @@ public class purchase extends javax.swing.JFrame {
         });
         topbar.add(customer, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, 180, 50));
 
-        report.setBackground(new java.awt.Color(0, 204, 204));
-        report.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        report.setForeground(new java.awt.Color(255, 255, 255));
-        report.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        report.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Report_Card_30px.png"))); // NOI18N
-        report.setText("  Report");
-        report.setOpaque(true);
-        report.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                reportMouseClicked(evt);
-            }
-        });
-        topbar.add(report, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 0, 180, 50));
-
-        getContentPane().add(topbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 1076, 50));
+        getContentPane().add(topbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 1090, 50));
 
         center.setBackground(new java.awt.Color(199, 238, 238));
         center.setLayout(new java.awt.CardLayout());
@@ -774,31 +721,29 @@ public class purchase extends javax.swing.JFrame {
                 sales_bill_numActionPerformed(evt);
             }
         });
-        jPanel2.add(sales_bill_num, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, 160, 35));
+        jPanel2.add(sales_bill_num, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, 150, 35));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         jLabel3.setText("Item Id");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
-        itemid_box.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         itemid_box.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemid_boxActionPerformed(evt);
             }
         });
-        jPanel2.add(itemid_box, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, 230, 25));
+        jPanel2.add(itemid_box, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, 220, 25));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         jLabel4.setText("Item Name");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
-        itemname_box.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        itemname_box.addActionListener(new java.awt.event.ActionListener() {
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemname_boxActionPerformed(evt);
+                jTextField3ActionPerformed(evt);
             }
         });
-        jPanel2.add(itemname_box, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 230, 25));
+        jPanel2.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 220, 25));
 
         additem_btn.setBackground(new java.awt.Color(31, 233, 133));
         additem_btn.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
@@ -808,17 +753,7 @@ public class purchase extends javax.swing.JFrame {
                 additem_btnActionPerformed(evt);
             }
         });
-        jPanel2.add(additem_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, 110, 35));
-
-        jButton2.setBackground(new java.awt.Color(31, 233, 133));
-        jButton2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jButton2.setText("Clear");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, 110, 35));
+        jPanel2.add(additem_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, 110, 35));
 
         purchase_panel.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 510, 190));
 
@@ -860,25 +795,15 @@ public class purchase extends javax.swing.JFrame {
             }
         });
         jPanel3.add(searchcus_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 100, 30));
+        jPanel3.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, 230, -1));
+        jPanel3.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 230, -1));
 
-        purchase_cusid_box.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        purchase_cusid_box.addActionListener(new java.awt.event.ActionListener() {
+        jTextField6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                purchase_cusid_boxActionPerformed(evt);
+                jTextField6ActionPerformed(evt);
             }
         });
-        jPanel3.add(purchase_cusid_box, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, 230, -1));
-
-        purchase_cusname_box.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel3.add(purchase_cusname_box, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 230, -1));
-
-        purchase_connum_box.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        purchase_connum_box.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                purchase_connum_boxActionPerformed(evt);
-            }
-        });
-        jPanel3.add(purchase_connum_box, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 230, -1));
+        jPanel3.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 230, -1));
 
         purchase_panel.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 20, 500, 190));
 
@@ -939,7 +864,7 @@ public class purchase extends javax.swing.JFrame {
         jPanel4.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jLabel13.setText("Extra Charges");
+        jLabel13.setText("Total Vat");
         jPanel4.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
         jPanel4.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 220, 25));
         jPanel4.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 220, 25));
@@ -1045,15 +970,10 @@ public class purchase extends javax.swing.JFrame {
         });
         purchase_panel.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 660, 200, 50));
 
-        remove_tablerow_btn.setBackground(new java.awt.Color(31, 233, 133));
-        remove_tablerow_btn.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        remove_tablerow_btn.setText("Remove");
-        remove_tablerow_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                remove_tablerow_btnActionPerformed(evt);
-            }
-        });
-        purchase_panel.add(remove_tablerow_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 430, 100, 30));
+        jButton8.setBackground(new java.awt.Color(31, 233, 133));
+        jButton8.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jButton8.setText("Remove");
+        purchase_panel.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 430, 100, 30));
 
         jButton9.setBackground(new java.awt.Color(31, 233, 133));
         jButton9.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
@@ -1136,20 +1056,10 @@ public class purchase extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        warranty_table.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         warranty_table.setGridColor(new java.awt.Color(100, 199, 150));
         warranty_table.setSelectionBackground(new java.awt.Color(0, 153, 153));
         jScrollPane2.setViewportView(warranty_table);
         if (warranty_table.getColumnModel().getColumnCount() > 0) {
-            warranty_table.getColumnModel().getColumn(0).setPreferredWidth(150);
-            warranty_table.getColumnModel().getColumn(1).setPreferredWidth(150);
-            warranty_table.getColumnModel().getColumn(2).setPreferredWidth(150);
-            warranty_table.getColumnModel().getColumn(3).setPreferredWidth(150);
-            warranty_table.getColumnModel().getColumn(4).setPreferredWidth(150);
-            warranty_table.getColumnModel().getColumn(5).setPreferredWidth(150);
-            warranty_table.getColumnModel().getColumn(6).setPreferredWidth(150);
-            warranty_table.getColumnModel().getColumn(7).setPreferredWidth(150);
-            warranty_table.getColumnModel().getColumn(8).setPreferredWidth(150);
             warranty_table.getColumnModel().getColumn(8).setCellEditor(new DefaultCellEditor(solution_combo));
         }
 
@@ -1297,7 +1207,7 @@ public class purchase extends javax.swing.JFrame {
         jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Google_Web_Search_40px.png"))); // NOI18N
         jPanel7.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 0, 40, 50));
 
-        customer_panel.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 1050, 50));
+        customer_panel.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 1040, 50));
 
         jPanel8.setBackground(new java.awt.Color(100, 199, 150));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1385,40 +1295,7 @@ public class purchase extends javax.swing.JFrame {
         jRadioButton4.setText("Female");
         jPanel8.add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 280, -1, -1));
 
-        cancel_btn.setBackground(new java.awt.Color(48, 214, 48));
-        cancel_btn.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        cancel_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Cancel_Subscription_30px.png"))); // NOI18N
-        cancel_btn.setText("Reset");
-        cancel_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancel_btnActionPerformed(evt);
-            }
-        });
-        jPanel8.add(cancel_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 550, 150, 45));
-
-        cancel_btn1.setBackground(new java.awt.Color(48, 214, 48));
-        cancel_btn1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        cancel_btn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Edit_30px.png"))); // NOI18N
-        cancel_btn1.setText("Edit");
-        cancel_btn1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancel_btn1ActionPerformed(evt);
-            }
-        });
-        jPanel8.add(cancel_btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 550, 140, 45));
-
-        save_btn.setBackground(new java.awt.Color(48, 214, 48));
-        save_btn.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        save_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Save_40px.png"))); // NOI18N
-        save_btn.setText("Save");
-        save_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                save_btnActionPerformed(evt);
-            }
-        });
-        jPanel8.add(save_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 550, 140, 45));
-
-        customer_panel.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 430, 600));
+        customer_panel.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 420, 570));
 
         purchaseditem_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1541,22 +1418,12 @@ public class purchase extends javax.swing.JFrame {
         purchaseditem_table.getTableHeader().setResizingAllowed(false);
         purchaseditem_table.getTableHeader().setReorderingAllowed(false);
         jScrollPane4.setViewportView(purchaseditem_table);
-        if (purchaseditem_table.getColumnModel().getColumnCount() > 0) {
-            purchaseditem_table.getColumnModel().getColumn(0).setPreferredWidth(150);
-            purchaseditem_table.getColumnModel().getColumn(1).setPreferredWidth(150);
-            purchaseditem_table.getColumnModel().getColumn(2).setPreferredWidth(150);
-            purchaseditem_table.getColumnModel().getColumn(3).setPreferredWidth(150);
-            purchaseditem_table.getColumnModel().getColumn(4).setPreferredWidth(150);
-            purchaseditem_table.getColumnModel().getColumn(5).setPreferredWidth(150);
-            purchaseditem_table.getColumnModel().getColumn(6).setPreferredWidth(150);
-            purchaseditem_table.getColumnModel().getColumn(7).setPreferredWidth(150);
-        }
 
-        customer_panel.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, 600, 380));
+        customer_panel.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 150, 600, 380));
 
         jLabel37.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel37.setText("Purchase item details");
-        customer_panel.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 110, 320, 30));
+        customer_panel.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 120, 320, 30));
 
         jLabel38.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel38.setText("Replaced items");
@@ -1677,243 +1544,33 @@ public class purchase extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        replaceditem_table.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         replaceditem_table.setGridColor(new java.awt.Color(100, 199, 150));
         jScrollPane5.setViewportView(replaceditem_table);
-        if (replaceditem_table.getColumnModel().getColumnCount() > 0) {
-            replaceditem_table.getColumnModel().getColumn(0).setPreferredWidth(150);
-            replaceditem_table.getColumnModel().getColumn(1).setPreferredWidth(150);
-            replaceditem_table.getColumnModel().getColumn(2).setPreferredWidth(150);
-            replaceditem_table.getColumnModel().getColumn(3).setPreferredWidth(150);
-            replaceditem_table.getColumnModel().getColumn(4).setPreferredWidth(150);
-        }
 
-        customer_panel.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 580, 600, 130));
+        customer_panel.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 580, 600, 120));
 
         center.add(customer_panel, "card4");
 
-        report_panel.setBackground(new java.awt.Color(202, 254, 227));
-        report_panel.setPreferredSize(new java.awt.Dimension(1060, 700));
-        report_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel9.setBackground(new java.awt.Color(100, 199, 150));
-        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel39.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel39.setText("Select Date");
-        jPanel9.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 15, -1, -1));
-
-        jLabel40.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jLabel40.setText("From");
-        jPanel9.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
-
-        jLabel41.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jLabel41.setText("To");
-        jPanel9.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
-
-        jButton4.setBackground(new java.awt.Color(31, 233, 133));
-        jButton4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jButton4.setText("Add");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        jPanel9.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, 110, 35));
-
-        jButton5.setBackground(new java.awt.Color(31, 233, 133));
-        jButton5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jButton5.setText("Today");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-        jPanel9.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 110, 35));
-        jPanel9.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 280, 25));
-        jPanel9.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 280, 25));
-
-        report_panel.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 510, 190));
-
-        jPanel10.setBackground(new java.awt.Color(100, 199, 150));
-        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel42.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
-        jLabel42.setText("Sumarry");
-        jPanel10.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 13, 130, 30));
-
-        jLabel43.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jLabel43.setText("Total Sales");
-        jPanel10.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
-
-        jLabel44.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jLabel44.setText("Total Items");
-        jPanel10.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
-
-        jLabel45.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jLabel45.setText("Total Customers");
-        jPanel10.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
-        jPanel10.add(jTextField28, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, 230, -1));
-        jPanel10.add(jTextField29, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 230, -1));
-
-        jTextField30.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField30ActionPerformed(evt);
-            }
-        });
-        jPanel10.add(jTextField30, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 230, -1));
-
-        report_panel.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 20, 500, 190));
-
-        report_tabel.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Item code", "Customer id", "Bill num", "Date", "Time", "Amount"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        report_tabel.setGridColor(new java.awt.Color(100, 199, 150));
-        jScrollPane6.setViewportView(report_tabel);
-
-        report_panel.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 1040, 410));
-
-        jButton6.setBackground(new java.awt.Color(48, 214, 48));
-        jButton6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Print_40px.png"))); // NOI18N
-        jButton6.setText("  Print");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-        report_panel.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 660, 200, 50));
-
-        jButton7.setBackground(new java.awt.Color(48, 214, 48));
-        jButton7.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Reset_40px.png"))); // NOI18N
-        jButton7.setText("  Reset");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-        report_panel.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 660, 200, 50));
-
-        center.add(report_panel, "card5");
-
-        getContentPane().add(center, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1076, 718));
+        getContentPane().add(center, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1090, 760));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bar1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bar1MousePressed
+        
+        
+        home h1 = new home(); // go to home page
+        h1.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_bar1MousePressed
+
+    private void topic2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topic2MousePressed
+       /* setColor(topic2);   //set the colour
+        bar2.setOpaque(true);  */
+        
+        
+    }//GEN-LAST:event_topic2MousePressed
 
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
        System.exit(0); // cancel button
@@ -1935,42 +1592,36 @@ public class purchase extends javax.swing.JFrame {
     }//GEN-LAST:event_topic6MousePressed
 
     private void name3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_name3MousePressed
-        /*stock s1 = new stock(); // go to stock
+        stock s1 = new stock(); // go to stock
         s1.setVisible(true);
-        this.dispose(); //dispose the current form*/
+        this.dispose(); //dispose the current form
     }//GEN-LAST:event_name3MousePressed
 
     private void purchaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_purchaseMouseClicked
         setlabelcolor(purchase);
         resettlabelcolor(warranty);
         resettlabelcolor(customer);
-        resettlabelcolor(report);
         purchase_panel.setVisible(true);
         warranty_panel.setVisible(false);
         customer_panel.setVisible(false);
-        report_panel.setVisible(false);
     }//GEN-LAST:event_purchaseMouseClicked
 
     private void warrantyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_warrantyMouseClicked
         setlabelcolor(warranty);
         resettlabelcolor(purchase);
         resettlabelcolor(customer);
-        resettlabelcolor(report);
         warranty_panel.setVisible(true);
         purchase_panel.setVisible(false);
         customer_panel.setVisible(false);
-        report_panel.setVisible(false);
     }//GEN-LAST:event_warrantyMouseClicked
 
     private void customerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerMouseClicked
         setlabelcolor(customer);
         resettlabelcolor(warranty);
         resettlabelcolor(purchase);
-        resettlabelcolor(report);
         customer_panel.setVisible(true);
         purchase_panel.setVisible(false);
         warranty_panel.setVisible(false);
-        report_panel.setVisible(false);
     }//GEN-LAST:event_customerMouseClicked
 
     private void jTextField22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField22ActionPerformed
@@ -1994,69 +1645,24 @@ public class purchase extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void additem_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_additem_btnActionPerformed
-    
-        
-        
-    
-        
-    if("".equals(itemname_box.getText()))
-    {
-        String itemid = itemid_box.getText();
-        String search = "SELECT item_code,item_name,brand,manufacture_date,warranty_period,discount,selling_price FROM item WHERE item_code LIKE '%"+itemid+"%'";
-                
+       
+        String key = itemid_box.getText();
+        String search = "select item_code,item_name,brand,manufacture_date,warranty_period,discount,selling_price FROM item "
+                +"where item_code LIKE '%"+key+"%'";
         try {
                 pst = conn.prepareStatement(search);
                 rs = pst.executeQuery();
-                //purchase_table.setModel(DbUtils.resultSetToTableModel(rs));
-                //DefaultTableModel tabelrowadd = (DefaultTableModel) purchase_table.getModel();
-                //tabelrowadd.addRow(new Object[] {DbUtils.resultSetToTableModel(rs)});
+                purchase_table.setModel(DbUtils.resultSetToTableModel(rs));
             
-        } catch (SQLException e1) {
-            JOptionPane.showMessageDialog(null, "invalid item_id");
-        }
-        //purchase_table.setModel(DbUtils.resultSetToTableModel(rs));
-    }    
-    else if("".equals(itemid_box.getText()))   
-    {
-        String itemname = itemname_box.getText();
-        String search2 = "SELECT item_code,item_name,brand,manufacture_date,warranty_period,discount,selling_price FROM item WHERE item_name LIKE '%"+itemname+"%'";
-                
-        try {
-                pst = conn.prepareStatement(search2);
-                rs = pst.executeQuery();
-                //purchase_table.setModel(DbUtils.resultSetToTableModel(rs));
-                
-                //DefaultTableModel tabelrowadd = (DefaultTableModel) purchase_table.getModel();
-                //tabelrowadd.addRow(new Object[] {DbUtils.resultSetToTableModel(rs)});
-            
-        } catch (SQLException e1) {JOptionPane.showMessageDialog(null, "invalid item_name");}
-        
-         
-    }  
-    
-    
-    //purchase_table.setModel(DbUtils.resultSetToTableModel(rs));
-    
-        
-            //DefaultTableModel tabelrowadd = (DefaultTableModel) purchase_table.getModel();
-                //tabelrowadd.addRow(new Object[] {DbUtils.resultSetToTableModel(rs)});
-            purchase_table.setModel(DbUtils.resultSetToTableModel(rs));
-            DefaultTableModel tabelrow = (DefaultTableModel) purchase_table.getModel(); //get selected row index
-    
-            int rowindex = purchase_table.getRowCount();
-            rowindex = rowindex + 1;
-          
-            
-        
-      // DefaultTableModel tabelrowadd = (DefaultTableModel) purchase_table.getModel();
-        //tabelrowadd.addRow(new Object[] {DbUtils.resultSetToTableModel(rs)});
+        } catch (Exception e1) {}
+        tableload();
         
     
     }//GEN-LAST:event_additem_btnActionPerformed
 
-    private void itemname_boxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemname_boxActionPerformed
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_itemname_boxActionPerformed
+    }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void itemid_boxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemid_boxActionPerformed
         // TODO add your handling code here:
@@ -2115,27 +1721,22 @@ public class purchase extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField9ActionPerformed
 
-    private void purchase_connum_boxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchase_connum_boxActionPerformed
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_purchase_connum_boxActionPerformed
+    }//GEN-LAST:event_jTextField6ActionPerformed
 
     private void searchcus_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchcus_btnActionPerformed
         searchcus sc1 = new searchcus();
         sc1.setVisible(true);
-        //this.setOpacity(0.5f);
-        //com.sun.awt.AWTUtilities.setWindowOpacity(this, 0.5f); // change the opacity level of main frame
-        blur_frame bf1 = new blur_frame();
-        bf1.setVisible(true);
+        this.setOpacity(0.5f); // change the opacity level of main frame
+        
     }//GEN-LAST:event_searchcus_btnActionPerformed
 
     private void newcus_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newcus_btnActionPerformed
         newcus nc1 = new newcus();
         nc1.setVisible(true);
-        //this.setOpacity(0.5f);
-        //com.sun.awt.AWTUtilities.setWindowOpacity(this, 0.5f); // change the opacity level of main frame
-        blur_frame bf1 = new blur_frame();
-        bf1.setVisible(true);
         
+        com.sun.awt.AWTUtilities.setWindowOpacity(this, 0.5f); // change the opacity level of main frame
     }//GEN-LAST:event_newcus_btnActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
@@ -2145,87 +1746,6 @@ public class purchase extends javax.swing.JFrame {
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton16ActionPerformed
-
-    private void remove_tablerow_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remove_tablerow_btnActionPerformed
-        DefaultTableModel tabelrow = (DefaultTableModel) purchase_table.getModel(); //get selected row index
-        try{
-            int SelectedRowIndex = purchase_table.getSelectedRow();
-            tabelrow.removeRow(SelectedRowIndex);
-        }
-        catch (Exception e) {
-            
-            message_box mb1= new message_box();
-            mb1.setVisible(true);
-            blur_frame bf1 = new blur_frame();
-            bf1.setVisible(true);
-            
-            //JOptionPane.showMessageDialog(null,"need to click a row");
-        }
-        
-    }//GEN-LAST:event_remove_tablerow_btnActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        itemid_box.setText("");
-        itemname_box.setText("");
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void reportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportMouseClicked
-        setlabelcolor(report);
-        resettlabelcolor(customer);
-        resettlabelcolor(warranty);
-        resettlabelcolor(purchase);
-        report_panel.setVisible(true);
-        customer_panel.setVisible(false);
-        purchase_panel.setVisible(false);
-        warranty_panel.setVisible(false);
-    }//GEN-LAST:event_reportMouseClicked
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jTextField30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField30ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField30ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void cancel_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_btnActionPerformed
-        //this.dispose();//close only current window
-    }//GEN-LAST:event_cancel_btnActionPerformed
-
-    private void cancel_btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_btn1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cancel_btn1ActionPerformed
-
-    private void save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_btnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_save_btnActionPerformed
-
-    private void topic1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topic1MousePressed
-
-        this.setVisible(false);//dispose the current form 
-    }//GEN-LAST:event_topic1MousePressed
-
-    private void topic2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topic2MousePressed
-        
-       
-        
-    }//GEN-LAST:event_topic2MousePressed
-
-    private void purchase_cusid_boxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchase_cusid_boxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_purchase_cusid_boxActionPerformed
     
         void setColor(JPanel pl) //set the colour after  click
         {
@@ -2276,7 +1796,6 @@ public class purchase extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new purchase().setVisible(true);
-                
             }
         });
     }
@@ -2342,8 +1861,6 @@ public class purchase extends javax.swing.JFrame {
     private javax.swing.JPanel bar7;
     private javax.swing.JPanel bar8;
     private javax.swing.ButtonGroup bg_cusdet_gender;
-    private javax.swing.JButton cancel_btn;
-    private javax.swing.JButton cancel_btn1;
     private javax.swing.JPanel center;
     private javax.swing.JLabel close;
     private javax.swing.JLabel customer;
@@ -2352,7 +1869,6 @@ public class purchase extends javax.swing.JFrame {
     private javax.swing.JLabel emp_id;
     private javax.swing.JLabel emp_name;
     private javax.swing.JTextField itemid_box;
-    private javax.swing.JTextField itemname_box;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -2361,15 +1877,9 @@ public class purchase extends javax.swing.JFrame {
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2402,21 +1912,13 @@ public class purchase extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel44;
-    private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -2424,7 +1926,6 @@ public class purchase extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
@@ -2434,7 +1935,6 @@ public class purchase extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField jTextField10;
@@ -2455,9 +1955,10 @@ public class purchase extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField25;
     private javax.swing.JTextField jTextField26;
     private javax.swing.JTextField jTextField27;
-    private javax.swing.JTextField jTextField28;
-    private javax.swing.JTextField jTextField29;
-    private javax.swing.JTextField jTextField30;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
@@ -2481,21 +1982,13 @@ public class purchase extends javax.swing.JFrame {
     private javax.swing.JLabel pic7;
     private javax.swing.ButtonGroup puchase_paytype;
     private javax.swing.JLabel purchase;
-    public static javax.swing.JTextField purchase_connum_box;
-    public static javax.swing.JTextField purchase_cusid_box;
-    public static javax.swing.JTextField purchase_cusname_box;
     private javax.swing.JPanel purchase_panel;
     private javax.swing.JButton purchase_save_btn;
     private javax.swing.JTable purchase_table;
     private javax.swing.JTable purchaseditem_table;
-    private javax.swing.JButton remove_tablerow_btn;
     private javax.swing.JTable replace_table;
     private javax.swing.JTable replaceditem_table;
-    private javax.swing.JLabel report;
-    private javax.swing.JPanel report_panel;
-    private javax.swing.JTable report_tabel;
     private javax.swing.JTextField sales_bill_num;
-    private javax.swing.JButton save_btn;
     private javax.swing.JButton searchcus_btn;
     private javax.swing.JPanel sidepanel;
     private javax.swing.JComboBox<String> solution_combo;

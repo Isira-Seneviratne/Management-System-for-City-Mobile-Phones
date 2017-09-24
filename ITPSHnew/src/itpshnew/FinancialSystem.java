@@ -107,14 +107,14 @@ public class FinancialSystem extends JFrame {
                 TodayDisCost += rs.getFloat("item_cost") + rs.getFloat("Shipping_Cost");
             TodayDisProf = TodayDisRev - TodayDisCost;
             rs = s.executeQuery("SELECT hour(ExitTime-Shift_eTime) AS Overtime_hours, dailyRate, otRate"
-                    + " FROM Daily_Attendance da, Current_Employee ce, Salary_Rate sr"
+                    + " FROM dailyattendance da, currentemployee ce, salaryrate sr"
                     + " WHERE da.EmpID=ce.EmpID AND ce.JobID=sr.JobID AND Date=STR_TO_DATE('"+getDate()+"', '%d %m %y')");
             while(rs.next())
                 TodayHRCost += rs.getInt("Overtime_hours") * rs.getFloat("otRate") + rs.getFloat("dailyRate");
             TodayTotRev = TodayRepRev + TodaySalesRev + TodayDisRev;
             TodayTotCost = TodayRepCost + TodaySalesCost + TodayDisCost + TodayHRCost;
             TodayTotProf = TodayTotRev - TodayTotCost;
-            rs = s.executeQuery("SELECT Other_cost FROM Daily_Finances WHERE Day="+getDay()+" AND Month='"+getMonth()+"' AND Year="+getYear());
+            rs = s.executeQuery("SELECT Other_cost FROM daily_finances WHERE Day="+getDay()+" AND Month='"+getMonth()+"' AND Year="+getYear());
             if(rs.next() && rs.getFloat("Other_Cost") != 0)
                 TodayOtherCost = rs.getFloat("Other_Cost");
             repair_rev.setText(Float.toString(TodayRepRev).replaceAll("\\.0*$", ""));
@@ -135,6 +135,7 @@ public class FinancialSystem extends JFrame {
         catch(SQLException e)
         {
             JOptionPane.showMessageDialog(this, "Unable to retrieve values from database.", "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
         }
     }
     
@@ -160,7 +161,7 @@ public class FinancialSystem extends JFrame {
                 MonthHRCost += rs.getFloat("HR_cost");
                 MonthOtherCost += rs.getFloat("Other_cost");
             }
-            rs = s.executeQuery("SELECT Salary FROM Monthly_Salary WHERE Month='"+getMonth()+"'");
+            rs = s.executeQuery("SELECT Salary FROM monthlysal WHERE Month='"+getMonth()+"'");
             while(rs.next())
                 MonthHRCost += rs.getFloat("Salary");
             
@@ -187,6 +188,7 @@ public class FinancialSystem extends JFrame {
         {
             JOptionPane.showMessageDialog(this, "There was an error while retrieving financial values to calculate results.",
                     "Error", JOptionPane.ERROR_MESSAGE);
+            se.printStackTrace();
         }
     }
     
@@ -214,7 +216,7 @@ public class FinancialSystem extends JFrame {
             MonthOtherCost = Float.parseFloat(other_costs1.getText());
             
             MonthTotRev = MonthRepRev + MonthSalesRev + MonthDisRev;
-            MonthTotCost = MonthRepCost + MonthSalesCost + MonthDisCost + MonthHRCost + MonthOtherCost;
+            MonthTotCost = MonthRepCost + MonthSalesCost + MonthDisRev + MonthHRCost + MonthOtherCost;
             MonthTotProf = MonthTotRev - MonthTotCost;
             tot_rev1.setText(Float.toString(MonthTotRev).replaceAll("\\.0*$", ""));
             tot_cost1.setText(Float.toString(MonthTotCost).replaceAll("\\.0*$", ""));
