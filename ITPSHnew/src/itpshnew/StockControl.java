@@ -11,13 +11,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import net.proteanit.sql.DbUtils;
 /**
  @author Sonal
@@ -30,11 +24,25 @@ public class StockControl extends javax.swing.JFrame {
     PreparedStatement pst = null;
     ResultSet rs = null;
     
-    /**
-     * Creates new form purchase
-     */
+    private void dbConnect()
+    {
+        try
+        {
+            Class.forName("com.mysql.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbcitymobile?verifyServerCertificate=false&useSSL=true", "root", "abcd1234");
+        }
+        catch(ClassNotFoundException ce)
+        {
+            JOptionPane.showMessageDialog(this, "Unable to load the database driver.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        catch(SQLException se)
+        {
+            JOptionPane.showMessageDialog(this, "Unable to connect to the database.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
     public StockControl() {
-        conn = dbCon.connect();
+        dbConnect();
         this.setUndecorated(true);
         //this.setAlwaysOnTop(true);
         this.setResizable(true);
@@ -1490,7 +1498,7 @@ public class StockControl extends javax.swing.JFrame {
     }//GEN-LAST:event_topic2MousePressed
 
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
-       System.exit(0); // cancel button
+       dispose();
     }//GEN-LAST:event_closeMouseClicked
 
     private void minimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeMouseClicked

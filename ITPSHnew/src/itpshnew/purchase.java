@@ -9,23 +9,13 @@ package itpshnew;
 import java.awt.Color;
 import java.awt.Font;
 import static java.lang.Thread.sleep;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JOptionPane;
+import javax.swing.*;
+import javax.swing.table.*;
 import sales_package.bill_class;
 import net.proteanit.sql.DbUtils;
-import sales_package.dbconnect;
 
 /**
  *
@@ -42,6 +32,23 @@ public class purchase extends javax.swing.JFrame {
     /**
      * Creates new form purchase
      */
+    private void dbConnect()
+    {
+        try
+        {
+            Class.forName("com.mysql.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbcitymobile?verifyServerCertificate=false&useSSL=true", "root", "abcd1234");
+        }
+        catch(ClassNotFoundException ce)
+        {
+            JOptionPane.showMessageDialog(this, "Unable to load the database driver.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        catch(SQLException se)
+        {
+            JOptionPane.showMessageDialog(this, "Unable to connect to the database.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
     public purchase() {
         this.setUndecorated(true);
         //this.setAlwaysOnTop(true);
@@ -107,7 +114,7 @@ public class purchase extends javax.swing.JFrame {
         bill_class bc1 = new bill_class();         //set bill number
         sales_bill_num.setText(bc1.bill_num());
         
-        conn = dbconnect.connect();
+        dbConnect();
         
         
         

@@ -42,11 +42,12 @@ public class FinancialSystem extends JFrame {
         initComponents();
         month_pan.setVisible(false);
         setlabelcolor(today_fin);
-        initToday();
         
         setColor(topic6);   //set the colour to FinancialSystem bar
         bar6.setOpaque(true);
         setlabelcolor(today_fin); // set the today  label colour as default one
+        dbConnect();
+        initToday();
     }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         updateResults();
@@ -83,8 +84,6 @@ public class FinancialSystem extends JFrame {
     
     private void initToday()
     {
-        if(conn == null)
-            dbConnect();
         try
         {
             Statement s = conn.createStatement();
@@ -135,14 +134,11 @@ public class FinancialSystem extends JFrame {
         catch(SQLException e)
         {
             JOptionPane.showMessageDialog(this, "Unable to retrieve values from database.", "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
         }
     }
     
     private void calculateResults()
     {
-        if(conn == null)
-            dbConnect();
         try
         {
             Statement s = conn.createStatement();
@@ -238,8 +234,6 @@ public class FinancialSystem extends JFrame {
     
     private void generateReport()
     {
-        if(conn == null)
-            dbConnect();
         if(MonthTotProf == 0 && MonthTotRev == 0 && MonthTotCost == 0)
         {
             JOptionPane.showMessageDialog(this, "You have not generated the required financial values. Please click the \"Calculate Results\" button to do so.",
@@ -277,7 +271,6 @@ public class FinancialSystem extends JFrame {
         {
             JOptionPane.showMessageDialog(this, "An error occurred while writing the financial report to the database.",
                     "Error", JOptionPane.ERROR_MESSAGE);
-            se.printStackTrace();
         }
     }
     /**
@@ -1470,8 +1463,6 @@ public class FinancialSystem extends JFrame {
     }//GEN-LAST:event_minimizeMouseClicked
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
-        if(conn == null)
-            dbConnect();
         String month = new String[]{"January", "February", "March",
             "April", "May", "June", "July",
             "August", "September", "October", "November", "December"}[search_month.getMonth()];
@@ -1480,10 +1471,10 @@ public class FinancialSystem extends JFrame {
         try
         {
             Statement s = conn.createStatement();
-            s.execute("SELECT 1 FROM Financial_Reports WHERE Month_issued='"+month+"' AND Year_issued="+year);
+            s.execute("SELECT 1 FROM financial_reports WHERE Month_issued='"+month+"' AND Year_issued="+year);
             if(s.getResultSet().next())
             {
-                ResultSet rs = s.executeQuery("SELECT * FROM Financial_Reports WHERE Month_issued='"+month+"' AND Year_issued="+year);
+                ResultSet rs = s.executeQuery("SELECT * FROM financial_reports WHERE Month_issued='"+month+"' AND Year_issued="+year);
                 rs.next();
                 double s_totrev = rs.getDouble("Total_revenue"), s_totcost = rs.getDouble("Total_costs"), s_totprof = rs.getDouble("Total_profit");
                 JOptionPane.showMessageDialog(this, "<html><b>Financial values for "+month+" "+year+"</b></html>\n\nTotal income: "
@@ -1516,8 +1507,6 @@ public class FinancialSystem extends JFrame {
     }//GEN-LAST:event_month_finMouseClicked
 
     private void updateTodayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateTodayActionPerformed
-        if(conn == null)
-            dbConnect();
         try
         {
             TodayOtherCost = Float.parseFloat(other_costs.getText());
@@ -1585,15 +1574,11 @@ public class FinancialSystem extends JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FinancialSystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FinancialSystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FinancialSystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(FinancialSystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        
         //</editor-fold>
 
         /* Create and display the form */
