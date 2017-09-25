@@ -69,7 +69,7 @@ public class Distribution extends javax.swing.JFrame {
         try
         {
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ManagementSystem?verifyServerCertificate=false&useSSL=true", "root", "abcd1234");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbcitymobile?verifyServerCertificate=false&useSSL=true", "root", "abcd1234");
         }
         catch(ClassNotFoundException ce)
         {
@@ -115,13 +115,14 @@ public class Distribution extends javax.swing.JFrame {
    }*/
    public void tableload()
     {
-          try {
+        try {
               String q = "select * FROM vendor";
               pst = con.prepareStatement(q);
          
               rs = pst.executeQuery();
               vendoradd_table.setModel(DbUtils.resultSetToTableModel(rs));
-        } catch (Exception e1) {
+        } 
+        catch (SQLException e1) {
         }
     }
 

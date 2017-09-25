@@ -69,7 +69,7 @@ public class FinancialSystem extends JFrame {
         try
         {
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbcitymobile?verifyServerCertificate=false&useSSL=true", "root", "");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbcitymobile?verifyServerCertificate=false&useSSL=true", "root", "abcd1234");
         }
         catch(ClassNotFoundException ce)
         {
@@ -92,17 +92,17 @@ public class FinancialSystem extends JFrame {
             TodayRepRev = 300;
             TodayRepCost = 300;
             TodayRepProf = TodayRepRev - TodayRepCost;
-            rs = s.executeQuery("SELECT net_amount FROM Payment p, Bill b WHERE b.Bill_Number=p.bill_number AND Date = CURDATE()");
+            rs = s.executeQuery("SELECT net_amount FROM payment p, bill b WHERE b.Bill_Number=p.bill_number AND Date = CURDATE()");
             while(rs.next())
                 TodaySalesRev += rs.getFloat("net_amount");
-            rs = s.executeQuery("SELECT totalCost FROM Reorder");
+            rs = s.executeQuery("SELECT totalCost FROM reorder");
             while(rs.next())
                 TodaySalesCost += rs.getFloat("totalCost");
             TodaySalesProf = TodaySalesRev - TodaySalesCost;
-            rs = s.executeQuery("SELECT item_cost FROM Shipping_rec WHERE Day="+getDay()+" AND Month='"+getMonth()+"' AND Year="+getYear()+" AND ship_type='Retail'");
+            rs = s.executeQuery("SELECT item_cost FROM shipping_rec WHERE Day="+getDay()+" AND Month='"+getMonth()+"' AND Year="+getYear()+" AND ship_type='Retail'");
             while(rs.next())
                 TodayDisRev += rs.getFloat("item_cost");
-            rs = s.executeQuery("SELECT item_cost, Shipping_Cost FROM Shipping_rec WHERE Day="+getDay()+" AND Month='"+getMonth()+"' AND Year="+getYear()+" AND ship_type='Vendor'");
+            rs = s.executeQuery("SELECT item_cost, Shipping_Cost FROM shipping_rec WHERE Day="+getDay()+" AND Month='"+getMonth()+"' AND Year="+getYear()+" AND ship_type='Vendor'");
             while(rs.next())
                 TodayDisCost += rs.getFloat("item_cost") + rs.getFloat("Shipping_Cost");
             TodayDisProf = TodayDisRev - TodayDisCost;
@@ -146,21 +146,25 @@ public class FinancialSystem extends JFrame {
         try
         {
             Statement s = conn.createStatement();
-            ResultSet rs = s.executeQuery("SELECT * FROM Daily_Finances WHERE Month='"+getMonth()+"' AND Year="+getYear());
+            ResultSet rs = s.executeQuery("SELECT * FROM daily_finances WHERE Month='"+getMonth()+"' AND Year="+getYear());
             while(rs.next())
             {
                 MonthRepRev += rs.getFloat("Rep_inc");
                 MonthRepCost += rs.getFloat("Rep_cost");
-                MonthRepProf += rs.getFloat("Rep_prof");
+                
                 MonthSalesRev += rs.getFloat("Sales_inc");
                 MonthSalesCost += rs.getFloat("Sales_cost");
-                MonthSalesProf += rs.getFloat("Sales_prof");
+                
                 MonthDisRev += rs.getFloat("Dis_inc");
                 MonthDisCost += rs.getFloat("Dis_cost");
-                MonthDisProf += rs.getFloat("Dis_prof");
+                
                 MonthHRCost += rs.getFloat("HR_cost");
                 MonthOtherCost += rs.getFloat("Other_cost");
             }
+            MonthRepProf = MonthRepRev - MonthRepCost;
+            MonthSalesProf = MonthSalesRev - MonthSalesCost;
+            MonthDisProf = MonthDisRev - MonthDisCost;
+            
             rs = s.executeQuery("SELECT Salary FROM monthlysal WHERE Month='"+getMonth()+"'");
             while(rs.next())
                 MonthHRCost += rs.getFloat("Salary");
@@ -248,17 +252,17 @@ public class FinancialSystem extends JFrame {
         {
             Statement s = conn.createStatement();
             String title, message;
-            s.execute("SELECT * FROM Financial_Reports WHERE Month_issued='"+month+"' AND Year_issued="+year);
+            s.execute("SELECT * FROM financial_reports WHERE Month_issued='"+month+"' AND Year_issued="+year);
             if(s.getResultSet().next())
             {
-                s.execute("UPDATE Financial_Reports SET Total_revenue="+MonthTotRev+", Total_costs="+MonthTotCost+", Total_profit="+MonthTotProf
+                s.execute("UPDATE financial_reports SET Total_revenue="+MonthTotRev+", Total_costs="+MonthTotCost+", Total_profit="+MonthTotProf
                         +" WHERE Month_issued='"+month+"' AND Year_issued="+year);
                 title = "Update successful";
                 message = "The financial report for the current month and year has been updated.";
             }
             else
             {
-                s.execute("INSERT INTO Financial_Reports VALUES('"+month+"',"+year+","+MonthTotRev+","+MonthTotCost+","+MonthTotProf+")");
+                s.execute("INSERT INTO financial_reports VALUES('"+month+"',"+year+","+MonthTotRev+","+MonthTotCost+","+MonthTotProf+")");
                 title = "Insertion successful";
                 message = "The financial report for the current month and year has been inserted.";
             }
@@ -273,6 +277,7 @@ public class FinancialSystem extends JFrame {
         {
             JOptionPane.showMessageDialog(this, "An error occurred while writing the financial report to the database.",
                     "Error", JOptionPane.ERROR_MESSAGE);
+            se.printStackTrace();
         }
     }
     /**
