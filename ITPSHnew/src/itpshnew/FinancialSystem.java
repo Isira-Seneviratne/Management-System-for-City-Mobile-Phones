@@ -188,7 +188,6 @@ public class FinancialSystem extends JFrame {
         {
             JOptionPane.showMessageDialog(this, "There was an error while retrieving financial values to calculate results.",
                     "Error", JOptionPane.ERROR_MESSAGE);
-            se.printStackTrace();
         }
     }
     
@@ -227,7 +226,7 @@ public class FinancialSystem extends JFrame {
         }
         catch(NumberFormatException e)
         {
-            JOptionPane.showMessageDialog(this, "You have attempted to store blank or invalid numbers. Please enter valid numbers.",
+            JOptionPane.showMessageDialog(this, "You have attempted to store one or more blank or invalid numbers. Please enter valid numbers.",
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -1513,10 +1512,10 @@ public class FinancialSystem extends JFrame {
             TodayTotCost = TodayRepCost + TodaySalesCost + TodayDisCost + TodayHRCost + TodayOtherCost;
             TodayTotProf = TodayTotRev - TodayTotCost;
             Statement s = conn.createStatement();
-            s.execute("SELECT 1 FROM Daily_Finances WHERE Day="+getDay()+" AND Month='"+getMonth()+"' AND Year="+getYear());
+            s.execute("SELECT 1 FROM daily_finances WHERE Day="+getDay()+" AND Month='"+getMonth()+"' AND Year="+getYear());
             if(s.getResultSet().next())
             {
-                s.execute("UPDATE Daily_Finances SET Rep_inc="+TodayRepRev+", Rep_cost="+TodayRepCost
+                s.execute("UPDATE daily_finances SET Rep_inc="+TodayRepRev+", Rep_cost="+TodayRepCost
                 +", Rep_prof="+TodayRepProf+", Sales_inc="+TodaySalesRev+", Sales_cost="+TodaySalesCost
                 +", Sales_prof="+TodaySalesCost+", Dis_inc="+TodayDisRev+", Dis_cost="+TodayDisCost
                 +", Dis_prof="+TodayDisProf+", HR_cost="+TodayHRCost
@@ -1527,7 +1526,7 @@ public class FinancialSystem extends JFrame {
             }
             else
             {
-                s.execute("INSERT INTO Daily_Finances VALUES("+getDay()+", '"+getMonth()+"', "+getYear()+", "
+                s.execute("INSERT INTO daily_finances VALUES("+getDay()+", '"+getMonth()+"', "+getYear()+", "
                 +TodayRepRev+", "+TodayRepCost+", "+TodayRepProf+", "+TodaySalesRev+", "+TodaySalesCost+", "+TodaySalesProf
                 +", "+TodayDisRev+", "+TodayDisCost+", "+TodayDisProf+", "+TodayHRCost+", "+TodayOtherCost
                 +", "+TodayTotRev+", "+TodayTotCost+", "+TodayTotProf+")");
