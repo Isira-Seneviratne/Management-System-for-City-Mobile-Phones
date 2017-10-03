@@ -31,18 +31,19 @@ public class FinancialSystem extends JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setPreferredSize(new java.awt.Dimension(0, 0));
+        setMinimumSize(new java.awt.Dimension(1100, 600));
+        setPreferredSize(new java.awt.Dimension(1100, 600));
         setRequestFocusEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1170, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 462, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -72,7 +73,6 @@ public class FinancialSystem extends JPanel {
     {
         return Calendar.getInstance().get(Calendar.MONTH)+1;
     }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

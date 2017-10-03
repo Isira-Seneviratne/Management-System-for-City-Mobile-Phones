@@ -66,6 +66,8 @@ public class TodayFinancialSystem extends FinancialSystem {
         other_costs = new javax.swing.JTextField();
         updateToday = new javax.swing.JButton();
 
+        setPreferredSize(new java.awt.Dimension(1100, 400));
+
         today_pan.setBackground(new java.awt.Color(202, 254, 227));
         today_pan.setPreferredSize(new java.awt.Dimension(1076, 718));
         today_pan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -364,7 +366,7 @@ public class TodayFinancialSystem extends FinancialSystem {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 2, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(today_pan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents

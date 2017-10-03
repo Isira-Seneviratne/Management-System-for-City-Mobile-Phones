@@ -10,16 +10,13 @@ import java.io.IOException;
 import static java.lang.Thread.sleep;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 /**
  *
  * @author Thareendra
  */
-public class home extends javax.swing.JFrame {
+public class home extends JFrame {
 
     /**
      * Creates new form home
@@ -35,6 +32,7 @@ public class home extends javax.swing.JFrame {
         
         initComponents();
         tfs = new TodayFinancialSystem();
+        add(tfs);
         tfs.setLocation(100,100);
         tfs.setVisible(false);
         

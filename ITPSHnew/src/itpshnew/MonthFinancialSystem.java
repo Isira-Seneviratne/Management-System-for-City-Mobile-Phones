@@ -74,6 +74,7 @@ public class MonthFinancialSystem extends FinancialSystem {
         jButton4 = new javax.swing.JButton();
 
         setMinimumSize(new java.awt.Dimension(1070, 450));
+        setPreferredSize(new java.awt.Dimension(1100, 700));
 
         month_pan.setBackground(new java.awt.Color(202, 254, 227));
         month_pan.setMinimumSize(new java.awt.Dimension(1060, 710));
@@ -437,10 +438,10 @@ public class MonthFinancialSystem extends FinancialSystem {
         try
         {
             Statement s = conn.createStatement();
-            s.execute("SELECT 1 FROM Financial_Reports WHERE Month_issued='"+month+"' AND Year_issued="+year);
+            s.execute("SELECT 1 FROM financial_reports WHERE Month_issued='"+month+"' AND Year_issued="+year);
             if(s.getResultSet().next())
             {
-                ResultSet rs = s.executeQuery("SELECT * FROM Financial_Reports WHERE Month_issued='"+month+"' AND Year_issued="+year);
+                ResultSet rs = s.executeQuery("SELECT * FROM financial_reports WHERE Month_issued='"+month+"' AND Year_issued="+year);
                 rs.next();
                 double s_totrev = rs.getDouble("Total_revenue"), s_totcost = rs.getDouble("Total_costs"), s_totprof = rs.getDouble("Total_profit");
                 JOptionPane.showMessageDialog(this, "<html><b>Financial values for "+month+" "+year+"</b></html>\n\nTotal income: "
@@ -568,17 +569,17 @@ public class MonthFinancialSystem extends FinancialSystem {
         {
             Statement s = conn.createStatement();
             String title, message;
-            s.execute("SELECT * FROM Financial_Reports WHERE Month_issued='"+month+"' AND Year_issued="+year);
+            s.execute("SELECT * FROM financial_reports WHERE Month_issued='"+month+"' AND Year_issued="+year);
             if(s.getResultSet().next())
             {
-                s.execute("UPDATE Financial_Reports SET Total_revenue="+TotRev+", Total_costs="+TotCost+", Total_profit="+TotProf
+                s.execute("UPDATE financial_reports SET Total_revenue="+TotRev+", Total_costs="+TotCost+", Total_profit="+TotProf
                         +" WHERE Month_issued='"+month+"' AND Year_issued="+year);
                 title = "Update successful";
                 message = "The financial report for the current month and year has been updated.";
             }
             else
             {
-                s.execute("INSERT INTO Financial_Reports VALUES('"+month+"',"+year+","+TotRev+","+TotCost+","+TotProf+")");
+                s.execute("INSERT INTO financial_reports VALUES('"+month+"',"+year+","+TotRev+","+TotCost+","+TotProf+")");
                 title = "Insertion successful";
                 message = "The financial report for the current month and year has been inserted.";
             }
