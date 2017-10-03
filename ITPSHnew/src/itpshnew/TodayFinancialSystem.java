@@ -19,7 +19,7 @@ public class TodayFinancialSystem extends FinancialSystem {
      */
     public TodayFinancialSystem() {
         conn = dbCon.connect();
-        initComponents();
+        this.initComponents();
         initToday();
     }
 

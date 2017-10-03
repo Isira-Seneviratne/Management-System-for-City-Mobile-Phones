@@ -19,7 +19,7 @@ public class FinancialSystem extends JPanel {
             TotCost = 0, TotProf = 0, TotRev = 0;
     
     public FinancialSystem() {
-        initComponents();
+        
     }
 
     /**
