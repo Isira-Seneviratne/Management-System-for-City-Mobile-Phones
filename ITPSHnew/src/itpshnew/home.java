@@ -5,6 +5,7 @@
  */
 package itpshnew;
 
+import java.awt.BorderLayout;
 import java.io.IOException;
 import static java.lang.Thread.sleep;
 import java.text.SimpleDateFormat;
@@ -23,6 +24,8 @@ public class home extends javax.swing.JFrame {
     /**
      * Creates new form home
      */
+    private TodayFinancialSystem tfs;
+    
     public home() {
         
         this.setUndecorated(true);
@@ -31,6 +34,9 @@ public class home extends javax.swing.JFrame {
         //this.setVisible(true);
         
         initComponents();
+        tfs = new TodayFinancialSystem();
+        tfs.setLocation(100,100);
+        tfs.setVisible(false);
         
         //new JScrollPane(jTable1, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         //jTable1.setAutoResizeMode(jTable1.AUTO_RESIZE_OFF);
@@ -323,7 +329,7 @@ public class home extends javax.swing.JFrame {
     }//GEN-LAST:event_minimizeMouseClicked
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
-        new FinancialSystem().setVisible(true);
+        tfs.setVisible(true);
     }//GEN-LAST:event_jLabel10MouseClicked
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
@@ -342,9 +348,9 @@ public class home extends javax.swing.JFrame {
         try
         {
             if(System.getProperty("os.name").equals("Linux"))
-                Runtime.getRuntime().exec(new String[]{"google-chrome-stable", "localhost/web/"});
-            else if(System.getProperty("os.name").equals("Windows 10"))
-                Runtime.getRuntime().exec(new String[]{"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe", "localhost/web/"});
+                Runtime.getRuntime().exec("google-chrome-stable");
+            else if(System.getProperty("os.name").equals("Windows"))
+                Runtime.getRuntime().exec("chrome.exe");
         }
         catch(IOException e)
         {

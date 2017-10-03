@@ -6,9 +6,12 @@
 package itpshnew;
 
 
-import java.sql.*;
+import java.awt.Window;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 import sales_package.customer_class;
+import sales_package.dbconnect;
 
 /**
  *
@@ -19,22 +22,7 @@ public class newcus extends javax.swing.JFrame {
     Connection con = null;
     PreparedStatement pst = null;
 
-    private void dbConnect()
-    {
-        try
-        {
-            Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbcitymobile?verifyServerCertificate=false&useSSL=true", "root", "abcd1234");
-        }
-        catch(ClassNotFoundException ce)
-        {
-            JOptionPane.showMessageDialog(this, "Unable to load the database driver.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        catch(SQLException se)
-        {
-            JOptionPane.showMessageDialog(this, "Unable to connect to the database.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
+    
     
     public newcus() {
         this.setUndecorated(true);
@@ -43,7 +31,7 @@ public class newcus extends javax.swing.JFrame {
         this.setVisible(true);
         initComponents();
         
-        dbConnect();
+        con = dbconnect.connect();
         customer_class c1 = new customer_class();         //set cus id
         cusid_box.setText(c1.cus_num());
         
