@@ -13,7 +13,8 @@ public class dbCon {
     public static Connection connect()
     {
         Connection conn = null;
-        try{
+        try
+        {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbcitymobile","root","abcd1234");
         }
