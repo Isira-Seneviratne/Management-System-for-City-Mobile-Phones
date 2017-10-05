@@ -19,8 +19,6 @@ public class TodayFinancialSystem extends FinancialSystem {
      */
     public TodayFinancialSystem() {
         conn = dbCon.connect();
-        this.initComponents();
-        initToday();
     }
 
     /**
@@ -30,7 +28,7 @@ public class TodayFinancialSystem extends FinancialSystem {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    public void initComponents() {
+    private void initComponents() {
 
         today_pan = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -371,6 +369,13 @@ public class TodayFinancialSystem extends FinancialSystem {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    @Override
+    public void pubInit()
+    {
+        initComponents();
+        initToday();
+    }
+    
     private void initToday()
     {
         try

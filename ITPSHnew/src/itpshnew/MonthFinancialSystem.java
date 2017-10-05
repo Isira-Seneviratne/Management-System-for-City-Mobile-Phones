@@ -20,7 +20,12 @@ public class MonthFinancialSystem extends FinancialSystem {
     public MonthFinancialSystem() {
         initComponents();
     }
-
+    
+    @Override
+    public void pubInit()
+    {
+        initComponents();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,7 +33,7 @@ public class MonthFinancialSystem extends FinancialSystem {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    public void initComponents() {
+    private void initComponents() {
 
         month_pan = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();

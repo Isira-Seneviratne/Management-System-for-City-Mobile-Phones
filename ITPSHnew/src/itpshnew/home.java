@@ -325,11 +325,11 @@ public class home extends JFrame {
     }//GEN-LAST:event_minimizeMouseClicked
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
-        /*tfs.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        tfs.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         add(tfs, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 1000, 600));
-        tfs.initComponents();
+        tfs.pubInit();
         tfs.setFocusable(true);
-        tfs.setVisible(true);*/
+        tfs.setVisible(true);
     }//GEN-LAST:event_jLabel10MouseClicked
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
