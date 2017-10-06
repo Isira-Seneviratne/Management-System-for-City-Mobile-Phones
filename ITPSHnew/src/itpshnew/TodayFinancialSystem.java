@@ -442,10 +442,10 @@ public class TodayFinancialSystem extends FinancialSystem {
             TotCost = RepCost + SalesCost + DisCost + HRCost + OtherCost;
             TotProf = TotRev - TotCost;
             Statement s = conn.createStatement();
-            s.execute("SELECT 1 FROM Daily_Finances WHERE Day="+getDay()+" AND Month='"+getMonth()+"' AND Year="+getYear());
+            s.execute("SELECT 1 FROM daily_finances WHERE Day="+getDay()+" AND Month='"+getMonth()+"' AND Year="+getYear());
             if(s.getResultSet().next())
             {
-                s.execute("UPDATE Daily_Finances SET Rep_inc="+RepRev+", Rep_cost="+RepCost
+                s.execute("UPDATE daily_finances SET Rep_inc="+RepRev+", Rep_cost="+RepCost
                     +", Rep_prof="+RepProf+", Sales_inc="+SalesRev+", Sales_cost="+SalesCost
                     +", Sales_prof="+SalesCost+", Dis_inc="+DisRev+", Dis_cost="+DisCost
                     +", Dis_prof="+DisProf+", HR_cost="+HRCost
@@ -456,7 +456,7 @@ public class TodayFinancialSystem extends FinancialSystem {
             }
             else
             {
-                s.execute("INSERT INTO Daily_Finances VALUES("+getDay()+", '"+getMonth()+"', "+getYear()+", "
+                s.execute("INSERT INTO daily_finances VALUES("+getDay()+", '"+getMonth()+"', "+getYear()+", "
                     +RepRev+", "+RepCost+", "+RepProf+", "+SalesRev+", "+SalesCost+", "+SalesProf
                     +", "+DisRev+", "+DisCost+", "+DisProf+", "+HRCost+", "+OtherCost
                     +", "+TotRev+", "+TotCost+", "+TotProf+")");
@@ -472,6 +472,7 @@ public class TodayFinancialSystem extends FinancialSystem {
         catch(SQLException se)
         {
             JOptionPane.showMessageDialog(this, "Unable to insert/update record for "+getDate()+" to database.", "Error", JOptionPane.ERROR_MESSAGE);
+            se.printStackTrace();
         }
     }//GEN-LAST:event_updateTodayActionPerformed
 

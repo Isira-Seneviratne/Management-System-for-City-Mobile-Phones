@@ -18,7 +18,7 @@ public class MonthFinancialSystem extends FinancialSystem {
      * Creates new form MonthFinancialSystem
      */
     public MonthFinancialSystem() {
-        initComponents();
+        conn = dbCon.connect();
     }
     
     @Override
@@ -466,6 +466,11 @@ public class MonthFinancialSystem extends FinancialSystem {
 
     private void calculateResults()
     {
+        RepRev = RepCost = RepProf = 0;
+        SalesRev = SalesCost = SalesProf = 0;
+        DisRev = DisCost = DisProf = 0;
+        HRCost = OtherCost = 0;
+        TotRev = TotCost = TotProf = 0;
         try
         {
             Statement s = conn.createStatement();
@@ -506,12 +511,6 @@ public class MonthFinancialSystem extends FinancialSystem {
             tot_rev1.setText(Float.toString(TotRev).replaceAll("\\.0*$", ""));
             tot_cost1.setText(Float.toString(TotCost).replaceAll("\\.0*$", ""));
             tot_prof1.setText(Float.toString(TotProf).replaceAll("\\.0*$", ""));
-            
-            RepRev = RepCost = RepProf = 0;
-            SalesRev = SalesCost = SalesProf = 0;
-            DisRev = DisCost = DisProf = 0;
-            HRCost = OtherCost = 0;
-            TotRev = TotCost = TotProf = 0;
         }
         catch(SQLException se)
         {
@@ -619,7 +618,7 @@ public class MonthFinancialSystem extends FinancialSystem {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        clear();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void clear()
@@ -634,6 +633,9 @@ public class MonthFinancialSystem extends FinancialSystem {
         dis_cost1.setText("");
         dis_prof1.setText("");
         hr_cost1.setText("");
+        tot_rev1.setText("");
+        tot_cost1.setText("");
+        tot_prof1.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

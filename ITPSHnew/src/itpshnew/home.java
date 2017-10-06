@@ -5,7 +5,6 @@
  */
 package itpshnew;
 
-import java.awt.BorderLayout;
 import java.io.IOException;
 import static java.lang.Thread.sleep;
 import java.text.SimpleDateFormat;
@@ -22,6 +21,7 @@ public class home extends JFrame {
      * Creates new form home
      */
     private TodayFinancialSystem tfs;
+    private MonthFinancialSystem mfs;
     
     public home() {
         
@@ -33,6 +33,8 @@ public class home extends JFrame {
         initComponents();
         tfs = new TodayFinancialSystem();
         tfs.setVisible(false);
+        mfs = new MonthFinancialSystem();
+        mfs.setVisible(false);
         
         //new JScrollPane(jTable1, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         //jTable1.setAutoResizeMode(jTable1.AUTO_RESIZE_OFF);
@@ -325,11 +327,11 @@ public class home extends JFrame {
     }//GEN-LAST:event_minimizeMouseClicked
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
-        tfs.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        add(tfs, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 1000, 600));
-        tfs.pubInit();
-        tfs.setFocusable(true);
-        tfs.setVisible(true);
+        mfs.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(mfs, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 1000, 600));
+        mfs.pubInit();
+        mfs.setFocusable(true);
+        mfs.setVisible(true);
     }//GEN-LAST:event_jLabel10MouseClicked
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
