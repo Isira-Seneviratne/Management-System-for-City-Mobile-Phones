@@ -7,7 +7,7 @@ package itpshnew;
 
 import java.sql.*;
 import javax.swing.JOptionPane;
-
+import net.sf.jasperreports.engine.*;
 /**
  *
  * @author isira
