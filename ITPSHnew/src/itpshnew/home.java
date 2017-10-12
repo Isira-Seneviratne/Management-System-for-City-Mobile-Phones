@@ -9,20 +9,20 @@ import java.io.IOException;
 import static java.lang.Thread.sleep;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 /**
  *
  * @author Thareendra
  */
-public class home extends javax.swing.JFrame {
+public class home extends JFrame {
 
     /**
      * Creates new form home
      */
+    private TodayFinancialSystem tfs;
+    private MonthFinancialSystem mfs;
+    
     public home() {
         
         this.setUndecorated(true);
@@ -31,6 +31,10 @@ public class home extends javax.swing.JFrame {
         //this.setVisible(true);
         
         initComponents();
+        tfs = new TodayFinancialSystem();
+        tfs.setVisible(false);
+        mfs = new MonthFinancialSystem();
+        mfs.setVisible(false);
         
         //new JScrollPane(jTable1, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         //jTable1.setAutoResizeMode(jTable1.AUTO_RESIZE_OFF);
@@ -323,7 +327,11 @@ public class home extends javax.swing.JFrame {
     }//GEN-LAST:event_minimizeMouseClicked
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
-        new FinancialSystem().setVisible(true);
+        mfs.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(mfs, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 1000, 600));
+        mfs.pubInit();
+        mfs.setFocusable(true);
+        mfs.setVisible(true);
     }//GEN-LAST:event_jLabel10MouseClicked
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
@@ -342,9 +350,9 @@ public class home extends javax.swing.JFrame {
         try
         {
             if(System.getProperty("os.name").equals("Linux"))
-                Runtime.getRuntime().exec(new String[]{"google-chrome-stable", "localhost/web/"});
-            else if(System.getProperty("os.name").equals("Windows 10"))
-                Runtime.getRuntime().exec(new String[]{"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe", "localhost/web/"});
+                Runtime.getRuntime().exec("google-chrome-stable");
+            else if(System.getProperty("os.name").equals("Windows"))
+                Runtime.getRuntime().exec("chrome.exe");
         }
         catch(IOException e)
         {

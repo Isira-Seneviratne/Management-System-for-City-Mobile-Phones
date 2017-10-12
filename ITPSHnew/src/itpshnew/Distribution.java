@@ -10,10 +10,19 @@ import java.awt.Color;
 import static java.lang.Thread.sleep;
 import java.sql.*;
 import java.text.SimpleDateFormat;
+import javafx.scene.control.Alert;
 import java.util.*;
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
-
+import sales_package.dbconnect;
+/**
+ *
+ * @author Thareendra
+ */
 
 
 public class Distribution extends javax.swing.JFrame {
@@ -48,14 +57,19 @@ public class Distribution extends javax.swing.JFrame {
         TimerThread timer = new TimerThread(time); // create timer object and set the time on time label
         timer.start();
         date.setText(getDate()); // call getdate method on date label
+
+        
+        con = dbconnect.connect();
+        
+        
+        
     }
-    
     private void dbConnect()
     {
         try
         {
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbcitymobile?verifyServerCertificate=false&useSSL=true", "root", "abcd1234");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ManagementSystem?verifyServerCertificate=false&useSSL=true", "root", "abcd1234");
         }
         catch(ClassNotFoundException ce)
         {
@@ -101,14 +115,13 @@ public class Distribution extends javax.swing.JFrame {
    }*/
    public void tableload()
     {
-        try {
+          try {
               String q = "select * FROM vendor";
               pst = con.prepareStatement(q);
          
               rs = pst.executeQuery();
               vendoradd_table.setModel(DbUtils.resultSetToTableModel(rs));
-        } 
-        catch (SQLException e1) {
+        } catch (Exception e1) {
         }
     }
 
@@ -713,17 +726,28 @@ public class Distribution extends javax.swing.JFrame {
         jLabel43.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel43.setText("Shipping Costs");
         jPanel9.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 150, 30));
+
+        jTextField40.setText("           ");
         jPanel9.add(jTextField40, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 220, 25));
+
+        jTextField50.setText("           ");
         jPanel9.add(jTextField50, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 220, 25));
+
+        jTextField29.setText("           ");
         jPanel9.add(jTextField29, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 220, 25));
+
+        jTextField30.setText("           ");
         jPanel9.add(jTextField30, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 220, 25));
 
+        jTextField31.setText("           ");
         jTextField31.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField31ActionPerformed(evt);
             }
         });
         jPanel9.add(jTextField31, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 220, 25));
+
+        jTextField32.setText("           ");
         jPanel9.add(jTextField32, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 220, 25));
 
         save_btn.setBackground(new java.awt.Color(31, 233, 133));
@@ -760,7 +784,11 @@ public class Distribution extends javax.swing.JFrame {
         jLabel44.setText("Vendor Name");
         jPanel10.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 110, 30));
 
+<<<<<<< HEAD
         jTextField33.setEditable(false);
+=======
+        jTextField33.setText("           ");
+>>>>>>> 45ea8291f8082ee8d60147b8fede1503af03a685
         jPanel10.add(jTextField33, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 220, 25));
 
         jLabel45.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -779,6 +807,7 @@ public class Distribution extends javax.swing.JFrame {
         jLabel48.setText("Shipping Costs");
         jPanel10.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 150, 30));
 
+<<<<<<< HEAD
         jTextField34.setEditable(false);
         jPanel10.add(jTextField34, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 220, 25));
 
@@ -786,6 +815,15 @@ public class Distribution extends javax.swing.JFrame {
         jPanel10.add(jTextField35, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 220, 25));
 
         jTextField36.setEditable(false);
+=======
+        jTextField34.setText("           ");
+        jPanel10.add(jTextField34, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 220, 25));
+
+        jTextField35.setText("           ");
+        jPanel10.add(jTextField35, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 220, 25));
+
+        jTextField36.setText("           ");
+>>>>>>> 45ea8291f8082ee8d60147b8fede1503af03a685
         jTextField36.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField36ActionPerformed(evt);
@@ -793,7 +831,11 @@ public class Distribution extends javax.swing.JFrame {
         });
         jPanel10.add(jTextField36, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, 220, 25));
 
+<<<<<<< HEAD
         jTextField37.setEditable(false);
+=======
+        jTextField37.setText("           ");
+>>>>>>> 45ea8291f8082ee8d60147b8fede1503af03a685
         jPanel10.add(jTextField37, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 220, 25));
 
         search.setBackground(new java.awt.Color(31, 233, 133));
@@ -820,6 +862,7 @@ public class Distribution extends javax.swing.JFrame {
         jLabel49.setText("Search ID");
         jPanel10.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 90, 40));
 
+        jTextField38.setText("           ");
         jTextField38.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField38ActionPerformed(evt);
@@ -1177,7 +1220,7 @@ public class Distribution extends javax.swing.JFrame {
     }//GEN-LAST:event_minimizeMouseClicked
 
     private void topic6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topic6MousePressed
-        FinancialSystem h1 = new FinancialSystem(); // go to FinancialSystem
+        TodayFinancialSystem h1 = new TodayFinancialSystem(); // go to TodayFinancialSystem
         h1.setVisible(true);
         this.setVisible(false);//dispose the current form 
     }//GEN-LAST:event_topic6MousePressed
@@ -1241,13 +1284,21 @@ public class Distribution extends javax.swing.JFrame {
         String shipcost = jTextField32.getText();
         
         Statement add_vendor = con.createStatement();
-        JOptionPane.showMessageDialog(this, "Inserted value to database.", "Success", JOptionPane.INFORMATION_MESSAGE);
-         add_vendor.execute("Insert into vendor values('"+VID+"','"+vName+"','"+address+"','"+email+"','"+phone+"','"+shipcost+"')");
+         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+         alert.setTitle("Success");
+         add_vendor.executeQuery("Insert into Vendor values('"+VID+"','"+vName+"','"+address+"','"+email+"','"+phone+"','"+shipcost+"')");
+         alert.setHeaderText("Insertion successful");
+         alert.setContentText("Vendor has been inserted.");
+         alert.getDialogPane().setPrefSize(400, 200);
+         alert.showAndWait();
         }
         catch(SQLException se)
         {
-            JOptionPane.showMessageDialog(this, "Unable to insert value to database.", "Error", JOptionPane.ERROR_MESSAGE);
-            se.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Database Insert Error");
+            alert.setContentText("Unable to Insert into DB");
+            alert.showAndWait();
         }
         catch(NumberFormatException e)
         {
@@ -1292,7 +1343,7 @@ public class Distribution extends javax.swing.JFrame {
         }
         catch(SQLException se)
         {
-            JOptionPane.showMessageDialog(this, "An error occurred while searching.",
+            JOptionPane.showMessageDialog(this, "An error occurred while writing the financial report to the database.",
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
         tableload();
@@ -1315,27 +1366,34 @@ public class Distribution extends javax.swing.JFrame {
     private void edit_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edit_btnActionPerformed
         if(con == null)
             dbConnect();
-        try
-        {
-            String VID = jTextField38.getText();
-            String vName = jTextField33.getText();
-            String address = jTextField34.getText();
-            String email = jTextField35.getText();
-            String phone = jTextField36.getText();
-            String shipcost = jTextField37.getText();
-
-            Statement add_vendor = con.createStatement();
-            add_vendor.execute("update Vendor set vName='"+vName+"',address='"+address+"',email='"+email+"',"
-                     + "phone='"+phone+"',shipcost='"+shipcost+"' where VID='"+VID+"'");
-            JOptionPane.showMessageDialog(this, "Vendor has been updated.", "Update successful", JOptionPane.INFORMATION_MESSAGE);
+        try{
+        String VID = jTextField38.getText();
+        String vName = jTextField33.getText();
+        String address = jTextField34.getText();
+        String email = jTextField35.getText();
+        String phone = jTextField36.getText();
+        String shipcost = jTextField37.getText();
+        
+        Statement add_vendor = con.createStatement();
+         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+         alert.setTitle("Success");
+         add_vendor.execute("update Vendor set vName='"+vName+"',address='"+address+"',email='"+email+"',"
+                 + "phone='"+phone+"',shipcost='"+shipcost+"' where VID='"+VID+"'");
+         alert.setHeaderText("Insertion successful");
+         alert.setContentText("Vendor has been updated.");
+         alert.getDialogPane().setPrefSize(400, 200);
+         alert.showAndWait();
         }
         catch(SQLException se)
         {
-            JOptionPane.showMessageDialog(this, "Unable to update database", "Database Update Error", JOptionPane.ERROR_MESSAGE);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Database Insert Error");
+            alert.setContentText("Unable to Insert into DB");
+            alert.showAndWait();
         }
         catch(NumberFormatException e)
         {
-            
             JOptionPane.showMessageDialog(this, "You have attempted to store blank or invalid numbers. Please enter valid numbers.",
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -1358,15 +1416,29 @@ public class Distribution extends javax.swing.JFrame {
         if(validate_vendor.executeQuery("select 1 from vendor where Vendor_ID = '"+VID+"'").next())
         {
         Statement add_vendorrec = con.createStatement();
+<<<<<<< HEAD
         add_vendorrec.executeQuery("Insert into shipping_rec values('"+SID+"','"+VID+"',,'"
                 +modelCode+"','"+qty+"','"+shipcost+"','"+itemcost+"','"
                 +type+"',"+getDay()+",'"+getMonth()+"',"+getYear()+")");
         JOptionPane.showMessageDialog(this, "The vendor shipping record has been inserted.", "Success", JOptionPane.INFORMATION_MESSAGE);
+=======
+         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+         alert.setTitle("Success");
+         add_vendorrec.executeQuery("Insert into Ship_Rec values('"+SID+"','"+VID+"','"+recdate+"','"+modelCode+"','"+qty+"','"+shipcost+"','"+itemcost+"','"+type+"')");
+         alert.setHeaderText("Insertion successful");
+         alert.setContentText("The vendor shipping record has been inserted.");
+         alert.getDialogPane().setPrefSize(400, 200);
+         alert.showAndWait();
+>>>>>>> 45ea8291f8082ee8d60147b8fede1503af03a685
         }
         }
         catch(SQLException se)
         {
-            JOptionPane.showMessageDialog(this, "Unable to insert into database.", "Error", JOptionPane.ERROR_MESSAGE);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Database Insert Error");
+            alert.setContentText("Unable to Insert into DB");
+            alert.showAndWait();
         }
         catch(NumberFormatException e)
         {
@@ -1408,7 +1480,11 @@ public class Distribution extends javax.swing.JFrame {
         }
         catch(SQLException se)
         {
-            JOptionPane.showMessageDialog(this, "Unable to retrieve values from database.", "Error", JOptionPane.ERROR_MESSAGE);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Database Retrieve Error");
+            alert.setContentText("Unable to Retrieve into DB");
+            alert.showAndWait();
         }
         catch(NumberFormatException e)
         {
@@ -1421,23 +1497,31 @@ public class Distribution extends javax.swing.JFrame {
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         if(con == null)
             dbConnect();
-        try
-        {
-            String SID = jTextField54.getText();
-            String RID = jTextField48.getText();
-            String recdate = jTextField49.getText();
-            String modelCode = jTextField51.getText();
-            String qty = jTextField52.getText();
-            String itemcost = jTextField53.getText();
-            String type = "Retail"; 
-
-            Statement add_vendorrec = con.createStatement();
-            add_vendorrec.executeQuery("Insert into shipping_rec values('"+SID+"','"+RID+"','"+recdate+"','"+modelCode+"','"+qty+"','"+itemcost+"','"+type+"')");
-            JOptionPane.showMessageDialog(this, "The retail shipping record has been inserted.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        try{
+        String SID = jTextField54.getText();
+        String RID = jTextField48.getText();
+        String recdate = jTextField49.getText();
+        String modelCode = jTextField51.getText();
+        String qty = jTextField52.getText();
+        String itemcost = jTextField53.getText();
+        String type = "Retail"; 
+        
+        Statement add_vendorrec = con.createStatement();
+         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+         alert.setTitle("Success");
+         add_vendorrec.executeQuery("Insert into Ship_Rec values('"+SID+"','"+RID+"','"+recdate+"','"+modelCode+"','"+qty+"','"+itemcost+"','"+type+"')");
+         alert.setHeaderText("Insertion successful");
+         alert.setContentText("The retail shipping record has been inserted.");
+         alert.getDialogPane().setPrefSize(400, 200);
+         alert.showAndWait();
         }
         catch(SQLException se)
         {
-            JOptionPane.showMessageDialog(this, "Unable to insert into database.", "Error", JOptionPane.ERROR_MESSAGE);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Database Insert Error");
+            alert.setContentText("Unable to Insert into DB");
+            alert.showAndWait();
         }
         catch(NumberFormatException e)
         {
@@ -1467,7 +1551,11 @@ public class Distribution extends javax.swing.JFrame {
         }
         catch(SQLException se)
         {
-            JOptionPane.showMessageDialog(this, "Unable to retrieve values from database.", "Error", JOptionPane.ERROR_MESSAGE);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Database Retrieve Error");
+            alert.setContentText("Unable to Retrieve into DB");
+            alert.showAndWait();
         }
         catch(NumberFormatException e)
         {
@@ -1548,47 +1636,6 @@ public class Distribution extends javax.swing.JFrame {
             }
         });
     }
-
-    
-    public class TimerThread extends Thread
-    {
-        private JLabel time;
-        private boolean running;
-        private SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
-        
-        public TimerThread(JLabel time)
-        {
-            this.time = time;
-            running = true;
-        }
-        
-        public void setRunning(boolean running)
-        {
-            this.running = running;
-        }
-        
-        public void run()
-        {
-            while(running)
-            {
-                SwingUtilities.invokeLater(new Runnable()
-                {
-                    public void run()
-                    {
-                        time.setText(timeFormat.format(Calendar.getInstance().getTime()));
-                    }
-                });
-                try
-                {
-                    sleep(1000);
-                }
-                catch(InterruptedException e){
-                
-                    JOptionPane.showMessageDialog(null, "There was an issue with the time system.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        }
-    }
     
     private String getDate()
     {
@@ -1596,20 +1643,10 @@ public class Distribution extends javax.swing.JFrame {
         return cal.get(Calendar.DATE)+" "+getMonth()+" "+cal.get(Calendar.YEAR);
     }
     
-    private int getDay()
-    {
-        return Calendar.getInstance().get(Calendar.DATE);
-    }
-    
     private static String getMonth()
     {
         String months[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         return months[Calendar.getInstance().get(Calendar.MONTH)];
-    }
-    
-    private int getYear()
-    {
-        return Calendar.getInstance().get(Calendar.YEAR);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -6,9 +6,12 @@
 package itpshnew;
 
 
-import java.sql.*;
+import java.awt.Window;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 import sales_package.customer_class;
+import sales_package.dbconnect;
 
 /**
  *
@@ -19,22 +22,7 @@ public class newcus extends javax.swing.JFrame {
     Connection con = null;
     PreparedStatement pst = null;
 
-    private void dbConnect()
-    {
-        try
-        {
-            Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbcitymobile?verifyServerCertificate=false&useSSL=true", "root", "abcd1234");
-        }
-        catch(ClassNotFoundException ce)
-        {
-            JOptionPane.showMessageDialog(this, "Unable to load the database driver.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        catch(SQLException se)
-        {
-            JOptionPane.showMessageDialog(this, "Unable to connect to the database.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
+    
     
     public newcus() {
         this.setUndecorated(true);
@@ -43,7 +31,7 @@ public class newcus extends javax.swing.JFrame {
         this.setVisible(true);
         initComponents();
         
-        dbConnect();
+        con = dbconnect.connect();
         customer_class c1 = new customer_class();         //set cus id
         cusid_box.setText(c1.cus_num());
         
@@ -288,13 +276,6 @@ public class newcus extends javax.swing.JFrame {
         
         //com.sun.awt.AWTUtilities.setWindowOpacity(p1, 1);  //reset main frame opacity
         p1.setVisible(true);
-        blur_frame bf1 = new blur_frame();
-        bf1.dispose();
-        
-        
-        
-        
-        
     }//GEN-LAST:event_save_btnActionPerformed
 
     private void cancel_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_btnActionPerformed
@@ -303,10 +284,6 @@ public class newcus extends javax.swing.JFrame {
         //p1.setOpacity(1f);
         //com.sun.awt.AWTUtilities.setWindowOpacity(p1, 1);//reset main frame opacity
         p1.setVisible(true);
-        blur_frame bf1 = new blur_frame();
-        bf1.dispose();
-        
-       
     }//GEN-LAST:event_cancel_btnActionPerformed
 
     private void cancel_lblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancel_lblMouseClicked
@@ -316,8 +293,6 @@ public class newcus extends javax.swing.JFrame {
         
         //com.sun.awt.AWTUtilities.setWindowOpacity(p1, 1);//reset main frame opacity
         p1.setVisible(true);
-        blur_frame bf1 = new blur_frame();
-        bf1.dispose();
     }//GEN-LAST:event_cancel_lblMouseClicked
 
     private void male_rbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_male_rbtnActionPerformed

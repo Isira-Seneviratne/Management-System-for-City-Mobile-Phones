@@ -224,8 +224,6 @@ public class searchcus extends javax.swing.JFrame {
         this.dispose();//close only current window
         purchase p1 = new purchase();
         //com.sun.awt.AWTUtilities.setWindowOpacity(p1, 1f);//reset main frame opacity
-        blur_frame bf1 = new blur_frame();
-        bf1.setVisible(false);
         p1.setVisible(true);
         
     }//GEN-LAST:event_save_btnActionPerformed
@@ -235,8 +233,6 @@ public class searchcus extends javax.swing.JFrame {
         purchase p1 = new purchase();
         
         //com.sun.awt.AWTUtilities.setWindowOpacity(p1, 1f);//reset main frame opacity
-        blur_frame bf1 = new blur_frame();
-        bf1.setVisible(false);
         p1.setVisible(true);
        
     }//GEN-LAST:event_cancel_btnActionPerformed
@@ -245,8 +241,6 @@ public class searchcus extends javax.swing.JFrame {
         this.dispose();//close only current window
         purchase p1 = new purchase();
         //com.sun.awt.AWTUtilities.setWindowOpacity(p1,1f);//reset main frame opacity
-        blur_frame bf1 = new blur_frame();
-        bf1.setVisible(false);
         p1.setVisible(true);
         
     }//GEN-LAST:event_close_lblMouseClicked

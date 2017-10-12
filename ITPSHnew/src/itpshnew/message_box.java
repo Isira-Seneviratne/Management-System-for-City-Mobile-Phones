@@ -88,16 +88,12 @@ public class message_box extends javax.swing.JFrame {
         this.dispose();//close only current window
         purchase p1 = new purchase();
         p1.setVisible(true);
-        blur_frame bf1 = new blur_frame();
-        bf1.dispose();
     }//GEN-LAST:event_cancel_lblMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();//close only current window
         purchase p1 = new purchase();
         p1.setVisible(true);
-        blur_frame bf1 = new blur_frame();
-        bf1.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
