@@ -5,12 +5,8 @@
  */
 package itpshnew;
 
-import static java.lang.Thread.sleep;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.SwingUtilities;
 
 /**
  *
@@ -450,19 +446,6 @@ public class stock extends javax.swing.JFrame {
             }
         });
     }
-    
-    private String getDate()
-    {
-        Calendar cal = Calendar.getInstance();
-        return cal.get(Calendar.DATE)+" "+getMonth()+" "+cal.get(Calendar.YEAR);
-    }
-    
-    private static String getMonth()
-    {
-        String months[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-        return months[Calendar.getInstance().get(Calendar.MONTH)];
-    }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bar1;
     private javax.swing.JPanel bar2;

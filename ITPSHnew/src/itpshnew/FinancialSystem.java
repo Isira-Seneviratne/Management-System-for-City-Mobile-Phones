@@ -44,32 +44,6 @@ public abstract class FinancialSystem extends JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    protected int getDay()
-    {
-        return Calendar.getInstance().get(Calendar.DATE);
-    }
-    
-    protected String getMonth()
-    {
-        return new String[]{"January", "February", "March",
-            "April", "May", "June", "July", "August", "September",
-            "October", "November", "December"}[Calendar.getInstance().get(Calendar.MONTH)];
-    }
-
-    protected int getYear()
-    {
-        return Calendar.getInstance().get(Calendar.YEAR);
-    }
-    
-    protected String getDate()
-    {
-        return getDay()+" "+getMonth()+" "+getYear();
-    }
-    
-    protected int getMonthVal()
-    {
-        return Calendar.getInstance().get(Calendar.MONTH)+1;
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

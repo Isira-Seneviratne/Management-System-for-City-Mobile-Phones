@@ -475,7 +475,8 @@ public class MonthFinancialSystem extends FinancialSystem {
         try
         {
             Statement s = conn.createStatement();
-            ResultSet rs = s.executeQuery("SELECT * FROM daily_finances WHERE Month='"+getMonth()+"' AND Year="+getYear());
+            ResultSet rs = s.executeQuery("SELECT * FROM daily_finances"
+                    + " WHERE Month='"+DateTimeFunctions.getMonth()+"' AND Year="+DateTimeFunctions.getYear());
             while(rs.next())
             {
                 RepRev += rs.getFloat("Rep_inc");
@@ -490,7 +491,7 @@ public class MonthFinancialSystem extends FinancialSystem {
                 HRCost += rs.getFloat("HR_cost");
                 OtherCost += rs.getFloat("Other_cost");
             }
-            rs = s.executeQuery("SELECT Salary FROM monthlysal WHERE Month='"+getMonth()+"'");
+            rs = s.executeQuery("SELECT Salary FROM monthlysal WHERE Month='"+DateTimeFunctions.getMonth()+"'");
             while(rs.next())
                 HRCost += rs.getFloat("Salary");
             
@@ -568,7 +569,7 @@ public class MonthFinancialSystem extends FinancialSystem {
                     "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        String month = getMonth();
+        String month = DateTimeFunctions.getMonth();
         int year = Calendar.getInstance().get(Calendar.YEAR);
         try
         {

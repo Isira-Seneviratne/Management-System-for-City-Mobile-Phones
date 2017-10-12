@@ -7,15 +7,12 @@ package itpshnew;
 
 
 import java.awt.Color;
-import static java.lang.Thread.sleep;
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import javafx.scene.control.Alert;
 import java.util.*;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 import sales_package.dbconnect;
@@ -56,7 +53,7 @@ public class Distribution extends javax.swing.JFrame {
         //time
         TimerThread timer = new TimerThread(time); // create timer object and set the time on time label
         timer.start();
-        date.setText(getDate()); // call getdate method on date label
+        date.setText(DateTimeFunctions.getDate()); // call getdate method on date label
 
         
         con = dbconnect.connect();
@@ -1207,10 +1204,6 @@ public class Distribution extends javax.swing.JFrame {
     private void minimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeMouseClicked
         //JFrame frame = new JFrame("test");   //minimize label
          this.setExtendedState(JFrame.ICONIFIED);
-         
-         
-         
-         
     }//GEN-LAST:event_minimizeMouseClicked
 
     private void topic6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topic6MousePressed
@@ -1263,28 +1256,28 @@ public class Distribution extends javax.swing.JFrame {
             dbConnect();
         try
         {
-        String VID = jTextField40.getText();
-        String vName = jTextField50.getText();
-        String address = jTextField29.getText();
-        String email;
-        if(jTextField30.getText().matches("^[A-Za-z]{1,}+@+[A-Za-z]{1,}+\\.+com$"))
-            email = jTextField30.getText();
-        else
-        {
-            JOptionPane.showMessageDialog(this, "Enter a valid email");
-            return;
-        }
-        String phone = jTextField31.getText();
-        String shipcost = jTextField32.getText();
-        
-        Statement add_vendor = con.createStatement();
-         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-         alert.setTitle("Success");
-         add_vendor.executeQuery("Insert into Vendor values('"+VID+"','"+vName+"','"+address+"','"+email+"','"+phone+"','"+shipcost+"')");
-         alert.setHeaderText("Insertion successful");
-         alert.setContentText("Vendor has been inserted.");
-         alert.getDialogPane().setPrefSize(400, 200);
-         alert.showAndWait();
+            String VID = jTextField40.getText();
+            String vName = jTextField50.getText();
+            String address = jTextField29.getText();
+            String email;
+            if(jTextField30.getText().matches("^[A-Za-z]{1,}+@+[A-Za-z]{1,}+\\.+com$"))
+                email = jTextField30.getText();
+            else
+            {
+                JOptionPane.showMessageDialog(this, "Enter a valid email");
+                return;
+            }
+            String phone = jTextField31.getText();
+            String shipcost = jTextField32.getText();
+
+            Statement add_vendor = con.createStatement();
+             Alert alert = new Alert(Alert.AlertType.INFORMATION);
+             alert.setTitle("Success");
+             add_vendor.executeQuery("Insert into Vendor values('"+VID+"','"+vName+"','"+address+"','"+email+"','"+phone+"','"+shipcost+"')");
+             alert.setHeaderText("Insertion successful");
+             alert.setContentText("Vendor has been inserted.");
+             alert.getDialogPane().setPrefSize(400, 200);
+             alert.showAndWait();
         }
         catch(SQLException se)
         {
@@ -1412,12 +1405,14 @@ public class Distribution extends javax.swing.JFrame {
         Statement add_vendorrec = con.createStatement();
         add_vendorrec.executeQuery("Insert into shipping_rec values('"+SID+"','"+VID+"',,'"
                 +modelCode+"','"+qty+"','"+shipcost+"','"+itemcost+"','"
-                +type+"',"+getDate()+",'"+getMonth()+"',"+getYear()+")");
+                +type+"',"+DateTimeFunctions.getDate()
+                +",'"+DateTimeFunctions.getMonth()+"',"+DateTimeFunctions.getYear()+")");
         JOptionPane.showMessageDialog(this, "The vendor shipping record has been inserted.", "Success", JOptionPane.INFORMATION_MESSAGE);
 
          Alert alert = new Alert(Alert.AlertType.INFORMATION);
          alert.setTitle("Success");
-         add_vendorrec.executeQuery("Insert into Ship_Rec values('"+SID+"','"+VID+"','"+getDate()+"','"+modelCode+"','"+qty+"','"+shipcost+"','"+itemcost+"','"+type+"')");
+         add_vendorrec.executeQuery("Insert into Ship_Rec values('"+SID+"','"+VID+"','"
+                 +DateTimeFunctions.getDate()+"','"+modelCode+"','"+qty+"','"+shipcost+"','"+itemcost+"','"+type+"')");
          alert.setHeaderText("Insertion successful");
          alert.setContentText("The vendor shipping record has been inserted.");
          alert.getDialogPane().setPrefSize(400, 200);
@@ -1627,33 +1622,6 @@ public class Distribution extends javax.swing.JFrame {
                 new Distribution().setVisible(true);
             }
         });
-    }
-    
-    protected int getDay()
-    {
-        return Calendar.getInstance().get(Calendar.DATE);
-    }
-    
-    protected String getMonth()
-    {
-        return new String[]{"January", "February", "March",
-            "April", "May", "June", "July", "August", "September",
-            "October", "November", "December"}[Calendar.getInstance().get(Calendar.MONTH)];
-    }
-
-    protected int getYear()
-    {
-        return Calendar.getInstance().get(Calendar.YEAR);
-    }
-    
-    protected String getDate()
-    {
-        return getDay()+" "+getMonth()+" "+getYear();
-    }
-    
-    protected int getMonthVal()
-    {
-        return Calendar.getInstance().get(Calendar.MONTH)+1;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

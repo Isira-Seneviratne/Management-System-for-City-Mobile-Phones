@@ -61,7 +61,7 @@ public class purchase extends javax.swing.JFrame {
         //time
         TimerThread timer = new TimerThread(time); // create timer object and set the time on time label
         timer.start();
-        date.setText(getDate()); // call getdate method on date label
+        date.setText(DateTimeFunctions.getDate()); // call getdate method on date label
         
         //table header
         JTableHeader thead = purchase_table.getTableHeader();
@@ -2269,18 +2269,6 @@ public class purchase extends javax.swing.JFrame {
                 
             }
         });
-    }
-    
-    private String getDate()
-    {
-        Calendar cal = Calendar.getInstance();
-        return cal.get(Calendar.DATE)+" "+getMonth()+" "+cal.get(Calendar.YEAR);
-    }
-    
-    private static String getMonth()
-    {
-        String months[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-        return months[Calendar.getInstance().get(Calendar.MONTH)];
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -392,22 +392,32 @@ public class TodayFinancialSystem extends FinancialSystem {
             while(rs.next())
                 SalesCost += rs.getFloat("totalCost");
             SalesProf = SalesRev - SalesCost;
-            rs = s.executeQuery("SELECT item_cost FROM shipping_rec WHERE Day="+getDay()+" AND Month='"+getMonth()+"' AND Year="+getYear()+" AND ship_type='Retail'");
+            rs = s.executeQuery("SELECT item_cost FROM shipping_rec WHERE Day="
+                    +DateTimeFunctions.getDay()+" AND Month='"
+                    +DateTimeFunctions.getMonth()+"' AND Year="
+                    +DateTimeFunctions.getYear()+" AND ship_type='Retail'");
             while(rs.next())
                 DisRev += rs.getFloat("item_cost");
-            rs = s.executeQuery("SELECT item_cost, Shipping_Cost FROM shipping_rec WHERE Day="+getDay()+" AND Month='"+getMonth()+"' AND Year="+getYear()+" AND ship_type='Vendor'");
+            rs = s.executeQuery("SELECT item_cost, Shipping_Cost FROM shipping_rec"
+                    + " WHERE Day="+DateTimeFunctions.getDay()
+                    +" AND Month='"+DateTimeFunctions.getMonth()
+                    +"' AND Year="+DateTimeFunctions.getYear()+" AND ship_type='Vendor'");
             while(rs.next())
                 DisCost += rs.getFloat("item_cost") + rs.getFloat("Shipping_Cost");
             DisProf = DisRev - DisCost;
             rs = s.executeQuery("SELECT hour(ExitTime-Shift_eTime) AS Overtime_hours, dailyRate, otRate"
                     + " FROM dailyattendance da, currentemployee ce, salaryrate sr"
-                    + " WHERE da.EmpID=ce.EmpID AND ce.JobID=sr.JobID AND Date=STR_TO_DATE('"+getDate()+"', '%d %m %y')");
+                    + " WHERE da.EmpID=ce.EmpID AND ce.JobID=sr.JobID AND Date=STR_TO_DATE('"
+                    +DateTimeFunctions.getDate()+"', '%d %m %y')");
             while(rs.next())
                 HRCost += rs.getInt("Overtime_hours") * rs.getFloat("otRate") + rs.getFloat("dailyRate");
             TotRev = RepRev + SalesRev + DisRev;
             TotCost = RepCost + SalesCost + DisCost + HRCost;
             TotProf = TotRev - TotCost;
-            rs = s.executeQuery("SELECT Other_cost FROM daily_finances WHERE Day="+getDay()+" AND Month='"+getMonth()+"' AND Year="+getYear());
+            rs = s.executeQuery("SELECT Other_cost FROM daily_finances WHERE Day="
+                    +DateTimeFunctions.getDay()+" AND Month='"
+                    +DateTimeFunctions.getMonth()+"' AND Year="
+                    +DateTimeFunctions.getYear());
             if(rs.next() && rs.getFloat("Other_Cost") != 0)
                 OtherCost = rs.getFloat("Other_Cost");
             repair_rev.setText(Float.toString(RepRev).replaceAll("\\.0*$", ""));
@@ -442,7 +452,9 @@ public class TodayFinancialSystem extends FinancialSystem {
             TotCost = RepCost + SalesCost + DisCost + HRCost + OtherCost;
             TotProf = TotRev - TotCost;
             Statement s = conn.createStatement();
-            s.execute("SELECT 1 FROM daily_finances WHERE Day="+getDay()+" AND Month='"+getMonth()+"' AND Year="+getYear());
+            s.execute("SELECT 1 FROM daily_finances WHERE Day="
+                    +DateTimeFunctions.getDay()+" AND Month='"+DateTimeFunctions.getMonth()
+                    +"' AND Year="+DateTimeFunctions.getYear());
             if(s.getResultSet().next())
             {
                 s.execute("UPDATE daily_finances SET Rep_inc="+RepRev+", Rep_cost="+RepCost
@@ -451,16 +463,20 @@ public class TodayFinancialSystem extends FinancialSystem {
                     +", Dis_prof="+DisProf+", HR_cost="+HRCost
                     +", Other_cost="+OtherCost
                     +", Tot_cost="+TotCost+", Tot_prof="+TotProf
-                    +" WHERE Day="+getDay()+" AND Month='"+getMonth()+"' AND Year="+getYear());
-                JOptionPane.showMessageDialog(this, "Successfully updated record for "+getDate()+" to database.", "Update successful", JOptionPane.INFORMATION_MESSAGE);
+                    +" WHERE Day="+DateTimeFunctions.getDay()+" AND Month='"+DateTimeFunctions.getMonth()
+                    +"' AND Year="+DateTimeFunctions.getYear());
+                JOptionPane.showMessageDialog(this, "Successfully updated record for "
+                        +DateTimeFunctions.getDate()+" to database.", "Update successful", JOptionPane.INFORMATION_MESSAGE);
             }
             else
             {
-                s.execute("INSERT INTO daily_finances VALUES("+getDay()+", '"+getMonth()+"', "+getYear()+", "
+                s.execute("INSERT INTO daily_finances VALUES("+DateTimeFunctions.getDay()
+                    +", '"+DateTimeFunctions.getMonth()+"', "+DateTimeFunctions.getYear()+", "
                     +RepRev+", "+RepCost+", "+RepProf+", "+SalesRev+", "+SalesCost+", "+SalesProf
                     +", "+DisRev+", "+DisCost+", "+DisProf+", "+HRCost+", "+OtherCost
                     +", "+TotRev+", "+TotCost+", "+TotProf+")");
-                JOptionPane.showMessageDialog(this, "Successfully inserted record for "+getDate()+".", "Insertion successful", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Successfully inserted record for "
+                        +DateTimeFunctions.getDate()+".", "Insertion successful", JOptionPane.INFORMATION_MESSAGE);
             }
             tot_cost.setText(Float.toString(TotCost).replaceAll("\\.0*$", ""));
             tot_prof.setText(Float.toString(TotProf).replaceAll("\\.0*$", ""));
@@ -471,8 +487,8 @@ public class TodayFinancialSystem extends FinancialSystem {
         }
         catch(SQLException se)
         {
-            JOptionPane.showMessageDialog(this, "Unable to insert/update record for "+getDate()+" to database.", "Error", JOptionPane.ERROR_MESSAGE);
-            se.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Unable to insert/update record for "
+                    +DateTimeFunctions.getDate()+" to database.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_updateTodayActionPerformed
 
