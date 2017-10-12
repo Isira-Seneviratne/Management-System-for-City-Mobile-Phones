@@ -207,15 +207,14 @@ public class Distribution extends javax.swing.JFrame {
         jLabel49 = new javax.swing.JLabel();
         jTextField38 = new javax.swing.JTextField();
         edit_btn = new javax.swing.JButton();
+        clear_btn1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         vendorrecord = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         jLabel50 = new javax.swing.JLabel();
         jTextField39 = new javax.swing.JTextField();
-        jLabel52 = new javax.swing.JLabel();
         jLabel53 = new javax.swing.JLabel();
         jLabel55 = new javax.swing.JLabel();
-        jTextField41 = new javax.swing.JTextField();
         jTextField42 = new javax.swing.JTextField();
         jTextField44 = new javax.swing.JTextField();
         jLabel56 = new javax.swing.JLabel();
@@ -760,6 +759,8 @@ public class Distribution extends javax.swing.JFrame {
         jLabel44.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel44.setText("Vendor Name");
         jPanel10.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 110, 30));
+
+        jTextField33.setEditable(false);
         jPanel10.add(jTextField33, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 220, 25));
 
         jLabel45.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -777,15 +778,22 @@ public class Distribution extends javax.swing.JFrame {
         jLabel48.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel48.setText("Shipping Costs");
         jPanel10.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 150, 30));
+
+        jTextField34.setEditable(false);
         jPanel10.add(jTextField34, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 220, 25));
+
+        jTextField35.setEditable(false);
         jPanel10.add(jTextField35, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 220, 25));
 
+        jTextField36.setEditable(false);
         jTextField36.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField36ActionPerformed(evt);
             }
         });
         jPanel10.add(jTextField36, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, 220, 25));
+
+        jTextField37.setEditable(false);
         jPanel10.add(jTextField37, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 220, 25));
 
         search.setBackground(new java.awt.Color(31, 233, 133));
@@ -821,13 +829,23 @@ public class Distribution extends javax.swing.JFrame {
 
         edit_btn.setBackground(new java.awt.Color(31, 233, 133));
         edit_btn.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        edit_btn.setText("Edit");
+        edit_btn.setText("Save");
         edit_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 edit_btnActionPerformed(evt);
             }
         });
-        jPanel10.add(edit_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, 110, 35));
+        jPanel10.add(edit_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 320, 110, 35));
+
+        clear_btn1.setBackground(new java.awt.Color(31, 233, 133));
+        clear_btn1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        clear_btn1.setText("Edit");
+        clear_btn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clear_btn1ActionPerformed(evt);
+            }
+        });
+        jPanel10.add(clear_btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 110, 35));
 
         addvendor.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 70, 470, 370));
 
@@ -847,14 +865,10 @@ public class Distribution extends javax.swing.JFrame {
 
         jLabel50.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel50.setText("Vendor ID");
-        jPanel11.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 110, 30));
+        jPanel11.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 110, 30));
 
         jTextField39.setText("           ");
-        jPanel11.add(jTextField39, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 220, 25));
-
-        jLabel52.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel52.setText("Date");
-        jPanel11.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 110, 30));
+        jPanel11.add(jTextField39, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 220, 25));
 
         jLabel53.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel53.setText("Time Taken");
@@ -863,9 +877,6 @@ public class Distribution extends javax.swing.JFrame {
         jLabel55.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel55.setText("Item Model");
         jPanel11.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 150, 30));
-
-        jTextField41.setText("           ");
-        jPanel11.add(jTextField41, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 220, 25));
 
         jTextField42.setText("           ");
         jPanel11.add(jTextField42, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 80, 220, 25));
@@ -1218,7 +1229,14 @@ public class Distribution extends javax.swing.JFrame {
         String VID = jTextField40.getText();
         String vName = jTextField50.getText();
         String address = jTextField29.getText();
-        String email = jTextField30.getText();
+        String email;
+        if(jTextField30.getText().matches("^[A-Za-z]{1,}+@+[A-Za-z]{1,}+\\.+com$"))
+            email = jTextField30.getText();
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Enter a valid email");
+            return;
+        }
         String phone = jTextField31.getText();
         String shipcost = jTextField32.getText();
         
@@ -1329,18 +1347,22 @@ public class Distribution extends javax.swing.JFrame {
         try{
         String SID = jTextField43.getText();
         String VID = jTextField39.getText();
-        String recdate = jTextField41.getText();
+        
         String modelCode = jTextField44.getText();
         String qty = jTextField45.getText();
         String shipcost = jTextField47.getText();
         String itemcost = jTextField46.getText();
         String type = "Vendor"; 
-
+        Statement validate_vendor = con.createStatement();
+        
+        if(validate_vendor.executeQuery("select 1 from vendor where Vendor_ID = '"+VID+"'").next())
+        {
         Statement add_vendorrec = con.createStatement();
-        add_vendorrec.executeQuery("Insert into shipping_rec values('"+SID+"','"+VID+"','"+recdate+"','"
+        add_vendorrec.executeQuery("Insert into shipping_rec values('"+SID+"','"+VID+"',,'"
                 +modelCode+"','"+qty+"','"+shipcost+"','"+itemcost+"','"
                 +type+"',"+getDay()+",'"+getMonth()+"',"+getYear()+")");
         JOptionPane.showMessageDialog(this, "The vendor shipping record has been inserted.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        }
         }
         catch(SQLException se)
         {
@@ -1361,7 +1383,6 @@ public class Distribution extends javax.swing.JFrame {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         jTextField43.setText("");
         jTextField39.setText("");
-        jTextField41.setText("");
         jTextField44.setText("");
         jTextField45.setText("");
         jTextField42.setText("");
@@ -1463,6 +1484,14 @@ public class Distribution extends javax.swing.JFrame {
     private void print2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_print2ActionPerformed
+
+    private void clear_btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clear_btn1ActionPerformed
+        jTextField33.setEditable(true);
+        jTextField34.setEditable(true);
+        jTextField35.setEditable(true);
+        jTextField36.setEditable(true);
+        jTextField37.setEditable(true);
+    }//GEN-LAST:event_clear_btn1ActionPerformed
     
         void setColor(JPanel pl) //set the colour after  click
         {
@@ -1597,6 +1626,7 @@ public class Distribution extends javax.swing.JFrame {
     private javax.swing.ButtonGroup bg_cusdet_gender;
     private javax.swing.JPanel center;
     private javax.swing.JButton clear_btn;
+    private javax.swing.JButton clear_btn1;
     private javax.swing.JLabel close;
     private javax.swing.JLabel date;
     private javax.swing.JButton edit_btn;
@@ -1625,7 +1655,6 @@ public class Distribution extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
-    private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel55;
@@ -1660,7 +1689,6 @@ public class Distribution extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField38;
     private javax.swing.JTextField jTextField39;
     private javax.swing.JTextField jTextField40;
-    private javax.swing.JTextField jTextField41;
     private javax.swing.JTextField jTextField42;
     private javax.swing.JTextField jTextField43;
     private javax.swing.JTextField jTextField44;
