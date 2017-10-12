@@ -3,11 +3,9 @@ package itpshnew;
 import java.sql.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import java.awt.Color;
-import static java.lang.Thread.sleep;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
@@ -18,7 +16,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 import net.proteanit.sql.DbUtils;
 /**
  @author Sonal
@@ -2184,44 +2181,6 @@ public class StockControl extends javax.swing.JFrame {
                 new StockControl().setVisible(true);
             }
         });
-    }
-
-    
-    public class TimerThread extends Thread
-    {
-        private JLabel time;
-        private boolean running;
-        private SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
-        
-        public TimerThread(JLabel time)
-        {
-            this.time = time;
-            running = true;
-        }
-        
-        public void setRunning(boolean running)
-        {
-            this.running = running;
-        }
-        
-        public void run()
-        {
-            while(running)
-            {
-                SwingUtilities.invokeLater(new Runnable()
-                {
-                    public void run()
-                    {
-                        time.setText(timeFormat.format(Calendar.getInstance().getTime()));
-                    }
-                });
-                try
-                {
-                    sleep(1000);
-                }
-                catch(InterruptedException e){}
-            }
-        }
     }
     
     private String getDate()

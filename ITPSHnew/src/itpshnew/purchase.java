@@ -8,17 +8,14 @@ package itpshnew;
 
 import java.awt.Color;
 import java.awt.Font;
-import static java.lang.Thread.sleep;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.DefaultCellEditor;
@@ -2124,8 +2121,6 @@ public class purchase extends javax.swing.JFrame {
         sc1.setVisible(true);
         //this.setOpacity(0.5f);
         //com.sun.awt.AWTUtilities.setWindowOpacity(this, 0.5f); // change the opacity level of main frame
-        blur_frame bf1 = new blur_frame();
-        bf1.setVisible(true);
     }//GEN-LAST:event_searchcus_btnActionPerformed
 
     private void newcus_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newcus_btnActionPerformed
@@ -2133,9 +2128,6 @@ public class purchase extends javax.swing.JFrame {
         nc1.setVisible(true);
         //this.setOpacity(0.5f);
         //com.sun.awt.AWTUtilities.setWindowOpacity(this, 0.5f); // change the opacity level of main frame
-        blur_frame bf1 = new blur_frame();
-        bf1.setVisible(true);
-        
     }//GEN-LAST:event_newcus_btnActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
@@ -2156,8 +2148,6 @@ public class purchase extends javax.swing.JFrame {
             
             message_box mb1= new message_box();
             mb1.setVisible(true);
-            blur_frame bf1 = new blur_frame();
-            bf1.setVisible(true);
             
             //JOptionPane.showMessageDialog(null,"need to click a row");
         }
@@ -2279,44 +2269,6 @@ public class purchase extends javax.swing.JFrame {
                 
             }
         });
-    }
-
-    
-    public class TimerThread extends Thread
-    {
-        private JLabel time;
-        private boolean running;
-        private SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
-        
-        public TimerThread(JLabel time)
-        {
-            this.time = time;
-            running = true;
-        }
-        
-        public void setRunning(boolean running)
-        {
-            this.running = running;
-        }
-        
-        public void run()
-        {
-            while(running)
-            {
-                SwingUtilities.invokeLater(new Runnable()
-                {
-                    public void run()
-                    {
-                        time.setText(timeFormat.format(Calendar.getInstance().getTime()));
-                    }
-                });
-                try
-                {
-                    sleep(1000);
-                }
-                catch(InterruptedException e){}
-            }
-        }
     }
     
     private String getDate()

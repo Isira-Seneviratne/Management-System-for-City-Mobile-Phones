@@ -276,13 +276,6 @@ public class newcus extends javax.swing.JFrame {
         
         //com.sun.awt.AWTUtilities.setWindowOpacity(p1, 1);  //reset main frame opacity
         p1.setVisible(true);
-        blur_frame bf1 = new blur_frame();
-        bf1.dispose();
-        
-        
-        
-        
-        
     }//GEN-LAST:event_save_btnActionPerformed
 
     private void cancel_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_btnActionPerformed
@@ -291,10 +284,6 @@ public class newcus extends javax.swing.JFrame {
         //p1.setOpacity(1f);
         //com.sun.awt.AWTUtilities.setWindowOpacity(p1, 1);//reset main frame opacity
         p1.setVisible(true);
-        blur_frame bf1 = new blur_frame();
-        bf1.dispose();
-        
-       
     }//GEN-LAST:event_cancel_btnActionPerformed
 
     private void cancel_lblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancel_lblMouseClicked
@@ -304,8 +293,6 @@ public class newcus extends javax.swing.JFrame {
         
         //com.sun.awt.AWTUtilities.setWindowOpacity(p1, 1);//reset main frame opacity
         p1.setVisible(true);
-        blur_frame bf1 = new blur_frame();
-        bf1.dispose();
     }//GEN-LAST:event_cancel_lblMouseClicked
 
     private void male_rbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_male_rbtnActionPerformed
