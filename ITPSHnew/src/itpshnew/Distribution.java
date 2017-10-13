@@ -8,8 +8,6 @@ package itpshnew;
 
 import java.awt.Color;
 import java.sql.*;
-import javafx.scene.control.Alert;
-import java.util.*;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -35,10 +33,11 @@ public class Distribution extends javax.swing.JFrame {
         this.setUndecorated(true);
         //this.setAlwaysOnTop(true);
         this.setResizable(true);
+        con = dbCon.connect();
         
         //initToday();
         initComponents();
-        
+        tableload();
         
         setColor(topic5);   //set the colour to purchase bar
         bar5.setOpaque(true);
@@ -56,27 +55,12 @@ public class Distribution extends javax.swing.JFrame {
         date.setText(DateTimeFunctions.getDate()); // call getdate method on date label
 
         
-        con = dbconnect.connect();
+        
         
         
         
     }
-    private void dbConnect()
-    {
-        try
-        {
-            Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ManagementSystem?verifyServerCertificate=false&useSSL=true", "root", "abcd1234");
-        }
-        catch(ClassNotFoundException ce)
-        {
-            JOptionPane.showMessageDialog(this, "Unable to load the database driver.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        catch(SQLException se)
-        {
-            JOptionPane.showMessageDialog(this, "Unable to connect to the database.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
+    
    /*private void initToday()
    {
        if(con==null)
@@ -113,12 +97,20 @@ public class Distribution extends javax.swing.JFrame {
    public void tableload()
     {
           try {
-              String q = "select * FROM vendor";
-              pst = con.prepareStatement(q);
+              
+              pst = con.prepareStatement("select * FROM vendor");
          
               rs = pst.executeQuery();
               vendoradd_table.setModel(DbUtils.resultSetToTableModel(rs));
+              pst = con.prepareStatement("select * FROM shipping_rec where ship_type='Vendor'");
+              rs = pst.executeQuery();
+              vendor_rectable.setModel(DbUtils.resultSetToTableModel(rs));
+              pst = con.prepareStatement("select * FROM shipping_rec where ship_type='Retail'");
+              rs = pst.executeQuery();
+              retail_rectable.setModel(DbUtils.resultSetToTableModel(rs));
+              
         } catch (SQLException e1) {
+            e1.printStackTrace();
         }
     }
 
@@ -239,7 +231,7 @@ public class Distribution extends javax.swing.JFrame {
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        purchase_table1 = new javax.swing.JTable();
+        vendor_rectable = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         print1 = new javax.swing.JButton();
         retailrecord = new javax.swing.JPanel();
@@ -260,7 +252,7 @@ public class Distribution extends javax.swing.JFrame {
         jButton12 = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        purchase_table2 = new javax.swing.JTable();
+        retail_rectable = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         print2 = new javax.swing.JButton();
 
@@ -723,28 +715,19 @@ public class Distribution extends javax.swing.JFrame {
         jLabel43.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel43.setText("Shipping Costs");
         jPanel9.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 150, 30));
-
-        jTextField40.setText("           ");
         jPanel9.add(jTextField40, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 220, 25));
 
-        jTextField50.setText("           ");
+        jTextField50.setText("    ");
         jPanel9.add(jTextField50, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 220, 25));
-
-        jTextField29.setText("           ");
         jPanel9.add(jTextField29, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 220, 25));
-
-        jTextField30.setText("           ");
         jPanel9.add(jTextField30, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 220, 25));
 
-        jTextField31.setText("           ");
         jTextField31.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField31ActionPerformed(evt);
             }
         });
         jPanel9.add(jTextField31, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 220, 25));
-
-        jTextField32.setText("           ");
         jPanel9.add(jTextField32, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 220, 25));
 
         save_btn.setBackground(new java.awt.Color(31, 233, 133));
@@ -769,6 +752,22 @@ public class Distribution extends javax.swing.JFrame {
 
         addvendor.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 460, 370));
 
+        vendoradd_table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Vendor ID", "Vendor Name", "Address", "Email", "Phone", "Shipping Cost"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         vendoradd_table.setGridColor(new java.awt.Color(100, 199, 150));
         jScrollPane1.setViewportView(vendoradd_table);
 
@@ -781,9 +780,7 @@ public class Distribution extends javax.swing.JFrame {
         jLabel44.setText("Vendor Name");
         jPanel10.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 110, 30));
 
-
         jTextField33.setEditable(false);
-        jTextField33.setText("           ");
         jPanel10.add(jTextField33, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 220, 25));
 
         jLabel45.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -802,7 +799,6 @@ public class Distribution extends javax.swing.JFrame {
         jLabel48.setText("Shipping Costs");
         jPanel10.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 150, 30));
 
-
         jTextField34.setEditable(false);
         jPanel10.add(jTextField34, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 220, 25));
 
@@ -810,13 +806,6 @@ public class Distribution extends javax.swing.JFrame {
         jPanel10.add(jTextField35, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 220, 25));
 
         jTextField36.setEditable(false);
-        jTextField34.setText("");
-        jPanel10.add(jTextField34, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 220, 25));
-
-        jTextField35.setText("");
-        jPanel10.add(jTextField35, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 220, 25));
-
-        jTextField36.setText("");
         jTextField36.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField36ActionPerformed(evt);
@@ -824,9 +813,7 @@ public class Distribution extends javax.swing.JFrame {
         });
         jPanel10.add(jTextField36, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, 220, 25));
 
-
         jTextField37.setEditable(false);
-        jTextField37.setText("");
         jPanel10.add(jTextField37, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 220, 25));
 
         search.setBackground(new java.awt.Color(31, 233, 133));
@@ -853,7 +840,6 @@ public class Distribution extends javax.swing.JFrame {
         jLabel49.setText("Search ID");
         jPanel10.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 90, 40));
 
-        jTextField38.setText("           ");
         jTextField38.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField38ActionPerformed(evt);
@@ -900,8 +886,6 @@ public class Distribution extends javax.swing.JFrame {
         jLabel50.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel50.setText("Vendor ID");
         jPanel11.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 110, 30));
-
-        jTextField39.setText("           ");
         jPanel11.add(jTextField39, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 220, 25));
 
         jLabel53.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -911,35 +895,23 @@ public class Distribution extends javax.swing.JFrame {
         jLabel55.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel55.setText("Item Model");
         jPanel11.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 150, 30));
-
-        jTextField42.setText("           ");
         jPanel11.add(jTextField42, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 80, 220, 25));
-
-        jTextField44.setText("           ");
         jPanel11.add(jTextField44, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 220, 25));
 
         jLabel56.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel56.setText("Quantity");
         jPanel11.add(jLabel56, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 40, 150, 30));
-
-        jTextField45.setText("           ");
         jPanel11.add(jTextField45, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 40, 220, 25));
 
         jLabel58.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel58.setText("Cost");
         jPanel11.add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 230, 150, 30));
-
-        jTextField46.setText("           ");
         jPanel11.add(jTextField46, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 230, 220, 25));
 
         jLabel54.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel54.setText("Shipping ID");
         jPanel11.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 110, 30));
-
-        jTextField43.setText("           ");
         jPanel11.add(jTextField43, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 220, 25));
-
-        jTextField47.setText("           ");
         jPanel11.add(jTextField47, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 180, 220, 25));
 
         jLabel59.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -978,29 +950,10 @@ public class Distribution extends javax.swing.JFrame {
 
         vendorrecord.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 1050, 280));
 
-        purchase_table1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        purchase_table1.setModel(new javax.swing.table.DefaultTableModel(
+        vendor_rectable.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        vendor_rectable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Shipping ID", "Vendor ID", "Date", "Item Model", "Quantity", "Shipping Cost", "Cost"
@@ -1014,8 +967,8 @@ public class Distribution extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        purchase_table1.setGridColor(new java.awt.Color(100, 199, 150));
-        jScrollPane2.setViewportView(purchase_table1);
+        vendor_rectable.setGridColor(new java.awt.Color(100, 199, 150));
+        jScrollPane2.setViewportView(vendor_rectable);
 
         vendorrecord.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 1040, 190));
 
@@ -1046,8 +999,6 @@ public class Distribution extends javax.swing.JFrame {
         jLabel57.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         jLabel57.setText("Retail ID");
         jPanel12.add(jLabel57, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 110, 30));
-
-        jTextField48.setText("           ");
         jPanel12.add(jTextField48, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 220, 25));
 
         jLabel60.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -1057,32 +1008,22 @@ public class Distribution extends javax.swing.JFrame {
         jLabel62.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel62.setText("Item Model");
         jPanel12.add(jLabel62, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 150, 30));
-
-        jTextField49.setText("           ");
         jPanel12.add(jTextField49, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 220, 25));
-
-        jTextField51.setText("           ");
         jPanel12.add(jTextField51, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 220, 25));
 
         jLabel63.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         jLabel63.setText("Quantity");
         jPanel12.add(jLabel63, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 40, 150, 30));
-
-        jTextField52.setText("           ");
         jPanel12.add(jTextField52, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 40, 220, 25));
 
         jLabel64.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         jLabel64.setText("Cost");
         jPanel12.add(jLabel64, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, 150, 30));
-
-        jTextField53.setText("           ");
         jPanel12.add(jTextField53, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 140, 220, 25));
 
         jLabel65.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         jLabel65.setText("Shipping ID");
         jPanel12.add(jLabel65, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 110, 30));
-
-        jTextField54.setText("           ");
         jPanel12.add(jTextField54, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 220, 25));
 
         jButton11.setBackground(new java.awt.Color(31, 233, 133));
@@ -1117,29 +1058,10 @@ public class Distribution extends javax.swing.JFrame {
 
         retailrecord.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 1050, 280));
 
-        purchase_table2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        purchase_table2.setModel(new javax.swing.table.DefaultTableModel(
+        retail_rectable.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        retail_rectable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Shipping ID", "Retail ID", "Date", "Item Model", "Quantity", "Cost"
@@ -1153,8 +1075,8 @@ public class Distribution extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        purchase_table2.setGridColor(new java.awt.Color(100, 199, 150));
-        jScrollPane3.setViewportView(purchase_table2);
+        retail_rectable.setGridColor(new java.awt.Color(100, 199, 150));
+        jScrollPane3.setViewportView(retail_rectable);
 
         retailrecord.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 1040, 190));
 
@@ -1252,8 +1174,7 @@ public class Distribution extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField31ActionPerformed
 
     private void save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_btnActionPerformed
-        if(con == null)
-            dbConnect();
+       
         try
         {
             String VID = jTextField40.getText();
@@ -1271,21 +1192,14 @@ public class Distribution extends javax.swing.JFrame {
             String shipcost = jTextField32.getText();
 
             Statement add_vendor = con.createStatement();
-             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-             alert.setTitle("Success");
              add_vendor.executeQuery("Insert into Vendor values('"+VID+"','"+vName+"','"+address+"','"+email+"','"+phone+"','"+shipcost+"')");
-             alert.setHeaderText("Insertion successful");
-             alert.setContentText("Vendor has been inserted.");
-             alert.getDialogPane().setPrefSize(400, 200);
-             alert.showAndWait();
+             JOptionPane.showMessageDialog(this, " Insertion successful","Vendor has been inserted.", JOptionPane.INFORMATION_MESSAGE);
+             tableload();
+             
         }
         catch(SQLException se)
         {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Database Insert Error");
-            alert.setContentText("Unable to Insert into DB");
-            alert.showAndWait();
+            JOptionPane.showMessageDialog(this, "Database Insert Error","Unable to Insert into DB", JOptionPane.ERROR_MESSAGE);
         }
         catch(NumberFormatException e)
         {
@@ -1351,8 +1265,7 @@ public class Distribution extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField38ActionPerformed
 
     private void edit_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edit_btnActionPerformed
-        if(con == null)
-            dbConnect();
+        
         try{
         String VID = jTextField38.getText();
         String vName = jTextField33.getText();
@@ -1362,22 +1275,15 @@ public class Distribution extends javax.swing.JFrame {
         String shipcost = jTextField37.getText();
         
         Statement add_vendor = con.createStatement();
-         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-         alert.setTitle("Success");
+         
          add_vendor.execute("update Vendor set vName='"+vName+"',address='"+address+"',email='"+email+"',"
                  + "phone='"+phone+"',shipcost='"+shipcost+"' where VID='"+VID+"'");
-         alert.setHeaderText("Insertion successful");
-         alert.setContentText("Vendor has been updated.");
-         alert.getDialogPane().setPrefSize(400, 200);
-         alert.showAndWait();
+         JOptionPane.showMessageDialog(this, " Insertion successful","Vendor has been updated.", JOptionPane.INFORMATION_MESSAGE);
+         tableload();
         }
         catch(SQLException se)
         {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Database Insert Error");
-            alert.setContentText("Unable to Insert into DB");
-            alert.showAndWait();
+            JOptionPane.showMessageDialog(this, " Database Insert Error","Unable to update DB", JOptionPane.ERROR_MESSAGE);
         }
         catch(NumberFormatException e)
         {
@@ -1387,8 +1293,7 @@ public class Distribution extends javax.swing.JFrame {
     }//GEN-LAST:event_edit_btnActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        if(con == null)
-            dbConnect();
+        
         try{
         String SID = jTextField43.getText();
         String VID = jTextField39.getText();
@@ -1408,24 +1313,14 @@ public class Distribution extends javax.swing.JFrame {
                 +type+"',"+DateTimeFunctions.getDate()
                 +",'"+DateTimeFunctions.getMonth()+"',"+DateTimeFunctions.getYear()+")");
         JOptionPane.showMessageDialog(this, "The vendor shipping record has been inserted.", "Success", JOptionPane.INFORMATION_MESSAGE);
-
-         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-         alert.setTitle("Success");
-         add_vendorrec.executeQuery("Insert into Ship_Rec values('"+SID+"','"+VID+"','"
-                 +DateTimeFunctions.getDate()+"','"+modelCode+"','"+qty+"','"+shipcost+"','"+itemcost+"','"+type+"')");
-         alert.setHeaderText("Insertion successful");
-         alert.setContentText("The vendor shipping record has been inserted.");
-         alert.getDialogPane().setPrefSize(400, 200);
-         alert.showAndWait();
+        JOptionPane.showMessageDialog(this, "Insertion succesful","The vendor shipping record has been inserted.", JOptionPane.INFORMATION_MESSAGE);
+        tableload();
+         
         }
         }
         catch(SQLException se)
         {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Database Insert Error");
-            alert.setContentText("Unable to Insert into DB");
-            alert.showAndWait();
+            JOptionPane.showMessageDialog(this, "Unable to insert into DB","DB insert error", JOptionPane.ERROR_MESSAGE);
         }
         catch(NumberFormatException e)
         {
@@ -1450,8 +1345,7 @@ public class Distribution extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        if(con == null)
-            dbConnect();
+        
         try{
         String VID = jTextField39.getText();
         int timetaken = Integer.parseInt(jTextField42.getText());
@@ -1467,11 +1361,7 @@ public class Distribution extends javax.swing.JFrame {
         }
         catch(SQLException se)
         {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Database Retrieve Error");
-            alert.setContentText("Unable to Retrieve into DB");
-            alert.showAndWait();
+            JOptionPane.showMessageDialog(this, "Unable to Retrieve into DB","Database Retrieve Error", JOptionPane.ERROR_MESSAGE);
         }
         catch(NumberFormatException e)
         {
@@ -1482,8 +1372,7 @@ public class Distribution extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        if(con == null)
-            dbConnect();
+        
         try{
         String SID = jTextField54.getText();
         String RID = jTextField48.getText();
@@ -1494,21 +1383,14 @@ public class Distribution extends javax.swing.JFrame {
         String type = "Retail"; 
         
         Statement add_vendorrec = con.createStatement();
-         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-         alert.setTitle("Success");
+         
          add_vendorrec.executeQuery("Insert into Ship_Rec values('"+SID+"','"+RID+"','"+recdate+"','"+modelCode+"','"+qty+"','"+itemcost+"','"+type+"')");
-         alert.setHeaderText("Insertion successful");
-         alert.setContentText("The retail shipping record has been inserted.");
-         alert.getDialogPane().setPrefSize(400, 200);
-         alert.showAndWait();
+         JOptionPane.showMessageDialog(this, "The retail shipping record has been inserted.","Insertion successful", JOptionPane.INFORMATION_MESSAGE);
+         tableload();
         }
         catch(SQLException se)
         {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Database Insert Error");
-            alert.setContentText("Unable to Insert into DB");
-            alert.showAndWait();
+            JOptionPane.showMessageDialog(this, "Database Insert Error","Unable to Insert into DB", JOptionPane.ERROR_MESSAGE);
         }
         catch(NumberFormatException e)
         {
@@ -1527,8 +1409,7 @@ public class Distribution extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        if(con == null)
-            dbConnect();
+        
         try{
         String item=jTextField51.getText();
         Statement stmt1 = con.createStatement( );
@@ -1538,11 +1419,7 @@ public class Distribution extends javax.swing.JFrame {
         }
         catch(SQLException se)
         {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Database Retrieve Error");
-            alert.setContentText("Unable to Retrieve into DB");
-            alert.showAndWait();
+            JOptionPane.showMessageDialog(this, "Unable to Retrieve into DB.","Database Retrieve Error", JOptionPane.ERROR_MESSAGE);
         }
         catch(NumberFormatException e)
         {
@@ -1735,10 +1612,9 @@ public class Distribution extends javax.swing.JFrame {
     private javax.swing.JButton print1;
     private javax.swing.JButton print2;
     private javax.swing.ButtonGroup puchase_paytype;
-    private javax.swing.JTable purchase_table1;
-    private javax.swing.JTable purchase_table2;
     private javax.swing.JButton reset_btn;
     private javax.swing.JLabel retail;
+    private javax.swing.JTable retail_rectable;
     private javax.swing.JPanel retailrecord;
     private javax.swing.JButton save_btn;
     private javax.swing.JButton search;
@@ -1755,6 +1631,7 @@ public class Distribution extends javax.swing.JFrame {
     private javax.swing.JPanel topic7;
     private javax.swing.JPanel topic8;
     private javax.swing.JLabel vendor;
+    private javax.swing.JTable vendor_rectable;
     private javax.swing.JTable vendoradd_table;
     private javax.swing.JPanel vendorrecord;
     // End of variables declaration//GEN-END:variables
