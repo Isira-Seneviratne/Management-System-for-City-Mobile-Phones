@@ -6,8 +6,7 @@
 package itpshnew;
 
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.*;
 import javax.swing.JOptionPane;
 import sales_package.customer_class;
 import sales_package.dbconnect;

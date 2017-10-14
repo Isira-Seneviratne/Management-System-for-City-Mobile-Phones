@@ -8,12 +8,8 @@ package itpshnew;
 
 import java.awt.Color;
 import java.sql.*;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 import net.proteanit.sql.DbUtils;
-import sales_package.dbconnect;
 /**
  *
  * @author Thareendra

@@ -6,9 +6,6 @@
 package itpshnew;
 
 import java.io.IOException;
-import static java.lang.Thread.sleep;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import javax.swing.*;
 
 /**

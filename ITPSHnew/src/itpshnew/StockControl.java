@@ -3,19 +3,11 @@ package itpshnew;
 import java.sql.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import java.awt.Color;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.text.DateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.JTextField;
+import java.util.logging.*;
+import javax.swing.*;
 import net.proteanit.sql.DbUtils;
 /**
  @author Sonal
