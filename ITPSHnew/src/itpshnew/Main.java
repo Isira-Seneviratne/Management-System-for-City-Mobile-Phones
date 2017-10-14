@@ -748,27 +748,27 @@ public class Main extends javax.swing.JFrame {
         setPanelColor(topic2);
     }//GEN-LAST:event_name1MouseClicked
 
-    void setLabelColor(JLabel label) //set the colour after  click
+    private void setLabelColor(JLabel label) //set the colour after  click
     {
         label.setBackground(new Color (0,153,153));
     }
     
-    void resetLabelColor(JLabel label) //set the colour after  click
+    private void resetLabelColor(JLabel label) //set the colour after  click
     {
         label.setBackground(new Color (0,204,204));
     }
     
-    void resetPanelColor(JPanel panel)
+    private void resetPanelColor(JPanel panel)
     {
         panel.setBackground(new Color (0,153,153));
     }
     
-    void setPanelColor(JPanel panel)
+    private void setPanelColor(JPanel panel)
     {
         panel.setBackground(new Color (0,204,204));
     }
     
-    void resetComp(JComponent c)
+    private void resetComp(JComponent c)
     {
         if(c.isEnabled() && c.isVisible())
         {
@@ -777,7 +777,7 @@ public class Main extends javax.swing.JFrame {
         }
     }
     
-    void resetAll()
+    private void resetAll()
     {
         Color c = new Color(0, 204, 204);
         if(topic2.getBackground().equals(c))
