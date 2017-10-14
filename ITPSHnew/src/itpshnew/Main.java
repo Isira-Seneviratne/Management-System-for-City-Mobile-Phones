@@ -6,6 +6,7 @@
 package itpshnew;
 
 import java.awt.Color;
+import java.awt.event.*;
 import javax.swing.*;
 
 /**
@@ -13,7 +14,8 @@ import javax.swing.*;
  * @author isira
  */
 public class Main extends javax.swing.JFrame {
-
+    private static Main m;
+    
     MonthFinancialSystem mfs;
     TodayFinancialSystem tfs;
     Distribution dis;
@@ -22,18 +24,43 @@ public class Main extends javax.swing.JFrame {
     /**
      * Creates new form Main
      */
+    public static Main getInstance(String name, MouseEvent e)
+    {
+        if(m == null)
+            m = new Main(name, e);
+        return m;
+    }
+    
+    public Main(String name, MouseEvent e) {
+        mfs = new MonthFinancialSystem();
+        tfs = new TodayFinancialSystem();
+        dis = new Distribution();
+        stcon = new StockControl();
+        mfs.setEnabled(false);
+        mfs.setVisible(false);
+        tfs.setEnabled(false);
+        tfs.setVisible(false);
+        initComponents();
+        t = new TimerThread(time);
+        t.start();
+        if(name.equals("Finance"))
+            topic6MouseClicked(e);
+    }
+
     public Main() {
         mfs = new MonthFinancialSystem();
         tfs = new TodayFinancialSystem();
         dis = new Distribution();
         stcon = new StockControl();
+        mfs.setEnabled(false);
         mfs.setVisible(false);
+        tfs.setEnabled(false);
         tfs.setVisible(false);
         initComponents();
         t = new TimerThread(time);
         t.start();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -569,23 +596,18 @@ public class Main extends javax.swing.JFrame {
 
     private void bar1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bar1MousePressed
 
-        home h1 = new home(); // go to home page
-        h1.setVisible(true);
-        this.setVisible(false);
+        home.getInstance().setVisible(true);
+        setVisible(false);
     }//GEN-LAST:event_bar1MousePressed
 
     private void namebar1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_namebar1MousePressed
 
-        home h1 = new home(); // go to home page
-        h1.setVisible(true);
-        this.setVisible(false);
+        bar1MousePressed(evt);
     }//GEN-LAST:event_namebar1MousePressed
 
     private void topic1bar1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topic1bar1MousePressed
 
-        home h1 = new home(); // go to home page
-        h1.setVisible(true);
-        setVisible(false);
+        bar1MousePressed(evt);
     }//GEN-LAST:event_topic1bar1MousePressed
 
     private void bar2topic2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bar2topic2MousePressed

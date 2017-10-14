@@ -14,9 +14,8 @@ import javax.swing.*;
  */
 public class home extends JFrame {
 
-    /**
-     * Creates new form home
-     */
+    private static home h = new home();
+    
     private TodayFinancialSystem tfs;
     private MonthFinancialSystem mfs;
     
@@ -42,6 +41,11 @@ public class home extends JFrame {
         date.setText(DateTimeFunctions.getDate()); // call getdate method on date label
     }
 
+    public static home getInstance()
+    {
+        return h;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -324,11 +328,8 @@ public class home extends JFrame {
     }//GEN-LAST:event_minimizeMouseClicked
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
-        mfs.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        add(mfs, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 1000, 600));
-        mfs.pubInit();
-        mfs.setFocusable(true);
-        mfs.setVisible(true);
+        Main.getInstance("Finance", evt).setVisible(true);
+        dispose();
     }//GEN-LAST:event_jLabel10MouseClicked
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
