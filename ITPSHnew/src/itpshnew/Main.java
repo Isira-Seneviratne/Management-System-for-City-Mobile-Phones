@@ -15,12 +15,23 @@ import javax.swing.*;
 public class Main extends javax.swing.JFrame {
 
     MonthFinancialSystem mfs;
+    TodayFinancialSystem tfs;
+    Distribution dis;
+    StockControl stcon;
+    TimerThread t;
     /**
      * Creates new form Main
      */
     public Main() {
         mfs = new MonthFinancialSystem();
+        tfs = new TodayFinancialSystem();
+        dis = new Distribution();
+        stcon = new StockControl();
+        mfs.setVisible(false);
+        tfs.setVisible(false);
         initComponents();
+        t = new TimerThread(time);
+        t.start();
     }
 
     /**
@@ -76,13 +87,17 @@ public class Main extends javax.swing.JFrame {
         minimize = new javax.swing.JLabel();
         time = new javax.swing.JLabel();
         date = new javax.swing.JLabel();
-        vendor = new javax.swing.JLabel();
-        retail = new javax.swing.JLabel();
         adddetail = new javax.swing.JLabel();
         adddetail1 = new javax.swing.JLabel();
+        vendor = new javax.swing.JLabel();
+        today = new javax.swing.JLabel();
+        retail = new javax.swing.JLabel();
+        month = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1366, 768));
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1366, 768));
         setResizable(false);
         setSize(new java.awt.Dimension(1366, 768));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -109,7 +124,7 @@ public class Main extends javax.swing.JFrame {
         bar1.setLayout(bar1Layout);
         bar1Layout.setHorizontalGroup(
             bar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 10, Short.MAX_VALUE)
         );
         bar1Layout.setVerticalGroup(
             bar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,7 +169,7 @@ public class Main extends javax.swing.JFrame {
         bar2.setLayout(bar2Layout);
         bar2Layout.setHorizontalGroup(
             bar2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 10, Short.MAX_VALUE)
         );
         bar2Layout.setVerticalGroup(
             bar2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,8 +191,8 @@ public class Main extends javax.swing.JFrame {
         name1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         name1.setText("Stock");
         name1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                name1topic2MousePressed(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                name1MouseClicked(evt);
             }
         });
         topic2.add(name1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 9, 260, 40));
@@ -193,7 +208,7 @@ public class Main extends javax.swing.JFrame {
         bar3.setLayout(bar3Layout);
         bar3Layout.setHorizontalGroup(
             bar3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 10, Short.MAX_VALUE)
         );
         bar3Layout.setVerticalGroup(
             bar3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,7 +247,7 @@ public class Main extends javax.swing.JFrame {
         bar4.setLayout(bar4Layout);
         bar4Layout.setHorizontalGroup(
             bar4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 10, Short.MAX_VALUE)
         );
         bar4Layout.setVerticalGroup(
             bar4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,7 +286,7 @@ public class Main extends javax.swing.JFrame {
         bar5.setLayout(bar5Layout);
         bar5Layout.setHorizontalGroup(
             bar5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 10, Short.MAX_VALUE)
         );
         bar5Layout.setVerticalGroup(
             bar5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -293,8 +308,8 @@ public class Main extends javax.swing.JFrame {
 
         topic6.setBackground(new java.awt.Color(0, 153, 153));
         topic6.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                topic6MousePressed(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                topic6MouseClicked(evt);
             }
         });
         topic6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -310,7 +325,7 @@ public class Main extends javax.swing.JFrame {
         bar6.setLayout(bar6Layout);
         bar6Layout.setHorizontalGroup(
             bar6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 10, Short.MAX_VALUE)
         );
         bar6Layout.setVerticalGroup(
             bar6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,14 +334,12 @@ public class Main extends javax.swing.JFrame {
 
         topic6.add(bar6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 60));
 
+        name5.setBackground(new java.awt.Color(0, 153, 153));
         name5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         name5.setForeground(new java.awt.Color(255, 255, 255));
         name5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         name5.setText("    Finance");
         name5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                name5topic6MousePressed(evt);
-            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 name5MouseClicked(evt);
             }
@@ -352,7 +365,7 @@ public class Main extends javax.swing.JFrame {
         bar7.setLayout(bar7Layout);
         bar7Layout.setHorizontalGroup(
             bar7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 10, Short.MAX_VALUE)
         );
         bar7Layout.setVerticalGroup(
             bar7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -388,7 +401,7 @@ public class Main extends javax.swing.JFrame {
         bar8.setLayout(bar8Layout);
         bar8Layout.setHorizontalGroup(
             bar8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 10, Short.MAX_VALUE)
         );
         bar8Layout.setVerticalGroup(
             bar8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -449,39 +462,8 @@ public class Main extends javax.swing.JFrame {
 
         date.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         date.setForeground(new java.awt.Color(255, 255, 255));
-        date.setText("Date with calender");
+        date.setText(DateTimeFunctions.getDate());
         topbar.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 0, 190, 50));
-
-        vendor.setBackground(new java.awt.Color(0, 204, 204));
-        vendor.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        vendor.setForeground(new java.awt.Color(255, 255, 255));
-        vendor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        vendor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Warranty_Card_30px_2.png"))); // NOI18N
-        vendor.setText("  New Item");
-        vendor.setOpaque(true);
-        vendor.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                vendorMouseClicked(evt);
-            }
-        });
-        topbar.add(vendor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 50));
-
-        retail.setBackground(new java.awt.Color(0, 204, 204));
-        retail.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        retail.setForeground(new java.awt.Color(255, 255, 255));
-        retail.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        retail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_New_Product_30px_1.png"))); // NOI18N
-        retail.setText("  Current Stock");
-        retail.setOpaque(true);
-        retail.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                retailMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                retailMouseEntered(evt);
-            }
-        });
-        topbar.add(retail, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 200, 50));
 
         adddetail.setBackground(new java.awt.Color(0, 204, 204));
         adddetail.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -489,7 +471,8 @@ public class Main extends javax.swing.JFrame {
         adddetail.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         adddetail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Combo_Chart_30px.png"))); // NOI18N
         adddetail.setText("  Stock Reports");
-        adddetail.setOpaque(true);
+        adddetail.setEnabled(false);
+        adddetail.setVisible(false);
         adddetail.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 adddetailMouseClicked(evt);
@@ -502,13 +485,82 @@ public class Main extends javax.swing.JFrame {
         adddetail1.setForeground(new java.awt.Color(255, 255, 255));
         adddetail1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         adddetail1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Calculator_24px_4.png"))); // NOI18N
+        adddetail1.setEnabled(false);
         adddetail1.setOpaque(true);
+        adddetail1.setVisible(false);
         adddetail1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 adddetail1MouseClicked(evt);
             }
         });
         topbar.add(adddetail1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 0, 50, 50));
+
+        vendor.setBackground(new java.awt.Color(0, 204, 204));
+        vendor.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        vendor.setForeground(new java.awt.Color(255, 255, 255));
+        vendor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        vendor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Warranty_Card_30px_2.png"))); // NOI18N
+        vendor.setText("  New Item");
+        vendor.setEnabled(false);
+        vendor.setVisible(false);
+        vendor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                vendorMouseClicked(evt);
+            }
+        });
+        topbar.add(vendor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 50));
+
+        today.setBackground(new java.awt.Color(0, 204, 204));
+        today.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        today.setForeground(new java.awt.Color(255, 255, 255));
+        today.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        today.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Money_30px_1.png"))); // NOI18N
+        today.setText("  Today");
+        today.setEnabled(false);
+        today.setOpaque(true);
+        today.setVisible(false);
+        today.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                todayMouseClicked(evt);
+            }
+        });
+        topbar.add(today, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 50));
+
+        retail.setBackground(new java.awt.Color(0, 204, 204));
+        retail.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        retail.setForeground(new java.awt.Color(255, 255, 255));
+        retail.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        retail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_New_Product_30px_1.png"))); // NOI18N
+        retail.setText("  Current Stock");
+        retail.setEnabled(false);
+        retail.setVisible(false);
+        retail.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                retailMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                retailMouseEntered(evt);
+            }
+        });
+        topbar.add(retail, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 200, 50));
+
+        month.setBackground(new java.awt.Color(0, 204, 204));
+        month.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        month.setForeground(new java.awt.Color(255, 255, 255));
+        month.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        month.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Money_Bag_40px.png"))); // NOI18N
+        month.setText("  Month");
+        month.setOpaque(true);
+        month.setVisible(false);
+        month.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                monthMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                monthMouseEntered(evt);
+            }
+        });
+        topbar.add(month, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 200, 50));
 
         getContentPane().add(topbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 1090, -1));
 
@@ -533,7 +585,7 @@ public class Main extends javax.swing.JFrame {
 
         home h1 = new home(); // go to home page
         h1.setVisible(true);
-        this.setVisible(false);
+        setVisible(false);
     }//GEN-LAST:event_topic1bar1MousePressed
 
     private void bar2topic2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bar2topic2MousePressed
@@ -545,12 +597,6 @@ public class Main extends javax.swing.JFrame {
     private void pic3name3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pic3name3MousePressed
 
     }//GEN-LAST:event_pic3name3MousePressed
-
-    private void name1topic2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_name1topic2MousePressed
-        /* setColor(topic2);   //set the colour
-        bar2.setOpaque(true);  */
-
-    }//GEN-LAST:event_name1topic2MousePressed
 
     private void topic2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topic2MousePressed
         /* setColor(topic2);   //set the colour
@@ -580,25 +626,18 @@ public class Main extends javax.swing.JFrame {
 
     }//GEN-LAST:event_bar6topic6MousePressed
 
-    private void name5topic6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_name5topic6MousePressed
-
-    }//GEN-LAST:event_name5topic6MousePressed
-
     private void pic5topic6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pic5topic6MousePressed
 
     }//GEN-LAST:event_pic5topic6MousePressed
 
-    private void topic6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topic6MousePressed
-
-    }//GEN-LAST:event_topic6MousePressed
-
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
-        this.dispose();
+        t.setRunning(false);
+        dispose();
     }//GEN-LAST:event_closeMouseClicked
 
     private void minimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeMouseClicked
         //JFrame frame = new JFrame("test");   //minimize label
-        this.setExtendedState(JFrame.ICONIFIED);
+        setExtendedState(JFrame.ICONIFIED);
 
     }//GEN-LAST:event_minimizeMouseClicked
 
@@ -616,32 +655,125 @@ public class Main extends javax.swing.JFrame {
 
     private void adddetailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adddetailMouseClicked
 
-        setlabelcolor(adddetail);
-        resettlabelcolor(retail);
-        resettlabelcolor(vendor);
+        setLabelColor(adddetail);
+        resetLabelColor(retail);
+        resetLabelColor(vendor);
     }//GEN-LAST:event_adddetailMouseClicked
 
     private void adddetail1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adddetail1MouseClicked
-        setlabelcolor(adddetail1);// TODO add your handling code here:
+        setLabelColor(adddetail1);// TODO add your handling code here:
         adddetail1.setVisible(true);
 
     }//GEN-LAST:event_adddetail1MouseClicked
 
     private void name5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_name5MouseClicked
-        mfs.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        add(mfs, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1200, 768));
-        mfs.pubInit();
-        mfs.setFocusable(true);
-        mfs.setVisible(true);
+        if(!tfs.isVisible() && !mfs.isVisible())
+        {
+            resetAll();
+            tfs.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+            add(tfs, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1200, 768));
+            tfs.pubInit();
+            tfs.setFocusable(true);
+            tfs.setVisible(true);
+            setLabelColor(name5);
+            today.setEnabled(true);
+            today.setVisible(true);
+            month.setEnabled(true);
+            month.setVisible(true);
+            setPanelColor(topic6);
+            setLabelColor(today);
+        }
     }//GEN-LAST:event_name5MouseClicked
 
-    void setlabelcolor(JLabel label) //set the colour after  click
+    private void todayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_todayMouseClicked
+        tfs.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(tfs, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 1200, 768));
+        tfs.pubInit();
+        tfs.setFocusable(true);
+        mfs.setEnabled(false);
+        mfs.setVisible(false);
+        tfs.setVisible(true);
+        setLabelColor(today);
+        resetLabelColor(month);
+    }//GEN-LAST:event_todayMouseClicked
+
+    private void monthMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_monthMouseClicked
+        mfs.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(mfs, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 1200, 768));
+        mfs.pubInit();
+        mfs.setFocusable(true);
+        tfs.setEnabled(false);
+        tfs.setVisible(false);
+        mfs.setVisible(true);
+        setLabelColor(month);
+        resetLabelColor(today);
+    }//GEN-LAST:event_monthMouseClicked
+
+    private void monthMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_monthMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_monthMouseEntered
+
+    private void topic6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topic6MouseClicked
+        name5MouseClicked(evt);
+    }//GEN-LAST:event_topic6MouseClicked
+
+    private void name1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_name1MouseClicked
+        resetAll();
+        vendor.setEnabled(true);
+        vendor.setVisible(true);
+        retail.setEnabled(true);
+        retail.setVisible(true);
+        setPanelColor(topic2);
+    }//GEN-LAST:event_name1MouseClicked
+
+    void setLabelColor(JLabel label) //set the colour after  click
     {
         label.setBackground(new Color (0,153,153));
     }
-    void resettlabelcolor(JLabel label) //set the colour after  click
+    
+    void resetLabelColor(JLabel label) //set the colour after  click
     {
         label.setBackground(new Color (0,204,204));
+    }
+    
+    void resetPanelColor(JPanel panel)
+    {
+        panel.setBackground(new Color (0,153,153));
+    }
+    
+    void setPanelColor(JPanel panel)
+    {
+        panel.setBackground(new Color (0,204,204));
+    }
+    
+    void resetComp(JComponent c)
+    {
+        if(c.isEnabled() && c.isVisible())
+        {
+            c.setEnabled(false);
+            c.setVisible(false);
+        }
+    }
+    
+    void resetAll()
+    {
+        Color c = new Color(0, 204, 204);
+        if(topic2.getBackground().equals(c))
+            resetPanelColor(topic2);
+        if(topic3.getBackground().equals(c))
+            resetPanelColor(topic3);
+        if(topic4.getBackground().equals(c))
+            resetPanelColor(topic4);
+        if(topic5.getBackground().equals(c))
+            resetPanelColor(topic5);
+        if(topic6.getBackground().equals(c))
+            resetPanelColor(topic6);
+        resetComp(month);
+        resetComp(today);
+        resetComp(vendor);
+        resetComp(retail);
+        resetComp(tfs);
+        resetComp(mfs);
     }
     /**
      * @param args the command line arguments
@@ -698,6 +830,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel minimize;
+    private javax.swing.JLabel month;
     private javax.swing.JLabel name;
     private javax.swing.JLabel name1;
     private javax.swing.JLabel name2;
@@ -717,6 +850,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel retail;
     private javax.swing.JPanel sidepanel;
     private javax.swing.JLabel time;
+    private javax.swing.JLabel today;
     private javax.swing.JPanel topbar;
     private javax.swing.JPanel topic1;
     private javax.swing.JPanel topic2;
