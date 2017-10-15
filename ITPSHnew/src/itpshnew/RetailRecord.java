@@ -5,10 +5,8 @@
  */
 package itpshnew;
 
-import java.awt.Color;
 import java.sql.*;
 import javax.swing.*;
-import net.proteanit.sql.DbUtils;
 /**
  *
  * @author Bhanu
@@ -20,10 +18,14 @@ public class RetailRecord extends Distribution {
      */
     public RetailRecord() {
         super();
+    }
+
+    public void pubInit()
+    {
         initComponents();
         tableload(retail_rectable,"select * FROM shipping_rec where ship_type='Retail'");
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

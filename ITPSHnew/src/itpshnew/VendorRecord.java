@@ -5,10 +5,8 @@
  */
 package itpshnew;
 
-import java.awt.Color;
 import java.sql.*;
 import javax.swing.*;
-import net.proteanit.sql.DbUtils;
 /**
  *
  * @author Bhanu
@@ -20,6 +18,10 @@ public class VendorRecord extends Distribution {
      */
     public VendorRecord() {
         super();
+    }
+    
+    public void pubInit()
+    {
         initComponents();
         tableload(vendor_rectable,"select * FROM shipping_rec where ship_type='Vendor'");
     }
@@ -56,6 +58,8 @@ public class VendorRecord extends Distribution {
         vendor_rectable = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         print1 = new javax.swing.JButton();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         vendorrecord.setBackground(new java.awt.Color(202, 254, 227));
         vendorrecord.setAutoscrolls(true);
@@ -169,22 +173,7 @@ public class VendorRecord extends Distribution {
         });
         vendorrecord.add(print1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 570, 200, 50));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(vendorrecord, javax.swing.GroupLayout.PREFERRED_SIZE, 1090, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(vendorrecord, javax.swing.GroupLayout.PREFERRED_SIZE, 760, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        add(vendorrecord, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 1110, 780));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -241,7 +230,8 @@ public class VendorRecord extends Distribution {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
 
-        try{
+        try
+        {
             String VID = jTextField39.getText();
             int timetaken = Integer.parseInt(jTextField42.getText());
             String item=jTextField44.getText();

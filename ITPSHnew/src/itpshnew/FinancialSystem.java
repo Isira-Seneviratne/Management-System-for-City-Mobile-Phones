@@ -16,6 +16,11 @@ public abstract class FinancialSystem extends JPanel {
             SalesProf = 0, DisRev = 0, DisCost = 0, DisProf = 0, HRCost = 0, OtherCost = 0,
             TotCost = 0, TotProf = 0, TotRev = 0;
 
+    public FinancialSystem()
+    {
+        conn = dbCon.connect();
+    }
+    
     public abstract void pubInit();
     
     /**

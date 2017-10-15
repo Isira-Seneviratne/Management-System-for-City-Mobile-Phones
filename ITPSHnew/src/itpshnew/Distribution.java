@@ -5,7 +5,6 @@
  */
 package itpshnew;
 
-import java.awt.Color;
 import java.sql.*;
 import javax.swing.*;
 import net.proteanit.sql.DbUtils;
@@ -14,7 +13,7 @@ import net.proteanit.sql.DbUtils;
  *
  * @author Bhanu
  */
-public class Distribution extends javax.swing.JPanel {
+public abstract class Distribution extends javax.swing.JPanel {
 
     /**
      * Creates new form Distribution
@@ -33,18 +32,19 @@ public class Distribution extends javax.swing.JPanel {
 
     public void tableload(JTable t,String s)
     {
-          try {
-              
-              pst = con.prepareStatement(s);
-         
-              rs = pst.executeQuery();
-              t.setModel(DbUtils.resultSetToTableModel(rs));
-              
-              
-        } catch (SQLException e1) {
+        try
+        {
+            pst = con.prepareStatement(s);
+            rs = pst.executeQuery();
+            t.setModel(DbUtils.resultSetToTableModel(rs));
+        }
+        catch(SQLException e1)
+        {
             e1.printStackTrace();
         }
     }
+    
+    public abstract void pubInit();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -14,48 +14,61 @@ import javax.swing.*;
  * @author isira
  */
 public class Main extends javax.swing.JFrame {
-    private static Main m;
     
     MonthFinancialSystem mfs;
     TodayFinancialSystem tfs;
-    Distribution dis;
+    
+    AddVendor av;
+    VendorRecord vr;
+    RetailRecord rr;
+    
     StockControl stcon;
+    
     TimerThread t;
     /**
      * Creates new form Main
+     * @param name
+     * @param e
+     * @return 
      */
-    public static Main getInstance(String name, MouseEvent e)
-    {
-        if(m == null)
-            m = new Main(name, e);
-        return m;
-    }
     
-    public Main(String name, MouseEvent e) {
+    public Main(String name, MouseEvent e)
+    {
         mfs = new MonthFinancialSystem();
         tfs = new TodayFinancialSystem();
-        dis = new Distribution();
+        vr = new VendorRecord();
+        rr = new RetailRecord();
         stcon = new StockControl();
-        mfs.setEnabled(false);
-        mfs.setVisible(false);
-        tfs.setEnabled(false);
-        tfs.setVisible(false);
+        av = new AddVendor();
+        setEnabledVisible(mfs, false);
+        setEnabledVisible(tfs, false);
+        setEnabledVisible(vr, false);
+        setEnabledVisible(rr, false);
+        stcon.setEnabled(false);
+        stcon.setVisible(false);
         initComponents();
         t = new TimerThread(time);
         t.start();
         if(name.equals("Finance"))
             topic6MouseClicked(e);
+        else if(name.equals("Distribution"))
+            topic5MouseClicked(e);
     }
-
-    public Main() {
+    
+    public Main()
+    {
         mfs = new MonthFinancialSystem();
         tfs = new TodayFinancialSystem();
-        dis = new Distribution();
+        vr = new VendorRecord();
+        rr = new RetailRecord();
         stcon = new StockControl();
-        mfs.setEnabled(false);
-        mfs.setVisible(false);
-        tfs.setEnabled(false);
-        tfs.setVisible(false);
+        av = new AddVendor();
+        setEnabledVisible(mfs, false);
+        setEnabledVisible(tfs, false);
+        setEnabledVisible(vr, false);
+        setEnabledVisible(rr, false);
+        stcon.setEnabled(false);
+        stcon.setVisible(false);
         initComponents();
         t = new TimerThread(time);
         t.start();
@@ -305,6 +318,11 @@ public class Main extends javax.swing.JFrame {
         sidepanel.add(topic4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 290, 60));
 
         topic5.setBackground(new java.awt.Color(0, 153, 153));
+        topic5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                topic5MouseClicked(evt);
+            }
+        });
         topic5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         bar5.setOpaque(false);
@@ -326,6 +344,11 @@ public class Main extends javax.swing.JFrame {
         name4.setForeground(new java.awt.Color(255, 255, 255));
         name4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         name4.setText("           Distribution");
+        name4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                name4MouseClicked(evt);
+            }
+        });
         topic5.add(name4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 9, 260, 40));
 
         pic4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Delivered_40px.png"))); // NOI18N
@@ -583,9 +606,6 @@ public class Main extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 monthMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                monthMouseEntered(evt);
-            }
         });
         topbar.add(month, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 200, 50));
 
@@ -597,7 +617,7 @@ public class Main extends javax.swing.JFrame {
     private void bar1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bar1MousePressed
 
         home.getInstance().setVisible(true);
-        setVisible(false);
+        dispose();
     }//GEN-LAST:event_bar1MousePressed
 
     private void namebar1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_namebar1MousePressed
@@ -695,13 +715,10 @@ public class Main extends javax.swing.JFrame {
             tfs.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
             add(tfs, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1200, 768));
             tfs.pubInit();
-            tfs.setFocusable(true);
-            tfs.setVisible(true);
+            setEnabledVisible(tfs, true);
             setLabelColor(name5);
-            today.setEnabled(true);
-            today.setVisible(true);
-            month.setEnabled(true);
-            month.setVisible(true);
+            setEnabledVisible(today, true);
+            setEnabledVisible(month, true);
             setPanelColor(topic6);
             setLabelColor(today);
         }
@@ -711,10 +728,8 @@ public class Main extends javax.swing.JFrame {
         tfs.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         add(tfs, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 1200, 768));
         tfs.pubInit();
-        tfs.setFocusable(true);
-        mfs.setEnabled(false);
-        mfs.setVisible(false);
-        tfs.setVisible(true);
+        setEnabledVisible(mfs, false);
+        setEnabledVisible(tfs, true);
         setLabelColor(today);
         resetLabelColor(month);
     }//GEN-LAST:event_todayMouseClicked
@@ -723,17 +738,11 @@ public class Main extends javax.swing.JFrame {
         mfs.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         add(mfs, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 1200, 768));
         mfs.pubInit();
-        mfs.setFocusable(true);
-        tfs.setEnabled(false);
-        tfs.setVisible(false);
-        mfs.setVisible(true);
+        setEnabledVisible(tfs, false);
+        setEnabledVisible(mfs, true);
         setLabelColor(month);
         resetLabelColor(today);
     }//GEN-LAST:event_monthMouseClicked
-
-    private void monthMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_monthMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_monthMouseEntered
 
     private void topic6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topic6MouseClicked
         name5MouseClicked(evt);
@@ -741,12 +750,26 @@ public class Main extends javax.swing.JFrame {
 
     private void name1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_name1MouseClicked
         resetAll();
-        vendor.setEnabled(true);
-        vendor.setVisible(true);
-        retail.setEnabled(true);
-        retail.setVisible(true);
+        setEnabledVisible(retail, true);
+        setEnabledVisible(vendor, true);
         setPanelColor(topic2);
     }//GEN-LAST:event_name1MouseClicked
+
+    private void name4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_name4MouseClicked
+        if(!vr.isVisible() && !rr.isVisible())
+        {
+            resetAll();
+            vr.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+            add(vr, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1200, 768));
+            vr.pubInit();
+            setEnabledVisible(vr, true);
+            setPanelColor(topic5);
+        }
+    }//GEN-LAST:event_name4MouseClicked
+
+    private void topic5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topic5MouseClicked
+        name4MouseClicked(evt);
+    }//GEN-LAST:event_topic5MouseClicked
 
     private void setLabelColor(JLabel label) //set the colour after  click
     {
@@ -772,9 +795,14 @@ public class Main extends javax.swing.JFrame {
     {
         if(c.isEnabled() && c.isVisible())
         {
-            c.setEnabled(false);
-            c.setVisible(false);
+            setEnabledVisible(c, false);
         }
+    }
+    
+    private void setEnabledVisible(JComponent c, boolean state)
+    {
+        c.setEnabled(state);
+        c.setVisible(state);
     }
     
     private void resetAll()
@@ -796,6 +824,8 @@ public class Main extends javax.swing.JFrame {
         resetComp(retail);
         resetComp(tfs);
         resetComp(mfs);
+        resetComp(rr);
+        resetComp(vr);
     }
     /**
      * @param args the command line arguments

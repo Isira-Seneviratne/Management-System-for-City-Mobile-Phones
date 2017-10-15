@@ -6,7 +6,6 @@
 package itpshnew;
 
 
-import java.awt.Color;
 import java.sql.*;
 import javax.swing.*;
 import net.proteanit.sql.DbUtils;
@@ -21,10 +20,14 @@ public class AddVendor extends Distribution {
      */
     public AddVendor() {
         super();
+    }
+
+    public void pubInit()
+    {
         initComponents();
         tableload(vendoradd_table,"select * FROM vendor");
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

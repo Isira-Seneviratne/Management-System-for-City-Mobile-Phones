@@ -16,9 +16,7 @@ public class home extends JFrame {
 
     private static home h = new home();
     
-    private TodayFinancialSystem tfs;
-    private MonthFinancialSystem mfs;
-    
+   
     public home() {
         
         this.setUndecorated(true);
@@ -27,10 +25,6 @@ public class home extends JFrame {
         //this.setVisible(true);
         
         initComponents();
-        tfs = new TodayFinancialSystem();
-        tfs.setVisible(false);
-        mfs = new MonthFinancialSystem();
-        mfs.setVisible(false);
         
         //new JScrollPane(jTable1, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         //jTable1.setAutoResizeMode(jTable1.AUTO_RESIZE_OFF);
@@ -208,6 +202,11 @@ public class home extends JFrame {
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Finance");
+        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel11MouseClicked(evt);
+            }
+        });
         jPanel6.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 150, 40));
 
         jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 150, 150));
@@ -328,7 +327,7 @@ public class home extends JFrame {
     }//GEN-LAST:event_minimizeMouseClicked
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
-        Main.getInstance("Finance", evt).setVisible(true);
+        new Main("Finance", evt).setVisible(true);
         dispose();
     }//GEN-LAST:event_jLabel10MouseClicked
 
@@ -359,8 +358,13 @@ public class home extends JFrame {
     }//GEN-LAST:event_jLabel14MouseClicked
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-        new Distribution().setVisible(true);
+        new Main("Distribution", evt).setVisible(true);
+        dispose();
     }//GEN-LAST:event_jLabel8MouseClicked
+
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+        jLabel10MouseClicked(evt);
+    }//GEN-LAST:event_jLabel11MouseClicked
 
     /**
      * @param args the command line arguments

@@ -19,7 +19,7 @@ public class MonthFinancialSystem extends FinancialSystem {
      * Creates new form MonthFinancialSystem
      */
     public MonthFinancialSystem() {
-        conn = dbCon.connect();
+        super();
     }
     
     @Override

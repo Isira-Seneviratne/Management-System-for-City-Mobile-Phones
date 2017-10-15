@@ -18,7 +18,7 @@ public class TodayFinancialSystem extends FinancialSystem {
      * Creates new form TodayFinancialSystem2
      */
     public TodayFinancialSystem() {
-        conn = dbCon.connect();
+        super();
     }
 
     /**
