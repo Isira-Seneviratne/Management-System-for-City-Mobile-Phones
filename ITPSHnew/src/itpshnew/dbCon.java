@@ -26,9 +26,7 @@ public class dbCon {
         catch(SQLException se)
         {
             JOptionPane.showMessageDialog(null, "Unable to establish database connection.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-       
-        
+        }        
         return conn;
     }
 }
