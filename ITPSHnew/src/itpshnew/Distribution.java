@@ -19,7 +19,7 @@ public abstract class Distribution extends javax.swing.JPanel {
      * Creates new form Distribution
      */
     
-    Connection con = null;
+    protected Connection con;
     PreparedStatement pst = null;
     ResultSet rs = null;
     

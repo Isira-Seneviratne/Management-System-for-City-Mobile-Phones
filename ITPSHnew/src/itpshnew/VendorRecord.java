@@ -20,6 +20,7 @@ public class VendorRecord extends Distribution {
         super();
     }
     
+    @Override
     public void pubInit()
     {
         initComponents();

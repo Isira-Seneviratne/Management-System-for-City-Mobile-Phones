@@ -16,7 +16,7 @@ import net.proteanit.sql.DbUtils;
 
 public class StockControl extends javax.swing.JFrame {
     private String ID;
-    Connection conn = null;
+    protected Connection conn;
     PreparedStatement pst = null;
     ResultSet rs = null;
     

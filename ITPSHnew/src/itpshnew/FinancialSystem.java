@@ -15,7 +15,7 @@ public abstract class FinancialSystem extends JPanel {
     protected float RepRev = 0, RepCost = 0, RepProf = 0, SalesRev = 0, SalesCost = 0,
             SalesProf = 0, DisRev = 0, DisCost = 0, DisProf = 0, HRCost = 0, OtherCost = 0,
             TotCost = 0, TotProf = 0, TotRev = 0;
-
+    
     public FinancialSystem()
     {
         conn = dbCon.connect();
