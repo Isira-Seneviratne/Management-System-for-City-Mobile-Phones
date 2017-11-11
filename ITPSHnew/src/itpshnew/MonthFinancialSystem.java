@@ -12,9 +12,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRTableModelDataSource;
-import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.view.JasperViewer;
-import org.apache.commons.digester.Digester;
+
 /**
  *
  * @author isira
