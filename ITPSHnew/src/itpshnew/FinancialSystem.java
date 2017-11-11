@@ -7,10 +7,14 @@ package itpshnew;
 
 import java.sql.*;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.*;
 
 public abstract class FinancialSystem extends JPanel {
 
     protected Connection conn;
+    protected JasperPrint jp;
+    protected DefaultTableModel repModel;
     
     protected float RepRev = 0, RepCost = 0, RepProf = 0, SalesRev = 0, SalesCost = 0,
             SalesProf = 0, DisRev = 0, DisCost = 0, DisProf = 0, HRCost = 0, OtherCost = 0,
@@ -22,6 +26,10 @@ public abstract class FinancialSystem extends JPanel {
     }
     
     public abstract void pubInit();
+    
+    public abstract void genIReport();
+    
+    public abstract void genTable();
     
     /**
      * This method is called from within the constructor to initialize the form.

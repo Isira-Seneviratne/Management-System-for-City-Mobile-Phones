@@ -6,8 +6,12 @@
 package itpshnew;
 
 import java.sql.*;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRTableModelDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 /**
  *
  * @author isira
@@ -17,7 +21,8 @@ public class TodayFinancialSystem extends FinancialSystem {
     /**
      * Creates new form TodayFinancialSystem2
      */
-    public TodayFinancialSystem() {
+    public TodayFinancialSystem()
+    {
         super();
     }
 
@@ -481,8 +486,53 @@ public class TodayFinancialSystem extends FinancialSystem {
         }
     }//GEN-LAST:event_updateTodayActionPerformed
 
-    
+    @Override
+    public void genIReport()
+    {
+        genTable();
+        try
+        {
+            JasperCompileManager.compileReportToFile("reports/todayfinances.jrxml");
+            jp = JasperFillManager.fillReport("reports/todayfinances.jasper", new HashMap(),
+                    new JRTableModelDataSource(repModel));
+            JasperViewer jv = new JasperViewer(jp);
+            jv.setVisible(true);
+        }
+        catch(JRException e)
+        {
+            JOptionPane.showMessageDialog(this, "Unable to generate report.", "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }
 
+    @Override
+    public void genTable()
+    {
+        try
+        {
+            String[] colNames = {"Day", "Month", "Year", "Repair income", "Repair cost", "Repair profit",
+                "Sales income", "Sales cost", "Sales profit", "Distribution income", "Distribution cost", "Distribution profit",
+                "HR cost", "Total income", "Total cost", "Total profit"};
+            Statement s = conn.createStatement();
+            ResultSet rs = s.executeQuery("SELECT * FROM daily_finances");
+            rs.last();
+            int n = rs.getRow();
+            rs.beforeFirst();
+            String[][] data = new String[n][17];
+            for(int i = 0; i < n; i++)
+            {
+                rs.next();
+                for(int j = 1; j <= 17; j++)
+                    data[i][j-1] = rs.getString(j);
+            }
+            repModel = new DefaultTableModel(data, colNames);
+        }
+        catch(SQLException e)
+        {
+            JOptionPane.showMessageDialog(this, "Unable to retrieve values from database.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField dis_cost;
     private javax.swing.JTextField dis_prof;

@@ -9,6 +9,7 @@ import java.sql.*;
 import javax.swing.*;
 import net.proteanit.sql.DbUtils;
 
+
 /**
  *
  * @author Bhanu
@@ -18,7 +19,6 @@ public abstract class Distribution extends javax.swing.JPanel {
     /**
      * Creates new form Distribution
      */
-    
     protected Connection con;
     PreparedStatement pst = null;
     ResultSet rs = null;

@@ -7,8 +7,14 @@ package itpshnew;
 
 import java.sql.*;
 import java.util.Calendar;
+import java.util.HashMap;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRTableModelDataSource;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.view.JasperViewer;
+import org.apache.commons.digester.Digester;
 /**
  *
  * @author isira
@@ -590,6 +596,7 @@ public class MonthFinancialSystem extends FinancialSystem {
                 message = "The financial report for the current month and year has been inserted.";
             }
             JOptionPane.showMessageDialog(this, message, title, JOptionPane.INFORMATION_MESSAGE);
+            genIReport();
         }
         catch(NullPointerException npe)
         {
@@ -640,6 +647,51 @@ public class MonthFinancialSystem extends FinancialSystem {
         tot_prof1.setText("");
     }
 
+    @Override
+    public void genIReport()
+    {
+        genTable();
+        try
+        {
+            JasperCompileManager.compileReportToFile("reports/monthfinances.jrxml");
+            jp = JasperFillManager.fillReport("reports/monthfinances.jasper", new HashMap(),
+                    new JRTableModelDataSource(repModel));
+            JasperViewer jv = new JasperViewer(jp);
+            jv.setVisible(true);
+        }
+        catch(JRException e)
+        {
+            JOptionPane.showMessageDialog(this, "Unable to generate report.", "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }
+    
+    @Override
+    public void genTable()
+    {
+        try
+        {
+            String[] colNames = {"Month issued", "Year issued", "Total revenue", "Total costs", "Total profit"};
+            Statement s = conn.createStatement();
+            ResultSet rs = s.executeQuery("SELECT * FROM financial_reports");
+            rs.last();
+            int n = rs.getRow();
+            rs.beforeFirst();
+            String[][] data = new String[n][5];
+            for(int i = 0; i < n; i++)
+            {
+                rs.next();
+                for(int j = 1; j <= 5; j++)
+                    data[i][j-1] = rs.getString(j);
+            }
+            repModel = new DefaultTableModel(data, colNames);
+        }
+        catch(SQLException e)
+        {
+            JOptionPane.showMessageDialog(this, "Unable to retrieve values from database.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField dis_cost1;
     private javax.swing.JTextField dis_prof1;
