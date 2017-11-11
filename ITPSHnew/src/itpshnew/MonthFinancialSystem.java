@@ -670,7 +670,7 @@ public class MonthFinancialSystem extends FinancialSystem {
     {
         try
         {
-            String[] colNames = {"Month issued", "Year issued", "Total revenue", "Total costs", "Total profit"};
+            String[] colNames = {"Month_issued", "Year_issued", "Total_revenue", "Total_costs", "Total_profit"};
             Statement s = conn.createStatement();
             ResultSet rs = s.executeQuery("SELECT * FROM financial_reports");
             rs.last();

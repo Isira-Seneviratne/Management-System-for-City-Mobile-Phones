@@ -510,9 +510,9 @@ public class TodayFinancialSystem extends FinancialSystem {
     {
         try
         {
-            String[] colNames = {"Day", "Month", "Year", "Repair income", "Repair cost", "Repair profit",
-                "Sales income", "Sales cost", "Sales profit", "Distribution income", "Distribution cost", "Distribution profit",
-                "HR cost", "Total income", "Total cost", "Total profit"};
+            String[] colNames = {"Day", "Month", "Year", "Rep_inc", "Rep_cost", "Rep_prof",
+                "Sales_inc", "Sales_cost", "Sales_prof", "Dis_inc", "Dis_cost", "Dis_prof",
+                "HR_cost", "Tot_inc", "Tot_cost", "Tot_prof"};
             Statement s = conn.createStatement();
             ResultSet rs = s.executeQuery("SELECT * FROM daily_finances");
             rs.last();
