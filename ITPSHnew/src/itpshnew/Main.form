@@ -990,6 +990,7 @@
               <Image iconType="3" name="/itpshnew/images/icons8_Money_Bag_40px.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="  Month"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>

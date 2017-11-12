@@ -600,6 +600,7 @@ public class Main extends javax.swing.JFrame {
         month.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         month.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Money_Bag_40px.png"))); // NOI18N
         month.setText("  Month");
+        month.setEnabled(false);
         month.setOpaque(true);
         month.setVisible(false);
         month.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -674,13 +675,11 @@ public class Main extends javax.swing.JFrame {
 
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
         t.setRunning(false);
-        dispose();
+        System.exit(0);
     }//GEN-LAST:event_closeMouseClicked
 
     private void minimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeMouseClicked
-        //JFrame frame = new JFrame("test");   //minimize label
         setExtendedState(JFrame.ICONIFIED);
-
     }//GEN-LAST:event_minimizeMouseClicked
 
     private void vendorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vendorMouseClicked
