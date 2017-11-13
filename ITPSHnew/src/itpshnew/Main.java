@@ -22,7 +22,9 @@ public class Main extends javax.swing.JFrame {
     private VendorRecord vr;
     private RetailRecord rr;
     
-    private StockControl stcon;
+    private Item i;
+    private Stock s;
+    private Reports r;
     
     private TimerThread t;
     /**
@@ -38,14 +40,17 @@ public class Main extends javax.swing.JFrame {
         tfs = new TodayFinancialSystem();
         vr = new VendorRecord();
         rr = new RetailRecord();
-        stcon = new StockControl();
+        r = new Reports();
+        i = new Item();
+        s = new Stock();
         av = new AddVendor();
         setEnabledVisible(mfs, false);
         setEnabledVisible(tfs, false);
         setEnabledVisible(vr, false);
         setEnabledVisible(rr, false);
-        stcon.setEnabled(false);
-        stcon.setVisible(false);
+        setEnabledVisible(r, false);
+        setEnabledVisible(s, false);
+        setEnabledVisible(i, false);
         initComponents();
         t = new TimerThread(time);
         t.start();
@@ -61,14 +66,17 @@ public class Main extends javax.swing.JFrame {
         tfs = new TodayFinancialSystem();
         vr = new VendorRecord();
         rr = new RetailRecord();
-        stcon = new StockControl();
+        r = new Reports();
+        i = new Item();
+        s = new Stock();
         av = new AddVendor();
         setEnabledVisible(mfs, false);
         setEnabledVisible(tfs, false);
         setEnabledVisible(vr, false);
         setEnabledVisible(rr, false);
-        stcon.setEnabled(false);
-        stcon.setVisible(false);
+        setEnabledVisible(r, false);
+        setEnabledVisible(s, false);
+        setEnabledVisible(i, false);
         initComponents();
         t = new TimerThread(time);
         t.start();
@@ -588,9 +596,6 @@ public class Main extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 retailMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                retailMouseEntered(evt);
-            }
         });
         topbar.add(retail, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 200, 50));
 
@@ -683,16 +688,26 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_minimizeMouseClicked
 
     private void vendorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vendorMouseClicked
-
+        s.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(s, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 1200, 768));
+        s.pubInit();
+        setEnabledVisible(i, false);
+        setEnabledVisible(r, false);
+        setEnabledVisible(s, true);
+        setLabelColor(vendor);
+        resetLabelColor(retail);
     }//GEN-LAST:event_vendorMouseClicked
 
     private void retailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_retailMouseClicked
-        //jTable2.setEnabled(false);
+        i.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(i, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 1200, 768));
+        i.pubInit();
+        setEnabledVisible(r, false);
+        setEnabledVisible(s, false);
+        setEnabledVisible(i, true);
+        setLabelColor(retail);
+        resetLabelColor(vendor);
     }//GEN-LAST:event_retailMouseClicked
-
-    private void retailMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_retailMouseEntered
-
-    }//GEN-LAST:event_retailMouseEntered
 
     private void adddetailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adddetailMouseClicked
 
@@ -825,6 +840,9 @@ public class Main extends javax.swing.JFrame {
         resetComp(mfs);
         resetComp(rr);
         resetComp(vr);
+        resetComp(r);
+        resetComp(i);
+        resetComp(s);
     }
     /**
      * @param args the command line arguments
