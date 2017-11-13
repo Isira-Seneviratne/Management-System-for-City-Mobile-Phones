@@ -9,10 +9,7 @@ import java.sql.*;
 import java.util.Calendar;
 import java.util.HashMap;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.data.JRTableModelDataSource;
-import net.sf.jasperreports.engine.fill.JRExpressionEvalException;
 import net.sf.jasperreports.view.JasperViewer;
 
 /**
@@ -597,11 +594,6 @@ public class MonthFinancialSystem extends FinancialSystem {
             }
             JOptionPane.showMessageDialog(this, message, title, JOptionPane.INFORMATION_MESSAGE);
             genIReport();
-        }
-        catch(NullPointerException npe)
-        {
-            JOptionPane.showMessageDialog(this, "A database connection was not properly established.",
-                    "Error", JOptionPane.ERROR_MESSAGE);
         }
         catch(SQLException se)
         {

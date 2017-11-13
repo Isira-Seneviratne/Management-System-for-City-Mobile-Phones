@@ -15,16 +15,16 @@ import javax.swing.*;
  */
 public class Main extends javax.swing.JFrame {
     
-    MonthFinancialSystem mfs;
-    TodayFinancialSystem tfs;
+    private MonthFinancialSystem mfs;
+    private TodayFinancialSystem tfs;
     
-    AddVendor av;
-    VendorRecord vr;
-    RetailRecord rr;
+    private AddVendor av;
+    private VendorRecord vr;
+    private RetailRecord rr;
     
-    StockControl stcon;
+    private StockControl stcon;
     
-    TimerThread t;
+    private TimerThread t;
     /**
      * Creates new form Main
      * @param name

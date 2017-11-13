@@ -1,6 +1,5 @@
 package itpshnew;
 
-import java.sql.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import java.awt.Color;
 import java.sql.*;
@@ -53,12 +52,12 @@ public class StockControl extends javax.swing.JFrame {
     }
    public void NullValidation()
    {
-   int count = 0;
+        int count = 0;
 //   if (txtship.)
  //      JOptionPane.showMessageDialog(rootPane, "Shipping ID cannot be NULL");
-   if (txtid.getText().equals("") && count == 0)
-       JOptionPane.showMessageDialog(rootPane, "Item ID cannot be NULL");
-                   txtship.setText("");
+        if (txtid.getText().equals("") && count == 0)
+            JOptionPane.showMessageDialog(rootPane, "Item ID cannot be NULL");
+        txtship.setText("");
         txtid.setText("");
         txtprice1.setText("");
         txtname.setText("");
