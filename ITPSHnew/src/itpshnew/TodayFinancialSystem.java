@@ -8,9 +8,7 @@ package itpshnew;
 import java.sql.*;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.data.JRTableModelDataSource;
 import net.sf.jasperreports.view.JasperViewer;
 /**
  *
@@ -379,7 +377,7 @@ public class TodayFinancialSystem extends FinancialSystem {
             RepRev = 300;
             RepCost = 300;
             RepProf = RepRev - RepCost;
-            rs = s.executeQuery("SELECT net_amount FROM payment p, bill b WHERE b.Bill_Number=p.bill_number AND Date = CURDATE()");
+            rs = s.executeQuery("SELECT net_amount FROM bill WHERE Date = CURDATE()");
             while(rs.next())
                 SalesRev += rs.getFloat("net_amount");
             rs = s.executeQuery("SELECT totalCost FROM reorder");
@@ -474,6 +472,7 @@ public class TodayFinancialSystem extends FinancialSystem {
             }
             tot_cost.setText(Float.toString(TotCost).replaceAll("\\.0*$", ""));
             tot_prof.setText(Float.toString(TotProf).replaceAll("\\.0*$", ""));
+            genIReport();
         }
         catch(NumberFormatException ne)
         {
@@ -489,47 +488,18 @@ public class TodayFinancialSystem extends FinancialSystem {
     @Override
     public void genIReport()
     {
-        genTable();
         try
         {
-            JasperCompileManager.compileReportToFile("reports/todayfinances.jrxml");
-            jp = JasperFillManager.fillReport("reports/todayfinances.jasper", new HashMap(),
-                    new JRTableModelDataSource(repModel));
-            JasperViewer jv = new JasperViewer(jp);
+            JasperCompileManager.compileReportToFile("reports/todayfinances.jrxml", "reports/todayfinances.jasper");
+            JasperFillManager.fillReportToFile("reports/todayfinances.jasper",
+                    "reports/todayfinances.jrprint", new HashMap(), conn);
+            JasperViewer jv = new JasperViewer("reports/todayfinances.jrprint", false);
             jv.setVisible(true);
         }
         catch(JRException e)
         {
             JOptionPane.showMessageDialog(this, "Unable to generate report.", "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void genTable()
-    {
-        try
-        {
-            String[] colNames = {"Day", "Month", "Year", "Rep_inc", "Rep_cost", "Rep_prof",
-                "Sales_inc", "Sales_cost", "Sales_prof", "Dis_inc", "Dis_cost", "Dis_prof",
-                "HR_cost", "Tot_inc", "Tot_cost", "Tot_prof"};
-            Statement s = conn.createStatement();
-            ResultSet rs = s.executeQuery("SELECT * FROM daily_finances");
-            rs.last();
-            int n = rs.getRow();
-            rs.beforeFirst();
-            String[][] data = new String[n][17];
-            for(int i = 0; i < n; i++)
-            {
-                rs.next();
-                for(int j = 1; j <= 17; j++)
-                    data[i][j-1] = rs.getString(j);
-            }
-            repModel = new DefaultTableModel(data, colNames);
-        }
-        catch(SQLException e)
-        {
-            JOptionPane.showMessageDialog(this, "Unable to retrieve values from database.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     

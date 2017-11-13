@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="1000" pageHeight="595" orientation="Landscape" columnWidth="960" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d457ed33-94bb-4599-9df6-91285a88c59d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString language="SQL">
+		<![CDATA[select * from daily_finances]]>
+	</queryString>
+	<field name="Day" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Month" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Year" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Rep_inc" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Rep_cost" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Rep_prof" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Sales_inc" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Sales_cost" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Sales_prof" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Dis_inc" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Dis_cost" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Dis_prof" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="HR_cost" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Tot_inc" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Tot_cost" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Tot_prof" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Other_cost" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<image>
+				<reportElement x="275" y="0" width="300" height="64" uuid="139c866f-6607-4cbb-8c4a-fcf90e77ed39"/>
+				<imageExpression><![CDATA["leaf_banner_green.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Title" x="0" y="13" width="263" height="33" uuid="71cea735-91ed-4a00-80b4-e9e818ce83c5"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Daily Finances]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="fa6bd5cf-e455-4a73-bd3c-f17f3e80786a"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="32" height="15" uuid="cd21df66-b059-474e-918d-1e08ae27ba79"/>
+				<text><![CDATA[Day]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="32" y="19" width="46" height="15" uuid="1d64fa5c-3ff7-4440-83a3-a74e239c7a92"/>
+				<text><![CDATA[Month]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="78" y="17" width="32" height="15" uuid="3d5a1daa-47c4-4e1d-b977-7605476d87dd"/>
+				<text><![CDATA[Year]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="110" y="17" width="54" height="15" uuid="73b1db62-aef2-44b3-b231-ae199141caa8"/>
+				<text><![CDATA[Rep_inc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="164" y="15" width="56" height="15" uuid="a5285d6f-049d-4e8f-bac3-d1fbad46183e"/>
+				<text><![CDATA[Rep_cost]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="220" y="15" width="55" height="15" uuid="d55db958-4c7a-4d36-8aa3-147699df712f"/>
+				<text><![CDATA[Rep_prof]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="275" y="17" width="59" height="15" uuid="20ceef57-576f-492d-989d-43f3515af081"/>
+				<text><![CDATA[Sales_inc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="334" y="17" width="70" height="15" uuid="e074e23e-83fd-41bc-bab9-66f2eb95bdab"/>
+				<text><![CDATA[Sales_cost]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="404" y="17" width="72" height="15" uuid="1af6d417-e53d-4da5-85c7-1f454c049909"/>
+				<text><![CDATA[Sales_prof]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="476" y="17" width="50" height="15" uuid="a32ae87b-d581-47f6-9e98-190cc85f7d2a"/>
+				<text><![CDATA[Dis_inc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="526" y="17" width="57" height="15" uuid="66c39f05-b2b3-4662-af63-2532a7635836"/>
+				<text><![CDATA[Dis_cost]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="583" y="17" width="61" height="15" uuid="3bf5191f-7920-4934-a31e-7b3b44b9d836"/>
+				<text><![CDATA[Dis_prof]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="644" y="17" width="57" height="15" uuid="c20b2cc9-7dda-4787-a3fd-b6477eaf469c"/>
+				<text><![CDATA[HR_cost]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="701" y="17" width="65" height="15" uuid="102dea12-68db-438f-8013-91df091cc415"/>
+				<text><![CDATA[Tot_inc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="766" y="19" width="61" height="15" uuid="4cebbe0a-8ed4-4be6-90c0-a226c1d64040"/>
+				<text><![CDATA[Tot_cost]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="827" y="19" width="58" height="15" uuid="beeb8c0e-6a0f-43f3-ac78-dc68750caff6"/>
+				<text><![CDATA[Tot_prof]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="885" y="19" width="75" height="15" uuid="c9dd342e-9c57-4118-94a5-6462cb3cece9"/>
+				<text><![CDATA[Other_cost]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="62eb1e4e-4882-4d61-b578-62369646c2f6"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="32" height="15" uuid="433f0cb8-75c6-4734-8915-af64644b04fe"/>
+				<textFieldExpression><![CDATA[$F{Day}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="32" y="0" width="46" height="15" uuid="7b1fb38f-b790-4208-8a29-f16067341487"/>
+				<textFieldExpression><![CDATA[$F{Month}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="334" y="0" width="70" height="15" uuid="d04def7c-5d6c-49bb-9f7b-595c1cb197bc"/>
+				<textFieldExpression><![CDATA[$F{Sales_cost}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="827" y="1" width="58" height="15" uuid="2ca5e6c6-6c34-4e05-b3e6-013b3064eb53"/>
+				<textFieldExpression><![CDATA[$F{Tot_prof}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="885" y="1" width="75" height="15" uuid="a588f3a9-c16f-4041-8e99-df97810c071a"/>
+				<textFieldExpression><![CDATA[$F{Other_cost}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="476" y="1" width="50" height="15" uuid="acb24320-7450-4d25-b4c7-590935a8fae1"/>
+				<textFieldExpression><![CDATA[$F{Dis_inc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="404" y="1" width="72" height="15" uuid="bf985b3e-bc0f-4ae2-9d6c-e8165ea3fbf0"/>
+				<textFieldExpression><![CDATA[$F{Sales_prof}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="591" y="1" width="61" height="15" uuid="47336c2e-5c43-41e5-8934-fd5f0216f500"/>
+				<textFieldExpression><![CDATA[$F{Dis_prof}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="644" y="1" width="57" height="15" uuid="ac852dbf-5ec3-4b45-a85b-90d35b1b65f2"/>
+				<textFieldExpression><![CDATA[$F{HR_cost}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="701" y="1" width="65" height="15" uuid="bcd49335-cf78-4670-896b-ecb7c6e17370"/>
+				<textFieldExpression><![CDATA[$F{Tot_inc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="766" y="1" width="61" height="15" uuid="353e1493-5f45-4c47-ae54-11f3b05dc48e"/>
+				<textFieldExpression><![CDATA[$F{Tot_cost}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="526" y="1" width="57" height="15" uuid="63c595bb-299e-49cd-acf4-c716f0b56831"/>
+				<textFieldExpression><![CDATA[$F{Dis_cost}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="275" y="0" width="59" height="15" uuid="db1cfb47-1321-4fac-a8a3-8270ba2519e6"/>
+				<textFieldExpression><![CDATA[$F{Sales_inc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="164" y="1" width="56" height="15" uuid="5646232f-3aa4-4d0a-8bce-7e86b598bf29"/>
+				<textFieldExpression><![CDATA[$F{Rep_cost}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="220" y="1" width="55" height="15" uuid="dbc7228b-21e8-4167-95e2-9e4eca7c84bd"/>
+				<textFieldExpression><![CDATA[$F{Rep_prof}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="110" y="1" width="54" height="15" uuid="052fe0be-b101-40df-b004-d043c7cf30de"/>
+				<textFieldExpression><![CDATA[$F{Rep_inc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="78" y="1" width="32" height="15" uuid="d991c69a-4d54-4ec9-a5a9-c97ffcae1a29"/>
+				<textFieldExpression><![CDATA[$F{Year}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="960" height="1" uuid="d3525c1f-42c2-405e-aa66-1c8cc420f40f"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="98ea5e5f-b25e-44dc-b38a-e4c5d917c2bb"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="5cf923ab-d687-4ec4-afff-985b3715355c"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="4d258594-4e6e-4482-80bd-1e839265a692"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

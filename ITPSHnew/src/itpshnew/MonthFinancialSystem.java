@@ -12,6 +12,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRTableModelDataSource;
+import net.sf.jasperreports.engine.fill.JRExpressionEvalException;
 import net.sf.jasperreports.view.JasperViewer;
 
 /**
@@ -649,45 +650,18 @@ public class MonthFinancialSystem extends FinancialSystem {
     @Override
     public void genIReport()
     {
-        genTable();
         try
         {
-            JasperCompileManager.compileReportToFile("reports/monthfinances.jrxml");
-            jp = JasperFillManager.fillReport("reports/monthfinances.jasper", new HashMap(),
-                    new JRTableModelDataSource(repModel));
-            JasperViewer jv = new JasperViewer(jp);
+            JasperCompileManager.compileReportToFile("reports/monthfinances.jrxml", "reports/monthfinances.jasper");
+            JasperFillManager.fillReportToFile("reports/monthfinances.jasper",
+                    "reports/monthfinances.jrprint", new HashMap(), conn);
+            JasperViewer jv = new JasperViewer("reports/monthfinances.jrprint", false);
             jv.setVisible(true);
         }
         catch(JRException e)
         {
             JOptionPane.showMessageDialog(this, "Unable to generate report.", "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
-        }
-    }
-    
-    @Override
-    public void genTable()
-    {
-        try
-        {
-            String[] colNames = {"Month_issued", "Year_issued", "Total_revenue", "Total_costs", "Total_profit"};
-            Statement s = conn.createStatement();
-            ResultSet rs = s.executeQuery("SELECT * FROM financial_reports");
-            rs.last();
-            int n = rs.getRow();
-            rs.beforeFirst();
-            String[][] data = new String[n][5];
-            for(int i = 0; i < n; i++)
-            {
-                rs.next();
-                for(int j = 1; j <= 5; j++)
-                    data[i][j-1] = rs.getString(j);
-            }
-            repModel = new DefaultTableModel(data, colNames);
-        }
-        catch(SQLException e)
-        {
-            JOptionPane.showMessageDialog(this, "Unable to retrieve values from database.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     

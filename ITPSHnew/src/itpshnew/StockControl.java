@@ -56,7 +56,7 @@ public class StockControl extends javax.swing.JFrame {
    int count = 0;
 //   if (txtship.)
  //      JOptionPane.showMessageDialog(rootPane, "Shipping ID cannot be NULL");
-   if (txtid.getText() == "" && count == 0)
+   if (txtid.getText().equals("") && count == 0)
        JOptionPane.showMessageDialog(rootPane, "Item ID cannot be NULL");
                    txtship.setText("");
         txtid.setText("");
