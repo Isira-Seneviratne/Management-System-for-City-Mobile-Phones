@@ -189,10 +189,10 @@ if (!isset($_SESSION['firstName']))
 						<a href="buy1.php">
 							<img class="img-responsive" src="images/pi22.jpg" alt="" />
 						</a>
-						<h3>Iphone 6s </h3>
+						<h3>iPhone 6s </h3>
 						
 						<div class="price">
-						  <h5 class="item_price">LKR 90 000</h5>
+						  <h5 class="item_price">LKR 90,000</h5>
 								<a href="buy1.php
 								" class="item_add">Add To Cart</a>
 								<div class="clearfix"> </div>
@@ -207,7 +207,7 @@ if (!isset($_SESSION['firstName']))
 					  </a>
 						<h3>LG-v20</h3>
 						<div class="price">
-						  <h5 class="item_price">LKR  79 900</h5>
+						  <h5 class="item_price">LKR 79,900</h5>
 					 	  <a href="buy9.php
 								" class="item_add">Add To Cart</a>
 						  <div class="clearfix"> </div>
@@ -220,9 +220,9 @@ if (!isset($_SESSION['firstName']))
 					  <a href="buy8.php">
 							<img class="img-responsive" src="images/oppo_f3.jpg" alt="" />
 					  </a>
-						<h3>oppo f3 </h3>
+						<h3>Oppo f3 </h3>
 						<div class="price">
-						  <h5 class="item_price">LKR  35 900</h5>
+						  <h5 class="item_price">LKR 35,900</h5>
 					 	  <a href="buy8.php
 								" class="item_add">Add To Cart</a>
 						  <div class="clearfix"> </div>
@@ -235,9 +235,9 @@ if (!isset($_SESSION['firstName']))
 						<a href="buy.php">
 							<img class="img-responsive" src="images/pi4.png" alt="" />
 						</a>
-						<h3>samsung galxy J2</h3>
+						<h3>Samsung Galaxy J2</h3>
 						<div class="price">
-						  <h5 class="item_price">LKR  20 000</h5>
+						  <h5 class="item_price">LKR 20,000</h5>
 						 	<a href="buy.php
 								" class="item_add">Add To Cart</a>
 						  <div class="clearfix"> </div>
