@@ -763,10 +763,19 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_topic6MouseClicked
 
     private void name1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_name1MouseClicked
-        resetAll();
-        setEnabledVisible(retail, true);
-        setEnabledVisible(vendor, true);
-        setPanelColor(topic2);
+        if(!i.isVisible() && !r.isVisible() && !s.isVisible())
+        {
+            resetAll();
+            i.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+            add(i, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1200, 768));
+            i.pubInit();
+            setEnabledVisible(i, true);
+            setLabelColor(name1);
+            setEnabledVisible(retail, true);
+            setEnabledVisible(vendor, true);
+            setPanelColor(topic2);
+            setLabelColor(retail);
+        }
     }//GEN-LAST:event_name1MouseClicked
 
     private void name4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_name4MouseClicked

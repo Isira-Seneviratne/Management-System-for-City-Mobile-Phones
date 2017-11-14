@@ -893,7 +893,7 @@ public class Item extends StockControl {
         } catch (SQLException ex) {
             Logger.getLogger(StockControl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        tableload2();
+        tableLoad(jTable2, "select * from availablestock");
         txtpro.setText("10");
         txtnro.setText("");
         String model = txtmdl1.getText();
@@ -914,7 +914,7 @@ public class Item extends StockControl {
                 } catch (SQLException ex) {
                     Logger.getLogger(StockControl.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                tableload2();
+                tableLoad(jTable2, "select * from availablestock");
 
                 //String nro = txtnro.getText();
                 String model = txtmdl1.getText();
@@ -926,7 +926,7 @@ public class Item extends StockControl {
     }//GEN-LAST:event_jButton25ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        tableload2();
+        tableLoad(jTable2, "select * from availablestock");
         txtqty1.setText("");
         txtbrand2.setText("");
         txtsearch3.setText("");
@@ -1054,7 +1054,8 @@ public class Item extends StockControl {
         String reorder = txtcb4.getText();
         if (goal == false && geo == false){
 
-            try{
+            try
+            {
                 SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
                 double total = Double.parseDouble(Price) * Double.parseDouble(qty);
                 double current = Double.parseDouble(Budget);
@@ -1070,14 +1071,12 @@ public class Item extends StockControl {
                 {
                     JOptionPane.showMessageDialog(null, "Company cannot afford Rs. "+total+"/-", "Cannot place Re-Order",
                         JOptionPane.ERROR_MESSAGE);
-
                 }
-
             }
             catch (Exception b)
             {}
 
-            tableload3();
+            tableLoad(jTable2, "select * from reorder");
         }
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -1108,26 +1107,13 @@ public class Item extends StockControl {
     }//GEN-LAST:event_txtbrand2ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        tableload3();
+        tableLoad(jTable2, "select * from reorder");
         jPanel12.setVisible(true);
         jPanel10.setVisible(false);
         jTable2.setEnabled(false);
         //jLabel49.setVisible(false);
     }//GEN-LAST:event_jButton14ActionPerformed
 
-    public void tableload3()
-    {
-          try {
-              String wq = "select * from reorder";
-              pst = (PreparedStatement) conn.prepareStatement(wq);
-              
-              rs = pst.executeQuery();
-              jTable2.setModel(DbUtils.resultSetToTableModel(rs));
-              
-              
-        } catch (Exception e1) {
-        }
-    }
     
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         // TODO add your handling code here:
@@ -1161,7 +1147,7 @@ public class Item extends StockControl {
     }//GEN-LAST:event_txtnameActionPerformed
 
     private void purchase_save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchase_save_btnActionPerformed
-        tableload();
+        tableLoad(jTable3, "select * from item");
 
         boolean flag = false;
         ID = getID();
@@ -1306,7 +1292,7 @@ public class Item extends StockControl {
 
             //"
             // + "
-            tableload();
+            tableLoad(jTable3, "select * from item");
             JOptionPane.showMessageDialog(null, Name +" has been added successfully");
 
             txtship.setText("");
@@ -1373,21 +1359,6 @@ public class Item extends StockControl {
     };
    }
     
-    public void tableload()
-    {
-          try {
-              String q = "select * FROM item";
-              
-              pst = (PreparedStatement) conn.prepareStatement(q);
-              
-              rs = pst.executeQuery();
-              jTable3.setModel(DbUtils.resultSetToTableModel(rs));
-              
-              
-        } catch (Exception e1) {
-        }
-    }
-    
     public void NullValidation()
    {
         int count = 0;
@@ -1433,7 +1404,7 @@ public class Item extends StockControl {
    }
     
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        tableload();
+        tableLoad(jTable3, "select * from item");
         txtsearch.setText("");
         txtship.setText("");
         //txtid.setText("");
@@ -1475,20 +1446,6 @@ public class Item extends StockControl {
             Logger.getLogger(StockControl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jLabel40MouseClicked
-
-     public void tableload2()
-    {
-          try {
-              String wq = "select * from availablestock";
-              pst = (PreparedStatement) conn.prepareStatement(wq);
-              
-              rs = pst.executeQuery();
-              jTable2.setModel(DbUtils.resultSetToTableModel(rs));
-              
-              
-        } catch (Exception e1) {
-        }
-    }
     
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         int x = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete?");
@@ -1500,8 +1457,8 @@ public class Item extends StockControl {
             try {
                 pst = (PreparedStatement) conn.prepareStatement(q);
                 int deleted = pst.executeUpdate(q);
-                tableload();
-                tableload2();
+                tableLoad(jTable3, "select * from item");
+                tableLoad(jTable2, "select * from availablestock");
                 if (deleted != 0) {
                     JOptionPane.showMessageDialog(null, id +" has been successfully deleted");
                     txtdel.setText("");

@@ -34,20 +34,6 @@ public class Stock extends StockControl {
         initComponents();
     }
     
-    public void tableload2()
-    {
-          try {
-              String wq = "select * from availablestock";
-              pst = (PreparedStatement) conn.prepareStatement(wq);
-              
-              rs = pst.executeQuery();
-              jTable2.setModel(DbUtils.resultSetToTableModel(rs));
-              
-              
-        } catch (Exception e1) {
-        }
-    }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -439,15 +425,18 @@ public class Stock extends StockControl {
     }//GEN-LAST:event_txtproActionPerformed
 
     private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
-        try {
+        try
+        {
             String model = txtmdl1.getText();
             String t = "Update availablestock SET reOrderLevel = 10 WHERE modelCode = '"+ model +"'";
             pst = (PreparedStatement) conn.prepareStatement(t);
             pst.execute();
-        } catch (SQLException ex) {
+        }
+        catch (SQLException ex)
+        {
             Logger.getLogger(StockControl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        tableload2();
+        tableLoad(jTable2, "select * from availablestock");
         txtpro.setText("10");
         txtnro.setText("");
         String model = txtmdl1.getText();
@@ -456,7 +445,8 @@ public class Stock extends StockControl {
 
     private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
         String nro = txtnro.getText();
-        if(!nro.equals("")){
+        if(!nro.equals(""))
+        {
             int x = JOptionPane.showConfirmDialog(null, "Are you sure you want to change the ReOrder Level?");
             if (x == 0){
                 try {
@@ -468,7 +458,7 @@ public class Stock extends StockControl {
                 } catch (SQLException ex) {
                     Logger.getLogger(StockControl.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                tableload2();
+                tableLoad(jTable2, "select * from availablestock");
 
                 //String nro = txtnro.getText();
                 String model = txtmdl1.getText();
@@ -480,7 +470,7 @@ public class Stock extends StockControl {
     }//GEN-LAST:event_jButton25ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        tableload2();
+        tableLoad(jTable2, "select * from availablestock");
         txtqty1.setText("");
         txtbrand2.setText("");
         txtsearch3.setText("");
@@ -562,31 +552,27 @@ public class Stock extends StockControl {
         int count = 0;
         if (!Model.equals("") && goal == false)
         {
-            try {
-
+            try
+            {
                 String SQL = "SELECT * FROM item";
                 ResultSet rs = pst.executeQuery(SQL);
                 while (rs.next()) {
                     String mc = rs.getString("modelCode");
-
                     if (Model.equals(mc))
-                    {
-                        count = count + 1;
-                    }
-
+                        count++;
                 }
-                if(count == 0){
+                if(count == 0)
+                {
                     int x = JOptionPane.showConfirmDialog(null, "This is a New Product, Do you still wish to ReOrder?");
                     if (x == 0){
                         geo = false;
                     }
                 }
                 else
-                geo = false;
+                    geo = false;
             } catch (SQLException ex) {
                 Logger.getLogger(StockControl.class.getName()).log(Level.SEVERE, null, ex);
             }
-
         }
 
         String CB = txtbudget.getText();
@@ -606,32 +592,32 @@ public class Stock extends StockControl {
         }
 
         String reorder = txtcb4.getText();
-        if (goal == false && geo == false){
-
-            try{
+        if (goal == false && geo == false)
+        {
+            try
+            {
                 SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
                 double total = Double.parseDouble(Price) * Double.parseDouble(qty);
                 double current = Double.parseDouble(Budget);
-                if (total<current){
+                if (total < current)
+                {
                     String b = "INSERT INTO reorder(reOrderID,vendorID,brand,modelCode,qty,totalCost,RequestDate,RequestTime) "
                     + " values ('"+ reorder +"','"+ Vendor +"','"+ Brand +"','"+ Model +"','"+ qty +"','"+ total +"','"+ DateTimeFunctions.getDate() +"','"+ timeFormat.format(Calendar.getInstance().getTime()) +"')";
                     pst = (PreparedStatement) conn.prepareStatement(b);
                     pst.execute();
                     SetReorderID();
-
                 }
                 else
                 {
                     JOptionPane.showMessageDialog(null,"Company cannot afford Rs. "+total+"/-", "Cannot place Re-Order",
                         JOptionPane.ERROR_MESSAGE);
-
                 }
-
             }
-            catch (Exception b)
-            {}
-
-            tableload3();
+            catch(SQLException b)
+            {
+                JOptionPane.showMessageDialog(null, "Unable to retrieve values.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            tableLoad(jTable2, "select * from reorder");
         }
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -674,20 +660,6 @@ public class Stock extends StockControl {
     };
    }
     
-    public void tableload3()
-    {
-          try {
-              String wq = "select * from reorder";
-              pst = (PreparedStatement) conn.prepareStatement(wq);
-              
-              rs = pst.executeQuery();
-              jTable2.setModel(DbUtils.resultSetToTableModel(rs));
-              
-              
-        } catch (Exception e1) {
-        }
-    }
-    
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
 
         txtbudget.setText("");
@@ -715,7 +687,7 @@ public class Stock extends StockControl {
     }//GEN-LAST:event_txtbrand2ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        tableload3();
+        tableLoad(jTable2, "select * from reorder");
         jPanel12.setVisible(true);
         jPanel10.setVisible(false);
         jTable2.setEnabled(false);

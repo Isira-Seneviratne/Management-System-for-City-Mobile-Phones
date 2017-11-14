@@ -5,8 +5,9 @@
  */
 package itpshnew;
 
-import com.mysql.jdbc.PreparedStatement;
 import java.sql.*;
+import javax.swing.*;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -27,6 +28,20 @@ public class StockControl extends javax.swing.JPanel {
     public void pubInit()
     {
         initComponents();
+    }
+    
+    protected void tableLoad(JTable table, String query)
+    {
+        try
+        {
+            pst = conn.prepareStatement(query);
+            rs = pst.executeQuery();
+            table.setModel(DbUtils.resultSetToTableModel(rs));
+        }
+        catch (SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, "Unable to load table "+table.getName()+".", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.

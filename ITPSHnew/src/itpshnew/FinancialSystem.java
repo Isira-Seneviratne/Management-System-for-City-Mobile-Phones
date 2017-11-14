@@ -23,7 +23,10 @@ public abstract class FinancialSystem extends JPanel {
         conn = dbCon.connect();
     }
     
-    public abstract void pubInit();
+    public void pubInit()
+    {
+        initComponents();
+    }
     
     public abstract void genIReport();
     
