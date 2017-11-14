@@ -49,7 +49,7 @@ $error = array();
 				$total = mysqli_real_escape_string($connection, $_POST['total']);
 				$user = $_SESSION['firstName'];
 		
-				$query = "INSERT INTO products (productId,product,price,quantity,discount,total,user,buyDate) VALUES ('{$id}','{$product}','{$price}','{$quantity}','{$discount}','{$total}','{$user}',now())";
+				$query = "INSERT INTO orders (productId,product,price,quantity,discount,total,user,buyDate) VALUES ('{$id}','{$product}','{$price}','{$quantity}','{$discount}','{$total}','{$user}',now())";
 
 				$result = mysqli_query($connection, $query);
 
@@ -92,7 +92,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script>
 document.getElementById("tb1").style.display='none';
 function net(){
-	var x1 = document.getElementById('20000').value;
+	var x1 = document.getElementById('50000').value;
 	var x = parseInt(x1);
 	var y = document.getElementById('qty').value;
 	var tot = x*y;
@@ -220,14 +220,14 @@ if (!isset($_SESSION['firstName']))
 	<div class="col-md-5 grid">		
 		<div class="flexslider">
 			  <ul class="slides">
-			    <li data-thumb="images/si.jpg">
-			        <div class="thumb-image"> <img src="images/si.jpg" class="img-responsive"> </div>
+			    <li data-thumb="images/buy4iii.jpg">
+			        <div class="thumb-image"> <img src="images/buy4iii.jpg" class="img-responsive"> </div>
 			    </li>
-			    <li data-thumb="images/si1.jpg">
-			         <div class="thumb-image"> <img src="images/si1.jpg" class="img-responsive"> </div>
+			    <li data-thumb="images/buy4i.jpg">
+			         <div class="thumb-image"> <img src="images/buy4i.jpg" class="img-responsive"> </div>
 			    </li>
-			    <li data-thumb="images/si2.jpg">
-			       <div class="thumb-image"> <img src="images/si2.jpg" class="img-responsive"> </div>
+			    <li data-thumb="images/buy4ii.jpg">
+			       <div class="thumb-image"> <img src="images/buy4ii.jpg" class="img-responsive"> </div>
 			    </li> 
 			  </ul>
 		</div>
@@ -248,7 +248,7 @@ if (!empty($error)) {
 						<?php
 							if ($result) {
 					//query successfull... redirect to login..
-				echo '<p class="order_confirmed"> YOUR ORDER HAS BEEN CONFIRMED </p>';
+				echo '<p class="order_confirmed"> YOUR ORDER HAS BEEN CONFIRMED <br>ADMIN WILL CONTACT YOU WITHIN 24HRS </p>';
 				}
 				//else
 					//{echo 'data not enter';}
@@ -256,20 +256,21 @@ if (!empty($error)) {
 							?>
 						
 						
-							<h1>SAMSUNG J2</h1>
-							<div id="details">Samsung Galaxy J2 is a Smart Phone powered by Android 5.1 Lollipop and 5MP Auto Focus Camera.</div>
-					</br>		
-							<form action ="buy.php" method="post" name="input" class="buy"> 
-							<table width="50%" border="1" cellspacing="0" cellpadding="0">
+							<h1>NOKIA 8</h1>
+							<div id="details"></div>
+					</br>
+							The <strong>Nokia 8</strong> also packs in a graphics processor, and 64 GB of internal storage which can be expanded to 256 GB via a microSD card. The <strong>Nokia 8</strong> runs Android 7.1.1 OS and is powered by a 3090 mAh battery. Its a Dual SIM Smartphone, and connectivity options on the <strong>Nokia 8</strong> include , GPS, HotSpot, NFC,Wifi,Bluetooth.
+<form action ="buy4.php" method="post" name="input" class="buy"> 
+			<table width="50%" border="1" cellspacing="0" cellpadding="0">
 								  <tbody class="buy"> <tr>
 								      <td width="40%">ITEM ID
-							          <input type="text" name="id" readonly value="10010"></td>
+							          <input type="text" name="id" readonly value="10014"></td>
 								      <td width="60%">ITEM NAME
-							            <input type="text" name="product" readonly id="s1001" value="SAMSUNG J2"></td>
+							            <input type="text" name="product" readonly id="s1001" value="Nokia 8"></td>
 							        </tr>
 								    <tr>
 								      <td width="40%">PRICE (LKR) :</td>
-								      <td width="60%"><input type="text" name="price" readonly id="20000" value="20000"></td>
+								      <td width="60%"><input type="text" name="price" readonly id="50000" value="50000"></td>
 							        </tr>
 								    <tr>
 								      <td>QTY :</td>
@@ -305,8 +306,7 @@ if (!empty($error)) {
 							      </tbody><br>
 							      
 						  </table></form>
-							
-								<a href="#" class="cart item_add" onClick="bill();">PRINT BILL</a>
+				
 						</div>
                         
                         <br><br>

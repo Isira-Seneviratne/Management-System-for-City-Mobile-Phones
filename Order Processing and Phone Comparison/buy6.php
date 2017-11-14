@@ -49,7 +49,7 @@ $error = array();
 				$total = mysqli_real_escape_string($connection, $_POST['total']);
 				$user = $_SESSION['firstName'];
 		
-				$query = "INSERT INTO products (productId,product,price,quantity,discount,total,user,buyDate) VALUES ('{$id}','{$product}','{$price}','{$quantity}','{$discount}','{$total}','{$user}',now())";
+				$query = "INSERT INTO orders (productId,product,price,quantity,discount,total,user,buyDate) VALUES ('{$id}','{$product}','{$price}','{$quantity}','{$discount}','{$total}','{$user}',now())";
 
 				$result = mysqli_query($connection, $query);
 
@@ -220,14 +220,14 @@ if (!isset($_SESSION['firstName']))
 	<div class="col-md-5 grid">		
 		<div class="flexslider">
 			  <ul class="slides">
-			    <li data-thumb="images/si.jpg">
-			        <div class="thumb-image"> <img src="images/si.jpg" class="img-responsive"> </div>
+			    <li data-thumb="images/buy6iii.jpg">
+			        <div class="thumb-image"> <img src="buy6iii.jpg" class="img-responsive"> </div>
 			    </li>
-			    <li data-thumb="images/si1.jpg">
-			         <div class="thumb-image"> <img src="images/si1.jpg" class="img-responsive"> </div>
+			    <li data-thumb="images/buy6i.jpg">
+			         <div class="thumb-image"> <img src="images/buy6i.jpg" class="img-responsive"> </div>
 			    </li>
-			    <li data-thumb="images/si2.jpg">
-			       <div class="thumb-image"> <img src="images/si2.jpg" class="img-responsive"> </div>
+			    <li data-thumb="images/buy6ii.jpg">
+			       <div class="thumb-image"> <img src="images/buy6ii.jpg" class="img-responsive"> </div>
 			    </li> 
 			  </ul>
 		</div>
@@ -248,7 +248,7 @@ if (!empty($error)) {
 						<?php
 							if ($result) {
 					//query successfull... redirect to login..
-				echo '<p class="order_confirmed"> YOUR ORDER HAS BEEN CONFIRMED </p>';
+				echo '<p class="order_confirmed"> YOUR ORDER HAS BEEN CONFIRMED <br>ADMIN WILL CONTACT YOU WITHIN 24HRS </p>';
 				}
 				//else
 					//{echo 'data not enter';}
@@ -256,16 +256,16 @@ if (!empty($error)) {
 							?>
 						
 						
-							<h1>SAMSUNG J2</h1>
-							<div id="details">Samsung Galaxy J2 is a Smart Phone powered by Android 5.1 Lollipop and 5MP Auto Focus Camera.</div>
+							<h1>HTC Desire 825</h1>
+							<div id="details">.The phone is powered by a 1.6 GHz Quad core Qualcomm Snapdragon 400 processor and it comes with 2 GB of RAM. ... The <strong>HTC Desire 825</strong> also packs in a graphics processor, and 16 GB of internal storage which can be expanded to 2 TB via a microSD card. The <strong>HTC Desire 825</strong> runs Android 6.0 OS and is powered by a 2700 mAh battery.</div>
 					</br>		
-							<form action ="buy.php" method="post" name="input" class="buy"> 
+							<form action ="buy6.php" method="post" name="input" class="buy"> 
 							<table width="50%" border="1" cellspacing="0" cellpadding="0">
 								  <tbody class="buy"> <tr>
 								      <td width="40%">ITEM ID
-							          <input type="text" name="id" readonly value="10010"></td>
+							          <input type="text" name="id" readonly value="10016"></td>
 								      <td width="60%">ITEM NAME
-							            <input type="text" name="product" readonly id="s1001" value="SAMSUNG J2"></td>
+							            <input type="text" name="product" readonly id="s1001" value="HTC Desire 825"></td>
 							        </tr>
 								    <tr>
 								      <td width="40%">PRICE (LKR) :</td>
@@ -305,8 +305,7 @@ if (!empty($error)) {
 							      </tbody><br>
 							      
 						  </table></form>
-							
-								<a href="#" class="cart item_add" onClick="bill();">PRINT BILL</a>
+				
 						</div>
                         
                         <br><br>

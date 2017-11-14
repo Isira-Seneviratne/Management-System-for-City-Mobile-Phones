@@ -1,11 +1,135 @@
 
 <html>
+
+<head>
+<title>City mobile</title>
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/jquery.min.js"></script>
+<!-- Custom Theme files -->
+<!--theme-style-->
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />  
+<!--//theme-style-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Fashion Mania Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- start menu -->
+<link href="css/memenu.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="js/memenu.js"></script>
+<script>$(document).ready(function(){$(".memenu").memenu();});</script>
+<script src="js/simpleCart.min.js"> </script>
+<!-- slide -->
+</head>
+<body>
+<!--header-->
+<!--header-->
+<div class="header">
+  <div class="header-top">
+    <div class="container">
+    <div class="col-sm-4 world">
+          <ul >
+            <li>
+            <select class="in-drop">
+                <option>English</option>
+                <option>Japanese</option>
+                <option>French</option>
+              </select></li>
+            <li><select class="in-drop1">
+                <option>LKR</option>
+                
+              </select>
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-4 logo">
+          <a href="index.html"><img src="images/logo.png" alt=""></a> 
+        </div>
+    
+      <div class="col-sm-4 header-left">    
+          <p class="log"><a href="account.html"  >Login</a>
+            <span>or</span><a  href="account.html"  >Signup</a></p>
+          <!--<div class="cart box_1">
+            <a href="checkout.html">
+            <h3> <div class="total">
+              <span class="simpleCart_total"></span></div>
+              <img src="images/cart.png" alt=""/></h3>
+            </a>
+            <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
+
+          </div>-->
+          <div class="clearfix"> </div>
+      </div>
+        <div class="clearfix"> </div>
+    </div>
+    </div>
+    <div class="container">
+      <div class="head-top">
+        <div class="col-sm-2 number">
+          <span><i class="glyphicon glyphicon-phone"></i>+94 770135662</span>
+        </div>
+     <div class="col-sm-8 h_menu4">
+        <ul class="memenu skyblue">
+            <li class=" grid"><a  href="index.html">HOME</a></li> 
+              <li><a  href="about_us.html">ABOUT US</a>
+                
+          </li>
+            <li class="grid"><a  href="shop.html">  SHOP</a>
+            
+          </li>
+        <li><a  href="feedback.html">FEEDBACK</a></li>        
+        <li><a class="color6" href="search.php">COMPARISONS</a></li>
+        
+        </ul> 
+      </div>
+        
+    <div class="clearfix"> </div>
+      <!---pop-up-box---->
+            <script type="text/javascript" src="js/modernizr.custom.min.js"></script>    
+          <link href="css/popuo-box.css" rel="stylesheet" type="text/css" media="all"/>
+          <script src="js/jquery.magnific-popup.js" type="text/javascript"></script>
+          <!---//pop-up-box---->
+        <div id="small-dialog" class="mfp-hide">
+        <div class="search-top">
+            <div class="login">
+              <input type="submit" value="">
+              <input type="text" value="Type something..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">    
+            </div>
+            <p> Shopping</p>
+          </div>        
+        </div>
+         <script>
+            $(document).ready(function() {
+            $('.popup-with-zoom-anim').magnificPopup({
+              type: 'inline',
+              fixedContentPos: false,
+              fixedBgPos: true,
+              overflowY: 'auto',
+              closeBtnInside: true,
+              preloader: false,
+              midClick: true,
+              removalDelay: 300,
+              mainClass: 'my-mfp-zoom-in'
+            });
+                                            
+            });
+        </script>     
+  <!---->   
+    </div>
+  </div>
+</div>
+
+
+
+
+
 <style>
 
 section {
-    margin-left:160px;
-    border-left: 1px solid gray;
-    padding: 4em;
+    margin-left:120px;
+    border-left: 0px ;
+    padding: 10em;
     overflow: hidden;
     text-align: left;
 }
@@ -34,11 +158,11 @@ select {
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 4px;
-    font-size: 14px;
+    font-size: 18px;
 }
 
  input[type=text1] {
-    width: 30%;
+    width: 37%;
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 4px;
@@ -56,7 +180,7 @@ select {
 <section>
 <form>
 <form>
-         <fieldset style="width:500;height:120">
+         <fieldset style="width:600;height:120">
     <legend>Find Items:</legend>
     <br>
     <input type="text" name="Devices" placeholder="Enter keywords" >
@@ -67,18 +191,26 @@ select {
   </fieldset>
   <br>
   </form>
+<br>
+    <br>
+    <br>
 <form>
- <fieldset style="width:500;height:80">
+ <fieldset style="width:600;height:80">
   <legend>Condition:</legend>
   <br>
-    <input type="radio"  name="a" checked >New</input>
+    <input type="radio"  name="a" checked >New</input>   
         <input type="radio"  name="a">Used</input>
         <input type="radio" name="a">Not Specified</input>
     </fieldset>
 </form>
+<br>
+    
     <br>
-  <form>  
- <fieldset style="width:500;height:80">
+
+    <br>
+  <form> 
+
+ <fieldset style="width:600;height:80">
   <legend>OS Version:</legend>
   <br>
     <input type="radio"  name="a" checked >Android</input>
@@ -87,8 +219,11 @@ select {
     </fieldset>
     </form>
     <br>
+    
+    <br>
+    <br>
     <form>
-    <fieldset style="width:500;height:80">
+    <fieldset style="width:600;height:80">
   <legend>Storage:</legend>
   <br>
     <input type="radio"  name="a" checked >16GB</input>
@@ -96,52 +231,46 @@ select {
         <input type="radio" name="a">64GB</input>
     </fieldset>
         </form>
+        <br>
+    
     <br>
-    <form>
-      <fieldset style="width:500;height:160">
-  <legend>Processor:</legend>
-  <br>
-    <input type="radio"  name="a" checked >Single Core</input><br>
-        <input type="radio"  name="a">Dual Core</input><br>
-        <input type="radio" name="a">Quad Core</input><br>
-         <input type="radio"  name="a" checked >Hexa Core</input><br>
-        <input type="radio"  name="a">Deca Core</input><br>
-        <input type="radio"  name="a"> Not Specified</input><br>
-        
-    </fieldset>
-    </form>
-
     <br>
+   
     <form>
-      <fieldset style="width:500;height:200">
+      <fieldset style="width:600;height:200">
   <legend>Camera Resolution:</legend>
   <br>
     <input type="radio"  name="a" checked >Less than 2.0MP</input><br>
-        <input type="radio"  name="a">2.0 - 4.9MP</input><br>
+      
         <input type="radio" name="a">5.0 - 7.9MP</input><br>
          <input type="radio"  name="a" checked > 8.0 - 11.9MP</input><br>
         <input type="radio"  name="a">12.0 - 15.9MP</input><br>
          <input type="radio"  name="a" checked >  16.0 - 19.9MP</input><br>
-        <input type="radio"  name="a"> 20.0MP or More</input><br>
-         <input type="radio"  name="a">  Not Specified</input><br>
+       <input type="radio"  name="a">  Not Specified</input><br>
         
     </fieldset>
         </form>
+        <br>
+    
+    <br>
 
     <br>
     <form>
-    <fieldset style="width:500;height:80">
+    <fieldset style="width:600;height:80">
   <legend>Price:</legend>
   <br>
     From:  Rs
-    <input type="text1" placeholder="Enter the amount"</input>       To:  Rs  <input type="text1" placeholder="Enter the amount"</input>
+    <input type="text1" placeholder="Enter the amount"</input>           To:  Rs  <input type="text1" placeholder="Enter the amount"</input>
       
     </fieldset>
     </form>
+    <br>
+    
+    <br>
 
     <br>
     <form>
-    <fieldset style="width:500;height:100">
+    <fieldset style="width:600;height:100">
   <legend>Sort by:</legend>
   <br>
    <select id="match" name="sort">
@@ -154,7 +283,10 @@ select {
     </fieldset>
     </form>
     <br>
-        <form>
+    <br>
+    
+    <br>
+       <!-- <form>
   <fieldset style="width:500;height:140">
   <legend>Features:</legend>
   <br>
@@ -164,25 +296,30 @@ select {
          <input type="checkbox">Touch screen</input><br>
         <input type="checkbox">Iris scanner</input><br>
 </fieldset>
+</form> -->
 <br>
+<br>
+    
+    <br>
 <br>
 <style>
 button[type=submit] {
-    width: 50%;
+    width: 65%;
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 4px;
-    font-size: 14px;
+    font-size: 18px;
 }
 
 button[type=reset] {
-    width: 50%;
+    width: 65%;
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 4px;
-    font-size: 14px;
+    font-size: 18px;
 }
 </style>
+<form>
 <button type="submit" value="Submit">Search</button>
 <br>
 <br>
@@ -190,11 +327,49 @@ button[type=reset] {
 <button type="reset" value="Reset">Reset</button>
 
 </form>
-
-
-
-
 </form>
+
+
+
+
+
 </section>
+<!--footer-->
+<div class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="clearfix"> </div> 
+    </div>  
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="col-md-3 footer-bottom-cate">
+        <h6>Top Brands</h6>
+          <ul>
+            <li><a href="#">SONY</a></li>
+            <li><a href="#">SAMSUNG</a></li>
+            <li><a href="#">APPLE</a></li>
+            <li><a href="#">HUAWEI</a></li>
+            <li><a href="#">LG</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 footer-bottom-cate cate-bottom">
+          <h6>Our Address</h6>
+          <ul>
+            <li>No. 3/5, Gampola, Kadugannawa.</li>
+                      <li class="phone">PH : 081-58585855</li>
+                      <li class="phone"></li>
+          </ul>
+        </div>
+        <div class="clearfix"> </div>
+        <p class="footer-class">© 2017 City Mobile. All Rights Reserved | Design by <a href="#" target="_blank">Pesh</a></p>
+      </div>
+  </div>
+</div>
+
+<!--//footer-->
+
 </body>
 </html>

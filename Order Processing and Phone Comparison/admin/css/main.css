@@ -1,0 +1,47 @@
+body{
+/*ffa */
+font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+
+font-size: 14px;
+
+}
+
+p.error{
+background-color: red;
+font-size: 14;
+color: white;
+padding: 5px;
+}
+
+.login {
+	width: 350px;
+	margin: 100px auto;
+
+}
+
+.registration {	
+width: 500px;
+margin: 100px auto;
+
+}
+
+input{
+	display: block;
+	width: 100%;
+	padding: 5px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	
+}
+
+button {
+
+	width: 100%;
+	padding: 5px;
+	/*bxz */
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+
+}

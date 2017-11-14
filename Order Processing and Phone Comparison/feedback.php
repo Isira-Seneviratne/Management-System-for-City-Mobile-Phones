@@ -4,6 +4,9 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "citymobile";
+$rating = "";
+$rating_1 ="";
+$name ="";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -16,12 +19,11 @@ $name = $_POST['user'];
 $rating = $_POST['radio'];
 $rating_1 = $_POST['radio_1'];
 
-$sql = "INSERT INTO rating (name, rating ,rating_1)
-VALUES ('$name', '$rating', '$rating_1')";
+$sql = "INSERT INTO rating (name,rating,rating_1) VALUES ('$name','$rating','$rating_1')";
 
 if ($conn->query($sql) === TRUE) {
-   // echo "Rating is successfull";
-   header('location:index.html');
+    header('location: feedback.html?feedback=sent');
+
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

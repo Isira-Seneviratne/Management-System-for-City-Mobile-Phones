@@ -49,7 +49,7 @@ $error = array();
 				$total = mysqli_real_escape_string($connection, $_POST['total']);
 				$user = $_SESSION['firstName'];
 		
-				$query = "INSERT INTO products (productId,product,price,quantity,discount,total,user,buyDate) VALUES ('{$id}','{$product}','{$price}','{$quantity}','{$discount}','{$total}','{$user}',now())";
+				$query = "INSERT INTO orders (productId,product,price,quantity,discount,total,user,buyDate) VALUES ('{$id}','{$product}','{$price}','{$quantity}','{$discount}','{$total}','{$user}',now())";
 
 				$result = mysqli_query($connection, $query);
 
@@ -223,11 +223,11 @@ if (!isset($_SESSION['firstName']))
 			    <li data-thumb="images/si.jpg">
 			        <div class="thumb-image"> <img src="images/si.jpg" class="img-responsive"> </div>
 			    </li>
-			    <li data-thumb="images/si1.jpg">
-			         <div class="thumb-image"> <img src="images/si1.jpg" class="img-responsive"> </div>
+			    <li data-thumb="images/buyi.jpg">
+			         <div class="thumb-image"> <img src="images/buyi.jpg" class="img-responsive"> </div>
 			    </li>
-			    <li data-thumb="images/si2.jpg">
-			       <div class="thumb-image"> <img src="images/si2.jpg" class="img-responsive"> </div>
+			    <li data-thumb="images/buyii.jpg">
+			       <div class="thumb-image"> <img src="images/buyii.jpg" class="img-responsive"> </div>
 			    </li> 
 			  </ul>
 		</div>
@@ -248,7 +248,7 @@ if (!empty($error)) {
 						<?php
 							if ($result) {
 					//query successfull... redirect to login..
-				echo '<p class="order_confirmed"> YOUR ORDER HAS BEEN CONFIRMED </p>';
+				echo '<p class="order_confirmed"> YOUR ORDER HAS BEEN CONFIRMED <br>ADMIN WILL CONTACT YOU WITHIN 24HRS </p>';
 				}
 				//else
 					//{echo 'data not enter';}
@@ -305,8 +305,7 @@ if (!empty($error)) {
 							      </tbody><br>
 							      
 						  </table></form>
-							
-								<a href="#" class="cart item_add" onClick="bill();">PRINT BILL</a>
+				
 						</div>
                         
                         <br><br>

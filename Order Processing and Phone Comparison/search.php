@@ -1,12 +1,11 @@
 <?php
-	$con = mysql_connect('localhost','root','');
-	$db = mysql_select_db('ManagementSystem');
-?>
+include 'db.php';
 
+?> 
 <!DOCTYPE html>
 <html>
 <head>
-<title>Fashion Mania A Ecommerce Category Flat Bootstarp Resposive Website Template | Single :: w3layouts</title>
+<title>City Mobile</title>
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 <!-- Custom Theme files -->
 <!--theme-style-->
@@ -18,7 +17,6 @@
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!---->
-
 
 
 </head>
@@ -47,8 +45,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 		
 			<div class="col-sm-4 header-left">		
-					<p class="log"><a href="account.html"  >Login</a>
-	<span>or</span><a  href="registration.html">Signup</a></p>
+					<p><?php
+
+if (!isset($_SESSION['firstName']))
+	{echo '<a href="login.php">Login</a>'; 
+	echo '<br>';}
+	else
+	{echo 'Welcome '.$_SESSION['firstName'];
+ 	echo '<br>';
+}
+
+if (!isset($_SESSION['firstName']))
+{echo '<a href="registration.php">Register </a>';}
+	else
+{echo '<a href="logout.php">Log out </a>';}
+
+	
+	
+?></p>
+
 					<!--<div class="cart box_1">
 						<a href="checkout.html">
 						<h3> <div class="total">
@@ -68,9 +83,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="col-sm-2 number">
 					<span><i class="glyphicon glyphicon-phone"></i>+94 770135662</span>
 				</div>
-		 <div class="col-sm-8 h_menu4">
+		 <div class="col-sm-9 h_menu4">
 				<ul class="memenu skyblue">
-					  <li class=" grid"><a  href="index.html">HOME</a></li>	
+					  <li class=" grid"><a  href="index.php">HOME</a></li>	
 				      <li><a  href="about_us.html">ABOUT US</a>
 				      	
 					</li>
@@ -78,7 +93,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					  
 			    </li>
 				<li><a  href="feedback.html">FEEDBACK</a></li>				
-				<li><a class="color6" href="devices.html">COMPARISONS</a></li>
+				<li><a class="color6" href="search.php">COMPARISONS</a></li>
+				<li><a class="color6" href="advance_search.php">SEARCH</a></li>
 			  </ul> 
 			</div>
 				
@@ -118,11 +134,30 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 </div>
 <!---->
-<div class="single">
 
-<div class="container"><!----->
+
+
+
 <br>
+
+<!--<nav>
 <style>
+
+nav {
+    float:left;
+    max-width:0px;
+    margin: 0;
+    padding: 7em;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 9px;
+}
+   
+nav ul a {
+    text-decoration: none;
+}
 
 .btn{
 	background-color: #C0C0C0;
@@ -137,7 +172,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     background-color: #C0C0C0;
     color: white;
     padding: 10px;
-    font-size: 16px;
+    font-size: 14px;
     border: none;
     cursor: pointer;
 	align:left;
@@ -152,7 +187,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     display: none;
     position: ;
     background-color: #f9f9f9;
-    min-width: 160px;
+    min-width: 100px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
@@ -174,7 +209,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     background-color: #3e8e41;
 }
 </style>
-<div class="dropdown">
+
+<!--<div class="dropdown">
   <button class="dropbtn">All Brands</button>
   <div class="dropdown-content">
     <a href="#">Apple</a>
@@ -192,28 +228,51 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br> 
 
 
 
 <div>
 <a href="advance.html">Advanced Search</a>
+</div>
+</nav>-->
 
+<div class="container">
 
+<style>
+section {
+    margin-left:300px;
+    border-left: 0px solid gray;
+    padding: 0em;
+    overflow: hidden;
+	text-align: left;
+}
+</style>
+
+<div class="content-top">
 <section>
-  <img class="mySlides" src="b.jpg"
-  style="width:70%">
-  <img class="mySlides" src="c.jpg"
-  style="width:70%">
-  <img class="mySlides" src="e.jpg"
-  style="width:70%">
-  <img class="mySlides" src="h.jpg"
-  style="width:70%">
-  <img class="mySlides" src="i.jpg"
-  style="width:70%">
-  <img class="mySlides" src="k.jpg"
-  style="width:70%">
-  <img class="mySlides" src="l.jpg"
-  style="width:70%">
+ <div class="col-md-7">
+ <h1>Comparison</h1>
+      </div>
+
+  <img class="mySlides" src="si.jpg"
+  style="width:50%">
+  <img class="mySlides" src="si1.jpg"
+  style="width:50%">
+  <img class="mySlides" src="si2.jpg"
+  style="width:50%">
+  <img class="mySlides" src="si.jpg"
+  style="width:50%">
+  <img class="mySlides" src="si1.jpg"
+  style="width:50%">
+  <img class="mySlides" src="si2.jpg"
+  style="width:50%">
+  <img class="mySlides" src="si1.jpg"
+  style="width:50%">
 
 
  	
@@ -223,7 +282,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   box-sizing: border-box;
 }
 
-#myInput {
+#id1{
+ 
+ /* background-position: 20px 50px;*/
+/*  background-repeat: no-repeat;
+  width: 100%;*/
+  font-size: 18px;
+ /* padding: 10px 8px 3px 20px;
+   border: 1px solid #ddd;
+  margin-bottom: 0px;*/
+}
+
+#search {
  
   background-position: 20px 50px;
   background-repeat: no-repeat;
@@ -239,6 +309,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   justify-content: center;
 }
 
+#id2{
+	font-size: 18px;
+}
 
 
 </style>
@@ -248,71 +321,38 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 <br>
-<div id="block_container" align:"left">
+
+<!--<div id="block_container" align:"left">
 
 <div class="container" style="background-color:white;color:blacck;padding:20px" id="block1">
-  
 <h3>Compare with</h3>
-<form action="search.php" method="GET">
+<br>
+<br>
 
-<input type="text" name="q" id="myInput"  placeholder="Search devices.." title="Type in a name">
-<br><br>
-
-  
-  <button type="button" class="btn1 ">Search</button>
-</form>
- <?php
- 	if(!isset($q)){
- 		echo '';
- 	} else {
- 	$query = mysql_query("SELECT * FROM Devices where name LIKE %$q%");
- 	$num_rows = mysql_num_rows($query);
- 	?>
- 	<p><strong><?php echo $num_rows;
- 	?></strong> results for '<?php echo $q; ?>'</p>
- 	<?php
- 	while($row = mysql_fetch_array($query)){
- 		$id = $row['deviceID'];
- 		$name = $row['deviceName'];
-
- 		echo '<a href="' . $id . '.php">'.$name . '</a><br/>';
-
- 		}
- 	}
- ?>
-</div>
-
-
-
-<div class="container" style="background-color:white;color:blacck;padding:20px" id="block2">
-<h3>Compare with</h3>
-<form action="search.php" method="get">
-
+<form >
 <input type="text" id="myInput"  placeholder="Search devices.." title="Type in a name">
 <br><br>
-<button type="button" class="btn1 " >Search</button>
+
+
 </form>
- <?php
- 	if(!isset($q)){
- 		echo '';
- 	} else {
- 	$query = mysql_query("SELECT * FROM Devices where name LIKE %$q%");
- 	$num_rows = mysql_num_rows($query);
- 	?>
- 	<p><strong><?php echo $num_rows;
- 	?></strong> results for '<?php echo $q; ?>'</p>
- 	<?php
- 	while($row = mysql_fetch_array($query)){
- 		$id = $row['deviceID'];
- 		$name = $row['deviceName'];
-
- 		echo '<a href="' . $id . '.php">'.$name . '</a><br/>';
-
- 		}
- 	}
- ?>
-
+ 
 </div>
+ 
+
+
+<!--<div class="container" style="background-color:white;color:blacck;padding:20px" id="block2">
+<h3>Compare with</h3>
+<br>
+<br>
+
+<form >
+<input type="text" id="myInput"  placeholder="Search devices.." title="Type in a name">
+<br><br>
+
+
+</form>
+ 
+</div>-->
 
 <script>
 // Automatic Slideshow - change image every 3 seconds
@@ -333,12 +373,12 @@ function carousel() {
 </script>
 </div>
 </section>
-
+        <!-------------------------------------------Table---------------------------------------------------- -->
 <article>
 <style>
 	table {
     
-    border-spacing: 0;
+    border-spacing: 2;
     width: 100%;
     border: 1px solid #ddd;
 }
@@ -346,58 +386,171 @@ function carousel() {
 th, td {
     border: none;
     text-align: left;
-    padding: 20px;
+    padding: 13px;
 }
+td{
+	color:#626466      ;
+		}
+tr:nth-child(even){background-color:#D7DBDD  }
 
-tr:nth-child(even){background-color: #C0C0C0}
+
+
 </style>
+
+
   <table>
+
+ 
+
+
+
+   	 <tr>
+      <th><h2>Specification</h2></th>
+      <th><h2>Compare with</h2><br><!-- <input type="text" name ="id" id="id"  placeholder="Search devices.." title="Type in a name"></th>
+     	 <?php
+                $sql="SELECT * FROM devices";
+                $result2=mysqli_query($conn,$sql);
+                while($row=mysqli_fetch_array($result2)){
+                
+                   // echo $row ='mob_brand';
+                   // echo $row ='mob_name';
+               }
+                
+              ?>
+              --> <select class="form-control" name="id" id="id1" onchange="changeValue();">
+             	 <option value=0>Select Device</option>
+              <?php
+                $sql="SELECT * FROM devices";
+                $result2=mysqli_query($conn,$sql);
+                while($row=mysqli_fetch_array($result2)){
+                ?>
+                  <option value=<?php echo $row['id']?>> <?php echo $row['mob_brand']?> <?php echo $row['mob_name']?> <?php echo $row['memory']?></option>
+                <?php
+                }
+              ?>
+            </select>
+      
+</th>
+
+
+	<th><h2>Compare with</h2><br><select class="form-control" name="id" id="id2" onchange="changeValue1();">
+	 <option value=0>Select Device</option>
+              <?php
+                $sql="SELECT * FROM devices";
+                $result2=mysqli_query($conn,$sql);
+                while($row=mysqli_fetch_array($result2)){
+                ?>
+                  <option value=<?php echo $row['id']?>><?php echo $row['mob_brand']?> <?php echo $row['mob_name']?> <?php echo $row['memory']?></option>
+                <?php
+                }
+              ?>
+            </select>
+
+            </th>
+ </tr>
+   
+
     <tr>
-      <th>Specification</th>
-      <th>Device1</th>
-	<th>Device2</th>
+   
+      <td>OS_version</td>
+   
+      <td><p id='os_version'</p>
+      </td>
+   
+      <td> <p id= 'os_version1'  </p> </td>
+   
+    </tr>
+     <tr>
+    
+      <td>Memory(GB)</td>
+    
+      <td> <p id= 'memory' </p>   </td>
+    
+      <td> <p id= 'memory1' </p>  </td>
+    
+    </tr>
+     <tr>
+      
+      <td>Display(inches)</td>
+      
+      <td><p id= 'display' </p> </td>
+      
+      <td> <p id= 'display1' /></td>
+    
+     </tr>
+     <tr>
      
+      <td>Dimension(mm)</td>
+     
+      <td> <p id= 'dimension'   </p></td>
+     
+      <td> <p id= 'dimension1'   /> </td>
+    
+     </tr>
+     <tr>
+     
+      <td>Camera(MP)</td>
+     
+      <td> <p id= 'camera'  </p></td>
+     
+      <td> <p id= 'camera1'  /></td>
+    
     </tr>
     <tr>
+    
+      <td>Device_condition</td>
+    
+      <td> <p id= 'device_condition' </p></td>
+    
+      <td><p id= 'device_condition1' /> </td>
+    
+    </tr>
+    <tr>
+   
       <td>Network</td>
-      <td> </td>
-      <td> </td>
+   
+      <td><p id= 'network' /> </td>
+   
+      <td><p id= 'network1' /> </td>
+   
     </tr>
     <tr>
-      <td>Camera</td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>Display</td>
-      <td> </td>
-      <td> </td>
-    </tr>
- <tr>
-      <td>Body</td>
-      <td> </td>
-      <td> </td>
-    </tr>
- <tr>
-      <td>Launch</td>
-      <td> </td>
-      <td> </td>
-    </tr>
- <tr>
+    
       <td>Sound</td>
-      <td> </td>
-      <td> </td>
+    
+      <td> <p id= 'sound' /></td>
+    
+      <td><p id= 'sound1'  /> </td>
+    
     </tr>
- <tr>
-      <td>Memory</td>
-      <td> </td>
-      <td> </td>
+    <tr>
+   
+      <td>Warranty(years)</td>
+   
+      <td><p id= 'warrenty' /> </td>
+   
+      <td> <p id= 'warrenty1'  /></td>
+   
     </tr>
- <tr>
-      <td>Platforms</td>
-      <td> </td>
-      <td> </td>
+    <tr>
+  
+      <td>Battery</td>
+  
+      <td> <p id= 'battery' /></td>
+  
+      <td> <p id= 'battery1'/> </td>
+  
     </tr>
+    <tr>
+ 
+      <td>Price(Rs)</td>
+ 
+      <td> <p id= 'price' /></td>
+ 
+      <td> <p id= 'price1' /></td>
+ 
+   </tr>
+
   </table>
 
 
@@ -405,6 +558,7 @@ tr:nth-child(even){background-color: #C0C0C0}
 
 </article>
 
+</div>
 </div>
 <div class="footer">
 <!--
@@ -444,7 +598,7 @@ tr:nth-child(even){background-color: #C0C0C0}
 					</ul>
 				</div>
 				<div class="clearfix"> </div>
-				<p class="footer-class"> © 2017 City Mobile. All Rights Reserved | Design by <a href="#" target="_blank">Sanka</a> </p>
+				<p class="footer-class"> © 2017 City Mobile. All Rights Reserved | Design by <a href="#" target="_blank">Pesh</a> </p>
 			</div>
 	</div>
 </div>
@@ -520,5 +674,63 @@ $(window).load(function() {
 																						
 						});
 				</script>	
+
+
+  <script type="text/javascript">
+
+	function changeValue(){
+    	var id=document.getElementById('id1').value;
+    	console.log(id1);
+    	 $.ajax({
+            type: "POST",
+            url: 'http://localhost/web/search1.php',
+            data: {id:id},
+            success: function(data)
+            {   
+              document.getElementById('os_version').innerHTML = JSON.parse(data).os_version;
+              document.getElementById('sound').innerHTML = JSON.parse(data).sound;
+              document.getElementById('camera').innerHTML = JSON.parse(data).camera;
+               document.getElementById('memory').innerHTML = JSON.parse(data).memory;
+              document.getElementById('warrenty').innerHTML = JSON.parse(data).warrenty;
+              document.getElementById('price').innerHTML = JSON.parse(data).price;
+                document.getElementById('device_condition').innerHTML = JSON.parse(data).device_condition;
+               document.getElementById('dimension').innerHTML = JSON.parse(data).dimension;
+              document.getElementById('display').innerHTML = JSON.parse(data).display;
+              document.getElementById('network').innerHTML = JSON.parse(data).network;
+              document.getElementById('battery').innerHTML = JSON.parse(data).battery;
+            }
+        });  
+
+		}
+	</script>
+
+
+	<script type="text/javascript">
+
+	function changeValue1(){
+    	var id=document.getElementById('id2').value;
+    	console.log(id2);
+    	 $.ajax({
+            type: "POST",
+            url: 'http://localhost/web/search1.php',
+            data: {id:id},
+            success: function(data)
+            {   
+              document.getElementById('os_version1').innerHTML = JSON.parse(data).os_version;
+              document.getElementById('sound1').innerHTML = JSON.parse(data).sound;
+              document.getElementById('camera1').innerHTML = JSON.parse(data).camera;
+               document.getElementById('memory1').innerHTML = JSON.parse(data).memory;
+              document.getElementById('warrenty1').innerHTML = JSON.parse(data).warrenty;
+              document.getElementById('price1').innerHTML = JSON.parse(data).price;
+                document.getElementById('device_condition1').innerHTML = JSON.parse(data).device_condition;
+               document.getElementById('dimension1').innerHTML = JSON.parse(data).dimension;
+              document.getElementById('display1').innerHTML = JSON.parse(data).display;
+              document.getElementById('network1').innerHTML = JSON.parse(data).network;
+              document.getElementById('battery1').innerHTML = JSON.parse(data).battery;
+            }
+        });  
+
+		}
+	</script>
 </body>
 </html>

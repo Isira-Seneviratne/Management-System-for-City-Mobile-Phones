@@ -49,7 +49,7 @@ $error = array();
 				$total = mysqli_real_escape_string($connection, $_POST['total']);
 				$user = $_SESSION['firstName'];
 		
-				$query = "INSERT INTO products (productId,product,price,quantity,discount,total,user) VALUES ('{$id}','{$product}','{$price}','{$quantity}','{$discount}','{$total}','{$user}')";
+				$query = "INSERT INTO orders (productId,product,price,quantity,discount,total,user) VALUES ('{$id}','{$product}','{$price}','{$quantity}','{$discount}','{$total}','{$user}')";
 
 				$result = mysqli_query($connection, $query);
 
@@ -220,11 +220,11 @@ if (!isset($_SESSION['firstName']))
 	<div class="col-md-5 grid">		
 		<div class="flexslider">
 			  <ul class="slides">
-			    <li data-thumb="images/si.jpg">
+			    <li data-thumb="images/iphone.jpg">
 			        <div class="thumb-image"> <img src="images/iphone.jpg" class="img-responsive"> </div>
 			    </li>
-			    <li data-thumb="images/si1.jpg">
-			         <div class="thumb-image"> <img src="images/3rd.jpg" class="img-responsive"> </div>
+			    <li data-thumb="images/buy1iii.jpg">
+			         <div class="thumb-image"> <img src="images/buy1iii.jpg" class="img-responsive"> </div>
 			    </li>
 			    <li data-thumb="images/si2.jpg">
 			       <div class="thumb-image"> <img src="images/si2.jpg" class="img-responsive"> </div>
@@ -248,7 +248,7 @@ if (!empty($error)) {
 						<?php
 							if ($result) {
 					//query successfull... redirect to login..
-				echo '<p class="order_confirmed"> YOUR ORDER HAS BEEN CONFIRMED </p>';
+				echo '<p class="order_confirmed"> YOUR ORDER HAS BEEN CONFIRMED <br>ADMIN WILL CONTACT YOU WITHIN 24HRS </p>';
 				}
 				//else
 					//{echo 'data not enter';}
@@ -256,11 +256,12 @@ if (!empty($error)) {
 							?>
 						
 						
-							<h1>SAMSUNG J2</h1>
-							<div id="details">Samsung Galaxy J2 is a Smart Phone powered by Android 5.1 Lollipop and 5MP Auto Focus Camera.</div>
-					</br>		
-							<form action ="buy.php" method="post" name="input" class="buy"> 
-							<table width="50%" border="1" cellspacing="0" cellpadding="0">
+							<h1>Apple I phone 6s</h1>
+							<div id="details"></div>
+					</br>
+							The <strong>iPhone 6s</strong> was introduced on September 9th, 2015 at Apple's event in San Francisco. Apple says <strong>iPhone 6s</strong> is the "most advanced smartphone ever". ... Both the<strong>iPhone 6s</strong> and <strong>iPhone 6s</strong> Plus will also use the new A9 processor, which is 70% faster than the A8 processor found in the <strong>iPhone 6</strong> and <strong>6</strong> Plus.
+                            <form action ="buy1.php" method="post" name="input" class="buy"> 
+			<table width="50%" border="1" cellspacing="0" cellpadding="0">
 								  <tbody class="buy"> <tr>
 								      <td width="40%">ITEM ID
 							          <input type="text" name="id" readonly value="10011"></td>

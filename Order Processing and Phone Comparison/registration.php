@@ -9,6 +9,7 @@ $errors =array();
 $firstName = "";
 $lastName = "";
 $email = "";
+$password ="";
 
 
 
@@ -21,21 +22,38 @@ $email = $_POST['email'];
 		if (empty(trim($_POST['firstName']))) {
 			$errors[] = 'First Name is invalid';
 		}
-
+			if (!preg_match("/^[a-zA-Z ]*$/",$firstName))
+            {
+            $errors[] = "Use only letters for First Name"; 
+            }
+	
 		if (empty(trim($_POST['lastName']))) {
 			$errors[] = 'Last Name is invalid';
 		}
+	
+			if (!preg_match("/^[a-zA-Z ]*$/",$lastName))
+               {
+               $errors[] = "Use only letters for Last Name";
+               }
+	
+		
 		if (empty(trim($_POST['email']))) {
 			$errors[] = 'Email Address is invalid';
 		}
 		if (empty(trim($_POST['password']))) {
 			$errors[] = 'Password is invalid';
 		}	
+		if(preg_match("/^.*(?=.{8,})(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).*$/", $_POST["password"]) === 0)
+				{
+				$errors[] = 'Password must be at least 8 characters and 				                  must contain at least one lowercase letter,
+				 one uppercase letter and one digit';
+				}
+
 		if (empty(trim($_POST['conPassword']))) {
 			$errors[] = 'Confirm Password is invalid';
 			
 		}
-
+	
 		if (($_POST['password']) != ($_POST['conPassword'])) {
 			$errors[] = 'Confirm Password is not matched';
 		}
@@ -70,7 +88,7 @@ if ($result) {
 		$hashedPassword = sha1($password);
 
 
-		$query1 = "INSERT INTO user (firstName,lastName,email,hashedPassword,isDeleted) VALUES ('{$firstName}','{$lastName}','{$email}','{$hashedPassword}',0)";
+		$query1 = "INSERT INTO user (firstName,lastName,email,hashedPassword) VALUES ('{$firstName}','{$lastName}','{$email}','{$hashedPassword}')";
 
 		$result_set = mysqli_query($connection, $query1);
 		}

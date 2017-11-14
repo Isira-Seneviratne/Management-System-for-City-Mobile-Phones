@@ -42,6 +42,14 @@ if (!isset($_POST['password']) || strlen(trim($_POST['password']))<1 ) {
 			$_SESSION['user_id'] = $user['id'];
 			$_SESSION['firstName'] = $user['firstName'];
 
+			
+			//last login date and time
+			$query2 = "UPDATE user SET lastLogin = NOW() WHERE id = {$_SESSION['user_id']} LIMIT 1";
+
+			$resultLogin = mysqli_query($connection,$query2);
+			
+			
+			
 			header('location:shop.php');
 		} 
 		else 

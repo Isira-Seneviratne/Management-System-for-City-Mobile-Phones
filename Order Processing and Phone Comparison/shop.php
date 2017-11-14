@@ -154,7 +154,7 @@ if (!isset($_SESSION['firstName']))
 						</a>
 						<h3>samsung galxy J2</h3>
 						<div class="price">
-						  <h5 class="item_price">LKR  20000</h5>
+						  <h5 class="item_price">LKR  20 000</h5>
 						 	<a href="buy.php
 								" class="item_add">Add To Cart</a>
 						  <div class="clearfix"> </div>
@@ -165,12 +165,12 @@ if (!isset($_SESSION['firstName']))
                 	<div class="col-md-3 col-md2">
 					<div class="col-md1 simpleCart_shelfItem">
 						<a href="buy1.php">
-							<img class="img-responsive" src="images/pi2.jpg" alt="" />
+							<img class="img-responsive" src="images/pi22.jpg" alt="" />
 						</a>
 						<h3>Iphone 6s </h3>
 						
 						<div class="price">
-						  <h5 class="item_price">LKR 82000</h5>
+						  <h5 class="item_price">LKR 90 000</h5>
 								<a href="buy1.php
 								" class="item_add">Add To Cart</a>
 								<div class="clearfix"> </div>
@@ -184,7 +184,7 @@ if (!isset($_SESSION['firstName']))
 						<img class="img-responsive" src="images/si1.jpg" alt="" /></a>
 						<h3>Samsung galaxy s8</h3>
 						<div class="price">
-						  <h3 class="item_price">LKR 146 900</h3><a href="buy2.php" class="item_add">Add To Cart</a>								
+						  <h3 class="item_price">LKR 99 900</h3><a href="buy2.php" class="item_add">Add To Cart</a>								
 								<div class="clearfix"> </div>
 						</div>
 						
@@ -197,9 +197,9 @@ if (!isset($_SESSION['firstName']))
 						</a>
 						<h3>huawei honor p10</h3>
 						<div class="price">
-						  <h5 class="item_price">LKR 59 999</h5> 
-					 	  <a href="buy3.php
-								" class="item_add">Add To Cart</a>
+						  <h5 class="item_price">LKR 94 900 </h5>
+					 	    <a href="buy3.php
+								" class="item_add">Add To Cart</a>						  
 						  <div class="clearfix"> </div>
 						</div>
 						
@@ -212,7 +212,7 @@ if (!isset($_SESSION['firstName']))
 						</a>
 						<h3>Nokia 8</h3>
 						<div class="price">
-						  <h5 class="item_price">LKR  24 900</h5>
+						  <h5 class="item_price">LKR  50 000</h5>
 					 	  <a href="buy4.php
 								" class="item_add">Add To Cart</a>
 						  <div class="clearfix"> </div>
@@ -227,9 +227,9 @@ if (!isset($_SESSION['firstName']))
 						</a>
 						<h3>Sony xperia xa1</h3>
 						<div class="price">
-						  <h5 class="item_price">LKR  27 489</h5>
-					 	  <a href="buy5.php
-								" class="item_add">Add To Cart</a>
+						  <h5 class="item_price">LKR  52 900</h5>
+					 	    <a href="buy5.php
+								" class="item_add">Add To Cart</a>						  
 						  <div class="clearfix"> </div>
 						</div>
 						
@@ -242,9 +242,9 @@ if (!isset($_SESSION['firstName']))
 						</a>
 						<h3>HTC desire 825</h3>
 						<div class="price">
-						  <h5 class="item_price">LKR  52 900</h5>
-					 	  <a href="buy6.php
-								" class="item_add">Add To Cart</a>
+						  <h5 class="item_price">LKR  20 000</h5>
+					 	    <a href="buy6.php
+								" class="item_add">Add To Cart</a>						 
 						  <div class="clearfix"> </div>
 						</div>
 						
@@ -272,7 +272,7 @@ if (!isset($_SESSION['firstName']))
 						</a>
 						<h3>oppo f3 </h3>
 						<div class="price">
-						  <h5 class="item_price">LKR  36 000</h5>
+						  <h5 class="item_price">LKR  35 900</h5>
 					 	  <a href="buy8.php
 								" class="item_add">Add To Cart</a>
 						  <div class="clearfix"> </div>

@@ -184,67 +184,68 @@ if (!isset($_SESSION['firstName']))
 		<div class="content-top">
 			<h1>Upcoming mobiles</h1>
 			<div class="content-top1">
-              <div class="col-md-3 col-md2">
-					<div class="col-md1 simpleCart_shelfItem">
-						<a href="single.html">
-							<img class="img-responsive" src="images/pi4.png" alt="" />
+			  <div class="col-md-3 col-md2">
+				  <div class="col-md1 simpleCart_shelfItem">
+						<a href="buy1.php">
+							<img class="img-responsive" src="images/pi22.jpg" alt="" />
 						</a>
-						<h3>samsung galxy J2</h3>
-						<div class="price">
-						  <h5 class="item_price">LKR  20000</h5>
-						 	<a href="buy.html
-								" class="item_add">Add To Cart</a>
-						  <div class="clearfix"> </div>
-						</div>
-						
-					</div>
-				</div>		
-			<div class="col-md-3 col-md2">
-					<div class="col-md1 simpleCart_shelfItem">
-						<a href="buy1.html">
-							<img class="img-responsive" src="images/pi2.jpg" alt="" />
-						</a>
-						<h3>Iphone 6s</h3>
+						<h3>Iphone 6s </h3>
 						
 						<div class="price">
-						  <h5 class="item_price">LKR 82000</h5>
-								<a href="buy1.html
+						  <h5 class="item_price">LKR 90 000</h5>
+								<a href="buy1.php
 								" class="item_add">Add To Cart</a>
 								<div class="clearfix"> </div>
 					  </div>
 						
 			  </div>
-				</div>	
-			<div class="col-md-3 col-md2">
+			  </div>
+                <div class="col-md-3 col-md2">
 					<div class="col-md1 simpleCart_shelfItem">
-						<a href="single.html">
-							<img class="img-responsive" src="images/3rd.jpg" alt="" />
-						</a>
-						<h3>I phone 5s</h3>
+					  <a href="buy9.php">
+							<img class="img-responsive" src="images/lg-v20.jpg" alt="" />
+					  </a>
+						<h3>LG-v20</h3>
 						<div class="price">
-						  <h5 class="item_price">LKR 68000</h5><a href="buy2.html" class="item_add">Add To Cart</a>								
-								<div class="clearfix"> </div>
-						</div>
-						
-					</div>
-				</div>
-              
-                 <div class="col-md-3 col-md2">
-					<div class="col-md1 simpleCart_shelfItem">
-						<a href="single.html">
-							<img class="img-responsive" src="images/pi4.png" alt="" />
-						</a>
-						<h3>samsung galxy J2</h3>
-						<div class="price">
-						  <h5 class="item_price">LKR  20000</h5>
-						 	<a href="buy.html
+						  <h5 class="item_price">LKR  79 900</h5>
+					 	  <a href="buy9.php
 								" class="item_add">Add To Cart</a>
 						  <div class="clearfix"> </div>
 						</div>
 						
 					</div>
 				</div>
-			<div class="clearfix"> </div>
+                <div class="col-md-3 col-md2">
+					<div class="col-md1 simpleCart_shelfItem">
+					  <a href="buy8.php">
+							<img class="img-responsive" src="images/oppo_f3.jpg" alt="" />
+					  </a>
+						<h3>oppo f3 </h3>
+						<div class="price">
+						  <h5 class="item_price">LKR  35 900</h5>
+					 	  <a href="buy8.php
+								" class="item_add">Add To Cart</a>
+						  <div class="clearfix"> </div>
+						</div>
+						
+					</div>
+				</div>
+                <div class="col-md-3 col-md2">
+					<div class="col-md1 simpleCart_shelfItem">
+						<a href="buy.php">
+							<img class="img-responsive" src="images/pi4.png" alt="" />
+						</a>
+						<h3>samsung galxy J2</h3>
+						<div class="price">
+						  <h5 class="item_price">LKR  20 000</h5>
+						 	<a href="buy.php
+								" class="item_add">Add To Cart</a>
+						  <div class="clearfix"> </div>
+						</div>
+						
+					</div>
+				</div>
+              <div class="clearfix"> </div>
 			</div>	
 			<div class="content-top1">
 			  <div class="clearfix"> </div>
