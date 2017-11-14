@@ -17,7 +17,7 @@ public class dbCon {
         try
         {
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbcitymobile","root","abcd1234");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbcitymobile","root","");
         }
         catch(ClassNotFoundException e)
         {
@@ -26,6 +26,7 @@ public class dbCon {
         catch(SQLException se)
         {
             JOptionPane.showMessageDialog(null, "Unable to establish database connection.", "Error", JOptionPane.ERROR_MESSAGE);
+            se.printStackTrace();
         }
         return conn;
     }
