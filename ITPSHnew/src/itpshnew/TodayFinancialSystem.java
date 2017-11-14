@@ -373,7 +373,7 @@ public class TodayFinancialSystem extends FinancialSystem {
         try
         {
             Statement s = conn.createStatement();
-            ResultSet rs/* = s.executeQuery("SELECT * FROM Repair_Checkout")*/;
+            ResultSet rs;
             RepRev = 300;
             RepCost = 300;
             RepProf = RepRev - RepCost;
