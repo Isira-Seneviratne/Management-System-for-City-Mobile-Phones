@@ -20,12 +20,12 @@ import net.proteanit.sql.DbUtils;
  *
  * @author isira
  */
-public class Stock extends StockControl {
+public class Stocks extends StockControl {
 
     /**
      * Creates new form Stock
      */
-    public Stock() {
+    public Stocks() {
         initComponents();
     }
 

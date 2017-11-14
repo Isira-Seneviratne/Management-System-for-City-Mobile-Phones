@@ -23,7 +23,7 @@ public class Main extends javax.swing.JFrame {
     private RetailRecord rr;
     
     private Item i;
-    private Stock s;
+    private Stocks s;
     private Reports r;
     
     private TimerThread t;
@@ -42,7 +42,7 @@ public class Main extends javax.swing.JFrame {
         rr = new RetailRecord();
         r = new Reports();
         i = new Item();
-        s = new Stock();
+        s = new Stocks();
         av = new AddVendor();
         setEnabledVisible(mfs, false);
         setEnabledVisible(tfs, false);
@@ -68,7 +68,7 @@ public class Main extends javax.swing.JFrame {
         rr = new RetailRecord();
         r = new Reports();
         i = new Item();
-        s = new Stock();
+        s = new Stocks();
         av = new AddVendor();
         setEnabledVisible(mfs, false);
         setEnabledVisible(tfs, false);
