@@ -492,9 +492,8 @@ public class TodayFinancialSystem extends FinancialSystem {
         {
             JasperCompileManager.compileReportToFile("reports/todayfinances.jrxml", "reports/todayfinances.jasper");
             JasperFillManager.fillReportToFile("reports/todayfinances.jasper",
-                    "reports/todayfinances.jrprint", new HashMap(), conn);
-            JasperViewer jv = new JasperViewer("reports/todayfinances.jrprint", false);
-            jv.setVisible(true);
+                    "reports/todayfinances.jrprint", null, conn);
+            JasperViewer.viewReport("reports/todayfinances.jrprint", false, false);
         }
         catch(JRException e)
         {

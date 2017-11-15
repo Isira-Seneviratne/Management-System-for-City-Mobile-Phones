@@ -646,9 +646,8 @@ public class MonthFinancialSystem extends FinancialSystem {
         {
             JasperCompileManager.compileReportToFile("reports/monthfinances.jrxml", "reports/monthfinances.jasper");
             JasperFillManager.fillReportToFile("reports/monthfinances.jasper",
-                    "reports/monthfinances.jrprint", new HashMap(), conn);
-            JasperViewer jv = new JasperViewer("reports/monthfinances.jrprint", false);
-            jv.setVisible(true);
+                    "reports/monthfinances.jrprint", null, conn);
+            JasperViewer.viewReport("reports/monthfinances.jrprint", false, false);
         }
         catch(JRException e)
         {
