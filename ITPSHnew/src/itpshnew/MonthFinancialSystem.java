@@ -423,7 +423,7 @@ public class MonthFinancialSystem extends FinancialSystem {
                 jButton4ActionPerformed(evt);
             }
         });
-        month_pan.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 590, 180, -1));
+        month_pan.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 590, 180, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -483,16 +483,16 @@ public class MonthFinancialSystem extends FinancialSystem {
             {
                 RepRev += rs.getFloat("Rep_inc");
                 RepCost += rs.getFloat("Rep_cost");
-                RepProf += rs.getFloat("Rep_prof");
                 SalesRev += rs.getFloat("Sales_inc");
                 SalesCost += rs.getFloat("Sales_cost");
-                SalesProf += rs.getFloat("Sales_prof");
                 DisRev += rs.getFloat("Dis_inc");
                 DisCost += rs.getFloat("Dis_cost");
-                DisProf += rs.getFloat("Dis_prof");
                 HRCost += rs.getFloat("HR_cost");
                 OtherCost += rs.getFloat("Other_cost");
             }
+            RepProf = RepRev - RepCost;
+            SalesProf = SalesRev - SalesCost;
+            DisProf = DisRev - DisCost;
             rs = s.executeQuery("SELECT Salary FROM monthlysal WHERE Month='"+DateTimeFunctions.getMonth()+"'");
             while(rs.next())
                 HRCost += rs.getFloat("Salary");
@@ -636,6 +636,7 @@ public class MonthFinancialSystem extends FinancialSystem {
         tot_rev1.setText("");
         tot_cost1.setText("");
         tot_prof1.setText("");
+        other_costs1.setText("");
     }
 
     @Override

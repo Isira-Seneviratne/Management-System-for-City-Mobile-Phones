@@ -33,7 +33,7 @@ public class DateTimeFunctionsTest {
     @Test
     public void testGetDay() {
         System.out.println("getDay");
-        int expResult = 13;
+        int expResult = 14;
         int result = DateTimeFunctions.getDay();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
@@ -72,7 +72,7 @@ public class DateTimeFunctionsTest {
     @Test
     public void testGetDate() {
         System.out.println("getDate");
-        String expResult = "13 November 2017";
+        String expResult = "14 November 2017";
         String result = DateTimeFunctions.getDate();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
