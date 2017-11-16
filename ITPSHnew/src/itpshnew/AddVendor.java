@@ -22,9 +22,11 @@ public class AddVendor extends Distribution {
         super();
     }
 
+    @Override
     public void pubInit()
     {
         initComponents();
+        loaded = true;
         tableload(vendoradd_table,"select * FROM vendor");
     }
     

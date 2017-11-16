@@ -20,8 +20,9 @@ public abstract class Distribution extends javax.swing.JPanel {
      * Creates new form Distribution
      */
     protected Connection con;
-    PreparedStatement pst = null;
-    ResultSet rs = null;
+    protected PreparedStatement pst = null;
+    protected ResultSet rs = null;
+    protected boolean loaded = false;
     
     /**
      * Creates new form purchase
@@ -30,6 +31,11 @@ public abstract class Distribution extends javax.swing.JPanel {
         con = dbCon.connect();
     }
 
+    public boolean getLoaded()
+    {
+        return loaded;
+    }
+    
     public void tableload(JTable t,String s)
     {
         try

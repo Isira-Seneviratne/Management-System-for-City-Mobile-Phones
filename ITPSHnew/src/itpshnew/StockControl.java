@@ -13,11 +13,12 @@ import net.proteanit.sql.DbUtils;
  *
  * @author isira
  */
-public class StockControl extends javax.swing.JPanel {
+public abstract class StockControl extends javax.swing.JPanel {
     protected String ID;
     protected Connection conn;
     protected PreparedStatement pst = null;
     protected ResultSet rs = null;
+    protected boolean loaded = false;
     /**
      * Creates new form StockControl2
      */
@@ -25,10 +26,12 @@ public class StockControl extends javax.swing.JPanel {
         initComponents();
     }
     
-    public void pubInit()
+    public boolean getLoaded()
     {
-        initComponents();
+        return loaded;
     }
+    
+    public abstract void pubInit();
     
     protected void tableLoad(JTable table, String query)
     {

@@ -31,12 +31,14 @@ public class TimerThread extends Thread
         this.running = running;
     }
 
+    @Override
     public void run()
     {
         while(running)
         {
             SwingUtilities.invokeLater(new Runnable()
             {
+                @Override
                 public void run()
                 {
                     time.setText(timeFormat.format(Calendar.getInstance().getTime()));

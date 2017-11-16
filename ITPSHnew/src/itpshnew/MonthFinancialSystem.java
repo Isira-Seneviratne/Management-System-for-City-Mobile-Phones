@@ -7,7 +7,6 @@ package itpshnew;
 
 import java.sql.*;
 import java.util.Calendar;
-import java.util.HashMap;
 import javax.swing.*;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.view.JasperViewer;
@@ -25,9 +24,11 @@ public class MonthFinancialSystem extends FinancialSystem {
         super();
     }
     
+    @Override
     public void pubInit()
     {
         initComponents();
+        loaded = true;
     }
     /**
      * This method is called from within the constructor to initialize the form.

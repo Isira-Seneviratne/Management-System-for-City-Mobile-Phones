@@ -20,9 +20,11 @@ public class RetailRecord extends Distribution {
         super();
     }
 
+    @Override
     public void pubInit()
     {
         initComponents();
+        loaded = true;
         tableload(retail_rectable,"select * FROM shipping_rec where ship_type='Retail'");
     }
     

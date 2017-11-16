@@ -18,9 +18,11 @@ public class Reports extends StockControl {
         initComponents();
     }
 
+    @Override
     public void pubInit()
     {
         initComponents();
+        loaded = true;
     }
     
     /**
@@ -65,7 +67,7 @@ public class Reports extends StockControl {
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel25.setText("Report ID");
-        jPanel7.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 120, -1));
+        jPanel7.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 130, -1));
 
         jTextField18.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,7 +180,7 @@ public class Reports extends StockControl {
 
         jLabel28.setFont(new java.awt.Font("Segoe UI Black", 2, 36)); // NOI18N
         jLabel28.setForeground(new java.awt.Color(0, 153, 0));
-        jLabel28.setText("Annualy");
+        jLabel28.setText("Annually");
         Reports.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 380, -1, -1));
 
         jTable1.setBackground(new java.awt.Color(204, 255, 204));

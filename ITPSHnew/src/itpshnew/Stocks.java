@@ -5,15 +5,12 @@
  */
 package itpshnew;
 
-import com.mysql.jdbc.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
+import javax.swing.*;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -29,9 +26,11 @@ public class Stocks extends StockControl {
         initComponents();
     }
 
+    @Override
     public void pubInit()
     {
         initComponents();
+        loaded = true;
     }
     
     /**
@@ -429,7 +428,7 @@ public class Stocks extends StockControl {
         {
             String model = txtmdl1.getText();
             String t = "Update availablestock SET reOrderLevel = 10 WHERE modelCode = '"+ model +"'";
-            pst = (PreparedStatement) conn.prepareStatement(t);
+            pst = conn.prepareStatement(t);
             pst.execute();
         }
         catch (SQLException ex)
@@ -453,7 +452,7 @@ public class Stocks extends StockControl {
                     String model = txtmdl1.getText();
                     //String nro = txtnro.getText();
                     String t = "Update availablestock SET reOrderLevel = '"+ nro +"' WHERE modelCode = '"+ model +"'";
-                    pst = (PreparedStatement) conn.prepareStatement(t);
+                    pst = conn.prepareStatement(t);
                     pst.execute();
                 } catch (SQLException ex) {
                     Logger.getLogger(StockControl.class.getName()).log(Level.SEVERE, null, ex);
@@ -493,7 +492,7 @@ public class Stocks extends StockControl {
         String key = txtsearch2.getText();
         try {
             String z1 = "SELECT * FROM availablestock where modelCode LIKE '%"+ key +"%'";
-            pst = (PreparedStatement) conn.prepareStatement(z1);
+            pst = conn.prepareStatement(z1);
             rs = pst.executeQuery();
             jTable2.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (SQLException ex) {
@@ -509,7 +508,7 @@ public class Stocks extends StockControl {
         String key = txtsearch3.getText();
         try {
             String z1 = "SELECT * FROM reorder where brand LIKE '%"+ key +"%'";
-            pst = (PreparedStatement) conn.prepareStatement(z1);
+            pst = conn.prepareStatement(z1);
             rs = pst.executeQuery();
             jTable2.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (SQLException ex) {
@@ -603,7 +602,7 @@ public class Stocks extends StockControl {
                 {
                     String b = "INSERT INTO reorder(reOrderID,vendorID,brand,modelCode,qty,totalCost,RequestDate,RequestTime) "
                     + " values ('"+ reorder +"','"+ Vendor +"','"+ Brand +"','"+ Model +"','"+ qty +"','"+ total +"','"+ DateTimeFunctions.getDate() +"','"+ timeFormat.format(Calendar.getInstance().getTime()) +"')";
-                    pst = (PreparedStatement) conn.prepareStatement(b);
+                    pst = conn.prepareStatement(b);
                     pst.execute();
                     SetReorderID();
                 }
@@ -622,10 +621,11 @@ public class Stocks extends StockControl {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     public void SetReorderID()
-   {
-        try {
+    {
+        try
+        {
             String sql = "select reOrderID from reorder ORDER BY reOrderID DESC LIMIT 1";
-            pst = (PreparedStatement) conn.prepareStatement(sql);
+            pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
             if(rs.next())
             {
@@ -634,31 +634,29 @@ public class Stocks extends StockControl {
                 String letters = id.substring(0,2);
                 String numbers = id.substring(2,len);
                 int inc = Integer.parseInt(numbers);
-                inc = inc + 1;
+                inc++;
                 numbers = Integer.toString(inc);
                 txtcb4.setText(letters+numbers);
             }
             else
             {
-                 txtcb4.setText("RE10000001");   
+                txtcb4.setText("RE10000001");   
             }
-                
-                
-            
-            
-            
-        } catch (SQLException ex) {
+        }
+        catch (SQLException ex) {
             Logger.getLogger(StockControl.class.getName()).log(Level.SEVERE, null, ex);
         }
-       JTable jTable2 = new JTable() {
-        private static final long serialVersionUID = 1L;
+        JTable jTable2 = new JTable()
+        {
+            private static final long serialVersionUID = 1L;
 
-        @Override
-        public boolean isCellEditable(int row, int column) {   //disable jtable editing             
+            @Override
+            public boolean isCellEditable(int row, int column)
+            {   //disable jtable editing             
                 return false;               
+            };
         };
-    };
-   }
+    }
     
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
 

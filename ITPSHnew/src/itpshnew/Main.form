@@ -842,6 +842,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="  Stock Reports"/>
             <Property name="enabled" type="boolean" value="false" postCode="adddetail.setVisible(false);"/>
+            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="adddetailMouseClicked"/>
@@ -899,6 +900,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="  New Item"/>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="vendorMouseClicked"/>
@@ -960,6 +962,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="  Current Stock"/>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="retailMouseClicked"/>

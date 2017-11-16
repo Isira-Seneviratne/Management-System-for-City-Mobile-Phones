@@ -5,7 +5,7 @@
  */
 package itpshnew;
 
-import java.io.IOException;
+import java.io.*;
 import javax.swing.*;
 
 /**
@@ -336,7 +336,7 @@ public class home extends JFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-        new StockControl().setVisible(true);
+        
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
@@ -347,9 +347,21 @@ public class home extends JFrame {
         try
         {
             if(System.getProperty("os.name").equals("Linux"))
-                Runtime.getRuntime().exec("google-chrome-stable");
+            {
+                Process p = new ProcessBuilder("which", "google-chrome-stable").start();
+                p.waitFor();
+                BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                if(br.readLine() != null)
+                    Runtime.getRuntime().exec("google-chrome-stable");
+                else
+                    JOptionPane.showMessageDialog(this, "Google Chrome is not installed.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
             else if(System.getProperty("os.name").equals("Windows"))
                 Runtime.getRuntime().exec("chrome.exe");
+        }
+        catch(InterruptedException e)
+        {
+            JOptionPane.showMessageDialog(this, "The program was interrupted before it could find Google Chrome.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         catch(IOException e)
         {

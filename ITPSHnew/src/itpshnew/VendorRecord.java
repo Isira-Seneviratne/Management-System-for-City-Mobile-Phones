@@ -24,6 +24,7 @@ public class VendorRecord extends Distribution {
     public void pubInit()
     {
         initComponents();
+        loaded = true;
         tableload(vendor_rectable,"select * FROM shipping_rec where ship_type='Vendor'");
     }
 

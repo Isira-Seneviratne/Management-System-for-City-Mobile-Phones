@@ -8,12 +8,15 @@ package itpshnew;
 import java.sql.*;
 import javax.swing.*;
 import net.sf.jasperreports.engine.*;
-
+/**
+ *
+ * @author Isira
+ */
 public abstract class FinancialSystem extends JPanel {
 
     protected Connection conn;
     protected JasperPrint jp;
-    
+    protected boolean loaded = false;
     protected float RepRev = 0, RepCost = 0, RepProf = 0, SalesRev = 0, SalesCost = 0,
             SalesProf = 0, DisRev = 0, DisCost = 0, DisProf = 0, HRCost = 0, OtherCost = 0,
             TotCost = 0, TotProf = 0, TotRev = 0;
@@ -27,6 +30,10 @@ public abstract class FinancialSystem extends JPanel {
     
     public abstract void genIReport();
     
+    public boolean getLoaded()
+    {
+        return loaded;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

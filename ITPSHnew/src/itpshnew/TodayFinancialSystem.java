@@ -6,7 +6,6 @@
 package itpshnew;
 
 import java.sql.*;
-import java.util.HashMap;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.view.JasperViewer;
@@ -300,12 +299,6 @@ public class TodayFinancialSystem extends FinancialSystem {
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel16.setText("Today's other costs:");
 
-        other_costs.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                other_costsActionPerformed(evt);
-            }
-        });
-
         updateToday.setBackground(new java.awt.Color(48, 214, 48));
         updateToday.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         updateToday.setText("Update");
@@ -366,6 +359,7 @@ public class TodayFinancialSystem extends FinancialSystem {
     {
         initComponents();
         initToday();
+        loaded = true;
     }
     
     private void initToday()
@@ -433,10 +427,6 @@ public class TodayFinancialSystem extends FinancialSystem {
         }
     }
     
-    private void other_costsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_other_costsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_other_costsActionPerformed
-
     private void updateTodayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateTodayActionPerformed
         try
         {

@@ -30,8 +30,7 @@ public class Main extends javax.swing.JFrame {
     /**
      * Creates new form Main
      * @param name
-     * @param e
-     * @return 
+     * @param e 
      */
     
     public Main(String name, MouseEvent e)
@@ -531,6 +530,7 @@ public class Main extends javax.swing.JFrame {
         adddetail.setText("  Stock Reports");
         adddetail.setEnabled(false);
         adddetail.setVisible(false);
+        adddetail.setOpaque(true);
         adddetail.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 adddetailMouseClicked(evt);
@@ -560,6 +560,7 @@ public class Main extends javax.swing.JFrame {
         vendor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Warranty_Card_30px_2.png"))); // NOI18N
         vendor.setText("  New Item");
         vendor.setEnabled(false);
+        vendor.setOpaque(true);
         vendor.setVisible(false);
         vendor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -591,6 +592,7 @@ public class Main extends javax.swing.JFrame {
         retail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_New_Product_30px_1.png"))); // NOI18N
         retail.setText("  Current Stock");
         retail.setEnabled(false);
+        retail.setOpaque(true);
         retail.setVisible(false);
         retail.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -680,7 +682,7 @@ public class Main extends javax.swing.JFrame {
 
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
         t.setRunning(false);
-        System.exit(0);
+        dispose();
     }//GEN-LAST:event_closeMouseClicked
 
     private void minimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeMouseClicked
@@ -688,32 +690,42 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_minimizeMouseClicked
 
     private void vendorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vendorMouseClicked
-        s.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        add(s, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 1200, 768));
-        s.pubInit();
-        setEnabledVisible(i, false);
+        i.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(i, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1090, 760));
+        if(i.getLoaded() == false)
+            i.pubInit();
+        setEnabledVisible(s, false);
         setEnabledVisible(r, false);
-        setEnabledVisible(s, true);
+        setEnabledVisible(i, true);
         setLabelColor(vendor);
         resetLabelColor(retail);
+        resetLabelColor(adddetail);
     }//GEN-LAST:event_vendorMouseClicked
 
     private void retailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_retailMouseClicked
-        i.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        add(i, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 1200, 768));
-        i.pubInit();
+        s.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(s, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1090, 760));
+        if(s.getLoaded() == false)
+            s.pubInit();
         setEnabledVisible(r, false);
-        setEnabledVisible(s, false);
-        setEnabledVisible(i, true);
+        setEnabledVisible(i, false);
+        setEnabledVisible(s, true);
         setLabelColor(retail);
         resetLabelColor(vendor);
+        resetLabelColor(adddetail);
     }//GEN-LAST:event_retailMouseClicked
 
     private void adddetailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adddetailMouseClicked
-
+        r.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(r, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1090, 760));
+        if(r.getLoaded() == false)
+            r.pubInit();
+        setEnabledVisible(i, false);
+        setEnabledVisible(s, false);
+        setEnabledVisible(r, true);
         setLabelColor(adddetail);
-        resetLabelColor(retail);
         resetLabelColor(vendor);
+        resetLabelColor(retail);
     }//GEN-LAST:event_adddetailMouseClicked
 
     private void adddetail1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adddetail1MouseClicked
@@ -728,7 +740,8 @@ public class Main extends javax.swing.JFrame {
             resetAll();
             tfs.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
             add(tfs, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1200, 768));
-            tfs.pubInit();
+            if(tfs.getLoaded() == false)
+                tfs.pubInit();
             setEnabledVisible(tfs, true);
             setLabelColor(name5);
             setEnabledVisible(today, true);
@@ -741,7 +754,8 @@ public class Main extends javax.swing.JFrame {
     private void todayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_todayMouseClicked
         tfs.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         add(tfs, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 1200, 768));
-        tfs.pubInit();
+        if(tfs.getLoaded() == false)
+            tfs.pubInit();
         setEnabledVisible(mfs, false);
         setEnabledVisible(tfs, true);
         setLabelColor(today);
@@ -751,7 +765,8 @@ public class Main extends javax.swing.JFrame {
     private void monthMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_monthMouseClicked
         mfs.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         add(mfs, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 1200, 768));
-        mfs.pubInit();
+        if(mfs.getLoaded() == false)
+            mfs.pubInit();
         setEnabledVisible(tfs, false);
         setEnabledVisible(mfs, true);
         setLabelColor(month);
@@ -767,14 +782,16 @@ public class Main extends javax.swing.JFrame {
         {
             resetAll();
             i.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-            add(i, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1200, 768));
-            i.pubInit();
+            add(i, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1090, 760));
+            if(i.getLoaded() == false)
+                i.pubInit();
             setEnabledVisible(i, true);
             setLabelColor(name1);
             setEnabledVisible(retail, true);
             setEnabledVisible(vendor, true);
+            setEnabledVisible(adddetail, true);
             setPanelColor(topic2);
-            setLabelColor(retail);
+            setLabelColor(vendor);
         }
     }//GEN-LAST:event_name1MouseClicked
 
@@ -784,7 +801,8 @@ public class Main extends javax.swing.JFrame {
             resetAll();
             vr.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
             add(vr, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1200, 768));
-            vr.pubInit();
+            if(vr.getLoaded() == false)
+                vr.pubInit();
             setEnabledVisible(vr, true);
             setPanelColor(topic5);
         }
