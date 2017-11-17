@@ -986,6 +986,7 @@ public class Main extends javax.swing.JFrame {
         resetLabelColor(warranty);
         resetLabelColor(customer);
         resetLabelColor(report);
+        
         purchase_panel.setVisible(true);
         warranty_panel.setVisible(false);
         customer_panel.setVisible(false);
@@ -993,10 +994,12 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_purchaseMouseClicked
 
     private void warrantyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_warrantyMouseClicked
+
         setLabelColor(warranty);
         resetLabelColor(purchase);
         resetLabelColor(customer);
         resetLabelColor(report);
+        
         warranty_panel.setVisible(true);
         purchase_panel.setVisible(false);
         customer_panel.setVisible(false);
@@ -1008,6 +1011,7 @@ public class Main extends javax.swing.JFrame {
         resetLabelColor(warranty);
         resetLabelColor(purchase);
         resetLabelColor(report);
+        
         customer_panel.setVisible(true);
         purchase_panel.setVisible(false);
         warranty_panel.setVisible(false);
@@ -1019,6 +1023,7 @@ public class Main extends javax.swing.JFrame {
         resetLabelColor(customer);
         resetLabelColor(warranty);
         resetLabelColor(purchase);
+
         report_panel.setVisible(true);
         customer_panel.setVisible(false);
         purchase_panel.setVisible(false);
