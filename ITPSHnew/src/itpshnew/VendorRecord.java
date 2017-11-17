@@ -204,10 +204,7 @@ public class VendorRecord extends Distribution {
 
             }
         }
-        catch(SQLException se)
-        {
-            JOptionPane.showMessageDialog(this, "Unable to insert into DB","DB insert error", JOptionPane.ERROR_MESSAGE);
-        }
+        
         catch(NumberFormatException e)
         {
             JOptionPane.showMessageDialog(this, "You have attempted to store blank or invalid numbers. Please enter valid numbers.",
@@ -217,6 +214,10 @@ public class VendorRecord extends Distribution {
         {
             JOptionPane.showMessageDialog(this, "A database connection was not properly established.",
                 "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        catch(SQLException se)
+        {
+            JOptionPane.showMessageDialog(this, "Unable to insert into DB","DB insert error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -246,14 +247,15 @@ public class VendorRecord extends Distribution {
             int price = a.getInt("price");
             jTextField46.setText(Integer.toString(price*Integer.parseInt(jTextField45.getText())));
         }
-        catch(SQLException se)
-        {
-            JOptionPane.showMessageDialog(this, "Unable to Retrieve into DB","Database Retrieve Error", JOptionPane.ERROR_MESSAGE);
-        }
+        
         catch(NumberFormatException e)
         {
             JOptionPane.showMessageDialog(this, "You have attempted to store blank or invalid numbers. Please enter valid numbers.",
                 "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        catch(SQLException se)
+        {
+            JOptionPane.showMessageDialog(this, "Unable to Retrieve into DB","Database Retrieve Error", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_jButton10ActionPerformed

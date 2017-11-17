@@ -200,14 +200,15 @@ public class RetailRecord extends Distribution {
             JOptionPane.showMessageDialog(this, "The retail shipping record has been inserted.","Insertion successful", JOptionPane.INFORMATION_MESSAGE);
             tableload(retail_rectable,"select * FROM shipping_rec where ship_type='Retail'");
         }
-        catch(SQLException se)
-        {
-            JOptionPane.showMessageDialog(this, "Database Insert Error","Unable to Insert into DB", JOptionPane.ERROR_MESSAGE);
-        }
+        
         catch(NumberFormatException e)
         {
             JOptionPane.showMessageDialog(this, "You have attempted to store blank or invalid numbers. Please enter valid numbers.",
                 "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        catch(SQLException se)
+        {
+            JOptionPane.showMessageDialog(this, "Database Insert Error","Unable to Insert into DB", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton11ActionPerformed
 
@@ -229,14 +230,15 @@ public class RetailRecord extends Distribution {
             int price = a.getInt("price");
             jTextField53.setText(Integer.toString(price*Integer.parseInt(jTextField52.getText())));
         }
-        catch(SQLException se)
-        {
-            JOptionPane.showMessageDialog(this, "Unable to Retrieve into DB.","Database Retrieve Error", JOptionPane.ERROR_MESSAGE);
-        }
+        
         catch(NumberFormatException e)
         {
             JOptionPane.showMessageDialog(this, "You have attempted to store blank or invalid numbers. Please enter valid numbers.",
                 "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        catch(SQLException se)
+        {
+            JOptionPane.showMessageDialog(this, "Unable to Retrieve from DB.","Database Retrieve Error", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_jButton13ActionPerformed
