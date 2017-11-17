@@ -474,7 +474,9 @@ public class Item extends StockControl {
                 pst.execute();
             }
             catch (SQLException b)
-            {}
+            {
+                JOptionPane.showMessageDialog(null, "Unable to insert item.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
 
             //"
             // + "
@@ -498,7 +500,9 @@ public class Item extends StockControl {
                 pst.execute();
             }
             catch (SQLException b)
-            {}
+            {
+                JOptionPane.showMessageDialog(null, "Unable to update available stock.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_purchase_save_btnActionPerformed
 
@@ -611,7 +615,7 @@ public class Item extends StockControl {
                     txtdel.setText("");
                 }
                 else {
-                    JOptionPane.showMessageDialog(null, "Could not find "+ id);
+                    JOptionPane.showMessageDialog(null, "Could not find "+ id, "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 

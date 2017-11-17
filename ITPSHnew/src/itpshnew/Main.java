@@ -790,6 +790,7 @@ public class Main extends javax.swing.JFrame {
             setEnabledVisible(retail, true);
             setEnabledVisible(vendor, true);
             setEnabledVisible(adddetail, true);
+            setEnabledVisible(adddetail1, true);
             setPanelColor(topic2);
             setLabelColor(vendor);
         }

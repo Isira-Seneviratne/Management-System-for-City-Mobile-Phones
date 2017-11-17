@@ -277,22 +277,18 @@ CREATE TABLE `item` (
 --
 
 INSERT INTO `item` (`shippingID`, `itemID`, `itemName`, `brand`, `modelCode`, `sellingPrice`, `manufactureDate`, `warrantyPeriod`, `discount`, `status`) VALUES
-('SH0001', 'IT10000001', 'J7 Prime', 'Samsung', 'F0xA1', 37000, 'Sep 2, 2015', 365, '5.0%', 'sold'),
-('default', 'IT10000002', 'iPhone 6S', 'Apple', 'xxD02', 90000, 'Sep 1, 2017', 365, '0.0%', 'sold'),
-('default', 'IT10000004', 'm8', 'Huawei', 'JxDba', 24000, 'Sep 11, 2014', 365, '10.0%', 'sold'),
-('SH0002', 'IT10000005', 'm8', 'Huawei', 'JxDba', 24000, 'Sep 11, 2014', 365, '10.0%', 'sold'),
-('SH0002', 'IT10000006', 'm8', 'Huawei', 'JxDba', 24000, 'Sep 4, 2015', 0, '0.0%', 'sold'),
-('SH0002', 'IT10000007', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'replace'),
-('SH0002', 'IT10000008', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'replace'),
-('SH0002', 'IT10000009', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'sold'),
-('SH0002', 'IT10000010', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'replace'),
+('SH0001', 'IT10000001', 'J7 Prime', 'Samsung', 'F0xA1', 37000, 'Sep 2, 2015', 365, '5.0%', 'not sold'),
+('SH0002', 'IT10000007', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'not sold'),
+('SH0002', 'IT10000008', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'not sold'),
+('SH0002', 'IT10000009', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'not sold'),
+('SH0002', 'IT10000010', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'not sold'),
 ('SH0002', 'IT10000011', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'not sold'),
 ('SH0002', 'IT10000012', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'not sold'),
 ('SH0002', 'IT10000013', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'not sold'),
 ('SH0002', 'IT10000014', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'not sold'),
-('SH0002', 'IT10000015', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'sold'),
-('SH0002', 'IT10000016', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'sold'),
-('SH0002', 'IT10000017', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'sold'),
+('SH0002', 'IT10000015', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'not sold'),
+('SH0002', 'IT10000016', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'not sold'),
+('SH0002', 'IT10000017', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'not sold'),
 ('SH0003', 'IT10000018', 's5', 'Samsung', 's5Xz3', 51000, 'Sep 26, 2014', 183, '5.0%', 'not sold'),
 ('SH0003', 'IT10000019', 's5', 'Samsung', 's5Xz3', 51000, 'Sep 26, 2014', 183, '5.0%', 'not sold'),
 ('SH0003', 'IT10000020', 's5', 'Samsung', 's5Xz3', 51000, 'Sep 26, 2014', 183, '0.0%', 'not sold'),
@@ -301,7 +297,7 @@ INSERT INTO `item` (`shippingID`, `itemID`, `itemName`, `brand`, `modelCode`, `s
 ('SH0003', 'IT10000023', 's5', 'Samsung', 's5Xz3', 51000, 'Sep 26, 2014', 183, '0.0%', 'not sold'),
 ('SH0003', 'IT10000024', 'S8 Plus', 'Samsung', 'mm01G', 111000, 'Aug 21, 2017', 730, '0.0%', 'not sold'),
 ('SH0003', 'IT10000025', 'S8 Plus', 'Samsung', 'mm01G', 111000, 'Aug 21, 2017', 730, '0.0%', 'not sold'),
-('SH0003', 'IT10000026', 'S8 Plus', 'Samsung', 'mm01G', 111000, 'Aug 21, 2017', 730, '0.0%', 'sold'),
+('SH0003', 'IT10000026', 'S8 Plus', 'Samsung', 'mm01G', 111000, 'Aug 21, 2017', 730, '0.0%', 'not sold'),
 ('SH0003', 'IT10000027', 'S8 Plus', 'Samsung', 'mm01G', 111000, 'Aug 21, 2017', 730, '0.0%', 'not sold'),
 ('SH0003', 'IT10000028', 'S8 Plus', 'Samsung', 'mm01G', 111000, 'Aug 21, 2017', 730, '0.0%', 'not sold'),
 ('SH0003', 'IT10000029', 'S8 Plus', 'Samsung', 'mm01G', 111000, 'Aug 21, 2017', 730, '0.0%', 'not sold'),
@@ -340,8 +336,16 @@ INSERT INTO `item` (`shippingID`, `itemID`, `itemName`, `brand`, `modelCode`, `s
 ('SH0003', 'IT10000062', 'J7 Prime', 'Samsung', 'F0xA1', 111000, 'Aug 21, 2017', 730, '0.0%', 'not sold'),
 ('SH0003', 'IT10000063', 'J7 Prime', 'Samsung', 'F0xA1', 111000, 'Aug 21, 2017', 730, '0.0%', 'not sold'),
 ('SH0003', 'IT10000064', 'J7 Prime', 'Samsung', 'F0xA1', 111000, 'Aug 21, 2017', 730, '0.0%', 'not sold'),
+('SH0003', 'IT10000065', 'J7 Prime', 'Samsung', 'F0xA1', 111000, 'Aug 21, 2017', 730, '0.0%', 'not sold'),
 ('SH0003', 'IT10000066', 'J7 Prime', 'Samsung', 'F0xA1', 111000, 'Aug 21, 2017', 730, '0.0%', 'not sold'),
-('default', 'IT10000067', 'J7 ', 'Samsung', 'Sd098', 50000, 'Sep 1, 2017', 365, '5.0%', 'not sold');
+('SH0001', 'IT10000068', 'P9', 'Huawei', 'vv2c', 23000, 'Nov 5, 2017', 365, '0.0%', 'not sold'),
+('SH0001', 'IT10000069', 'iPhone 6s', 'Appule', 'ccv', 112000, 'Nov 1, 2017', 365, '0.0%', 'not sold'),
+('SH0001', 'IT10000070', 'iPhone 7Plus', 'Appule', 'ccvd', 139000, 'Nov 1, 2017', 365, '0.0%', 'not sold'),
+('SH0004', 'IT10000071', 'iPhone 5S', 'Appule', 'fdfd', 1234, 'Nov 5, 2017', 0, '0.0%', 'not sold'),
+('SH0001', 'IT10000072', 'iPhone 5S', 'Appule', 'fdfd', 12343, 'Nov 5, 2017', 0, '0.0%', 'not sold'),
+('SH0001', 'IT10000073', 'Note 8', 'Samsung', 'gGcs5', 120000, 'Nov 5, 2017', 365, '0.0%', 'not sold'),
+('SH0007', 'IT10000074', 'Tab 8.0', 'Huawei', 'bbc', 60000, 'Nov 12, 2017', 365, '0.0%', 'not sold'),
+('SH0001', 'IT10000075', 'Galaxy', 'Samsung', 'Sams1', 100, 'Nov 14, 2017', 100, '10.0%', 'not sold');
 
 --
 -- Triggers `item`
@@ -495,7 +499,7 @@ CREATE TABLE `reorder` (
   `reOrderID` varchar(10) NOT NULL,
   `vendorID` varchar(10) NOT NULL,
   `brand` varchar(20) NOT NULL,
-  `modelCode` varchar(20) NOT NULL,
+  `itemName` varchar(20) NOT NULL,
   `qty` int(11) NOT NULL,
   `totalCost` double NOT NULL,
   `RequestDate` varchar(20) NOT NULL,
@@ -506,20 +510,9 @@ CREATE TABLE `reorder` (
 -- Dumping data for table `reorder`
 --
 
-INSERT INTO `reorder` (`reOrderID`, `vendorID`, `brand`, `modelCode`, `qty`, `totalCost`, `RequestDate`, `RequestTime`) VALUES
-('RE10000001', 'VENDOR01', 'Samsung', 'F0xA1', 10, 350, '23 September 2017', '7:20 PM'),
-('RE10000002', 'V0001', 'asds', 'sdsdsd', 1, 2, '25 September 2017', '3:50 PM'),
-('RE10000003', 'V0001', 'asds', 'sdsdsd', 1, 2, '25 September 2017', '3:50 PM'),
-('RE10000004', 'V0001', 's', 's', 2, 4, '25 September 2017', '3:52 PM'),
-('RE10000005', 'V0001', 'sdsd', 'jk', 1, 1, '25 September 2017', '4:12 PM'),
-('RE10000006', 'V0001', 'msms', 'sd', 2, 4, '25 September 2017', '4:20 PM'),
-('RE10000007', 'V0001', 'sad', 'sad', 1, 1, '25 September 2017', '4:36 PM'),
-('RE10000008', 'V0003', 'asd', 'sadasd', 2, 40, '25 September 2017', '4:42 PM'),
-('RE10000009', 'V0001', 'Samsung', 'asdasd', 2, 2, '25 September 2017', '7:37 PM'),
-('RE10000010', 'V0001', 'Samsung', 'A0xF1', 2, 40000, '25 September 2017', '9:49 PM'),
-('RE10000011', 'V0001', 'Samsung', 'FF0xa', 2, 180000, '26 September 2017', '11:57 AM'),
-('RE10000012', 'V0001', 'sss', 'sss', 2, 4, '26 September 2017', '3:52 PM'),
-('RE10000013', 'V0001', 'aaa', 'Sdf0A', 2, 60000, '26 September 2017', '4:42 PM');
+INSERT INTO `reorder` (`reOrderID`, `vendorID`, `brand`, `itemName`, `qty`, `totalCost`, `RequestDate`, `RequestTime`) VALUES
+('RE10000001', 'V0001', 'Samsung', 'A5', 2, 2, '16 November 2017', '3:38 PM'),
+('RE10000002', 'V0002', 'Appule', 'iPhone 6s', 2, 200, '17 November 2017', '1:36 AM');
 
 -- --------------------------------------------------------
 

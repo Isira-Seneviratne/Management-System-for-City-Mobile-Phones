@@ -697,7 +697,8 @@ public class Stocks extends StockControl {
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
-        try{
+        try
+        {
             int r = jTable2.getSelectedRow();
             String mc = jTable2.getValueAt(r,0).toString();
             String qty = jTable2.getValueAt(r,1).toString();
@@ -708,7 +709,9 @@ public class Stocks extends StockControl {
             txtpro.setText(level);
         }
         catch(Exception e)
-        {}
+        {
+            JOptionPane.showMessageDialog(null, "Something went wrong.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jTable2MouseClicked
 
 
