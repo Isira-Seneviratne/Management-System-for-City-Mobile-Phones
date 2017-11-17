@@ -729,9 +729,12 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_adddetailMouseClicked
 
     private void adddetail1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adddetail1MouseClicked
-        setLabelColor(adddetail1);// TODO add your handling code here:
-        adddetail1.setVisible(true);
-
+        //setLabelColor(adddetail1);// TODO add your handling code here:
+        Calculator h1 = Calculator.getInstance();
+        h1.pubInit();
+        h1.setVisible(true);
+        h1.setAlwaysOnTop(true);
+        //resetLabelColor(adddetail1);
     }//GEN-LAST:event_adddetail1MouseClicked
 
     private void name5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_name5MouseClicked

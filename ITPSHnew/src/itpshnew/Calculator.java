@@ -18,10 +18,12 @@ public class Calculator extends JFrame {
      */
     private double num1, num2, result;
     private char op;
-    private static Calculator c = new Calculator();
+    private static Calculator c;
     
-    public static Calculator getInstance()
+    public static synchronized Calculator getInstance()
     {
+        if(c == null)
+            c = new Calculator();
         return c;
     }
     
@@ -32,6 +34,11 @@ public class Calculator extends JFrame {
         initComponents();
     }
 
+    public void pubInit()
+    {
+        initComponents();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
