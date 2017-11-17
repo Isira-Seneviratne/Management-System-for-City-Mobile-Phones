@@ -45,6 +45,7 @@ public class Main extends javax.swing.JFrame {
         av = new AddVendor();
         setEnabledVisible(mfs, false);
         setEnabledVisible(tfs, false);
+        setEnabledVisible(av, false);
         setEnabledVisible(vr, false);
         setEnabledVisible(rr, false);
         setEnabledVisible(r, false);
@@ -57,6 +58,8 @@ public class Main extends javax.swing.JFrame {
             topic6MouseClicked(e);
         else if(name.equals("Distribution"))
             topic5MouseClicked(e);
+        else if(name.equals("Stock Control"))
+            topic2MouseClicked(e);
     }
     
     public Main()
@@ -144,6 +147,10 @@ public class Main extends javax.swing.JFrame {
         addvendor = new javax.swing.JLabel();
         addretailrec = new javax.swing.JLabel();
         addvendorrec = new javax.swing.JLabel();
+        purchase = new javax.swing.JLabel();
+        warranty = new javax.swing.JLabel();
+        customer = new javax.swing.JLabel();
+        report = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1366, 768));
@@ -202,8 +209,8 @@ public class Main extends javax.swing.JFrame {
 
         topic2.setBackground(new java.awt.Color(0, 153, 153));
         topic2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                topic2MousePressed(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                topic2MouseClicked(evt);
             }
         });
         topic2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -506,7 +513,7 @@ public class Main extends javax.swing.JFrame {
                 closeMouseClicked(evt);
             }
         });
-        topbar.add(close, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 0, -1, 49));
+        topbar.add(close, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 0, -1, 49));
 
         minimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Minimize_Window_40px.png"))); // NOI18N
         minimize.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -514,17 +521,17 @@ public class Main extends javax.swing.JFrame {
                 minimizeMouseClicked(evt);
             }
         });
-        topbar.add(minimize, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 0, -1, 50));
+        topbar.add(minimize, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 0, -1, 50));
 
         time.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         time.setForeground(new java.awt.Color(255, 255, 255));
         time.setText("Time");
-        topbar.add(time, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 0, 90, 50));
+        topbar.add(time, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 0, 90, 50));
 
         date.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         date.setForeground(new java.awt.Color(255, 255, 255));
         date.setText(DateTimeFunctions.getDate());
-        topbar.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 0, 190, 50));
+        topbar.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 0, 190, 50));
 
         adddetail.setBackground(new java.awt.Color(0, 204, 204));
         adddetail.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -669,6 +676,70 @@ public class Main extends javax.swing.JFrame {
         });
         topbar.add(addvendorrec, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 0, 190, 50));
 
+        purchase.setBackground(new java.awt.Color(0, 204, 204));
+        purchase.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        purchase.setForeground(new java.awt.Color(255, 255, 255));
+        purchase.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        purchase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Shopping_Cart_30px_1.png"))); // NOI18N
+        purchase.setText("  Purchase");
+        purchase.setEnabled(false);
+        purchase.setOpaque(true);
+        purchase.setVisible(false);
+        purchase.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                purchaseMouseClicked(evt);
+            }
+        });
+        topbar.add(purchase, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 50));
+
+        warranty.setBackground(new java.awt.Color(0, 204, 204));
+        warranty.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        warranty.setForeground(new java.awt.Color(255, 255, 255));
+        warranty.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        warranty.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Warranty_Card_30px_2.png"))); // NOI18N
+        warranty.setText("  Warranty");
+        warranty.setEnabled(false);
+        warranty.setOpaque(true);
+        warranty.setVisible(false);
+        warranty.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                warrantyMouseClicked(evt);
+            }
+        });
+        topbar.add(warranty, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 180, 50));
+
+        customer.setBackground(new java.awt.Color(0, 204, 204));
+        customer.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        customer.setForeground(new java.awt.Color(255, 255, 255));
+        customer.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        customer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Loyalty_Card_30px.png"))); // NOI18N
+        customer.setText("  Customer");
+        customer.setEnabled(false);
+        customer.setOpaque(true);
+        customer.setVisible(false);
+        customer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                customerMouseClicked(evt);
+            }
+        });
+        topbar.add(customer, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, 180, 50));
+
+        report.setBackground(new java.awt.Color(0, 204, 204));
+        report.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        report.setForeground(new java.awt.Color(255, 255, 255));
+        report.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        report.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Report_Card_30px.png"))); // NOI18N
+        report.setText("  Report");
+        report.setEnabled(false);
+        report.setOpaque(true);
+        report.setVisible(false);
+        report.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                reportMouseClicked(evt);
+            }
+        });
+        topbar.add(report, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 0, 180, 50));
+
         getContentPane().add(topbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 1090, -1));
 
         pack();
@@ -699,12 +770,6 @@ public class Main extends javax.swing.JFrame {
     private void pic3name3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pic3name3MousePressed
 
     }//GEN-LAST:event_pic3name3MousePressed
-
-    private void topic2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topic2MousePressed
-        /* setColor(topic2);   //set the colour
-        bar2.setOpaque(true);  */
-
-    }//GEN-LAST:event_topic2MousePressed
 
     private void bar4name3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bar4name3MousePressed
 
@@ -781,12 +846,12 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_adddetailMouseClicked
 
     private void adddetail1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adddetail1MouseClicked
-        //setLabelColor(adddetail1);// TODO add your handling code here:
+        setLabelColor(adddetail1);// TODO add your handling code here:
         Calculator h1 = Calculator.getInstance();
         h1.pubInit();
         h1.setVisible(true);
         h1.setAlwaysOnTop(true);
-        //resetLabelColor(adddetail1);
+        resetLabelColor(adddetail1);
     }//GEN-LAST:event_adddetail1MouseClicked
 
     private void name5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_name5MouseClicked
@@ -912,6 +977,54 @@ public class Main extends javax.swing.JFrame {
         resetLabelColor(addretailrec);
     }//GEN-LAST:event_addvendorrecMouseClicked
 
+    private void topic2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topic2MouseClicked
+        name1MouseClicked(evt);
+    }//GEN-LAST:event_topic2MouseClicked
+
+    private void purchaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_purchaseMouseClicked
+        setlabelcolor(purchase);
+        resettlabelcolor(warranty);
+        resettlabelcolor(customer);
+        resettlabelcolor(report);
+        purchase_panel.setVisible(true);
+        warranty_panel.setVisible(false);
+        customer_panel.setVisible(false);
+        report_panel.setVisible(false);
+    }//GEN-LAST:event_purchaseMouseClicked
+
+    private void warrantyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_warrantyMouseClicked
+        setlabelcolor(warranty);
+        resettlabelcolor(purchase);
+        resettlabelcolor(customer);
+        resettlabelcolor(report);
+        warranty_panel.setVisible(true);
+        purchase_panel.setVisible(false);
+        customer_panel.setVisible(false);
+        report_panel.setVisible(false);
+    }//GEN-LAST:event_warrantyMouseClicked
+
+    private void customerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerMouseClicked
+        setlabelcolor(customer);
+        resettlabelcolor(warranty);
+        resettlabelcolor(purchase);
+        resettlabelcolor(report);
+        customer_panel.setVisible(true);
+        purchase_panel.setVisible(false);
+        warranty_panel.setVisible(false);
+        report_panel.setVisible(false);
+    }//GEN-LAST:event_customerMouseClicked
+
+    private void reportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportMouseClicked
+        setlabelcolor(report);
+        resettlabelcolor(customer);
+        resettlabelcolor(warranty);
+        resettlabelcolor(purchase);
+        report_panel.setVisible(true);
+        customer_panel.setVisible(false);
+        purchase_panel.setVisible(false);
+        warranty_panel.setVisible(false);
+    }//GEN-LAST:event_reportMouseClicked
+
     private void setLabelColor(JLabel label) //set the colour after  click
     {
         label.setBackground(new Color (0,153,153));
@@ -1021,6 +1134,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel bar7;
     private javax.swing.JPanel bar8;
     private javax.swing.JLabel close;
+    private javax.swing.JLabel customer;
     private javax.swing.JLabel date;
     private javax.swing.JLabel emp_id;
     private javax.swing.JLabel emp_name;
@@ -1046,6 +1160,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel pic5;
     private javax.swing.JLabel pic6;
     private javax.swing.JLabel pic7;
+    private javax.swing.JLabel purchase;
+    private javax.swing.JLabel report;
     private javax.swing.JLabel retail;
     private javax.swing.JPanel sidepanel;
     private javax.swing.JLabel time;
@@ -1060,5 +1176,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel topic7;
     private javax.swing.JPanel topic8;
     private javax.swing.JLabel vendor;
+    private javax.swing.JLabel warranty;
     // End of variables declaration//GEN-END:variables
 }
