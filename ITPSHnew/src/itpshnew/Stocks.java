@@ -31,6 +31,7 @@ public class Stocks extends StockControl {
     {
         initComponents();
         loaded = true;
+        tableLoad(jTable2, "select * from reorder");
     }
     
     /**
@@ -109,11 +110,6 @@ public class Stocks extends StockControl {
 
         txtqty2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtqty2.setBorder(null);
-        txtqty2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtqty2ActionPerformed(evt);
-            }
-        });
         jPanel8.add(txtqty2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 50, 260, 25));
 
         txtnro.setBorder(null);
@@ -410,10 +406,6 @@ public class Stocks extends StockControl {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtqty2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtqty2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtqty2ActionPerformed
 
     private void txtnroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnroActionPerformed
         // TODO add your handling code here:

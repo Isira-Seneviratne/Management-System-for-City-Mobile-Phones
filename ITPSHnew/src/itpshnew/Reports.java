@@ -5,6 +5,9 @@
  */
 package itpshnew;
 
+import net.proteanit.sql.DbUtils;
+import java.sql.*;
+import javax.swing.JOptionPane;
 /**
  *
  * @author isira
@@ -23,6 +26,7 @@ public class Reports extends StockControl {
     {
         initComponents();
         loaded = true;
+        tableLoad(jTable1, "Select * From financial_reports");
     }
     
     /**
