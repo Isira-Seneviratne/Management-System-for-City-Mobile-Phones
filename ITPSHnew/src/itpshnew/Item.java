@@ -31,6 +31,7 @@ public class Item extends StockControl {
     {
         initComponents();
         loaded = true;
+        tableLoad(jTable3, "Select * From item");
     }
     
     /**
@@ -338,38 +339,44 @@ public class Item extends StockControl {
         ID = getID();
 
         String ShipID = txtship.getText();
-        if (ShipID.equals("") && flag == false){
+        if (ShipID.equals("") && flag == false)
+        {
             JOptionPane.showMessageDialog(null,"Shipping ID cannot be Empty");
             flag = true;
         }
         String Name = txtname.getText();
-        if (Name.equals("")&& flag == false){
+        if (Name.equals("")&& flag == false)
+        {
             JOptionPane.showMessageDialog(null,"Item Name cannot be Empty");
             flag = true;
         }
         String Brand = txtbrand.getText();
-        if (Brand.equals("")&& flag == false){
+        if (Brand.equals("")&& flag == false)
+        {
             JOptionPane.showMessageDialog(null,"Brand cannot be Empty");
             flag = true;
         }
-        if(!Brand.matches("[a-zA-Z]+") && flag == false){
+        if(!Brand.matches("[a-zA-Z]+") && flag == false)
+        {
             JOptionPane.showMessageDialog(null,"Brand can only consist of letters");
             flag = true;
         }
         java.util.Date Date1 = jDateChooser1.getDate();
-        if (Date1 == null && flag == false){
+        if (Date1 == null && flag == false)
+        {
             JOptionPane.showMessageDialog(null,"Manufacture Date cannot be Empty");
             flag = true;
 
         }
         String Model = txtmodel.getText();
-        if (Model.equals("")&& flag == false){
+        if (Model.equals("")&& flag == false)
+        {
             JOptionPane.showMessageDialog(null,"Model Code cannot be Empty");
             flag = true;
         }
         String Price = txtprice1.getText();
 
-        if (Price.equals("")&& flag == false)
+        if (Price.equals("") && flag == false)
         {
             JOptionPane.showMessageDialog(null,"Price cannot be Empty");
             flag = true;
@@ -541,7 +548,7 @@ public class Item extends StockControl {
                 String letters = id.substring(0,2);
                 String numbers = id.substring(2,len);
                 int inc = Integer.parseInt(numbers);
-                inc = inc + 1;
+                inc++;
                 numbers = Integer.toString(inc);
                 txtid.setText(letters+numbers);
             }

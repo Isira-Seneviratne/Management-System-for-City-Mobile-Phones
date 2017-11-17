@@ -23,6 +23,7 @@ public abstract class StockControl extends javax.swing.JPanel {
      * Creates new form StockControl2
      */
     public StockControl() {
+        conn = dbCon.connect();
         initComponents();
     }
     
