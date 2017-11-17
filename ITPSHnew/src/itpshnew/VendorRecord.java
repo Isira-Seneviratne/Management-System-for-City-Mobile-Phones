@@ -180,21 +180,32 @@ public class VendorRecord extends Distribution {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
 
-        try{
-            String SID = jTextField43.getText();
-            String VID = jTextField39.getText();
-
-            String modelCode = jTextField44.getText();
-            String qty = jTextField45.getText();
-            String shipcost = jTextField47.getText();
-            String itemcost = jTextField46.getText();
-            String type = "Vendor";
+        try
+        {
+            String SID, VID, modelCode, qty, shipcost, itemcost, type;
+            if(jTextField39.getText().matches("V\\d{3,}"))
+                VID = jTextField39.getText();
+            else
+            {
+                JOptionPane.showMessageDialog(null,"Incorrect VID format", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if( jTextField43.getText().matches("S\\d{3,}"))
+                SID = jTextField43.getText();
+            else
+            {
+                JOptionPane.showMessageDialog(null,"Incorrect SID format", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            modelCode = jTextField44.getText();
+            qty = jTextField45.getText();
+            shipcost = jTextField47.getText();
+            itemcost = jTextField46.getText();
+            type = "Vendor";
             Statement validate_vendor = con.createStatement();
-
             if(validate_vendor.executeQuery("select 1 from vendor where Vendor_ID = '"+VID+"'").next())
             {
-                Statement add_vendorrec = con.createStatement();
-                add_vendorrec.executeQuery("Insert into shipping_rec values('"+SID+"','"+VID+"',,'"
+                validate_vendor.executeQuery("Insert into shipping_rec values('"+SID+"','"+VID+"',,'"
                     +modelCode+"','"+qty+"','"+shipcost+"','"+itemcost+"','"
                     +type+"',"+DateTimeFunctions.getDate()
                     +",'"+DateTimeFunctions.getMonth()+"',"+DateTimeFunctions.getYear()+")");

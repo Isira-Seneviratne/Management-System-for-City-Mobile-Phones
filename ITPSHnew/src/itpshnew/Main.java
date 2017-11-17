@@ -71,6 +71,7 @@ public class Main extends javax.swing.JFrame {
         av = new AddVendor();
         setEnabledVisible(mfs, false);
         setEnabledVisible(tfs, false);
+        setEnabledVisible(av, false);
         setEnabledVisible(vr, false);
         setEnabledVisible(rr, false);
         setEnabledVisible(r, false);
@@ -140,6 +141,9 @@ public class Main extends javax.swing.JFrame {
         today = new javax.swing.JLabel();
         retail = new javax.swing.JLabel();
         month = new javax.swing.JLabel();
+        addvendor = new javax.swing.JLabel();
+        addretailrec = new javax.swing.JLabel();
+        addvendorrec = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1366, 768));
@@ -617,6 +621,54 @@ public class Main extends javax.swing.JFrame {
         });
         topbar.add(month, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 200, 50));
 
+        addvendor.setBackground(new java.awt.Color(0, 204, 204));
+        addvendor.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        addvendor.setForeground(new java.awt.Color(255, 255, 255));
+        addvendor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        addvendor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Warranty_Card_30px_2.png"))); // NOI18N
+        addvendor.setText("Add Vendor");
+        addvendor.setEnabled(false);
+        addvendor.setOpaque(true);
+        addvendor.setVisible(false);
+        addvendor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addvendorMouseClicked(evt);
+            }
+        });
+        topbar.add(addvendor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 50));
+
+        addretailrec.setBackground(new java.awt.Color(0, 204, 204));
+        addretailrec.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        addretailrec.setForeground(new java.awt.Color(255, 255, 255));
+        addretailrec.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        addretailrec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_New_Product_30px_1.png"))); // NOI18N
+        addretailrec.setText("Add Retail Rec");
+        addretailrec.setEnabled(false);
+        addretailrec.setOpaque(true);
+        addretailrec.setVisible(false);
+        addretailrec.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addretailrecMouseClicked(evt);
+            }
+        });
+        topbar.add(addretailrec, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 200, 50));
+
+        addvendorrec.setBackground(new java.awt.Color(0, 204, 204));
+        addvendorrec.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        addvendorrec.setForeground(new java.awt.Color(255, 255, 255));
+        addvendorrec.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        addvendorrec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Combo_Chart_30px.png"))); // NOI18N
+        addvendorrec.setText("Add Vendor Rec");
+        addvendorrec.setEnabled(false);
+        addvendorrec.setOpaque(true);
+        addvendorrec.setVisible(false);
+        addvendorrec.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addvendorrecMouseClicked(evt);
+            }
+        });
+        topbar.add(addvendorrec, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 0, 190, 50));
+
         getContentPane().add(topbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 1090, -1));
 
         pack();
@@ -800,21 +852,65 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_name1MouseClicked
 
     private void name4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_name4MouseClicked
-        if(!vr.isVisible() && !rr.isVisible())
+        if(!vr.isVisible() && !rr.isVisible() && !av.isVisible())
         {
             resetAll();
-            vr.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-            add(vr, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1200, 768));
-            if(vr.getLoaded() == false)
-                vr.pubInit();
-            setEnabledVisible(vr, true);
+            av.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+            add(av, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1090, 760));
+            if(av.getLoaded() == false)
+                av.pubInit();
+            setEnabledVisible(av, true);
+            setEnabledVisible(addvendorrec, true);
+            setEnabledVisible(addvendor, true);
+            setEnabledVisible(addretailrec, true);
+            
             setPanelColor(topic5);
+            setLabelColor(addvendor);
         }
     }//GEN-LAST:event_name4MouseClicked
 
     private void topic5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topic5MouseClicked
         name4MouseClicked(evt);
     }//GEN-LAST:event_topic5MouseClicked
+
+    private void addvendorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addvendorMouseClicked
+        av.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(av, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1090, 760));
+        if(av.getLoaded() == false)
+            av.pubInit();
+        setEnabledVisible(vr, false);
+        setEnabledVisible(rr, false);
+        setEnabledVisible(av, true);
+        setLabelColor(addvendor);
+        resetLabelColor(retail);
+        resetLabelColor(addretailrec);
+    }//GEN-LAST:event_addvendorMouseClicked
+
+    private void addretailrecMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addretailrecMouseClicked
+        rr.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(rr, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1090, 760));
+        if(rr.getLoaded() == false)
+            rr.pubInit();
+        setEnabledVisible(vr, false);
+        setEnabledVisible(av, false);
+        setEnabledVisible(rr, true);
+        setLabelColor(addretailrec);
+        resetLabelColor(addvendor);
+        resetLabelColor(addvendorrec);
+    }//GEN-LAST:event_addretailrecMouseClicked
+
+    private void addvendorrecMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addvendorrecMouseClicked
+        vr.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(vr, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1090, 760));
+        if(vr.getLoaded() == false)
+            vr.pubInit();
+        setEnabledVisible(av, false);
+        setEnabledVisible(rr, false);
+        setEnabledVisible(vr, true);
+        setLabelColor(addvendorrec);
+        resetLabelColor(addvendor);
+        resetLabelColor(addretailrec);
+    }//GEN-LAST:event_addvendorrecMouseClicked
 
     private void setLabelColor(JLabel label) //set the colour after  click
     {
@@ -913,6 +1009,9 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel adddetail;
     private javax.swing.JLabel adddetail1;
+    private javax.swing.JLabel addretailrec;
+    private javax.swing.JLabel addvendor;
+    private javax.swing.JLabel addvendorrec;
     private javax.swing.JPanel bar1;
     private javax.swing.JPanel bar2;
     private javax.swing.JPanel bar3;
