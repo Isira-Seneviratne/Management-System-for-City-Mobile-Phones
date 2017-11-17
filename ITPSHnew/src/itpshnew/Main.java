@@ -319,8 +319,8 @@ public class Main extends javax.swing.JFrame {
         name3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         name3.setText("Sales");
         name3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                name3MousePressed(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                name3MouseClicked(evt);
             }
         });
         topic4.add(name3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 9, 260, 40));
@@ -775,10 +775,6 @@ public class Main extends javax.swing.JFrame {
 
     }//GEN-LAST:event_bar4name3MousePressed
 
-    private void name3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_name3MousePressed
-
-    }//GEN-LAST:event_name3MousePressed
-
     private void pic1topic2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pic1topic2MousePressed
         /* setColor(topic2);   //set the colour
         bar2.setOpaque(true);  */
@@ -987,10 +983,10 @@ public class Main extends javax.swing.JFrame {
         resetLabelColor(customer);
         resetLabelColor(report);
         
-        purchase_panel.setVisible(true);
-        warranty_panel.setVisible(false);
-        customer_panel.setVisible(false);
-        report_panel.setVisible(false);
+        //purchase_panel.setVisible(true);
+        //warranty_panel.setVisible(false);
+        //customer_panel.setVisible(false);
+        //report_panel.setVisible(false);
     }//GEN-LAST:event_purchaseMouseClicked
 
     private void warrantyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_warrantyMouseClicked
@@ -1000,10 +996,10 @@ public class Main extends javax.swing.JFrame {
         resetLabelColor(customer);
         resetLabelColor(report);
         
-        warranty_panel.setVisible(true);
-        purchase_panel.setVisible(false);
-        customer_panel.setVisible(false);
-        report_panel.setVisible(false);
+        //warranty_panel.setVisible(true);
+        //purchase_panel.setVisible(false);
+        //customer_panel.setVisible(false);
+        //report_panel.setVisible(false);
     }//GEN-LAST:event_warrantyMouseClicked
 
     private void customerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerMouseClicked
@@ -1012,10 +1008,10 @@ public class Main extends javax.swing.JFrame {
         resetLabelColor(purchase);
         resetLabelColor(report);
         
-        customer_panel.setVisible(true);
-        purchase_panel.setVisible(false);
-        warranty_panel.setVisible(false);
-        report_panel.setVisible(false);
+        //customer_panel.setVisible(true);
+        //purchase_panel.setVisible(false);
+        //warranty_panel.setVisible(false);
+        //report_panel.setVisible(false);
     }//GEN-LAST:event_customerMouseClicked
 
     private void reportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportMouseClicked
@@ -1024,11 +1020,21 @@ public class Main extends javax.swing.JFrame {
         resetLabelColor(warranty);
         resetLabelColor(purchase);
 
-        report_panel.setVisible(true);
-        customer_panel.setVisible(false);
-        purchase_panel.setVisible(false);
-        warranty_panel.setVisible(false);
+        //report_panel.setVisible(true);
+        //customer_panel.setVisible(false);
+        //purchase_panel.setVisible(false);
+        //warranty_panel.setVisible(false);
     }//GEN-LAST:event_reportMouseClicked
+
+    private void name3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_name3MouseClicked
+        setEnabledVisible(report, true);
+        setEnabledVisible(customer, true);
+        setEnabledVisible(warranty, true);
+        setEnabledVisible(purchase, true);
+        
+        setPanelColor(topic4);
+        setLabelColor(purchase);
+    }//GEN-LAST:event_name3MouseClicked
 
     private void setLabelColor(JLabel label) //set the colour after  click
     {
@@ -1081,6 +1087,13 @@ public class Main extends javax.swing.JFrame {
         resetComp(today);
         resetComp(vendor);
         resetComp(retail);
+        resetComp(adddetail);
+        resetComp(adddetail1);
+        resetComp(purchase);
+        resetComp(warranty);
+        resetComp(customer);
+        resetComp(report);
+        
         resetComp(tfs);
         resetComp(mfs);
         resetComp(rr);
