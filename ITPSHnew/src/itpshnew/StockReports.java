@@ -8,6 +8,10 @@ package itpshnew;
 import net.proteanit.sql.DbUtils;
 import java.sql.*;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.view.JasperViewer;
 /**
  *
  * @author isira
@@ -238,7 +242,7 @@ public class StockReports extends StockControl {
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-        // TODO add your handling code here:
+        genIReport();
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
@@ -257,6 +261,21 @@ public class StockReports extends StockControl {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton21ActionPerformed
 
+    public void genIReport()
+    {
+        try
+        {
+            JasperCompileManager.compileReportToFile("reports/item.jrxml", "reports/item.jasper");
+            JasperFillManager.fillReportToFile("reports/item.jasper",
+                    "reports/item.jrprint", null, conn);
+            JasperViewer.viewReport("reports/item.jrprint", false, false);
+        }
+        catch(JRException e)
+        {
+            JOptionPane.showMessageDialog(null, "Unable to generate report.", "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Reports;
