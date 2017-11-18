@@ -6,6 +6,7 @@
 package itpshnew;
 
 import java.util.Calendar;
+import java.text.DateFormatSymbols;
 
 /**
  *
@@ -19,9 +20,7 @@ public class DateTimeFunctions {
     
     public static String getMonth()
     {
-        return new String[]{"January", "February", "March",
-            "April", "May", "June", "July", "August", "September",
-            "October", "November", "December"}[Calendar.getInstance().get(Calendar.MONTH)];
+        return new DateFormatSymbols().getMonths()[Calendar.getInstance().get(Calendar.MONTH)];
     }
 
     public static int getYear()

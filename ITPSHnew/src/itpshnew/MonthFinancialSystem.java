@@ -10,6 +10,7 @@ import java.util.Calendar;
 import javax.swing.*;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.view.JasperViewer;
+import java.text.DateFormatSymbols;
 
 /**
  *
@@ -439,9 +440,7 @@ public class MonthFinancialSystem extends FinancialSystem {
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
-        String month = new String[]{"January", "February", "March",
-            "April", "May", "June", "July",
-            "August", "September", "October", "November", "December"}[search_month.getMonth()];
+        String month = new DateFormatSymbols().getMonths()[search_month.getMonth()];
         String year = ""+search_year.getYear();
 
         try
