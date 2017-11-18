@@ -7,6 +7,7 @@ package itpshnew;
 
 import java.awt.Color;
 import java.awt.event.*;
+import java.io.*;
 import javax.swing.*;
 
 /**
@@ -515,6 +516,11 @@ public class Main extends javax.swing.JFrame {
         name7.setForeground(new java.awt.Color(255, 255, 255));
         name7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         name7.setText("   Web");
+        name7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                name7MouseClicked(evt);
+            }
+        });
         topic8.add(name7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 9, 230, 40));
 
         pic7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Web_Design_40px.png"))); // NOI18N
@@ -1114,6 +1120,34 @@ public class Main extends javax.swing.JFrame {
     private void topic4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topic4MouseClicked
         name3MouseClicked(evt);
     }//GEN-LAST:event_topic4MouseClicked
+
+    private void name7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_name7MouseClicked
+        try
+        {
+            if(System.getProperty("os.name").equals("Linux"))
+            {
+                Process p = new ProcessBuilder("which", "google-chrome-stable").start();
+                p.waitFor();
+                BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                if(br.readLine() != null)
+                    Runtime.getRuntime().exec(new String[]{"google-chrome-stable", "localhost/web/"});
+                else
+                    JOptionPane.showMessageDialog(this, "Google Chrome is not installed.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            else if(System.getProperty("os.name").equals("Windows"))
+                Runtime.getRuntime().exec("chrome.exe");
+            else
+                JOptionPane.showMessageDialog(this, "OS not recognised.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        catch(InterruptedException e)
+        {
+            JOptionPane.showMessageDialog(this, "The program was interrupted before it could find Google Chrome.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        catch(IOException e)
+        {
+            JOptionPane.showMessageDialog(this, "Unable to open Google Chrome.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_name7MouseClicked
 
     private void setLabelColor(JLabel label) //set the colour after  click
     {

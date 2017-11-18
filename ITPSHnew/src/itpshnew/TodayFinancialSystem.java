@@ -391,7 +391,7 @@ public class TodayFinancialSystem extends FinancialSystem {
             while(rs.next())
                 DisCost += rs.getFloat("item_cost") + rs.getFloat("Shipping_Cost");
             DisProf = DisRev - DisCost;
-            rs = s.executeQuery("SELECT hour(ExitTime-Shift_eTime) AS Overtime_hours, dailyRate, otRate"
+            rs = s.executeQuery("SELECT hour(ExitTime-Shift_eTime) AS Overtime_hours, dailyRate, ce.otRate"
                     + " FROM dailyattendance da, currentemployee ce, salaryrate sr"
                     + " WHERE da.EmpID=ce.EmpID AND ce.JobID=sr.JobID AND Date=STR_TO_DATE('"
                     +DateTimeFunctions.getDate()+"', '%d %m %y')");
@@ -424,6 +424,7 @@ public class TodayFinancialSystem extends FinancialSystem {
         catch(SQLException e)
         {
             JOptionPane.showMessageDialog(this, "Unable to retrieve values from database.", "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
         }
     }
     

@@ -354,12 +354,14 @@ public class home extends JFrame {
                 p.waitFor();
                 BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
                 if(br.readLine() != null)
-                    Runtime.getRuntime().exec("google-chrome-stable");
+                    Runtime.getRuntime().exec(new String[]{"google-chrome-stable", "localhost/web/"});
                 else
                     JOptionPane.showMessageDialog(this, "Google Chrome is not installed.", "Error", JOptionPane.ERROR_MESSAGE);
             }
             else if(System.getProperty("os.name").equals("Windows"))
                 Runtime.getRuntime().exec("chrome.exe");
+            else
+                JOptionPane.showMessageDialog(this, "OS not recognised.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         catch(InterruptedException e)
         {
@@ -367,7 +369,7 @@ public class home extends JFrame {
         }
         catch(IOException e)
         {
-            JOptionPane.showMessageDialog(this, "Unable to open browser.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Unable to open Google Chrome.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jLabel14MouseClicked
 
