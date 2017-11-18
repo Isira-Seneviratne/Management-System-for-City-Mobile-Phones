@@ -14,15 +14,14 @@ public class customer_class {
     public String bill_num = "CI00000001";
 
     public String cus_num ()
-{
-        return bill_num ;
-        
-}
+    {
+        return bill_num ;    
+    }
+    
     public String cus_num_increment ()
     {
         
-        String new_bill_num = "BI0000000" + (Integer.parseInt(bill_num.substring(8,bill_num.length()))+1);
-        return new_bill_num;
+        return "BI0000000" + (Integer.parseInt(bill_num.substring(8,bill_num.length()))+1);
         /*int int_bnum = Integer.parseInt(bill_num);
         int_bnum = int_bnum + 1;
         String st_bnum = Integer.toString(int_bnum);

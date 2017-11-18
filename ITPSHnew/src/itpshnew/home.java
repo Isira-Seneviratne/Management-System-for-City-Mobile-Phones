@@ -332,7 +332,8 @@ public class home extends JFrame {
     }//GEN-LAST:event_jLabel10MouseClicked
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        
+        new Main("Sales", evt).setVisible(true);
+        dispose();
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked

@@ -86,14 +86,10 @@ public class message_box extends javax.swing.JFrame {
 
     private void cancel_lblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancel_lblMouseClicked
         this.dispose();//close only current window
-        purchase p1 = new purchase();
-        p1.setVisible(true);
     }//GEN-LAST:event_cancel_lblMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();//close only current window
-        purchase p1 = new purchase();
-        p1.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

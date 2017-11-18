@@ -24,7 +24,12 @@ public class Main extends javax.swing.JFrame {
     
     private Item i;
     private Stocks s;
-    private Reports r;
+    private StockReports stockr;
+    
+    private Purchase p;
+    private SalesReports salesr;
+    private Warranty w;
+    private Customer cus;
     
     private TimerThread t;
     /**
@@ -37,20 +42,33 @@ public class Main extends javax.swing.JFrame {
     {
         mfs = new MonthFinancialSystem();
         tfs = new TodayFinancialSystem();
+        
         vr = new VendorRecord();
         rr = new RetailRecord();
-        r = new Reports();
+        av = new AddVendor();
+        
+        stockr = new StockReports();
         i = new Item();
         s = new Stocks();
-        av = new AddVendor();
+        
+        cus = new Customer();
+        p = new Purchase();
+        salesr = new SalesReports();
+        w = new Warranty();
+        
         setEnabledVisible(mfs, false);
         setEnabledVisible(tfs, false);
         setEnabledVisible(av, false);
         setEnabledVisible(vr, false);
         setEnabledVisible(rr, false);
-        setEnabledVisible(r, false);
+        setEnabledVisible(stockr, false);
         setEnabledVisible(s, false);
         setEnabledVisible(i, false);
+        setEnabledVisible(cus, false);
+        setEnabledVisible(p, false);
+        setEnabledVisible(salesr, false);
+        setEnabledVisible(w, false);
+        
         initComponents();
         t = new TimerThread(time);
         t.start();
@@ -60,26 +78,41 @@ public class Main extends javax.swing.JFrame {
             topic5MouseClicked(e);
         else if(name.equals("Stock Control"))
             topic2MouseClicked(e);
+        else if(name.equals("Sales"))
+            topic4MouseClicked(e);
     }
     
     public Main()
     {
         mfs = new MonthFinancialSystem();
         tfs = new TodayFinancialSystem();
+        
         vr = new VendorRecord();
         rr = new RetailRecord();
-        r = new Reports();
+        av = new AddVendor();
+        
+        stockr = new StockReports();
         i = new Item();
         s = new Stocks();
-        av = new AddVendor();
+        
+        cus = new Customer();
+        p = new Purchase();
+        salesr = new SalesReports();
+        w = new Warranty();
+        
         setEnabledVisible(mfs, false);
         setEnabledVisible(tfs, false);
         setEnabledVisible(av, false);
         setEnabledVisible(vr, false);
         setEnabledVisible(rr, false);
-        setEnabledVisible(r, false);
+        setEnabledVisible(stockr, false);
         setEnabledVisible(s, false);
         setEnabledVisible(i, false);
+        setEnabledVisible(cus, false);
+        setEnabledVisible(p, false);
+        setEnabledVisible(salesr, false);
+        setEnabledVisible(w, false);
+        
         initComponents();
         t = new TimerThread(time);
         t.start();
@@ -288,8 +321,8 @@ public class Main extends javax.swing.JFrame {
 
         topic4.setBackground(new java.awt.Color(0, 153, 153));
         topic4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                topic4name3MousePressed(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                topic4MouseClicked(evt);
             }
         });
         topic4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -781,10 +814,6 @@ public class Main extends javax.swing.JFrame {
 
     }//GEN-LAST:event_pic1topic2MousePressed
 
-    private void topic4name3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topic4name3MousePressed
-
-    }//GEN-LAST:event_topic4name3MousePressed
-
     private void bar6topic6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bar6topic6MousePressed
 
     }//GEN-LAST:event_bar6topic6MousePressed
@@ -808,7 +837,7 @@ public class Main extends javax.swing.JFrame {
         if(i.getLoaded() == false)
             i.pubInit();
         setEnabledVisible(s, false);
-        setEnabledVisible(r, false);
+        setEnabledVisible(stockr, false);
         setEnabledVisible(i, true);
         setLabelColor(vendor);
         resetLabelColor(retail);
@@ -820,7 +849,7 @@ public class Main extends javax.swing.JFrame {
         add(s, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1090, 760));
         if(s.getLoaded() == false)
             s.pubInit();
-        setEnabledVisible(r, false);
+        setEnabledVisible(stockr, false);
         setEnabledVisible(i, false);
         setEnabledVisible(s, true);
         setLabelColor(retail);
@@ -829,13 +858,13 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_retailMouseClicked
 
     private void adddetailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adddetailMouseClicked
-        r.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        add(r, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1090, 760));
-        if(r.getLoaded() == false)
-            r.pubInit();
+        stockr.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(stockr, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1090, 760));
+        if(stockr.getLoaded() == false)
+            stockr.pubInit();
         setEnabledVisible(i, false);
         setEnabledVisible(s, false);
-        setEnabledVisible(r, true);
+        setEnabledVisible(stockr, true);
         setLabelColor(adddetail);
         resetLabelColor(vendor);
         resetLabelColor(retail);
@@ -858,10 +887,11 @@ public class Main extends javax.swing.JFrame {
             add(tfs, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1200, 768));
             if(tfs.getLoaded() == false)
                 tfs.pubInit();
+            
             setEnabledVisible(tfs, true);
-            setLabelColor(name5);
             setEnabledVisible(today, true);
             setEnabledVisible(month, true);
+            
             setPanelColor(topic6);
             setLabelColor(today);
         }
@@ -872,8 +902,10 @@ public class Main extends javax.swing.JFrame {
         add(tfs, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 1200, 768));
         if(tfs.getLoaded() == false)
             tfs.pubInit();
+        
         setEnabledVisible(mfs, false);
         setEnabledVisible(tfs, true);
+        
         setLabelColor(today);
         resetLabelColor(month);
     }//GEN-LAST:event_todayMouseClicked
@@ -883,8 +915,10 @@ public class Main extends javax.swing.JFrame {
         add(mfs, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 1200, 768));
         if(mfs.getLoaded() == false)
             mfs.pubInit();
+        
         setEnabledVisible(tfs, false);
         setEnabledVisible(mfs, true);
+        
         setLabelColor(month);
         resetLabelColor(today);
     }//GEN-LAST:event_monthMouseClicked
@@ -894,19 +928,21 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_topic6MouseClicked
 
     private void name1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_name1MouseClicked
-        if(!i.isVisible() && !r.isVisible() && !s.isVisible())
+        if(!i.isVisible() && !stockr.isVisible() && !s.isVisible())
         {
             resetAll();
             i.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
             add(i, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1090, 760));
             if(i.getLoaded() == false)
                 i.pubInit();
+            
             setEnabledVisible(i, true);
-            setLabelColor(name1);
+            
             setEnabledVisible(retail, true);
             setEnabledVisible(vendor, true);
             setEnabledVisible(adddetail, true);
             setEnabledVisible(adddetail1, true);
+            
             setPanelColor(topic2);
             setLabelColor(vendor);
         }
@@ -916,10 +952,12 @@ public class Main extends javax.swing.JFrame {
         if(!vr.isVisible() && !rr.isVisible() && !av.isVisible())
         {
             resetAll();
+            
             av.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
             add(av, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1090, 760));
             if(av.getLoaded() == false)
                 av.pubInit();
+            
             setEnabledVisible(av, true);
             setEnabledVisible(addvendorrec, true);
             setEnabledVisible(addvendor, true);
@@ -939,9 +977,11 @@ public class Main extends javax.swing.JFrame {
         add(av, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1090, 760));
         if(av.getLoaded() == false)
             av.pubInit();
+        
         setEnabledVisible(vr, false);
         setEnabledVisible(rr, false);
         setEnabledVisible(av, true);
+        
         setLabelColor(addvendor);
         resetLabelColor(retail);
         resetLabelColor(addretailrec);
@@ -952,9 +992,11 @@ public class Main extends javax.swing.JFrame {
         add(rr, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1090, 760));
         if(rr.getLoaded() == false)
             rr.pubInit();
+        
         setEnabledVisible(vr, false);
         setEnabledVisible(av, false);
         setEnabledVisible(rr, true);
+        
         setLabelColor(addretailrec);
         resetLabelColor(addvendor);
         resetLabelColor(addvendorrec);
@@ -965,9 +1007,11 @@ public class Main extends javax.swing.JFrame {
         add(vr, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1090, 760));
         if(vr.getLoaded() == false)
             vr.pubInit();
+        
         setEnabledVisible(av, false);
         setEnabledVisible(rr, false);
         setEnabledVisible(vr, true);
+        
         setLabelColor(addvendorrec);
         resetLabelColor(addvendor);
         resetLabelColor(addretailrec);
@@ -978,63 +1022,98 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_topic2MouseClicked
 
     private void purchaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_purchaseMouseClicked
+        p.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(p, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1076, 718));
+        if(p.getLoaded() == false)
+            p.pubInit();
+        
+        setEnabledVisible(salesr, false);
+        setEnabledVisible(w, false);
+        setEnabledVisible(cus, false);
+        setEnabledVisible(p, true);
+        
         setLabelColor(purchase);
         resetLabelColor(warranty);
         resetLabelColor(customer);
         resetLabelColor(report);
-        
-        //purchase_panel.setVisible(true);
-        //warranty_panel.setVisible(false);
-        //customer_panel.setVisible(false);
-        //report_panel.setVisible(false);
     }//GEN-LAST:event_purchaseMouseClicked
 
     private void warrantyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_warrantyMouseClicked
-
+        w.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(w, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1076, 718));
+        if(w.getLoaded() == false)
+            w.pubInit();
+        
+        setEnabledVisible(salesr, false);
+        setEnabledVisible(p, false);
+        setEnabledVisible(cus, false);
+        setEnabledVisible(w, true);
+        
         setLabelColor(warranty);
         resetLabelColor(purchase);
         resetLabelColor(customer);
         resetLabelColor(report);
-        
-        //warranty_panel.setVisible(true);
-        //purchase_panel.setVisible(false);
-        //customer_panel.setVisible(false);
-        //report_panel.setVisible(false);
     }//GEN-LAST:event_warrantyMouseClicked
 
     private void customerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerMouseClicked
+        cus.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(cus, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1076, 718));
+        if(cus.getLoaded() == false)
+            cus.pubInit();
+        
+        setEnabledVisible(salesr, false);
+        setEnabledVisible(w, false);
+        setEnabledVisible(p, false);
+        setEnabledVisible(cus, true);
+        
         setLabelColor(customer);
         resetLabelColor(warranty);
         resetLabelColor(purchase);
         resetLabelColor(report);
-        
-        //customer_panel.setVisible(true);
-        //purchase_panel.setVisible(false);
-        //warranty_panel.setVisible(false);
-        //report_panel.setVisible(false);
     }//GEN-LAST:event_customerMouseClicked
 
     private void reportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportMouseClicked
+        salesr.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(salesr, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1076, 718));
+        if(salesr.getLoaded() == false)
+            salesr.pubInit();
+        
+        setEnabledVisible(cus, false);
+        setEnabledVisible(w, false);
+        setEnabledVisible(p, false);
+        setEnabledVisible(salesr, true);
+        
         setLabelColor(report);
         resetLabelColor(customer);
         resetLabelColor(warranty);
         resetLabelColor(purchase);
-
-        //report_panel.setVisible(true);
-        //customer_panel.setVisible(false);
-        //purchase_panel.setVisible(false);
-        //warranty_panel.setVisible(false);
     }//GEN-LAST:event_reportMouseClicked
 
     private void name3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_name3MouseClicked
-        setEnabledVisible(report, true);
-        setEnabledVisible(customer, true);
-        setEnabledVisible(warranty, true);
-        setEnabledVisible(purchase, true);
-        
-        setPanelColor(topic4);
-        setLabelColor(purchase);
+        if(!salesr.isVisible() && !cus.isVisible() && !w.isVisible() && !p.isVisible())
+        {
+            resetAll();
+           
+            p.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+            add(p, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 1076, 718));
+            if(p.getLoaded() == false)
+                p.pubInit();
+            
+            setEnabledVisible(p, true);
+            
+            setEnabledVisible(report, true);
+            setEnabledVisible(customer, true);
+            setEnabledVisible(warranty, true);
+            setEnabledVisible(purchase, true);
+            
+            setPanelColor(topic4);
+            setLabelColor(purchase);
+        }
     }//GEN-LAST:event_name3MouseClicked
+
+    private void topic4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topic4MouseClicked
+        name3MouseClicked(evt);
+    }//GEN-LAST:event_topic4MouseClicked
 
     private void setLabelColor(JLabel label) //set the colour after  click
     {
@@ -1085,22 +1164,36 @@ public class Main extends javax.swing.JFrame {
             resetPanelColor(topic6);
         resetComp(month);
         resetComp(today);
+        
         resetComp(vendor);
         resetComp(retail);
         resetComp(adddetail);
         resetComp(adddetail1);
+        
         resetComp(purchase);
-        resetComp(warranty);
         resetComp(customer);
         resetComp(report);
+        resetComp(warranty);
+        
+        resetComp(addvendorrec);
+        resetComp(addvendor);
+        resetComp(addretailrec);
         
         resetComp(tfs);
         resetComp(mfs);
+        
+        resetComp(av);
         resetComp(rr);
         resetComp(vr);
-        resetComp(r);
+        
+        resetComp(stockr);
         resetComp(i);
         resetComp(s);
+        
+        resetComp(p);
+        resetComp(salesr);
+        resetComp(w);
+        resetComp(cus);
     }
     /**
      * @param args the command line arguments

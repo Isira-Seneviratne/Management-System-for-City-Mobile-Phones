@@ -12,12 +12,12 @@ import javax.swing.JOptionPane;
  *
  * @author isira
  */
-public class Reports extends StockControl {
+public class StockReports extends StockControl {
 
     /**
      * Creates new form Reports
      */
-    public Reports() {
+    public StockReports() {
         initComponents();
     }
 

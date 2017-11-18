@@ -9,7 +9,6 @@ package itpshnew;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import sales_package.customer_class;
-import sales_package.dbconnect;
 
 /**
  *
@@ -29,12 +28,9 @@ public class newcus extends javax.swing.JFrame {
         this.setVisible(true);
         initComponents();
         
-        con = dbconnect.connect();
+        con = dbCon.connect();
         customer_class c1 = new customer_class();         //set cus id
         cusid_box.setText(c1.cus_num());
-        
-        
-        
     }
 
     /**
@@ -234,7 +230,7 @@ public class newcus extends javax.swing.JFrame {
 
     private void save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_btnActionPerformed
         
-        purchase p2 = new purchase();                               // set text on purchase panel
+        Sales p2 = new Sales();                               // set text on Sales panel
         p2.purchase_cusid_box.setText(cusid_box.getText());
         
         String fname1 = fname_box.getText();
@@ -256,13 +252,15 @@ public class newcus extends javax.swing.JFrame {
         female_rbtn.setActionCommand("female");
         String gender = add_newcus_gender.getSelection().getActionCommand();
         
-        try{
+        try
+        {
                 String querry1 = "Insert INTO customer (customer_id,fname,lname,phone_num1,phone_num2,gender,address,city) values ('"+cus_id+"','"+fname+"','"+lname+"','"+pnum1+"','"+pnum2+"','"+gender+"','"+address+"','"+city+"')";
                 pst = con.prepareStatement(querry1); 
                 pst.execute();
         }
-        catch (Exception e){
-        JOptionPane.showMessageDialog(null, "input process doesn't work properly.");
+        catch (SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, "Input process doesn't work properly.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         
         
@@ -270,7 +268,7 @@ public class newcus extends javax.swing.JFrame {
         cusid_box.setText(c2.cus_num_increment());
         
         this.setVisible(false);//close only current window
-        purchase p1 = new purchase();
+        Sales p1 = new Sales();
         
         //com.sun.awt.AWTUtilities.setWindowOpacity(p1, 1);  //reset main frame opacity
         p1.setVisible(true);
@@ -278,19 +276,10 @@ public class newcus extends javax.swing.JFrame {
 
     private void cancel_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_btnActionPerformed
         this.dispose();//close only current window
-        purchase p1 = new purchase();
-        //p1.setOpacity(1f);
-        //com.sun.awt.AWTUtilities.setWindowOpacity(p1, 1);//reset main frame opacity
-        p1.setVisible(true);
     }//GEN-LAST:event_cancel_btnActionPerformed
 
     private void cancel_lblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancel_lblMouseClicked
         this.dispose();//close only current window
-        purchase p1 = new purchase();
-        //p1.setOpacity(1f);
-        
-        //com.sun.awt.AWTUtilities.setWindowOpacity(p1, 1);//reset main frame opacity
-        p1.setVisible(true);
     }//GEN-LAST:event_cancel_lblMouseClicked
 
     private void male_rbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_male_rbtnActionPerformed

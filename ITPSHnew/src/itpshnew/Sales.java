@@ -13,7 +13,6 @@ import javax.swing.*;
 import javax.swing.table.*;
 import sales_package.bill_class;
 import net.proteanit.sql.DbUtils;
-import sales_package.dbconnect;
 
 /**
  *
@@ -21,7 +20,7 @@ import sales_package.dbconnect;
  */
 
 
-public class purchase extends javax.swing.JFrame {
+public class Sales extends javax.swing.JFrame {
 
     Connection conn = null;
     PreparedStatement pst = null;
@@ -30,7 +29,7 @@ public class purchase extends javax.swing.JFrame {
     /**
      * Creates new form purchase
      */
-    public purchase() {
+    public Sales() {
         this.setUndecorated(true);
         //this.setAlwaysOnTop(true);
         this.setResizable(true);
@@ -39,10 +38,10 @@ public class purchase extends javax.swing.JFrame {
         
         initComponents();
         
-        setColor(topic2);   //set the colour to purchase bar
+        setColor(topic2);   //set the colour to Sales bar
         bar2.setOpaque(true);
         
-        setlabelcolor(purchase); // set the purchase label colour as default one
+        setlabelcolor(purchase); // set the Sales label colour as default one
         
         /*Toolkit tk = Toolkit.getDefaultToolkit();
             int xsize = (int) tk.getScreenSize().getWidth();
@@ -95,12 +94,7 @@ public class purchase extends javax.swing.JFrame {
         bill_class bc1 = new bill_class();         //set bill number
         sales_bill_num.setText(bc1.bill_num());
         
-        conn = dbconnect.connect();
-        
-        
-        
-        
-        
+        conn = dbCon.connect();
     }
     
    /*public void tableload()
@@ -765,7 +759,7 @@ public class purchase extends javax.swing.JFrame {
         jPanel2.add(sales_bill_num, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, 160, 35));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jLabel3.setText("Item Id");
+        jLabel3.setText("Item ID");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
         itemid_box.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -2243,20 +2237,21 @@ public class purchase extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(purchase.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Sales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(purchase.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Sales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(purchase.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Sales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(purchase.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Sales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new purchase().setVisible(true);
+                new Sales().setVisible(true);
                 
             }
         });

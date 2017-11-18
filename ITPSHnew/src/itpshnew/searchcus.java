@@ -222,7 +222,7 @@ public class searchcus extends javax.swing.JFrame {
 
     private void save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_btnActionPerformed
         this.dispose();//close only current window
-        purchase p1 = new purchase();
+        Sales p1 = new Sales();
         //com.sun.awt.AWTUtilities.setWindowOpacity(p1, 1f);//reset main frame opacity
         p1.setVisible(true);
         
@@ -230,7 +230,7 @@ public class searchcus extends javax.swing.JFrame {
 
     private void cancel_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_btnActionPerformed
         this.setVisible(false);//close only current window
-        purchase p1 = new purchase();
+        Sales p1 = new Sales();
         
         //com.sun.awt.AWTUtilities.setWindowOpacity(p1, 1f);//reset main frame opacity
         p1.setVisible(true);
@@ -239,7 +239,7 @@ public class searchcus extends javax.swing.JFrame {
 
     private void close_lblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_close_lblMouseClicked
         this.dispose();//close only current window
-        purchase p1 = new purchase();
+        Sales p1 = new Sales();
         //com.sun.awt.AWTUtilities.setWindowOpacity(p1,1f);//reset main frame opacity
         p1.setVisible(true);
         
