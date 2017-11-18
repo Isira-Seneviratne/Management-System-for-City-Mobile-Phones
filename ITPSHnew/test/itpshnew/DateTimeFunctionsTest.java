@@ -90,7 +90,7 @@ public class DateTimeFunctionsTest {
     }
     
     @Test
-    public void testGeExtremeDate() {
+    public void testGetExtremeDate() {
         System.out.println("getDate - Extreme");
         String expResult = "30 November 2017";
         String result = DateTimeFunctions.getDate();
