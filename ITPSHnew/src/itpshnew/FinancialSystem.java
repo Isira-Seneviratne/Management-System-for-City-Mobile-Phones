@@ -15,10 +15,11 @@ import net.sf.jasperreports.engine.*;
 public abstract class FinancialSystem extends JPanel {
 
     protected Connection conn;
+    protected Statement s;
     protected JasperPrint jp;
     protected boolean loaded = false;
     protected float RepRev = 0, RepCost = 0, RepProf = 0, SalesRev = 0, SalesCost = 0,
-            SalesProf = 0, DisRev = 0, DisCost = 0, DisProf = 0, HRCost = 0, OtherCost = 0,
+            SalesProf = 0, DisRev = 0, DisCost = 0, DisProf = 0, HRCost = 0, UtilityCost = 0,
             TotCost = 0, TotProf = 0, TotRev = 0;
     
     public FinancialSystem()

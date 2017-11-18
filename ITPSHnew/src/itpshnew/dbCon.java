@@ -13,11 +13,10 @@ import javax.swing.JOptionPane;
 public class dbCon {
     public static Connection connect()
     {
-        Connection conn = null;
         try
         {
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbcitymobile","root","");
+            return DriverManager.getConnection("jdbc:mysql://localhost:3306/dbcitymobile","root","");
         }
         catch(ClassNotFoundException e)
         {
@@ -28,6 +27,6 @@ public class dbCon {
             JOptionPane.showMessageDialog(null, "Unable to establish database connection.", "Error", JOptionPane.ERROR_MESSAGE);
             se.printStackTrace();
         }
-        return conn;
+        return null;
     }
 }

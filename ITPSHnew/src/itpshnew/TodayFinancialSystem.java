@@ -297,7 +297,7 @@ public class TodayFinancialSystem extends FinancialSystem {
         hr_cost.setEditable(false);
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel16.setText("Today's other costs:");
+        jLabel16.setText("Today's utility costs:");
 
         updateToday.setBackground(new java.awt.Color(48, 214, 48));
         updateToday.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -323,7 +323,7 @@ public class TodayFinancialSystem extends FinancialSystem {
                 .addComponent(other_costs, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(69, 69, 69)
                 .addComponent(updateToday, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(198, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -366,7 +366,7 @@ public class TodayFinancialSystem extends FinancialSystem {
     {
         try
         {
-            Statement s = conn.createStatement();
+            s = conn.createStatement();
             ResultSet rs;
             RepRev = 300;
             RepCost = 300;
@@ -405,7 +405,7 @@ public class TodayFinancialSystem extends FinancialSystem {
                     +DateTimeFunctions.getMonth()+"' AND Year="
                     +DateTimeFunctions.getYear());
             if(rs.next() && rs.getFloat("Other_Cost") != 0)
-                OtherCost = rs.getFloat("Other_Cost");
+                UtilityCost = rs.getFloat("Other_Cost");
             repair_rev.setText(Float.toString(RepRev).replaceAll("\\.0*$", ""));
             repair_cost.setText(Float.toString(RepCost).replaceAll("\\.0*$", ""));
             repair_prof.setText(Float.toString(RepProf).replaceAll("\\.0*$", ""));
@@ -416,7 +416,7 @@ public class TodayFinancialSystem extends FinancialSystem {
             dis_cost.setText(Float.toString(DisCost).replaceAll("\\.0*$", ""));
             dis_prof.setText(Float.toString(DisProf).replaceAll("\\.0*$", ""));
             hr_cost.setText(Float.toString(HRCost).replaceAll("\\.0*$", ""));
-            other_costs.setText(Float.toString(OtherCost).replaceAll("\\.0*$", ""));
+            other_costs.setText(Float.toString(UtilityCost).replaceAll("\\.0*$", ""));
             tot_rev.setText(Float.toString(TotRev).replaceAll("\\.0*$", ""));
             tot_cost.setText(Float.toString(TotCost).replaceAll("\\.0*$", ""));
             tot_prof.setText(Float.toString(TotProf).replaceAll("\\.0*$", ""));
@@ -430,8 +430,8 @@ public class TodayFinancialSystem extends FinancialSystem {
     private void updateTodayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateTodayActionPerformed
         try
         {
-            OtherCost = Float.parseFloat(other_costs.getText());
-            TotCost = RepCost + SalesCost + DisCost + HRCost + OtherCost;
+            UtilityCost = Float.parseFloat(other_costs.getText());
+            TotCost = RepCost + SalesCost + DisCost + HRCost + UtilityCost;
             TotProf = TotRev - TotCost;
             Statement s = conn.createStatement();
             s.execute("SELECT 1 FROM daily_finances WHERE Day="
@@ -443,7 +443,7 @@ public class TodayFinancialSystem extends FinancialSystem {
                     +", Rep_prof="+RepProf+", Sales_inc="+SalesRev+", Sales_cost="+SalesCost
                     +", Sales_prof="+SalesCost+", Dis_inc="+DisRev+", Dis_cost="+DisCost
                     +", Dis_prof="+DisProf+", HR_cost="+HRCost
-                    +", Other_cost="+OtherCost
+                    +", Other_cost="+UtilityCost
                     +", Tot_cost="+TotCost+", Tot_prof="+TotProf
                     +" WHERE Day="+DateTimeFunctions.getDay()+" AND Month='"+DateTimeFunctions.getMonth()
                     +"' AND Year="+DateTimeFunctions.getYear());
@@ -455,7 +455,7 @@ public class TodayFinancialSystem extends FinancialSystem {
                 s.execute("INSERT INTO daily_finances VALUES("+DateTimeFunctions.getDay()
                     +", '"+DateTimeFunctions.getMonth()+"', "+DateTimeFunctions.getYear()+", "
                     +RepRev+", "+RepCost+", "+RepProf+", "+SalesRev+", "+SalesCost+", "+SalesProf
-                    +", "+DisRev+", "+DisCost+", "+DisProf+", "+HRCost+", "+OtherCost
+                    +", "+DisRev+", "+DisCost+", "+DisProf+", "+HRCost+", "+UtilityCost
                     +", "+TotRev+", "+TotCost+", "+TotProf+")");
                 JOptionPane.showMessageDialog(this, "Successfully inserted record for "
                         +DateTimeFunctions.getDate()+".", "Insertion successful", JOptionPane.INFORMATION_MESSAGE);

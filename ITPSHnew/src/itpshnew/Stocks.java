@@ -8,8 +8,7 @@ package itpshnew;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.logging.*;
 import javax.swing.*;
 import net.proteanit.sql.DbUtils;
 

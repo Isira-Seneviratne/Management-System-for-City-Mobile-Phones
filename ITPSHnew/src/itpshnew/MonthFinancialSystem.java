@@ -97,7 +97,7 @@ public class MonthFinancialSystem extends FinancialSystem {
         jLabel33.setText("Monthly HR costs:");
 
         jLabel34.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel34.setText("Other monthly costs:");
+        jLabel34.setText("Monthly utility costs:");
 
         other_costs1.setName(""); // NOI18N
 
@@ -114,7 +114,7 @@ public class MonthFinancialSystem extends FinancialSystem {
                 .addComponent(jLabel34)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(other_costs1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(283, Short.MAX_VALUE))
+                .addContainerGap(270, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -445,7 +445,7 @@ public class MonthFinancialSystem extends FinancialSystem {
 
         try
         {
-            Statement s = conn.createStatement();
+            s = conn.createStatement();
             s.execute("SELECT 1 FROM financial_reports WHERE Month_issued='"+month+"' AND Year_issued="+year);
             if(s.getResultSet().next())
             {
@@ -472,7 +472,7 @@ public class MonthFinancialSystem extends FinancialSystem {
         RepRev = RepCost = RepProf = 0;
         SalesRev = SalesCost = SalesProf = 0;
         DisRev = DisCost = DisProf = 0;
-        HRCost = OtherCost = 0;
+        HRCost = UtilityCost = 0;
         TotRev = TotCost = TotProf = 0;
         try
         {
@@ -488,7 +488,7 @@ public class MonthFinancialSystem extends FinancialSystem {
                 DisRev += rs.getFloat("Dis_inc");
                 DisCost += rs.getFloat("Dis_cost");
                 HRCost += rs.getFloat("HR_cost");
-                OtherCost += rs.getFloat("Other_cost");
+                UtilityCost += rs.getFloat("Other_cost");
             }
             RepProf = RepRev - RepCost;
             SalesProf = SalesRev - SalesCost;
@@ -498,7 +498,7 @@ public class MonthFinancialSystem extends FinancialSystem {
                 HRCost += rs.getFloat("Salary");
             
             TotRev = RepRev + SalesRev + DisRev;
-            TotCost = RepCost + SalesCost + DisRev + HRCost + OtherCost;
+            TotCost = RepCost + SalesCost + DisRev + HRCost + UtilityCost;
             TotProf = TotRev - TotCost;
             
             repair_rev1.setText(Float.toString(RepRev).replaceAll("\\.0*$", ""));
@@ -511,7 +511,7 @@ public class MonthFinancialSystem extends FinancialSystem {
             dis_cost1.setText(Float.toString(DisCost).replaceAll("\\.0*$", ""));
             dis_prof1.setText(Float.toString(DisProf).replaceAll("\\.0*$", ""));
             hr_cost1.setText(Float.toString(HRCost).replaceAll("\\.0*$", ""));
-            other_costs1.setText(Float.toString(OtherCost).replaceAll("\\.0*$", ""));
+            other_costs1.setText(Float.toString(UtilityCost).replaceAll("\\.0*$", ""));
             tot_rev1.setText(Float.toString(TotRev).replaceAll("\\.0*$", ""));
             tot_cost1.setText(Float.toString(TotCost).replaceAll("\\.0*$", ""));
             tot_prof1.setText(Float.toString(TotProf).replaceAll("\\.0*$", ""));
@@ -544,10 +544,10 @@ public class MonthFinancialSystem extends FinancialSystem {
             
             HRCost = Float.parseFloat(hr_cost1.getText());
             
-            OtherCost = Float.parseFloat(other_costs1.getText());
+            UtilityCost = Float.parseFloat(other_costs1.getText());
             
             TotRev = RepRev + SalesRev + DisRev;
-            TotCost = RepCost + SalesCost + DisCost + HRCost + OtherCost;
+            TotCost = RepCost + SalesCost + DisCost + HRCost + UtilityCost;
             TotProf = TotRev - TotCost;
             tot_rev1.setText(Float.toString(TotRev).replaceAll("\\.0*$", ""));
             tot_cost1.setText(Float.toString(TotCost).replaceAll("\\.0*$", ""));

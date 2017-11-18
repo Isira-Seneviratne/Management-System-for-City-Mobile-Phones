@@ -5,12 +5,8 @@
  */
 package itpshnew;
 
-import net.proteanit.sql.DbUtils;
-import java.sql.*;
 import javax.swing.JOptionPane;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.view.JasperViewer;
 /**
  *
