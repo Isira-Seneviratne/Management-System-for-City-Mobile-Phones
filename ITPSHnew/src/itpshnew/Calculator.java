@@ -9,12 +9,12 @@ import javax.swing.*;
 
 /**
  *
- * @author Thareendra
+ * @author Sonal
  */
 public class Calculator extends JFrame {
 
     /**
-     * Creates new form message_box
+     * Creates new form Calculator
      */
     private double num1, num2, result;
     private char op;
@@ -27,10 +27,9 @@ public class Calculator extends JFrame {
         return c;
     }
     
-    public Calculator() {
-        
-        this.setUndecorated(true);
-        
+    public Calculator()
+    {
+        this.setUndecorated(true);  
         initComponents();
     }
 
@@ -88,11 +87,6 @@ public class Calculator extends JFrame {
                 jButton1MouseClicked(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 60, 60));
 
         jButton2.setBackground(new java.awt.Color(0, 153, 153));
@@ -103,11 +97,6 @@ public class Calculator extends JFrame {
                 jButton2MouseClicked(evt);
             }
         });
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 60, 60));
 
         jButton3.setBackground(new java.awt.Color(0, 153, 153));
@@ -116,11 +105,6 @@ public class Calculator extends JFrame {
         jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton3MouseClicked(evt);
-            }
-        });
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
             }
         });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 60, 60));
@@ -193,11 +177,6 @@ public class Calculator extends JFrame {
                 jButton10MouseClicked(evt);
             }
         });
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
-            }
-        });
         jPanel1.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 310, 60, 60));
 
         jButton11.setBackground(new java.awt.Color(153, 153, 153));
@@ -213,9 +192,9 @@ public class Calculator extends JFrame {
         jButton13.setBackground(new java.awt.Color(153, 153, 153));
         jButton13.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jButton13.setText("=");
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
+        jButton13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton13MouseClicked(evt);
             }
         });
         jPanel1.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, 60, 130));
@@ -223,9 +202,9 @@ public class Calculator extends JFrame {
         jButton14.setBackground(new java.awt.Color(153, 153, 153));
         jButton14.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jButton14.setText("Clear");
-        jButton14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton14ActionPerformed(evt);
+        jButton14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton14MouseClicked(evt);
             }
         });
         jPanel1.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 130, 60));
@@ -238,19 +217,14 @@ public class Calculator extends JFrame {
                 jButton15MouseClicked(evt);
             }
         });
-        jButton15.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton15ActionPerformed(evt);
-            }
-        });
         jPanel1.add(jButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 60, 60));
 
         jButton16.setBackground(new java.awt.Color(153, 153, 153));
         jButton16.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jButton16.setText("+");
-        jButton16.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton16ActionPerformed(evt);
+        jButton16.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton16MouseClicked(evt);
             }
         });
         jPanel1.add(jButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 60, 60));
@@ -258,9 +232,9 @@ public class Calculator extends JFrame {
         jButton17.setBackground(new java.awt.Color(153, 153, 153));
         jButton17.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jButton17.setText("/");
-        jButton17.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton17ActionPerformed(evt);
+        jButton17.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton17MouseClicked(evt);
             }
         });
         jPanel1.add(jButton17, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 60, 60));
@@ -268,9 +242,9 @@ public class Calculator extends JFrame {
         jButton18.setBackground(new java.awt.Color(153, 153, 153));
         jButton18.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jButton18.setText("*");
-        jButton18.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton18ActionPerformed(evt);
+        jButton18.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton18MouseClicked(evt);
             }
         });
         jPanel1.add(jButton18, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, 60, 60));
@@ -278,9 +252,9 @@ public class Calculator extends JFrame {
         jButton19.setBackground(new java.awt.Color(153, 153, 153));
         jButton19.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jButton19.setText("-");
-        jButton19.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton19ActionPerformed(evt);
+        jButton19.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton19MouseClicked(evt);
             }
         });
         jPanel1.add(jButton19, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, 60, 60));
@@ -312,15 +286,92 @@ public class Calculator extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancel_lblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancel_lblMouseClicked
-        this.dispose();//close only current window
-        
+        dispose();//close only current window
     }//GEN-LAST:event_cancel_lblMouseClicked
 
-    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        calculate("+");
-    }//GEN-LAST:event_jButton16ActionPerformed
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        if(txtDisplay.getText().matches("^[*+-/]$"))
+            txtDisplay.setText("1");
+        else
+            txtDisplay.setText(txtDisplay.getText()+"1");
+    }//GEN-LAST:event_jButton1MouseClicked
 
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        if(txtDisplay.getText().matches("^[*+-/]$"))
+            txtDisplay.setText("2");
+        else
+            txtDisplay.setText(txtDisplay.getText()+"2");
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        if(txtDisplay.getText().matches("^[*+-/]$"))
+            txtDisplay.setText("3");
+        else
+            txtDisplay.setText(txtDisplay.getText()+"3");
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        if(txtDisplay.getText().matches("^[*+-/]$"))
+            txtDisplay.setText("4");
+        else
+            txtDisplay.setText(txtDisplay.getText()+"4");
+    }//GEN-LAST:event_jButton4MouseClicked
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        if(txtDisplay.getText().matches("^[*+-/]$"))
+            txtDisplay.setText("5");
+        else
+            txtDisplay.setText(txtDisplay.getText()+"5");
+    }//GEN-LAST:event_jButton5MouseClicked
+
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+        if(txtDisplay.getText().matches("^[*+-/]$"))
+            txtDisplay.setText("6");
+        else
+            txtDisplay.setText(txtDisplay.getText()+"6");
+    }//GEN-LAST:event_jButton6MouseClicked
+
+    private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
+        if(txtDisplay.getText().matches("^[*+-/]$"))
+            txtDisplay.setText("7");
+        else
+            txtDisplay.setText(txtDisplay.getText()+"7");
+    }//GEN-LAST:event_jButton7MouseClicked
+
+    private void jButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseClicked
+        if(txtDisplay.getText().matches("^[*+-/]$"))
+            txtDisplay.setText("8");
+        else
+            txtDisplay.setText(txtDisplay.getText()+"8");
+    }//GEN-LAST:event_jButton8MouseClicked
+
+    private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseClicked
+        if(txtDisplay.getText().matches("^[*+-/]$"))
+            txtDisplay.setText("9");
+        else
+            txtDisplay.setText(txtDisplay.getText()+"9");
+    }//GEN-LAST:event_jButton9MouseClicked
+
+    private void jButton11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseClicked
+        txtDisplay.setText(txtDisplay.getText()+".");
+    }//GEN-LAST:event_jButton11MouseClicked
+
+    private void jButton10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton10MouseClicked
+        if(txtDisplay.getText().matches("^[*+-/]$"))
+            txtDisplay.setText("0");
+        else
+            txtDisplay.setText(txtDisplay.getText()+"0");
+    }//GEN-LAST:event_jButton10MouseClicked
+
+    private void jButton15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton15MouseClicked
+        txtDisplay.setText(txtDisplay.getText()+"%");
+    }//GEN-LAST:event_jButton15MouseClicked
+
+    private void jButton16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton16MouseClicked
+        calculate("+");
+    }//GEN-LAST:event_jButton16MouseClicked
+
+    private void jButton13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton13MouseClicked
         try
         {
             if(!txtDisplay.getText().matches("^[0-9]{1,}+%$"))
@@ -351,118 +402,23 @@ public class Calculator extends JFrame {
             JOptionPane.showMessageDialog(this, "Enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
             txtDisplay.setText("");
         }
-    }//GEN-LAST:event_jButton13ActionPerformed
+    }//GEN-LAST:event_jButton13MouseClicked
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        if(txtDisplay.getText().matches("^[*+-/]?$"))
-            txtDisplay.setText("1");
-        else
-            txtDisplay.setText(txtDisplay.getText()+"1");
-    }//GEN-LAST:event_jButton1MouseClicked
-
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        if(txtDisplay.getText().matches("^[*+-/]?$"))
-            txtDisplay.setText("2");
-        else
-            txtDisplay.setText(txtDisplay.getText()+"2");
-    }//GEN-LAST:event_jButton2MouseClicked
-
-    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-        if(txtDisplay.getText().matches("^[*+-/]?$"))
-            txtDisplay.setText("3");
-        else
-            txtDisplay.setText(txtDisplay.getText()+"3");
-    }//GEN-LAST:event_jButton3MouseClicked
-
-    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-        if(txtDisplay.getText().matches("^[*+-/]?$"))
-            txtDisplay.setText("4");
-        else
-            txtDisplay.setText(txtDisplay.getText()+"4");
-    }//GEN-LAST:event_jButton4MouseClicked
-
-    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
-        if(txtDisplay.getText().matches("^[*+-/]?$"))
-            txtDisplay.setText("5");
-        else
-            txtDisplay.setText(txtDisplay.getText()+"5");
-    }//GEN-LAST:event_jButton5MouseClicked
-
-    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
-        if(txtDisplay.getText().matches("^[*+-/]?$"))
-            txtDisplay.setText("6");
-        else
-            txtDisplay.setText(txtDisplay.getText()+"6");
-    }//GEN-LAST:event_jButton6MouseClicked
-
-    private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
-        if(txtDisplay.getText().matches("^[*+-/]?$"))
-            txtDisplay.setText("7");
-        else
-            txtDisplay.setText(txtDisplay.getText()+"7");
-    }//GEN-LAST:event_jButton7MouseClicked
-
-    private void jButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseClicked
-        if(txtDisplay.getText().matches("^[*+-/]?$"))
-            txtDisplay.setText("8");
-        else
-            txtDisplay.setText(txtDisplay.getText()+"8");
-    }//GEN-LAST:event_jButton8MouseClicked
-
-    private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseClicked
-        if(txtDisplay.getText().matches("^[*+-/]?$"))
-            txtDisplay.setText("9");
-        else
-            txtDisplay.setText(txtDisplay.getText()+"9");
-    }//GEN-LAST:event_jButton9MouseClicked
-
-    private void jButton11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton11MouseClicked
-
-    private void jButton10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton10MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton10MouseClicked
-
-    private void jButton15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton15MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton15MouseClicked
-
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        txtDisplay.setText("");
-    }//GEN-LAST:event_jButton14ActionPerformed
-
-    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+    private void jButton17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton17MouseClicked
         calculate("/");
-    }//GEN-LAST:event_jButton17ActionPerformed
+    }//GEN-LAST:event_jButton17MouseClicked
 
-    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-        calculate("-");
-    }//GEN-LAST:event_jButton19ActionPerformed
+    private void jButton14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton14MouseClicked
+        txtDisplay.setText("");
+    }//GEN-LAST:event_jButton14MouseClicked
 
-    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+    private void jButton18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton18MouseClicked
         calculate("*");
-    }//GEN-LAST:event_jButton18ActionPerformed
+    }//GEN-LAST:event_jButton18MouseClicked
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        txtDisplay.setText(txtDisplay.getText()+"0");
-    }//GEN-LAST:event_jButton10ActionPerformed
-
-    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        txtDisplay.setText(txtDisplay.getText()+"%");
-    }//GEN-LAST:event_jButton15ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButton19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton19MouseClicked
+        calculate("-");
+    }//GEN-LAST:event_jButton19MouseClicked
 
     public void calculate(String o)
     {
@@ -483,44 +439,6 @@ public class Calculator extends JFrame {
             JOptionPane.showMessageDialog(this, "Enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
             txtDisplay.setText("");
         }
-    }
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows Clasic".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Calculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Calculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Calculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Calculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Calculator().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

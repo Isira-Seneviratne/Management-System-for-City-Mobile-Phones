@@ -2124,19 +2124,15 @@ public class Sales extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void remove_tablerow_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remove_tablerow_btnActionPerformed
-        DefaultTableModel tabelrow = (DefaultTableModel) purchase_table.getModel(); //get selected row index
-        try{
-            int SelectedRowIndex = purchase_table.getSelectedRow();
-            tabelrow.removeRow(SelectedRowIndex);
+        DefaultTableModel tableRow = (DefaultTableModel) purchase_table.getModel(); //get selected row index
+        try
+        {
+            tableRow.removeRow(purchase_table.getSelectedRow());
         }
-        catch (Exception e) {
-            
-            message_box mb1= new message_box();
-            mb1.setVisible(true);
-            
-            //JOptionPane.showMessageDialog(null,"need to click a row");
+        catch (ArrayIndexOutOfBoundsException e)
+        {
+            JOptionPane.showMessageDialog(null,"You need to click a row.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
     }//GEN-LAST:event_remove_tablerow_btnActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

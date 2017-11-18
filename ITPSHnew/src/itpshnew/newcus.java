@@ -19,8 +19,6 @@ public class newcus extends javax.swing.JFrame {
     Connection con = null;
     PreparedStatement pst = null;
 
-    
-    
     public newcus() {
         this.setUndecorated(true);
         this.setAlwaysOnTop(true);
@@ -230,7 +228,7 @@ public class newcus extends javax.swing.JFrame {
 
     private void save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_btnActionPerformed
         
-        Sales p2 = new Sales();                               // set text on Sales panel
+        Purchase p2 = Main.p;
         p2.purchase_cusid_box.setText(cusid_box.getText());
         
         String fname1 = fname_box.getText();
@@ -267,19 +265,15 @@ public class newcus extends javax.swing.JFrame {
         customer_class c2 = new customer_class();           //increment the customer id
         cusid_box.setText(c2.cus_num_increment());
         
-        this.setVisible(false);//close only current window
-        Sales p1 = new Sales();
-        
-        //com.sun.awt.AWTUtilities.setWindowOpacity(p1, 1);  //reset main frame opacity
-        p1.setVisible(true);
+        dispose();
     }//GEN-LAST:event_save_btnActionPerformed
 
     private void cancel_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_btnActionPerformed
-        this.dispose();//close only current window
+        dispose();//close only current window
     }//GEN-LAST:event_cancel_btnActionPerformed
 
     private void cancel_lblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancel_lblMouseClicked
-        this.dispose();//close only current window
+        dispose();//close only current window
     }//GEN-LAST:event_cancel_lblMouseClicked
 
     private void male_rbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_male_rbtnActionPerformed

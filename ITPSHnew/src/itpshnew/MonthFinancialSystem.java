@@ -493,9 +493,9 @@ public class MonthFinancialSystem extends FinancialSystem {
             RepProf = RepRev - RepCost;
             SalesProf = SalesRev - SalesCost;
             DisProf = DisRev - DisCost;
-            rs = s.executeQuery("SELECT Salary FROM monthlysal WHERE Month='"+DateTimeFunctions.getMonth()+"'");
+            rs = s.executeQuery("SELECT NetSalary FROM monthlysal WHERE Month='"+DateTimeFunctions.getMonth()+"'");
             while(rs.next())
-                HRCost += rs.getFloat("Salary");
+                HRCost += rs.getFloat("NetSalary");
             
             TotRev = RepRev + SalesRev + DisRev;
             TotCost = RepCost + SalesCost + DisRev + HRCost + UtilityCost;
@@ -520,6 +520,7 @@ public class MonthFinancialSystem extends FinancialSystem {
         {
             JOptionPane.showMessageDialog(this, "There was an error while retrieving financial values to calculate results.",
                     "Error", JOptionPane.ERROR_MESSAGE);
+            se.printStackTrace();
         }
     }
     

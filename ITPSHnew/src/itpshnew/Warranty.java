@@ -126,7 +126,7 @@ public class Warranty extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Bill Number", "Item Code", "Item Name", "Brand", "Amount", "warranty period", "sold date", "valid until", "solution"
+                "Bill Number", "Item Code", "Item Name", "Brand", "Amount", "Warranty Period", "Sold Date", "Valid Until", "Solution"
             }
         ) {
             boolean[] canEdit = new boolean [] {

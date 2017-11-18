@@ -27,7 +27,7 @@ public class Main extends javax.swing.JFrame {
     private Stocks s;
     private StockReports stockr;
     
-    private Purchase p;
+    public static Purchase p;
     private SalesReports salesr;
     private Warranty w;
     private Customer cus;

@@ -22,8 +22,6 @@ public class searchcus extends javax.swing.JFrame {
         this.setResizable(true);
         this.setVisible(true);
         initComponents();
-        
-        
     }
 
     /**
@@ -222,27 +220,14 @@ public class searchcus extends javax.swing.JFrame {
 
     private void save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_btnActionPerformed
         this.dispose();//close only current window
-        Sales p1 = new Sales();
-        //com.sun.awt.AWTUtilities.setWindowOpacity(p1, 1f);//reset main frame opacity
-        p1.setVisible(true);
-        
     }//GEN-LAST:event_save_btnActionPerformed
 
     private void cancel_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_btnActionPerformed
-        this.setVisible(false);//close only current window
-        Sales p1 = new Sales();
-        
-        //com.sun.awt.AWTUtilities.setWindowOpacity(p1, 1f);//reset main frame opacity
-        p1.setVisible(true);
-       
+        dispose();
     }//GEN-LAST:event_cancel_btnActionPerformed
 
     private void close_lblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_close_lblMouseClicked
-        this.dispose();//close only current window
-        Sales p1 = new Sales();
-        //com.sun.awt.AWTUtilities.setWindowOpacity(p1,1f);//reset main frame opacity
-        p1.setVisible(true);
-        
+        dispose();//close only current window
     }//GEN-LAST:event_close_lblMouseClicked
 
     private void jTextField22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField22ActionPerformed

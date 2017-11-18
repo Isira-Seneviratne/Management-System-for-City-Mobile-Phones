@@ -140,7 +140,7 @@ public class Customer extends javax.swing.JPanel {
         jPanel8.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 110, 30));
 
         jLabel35.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel35.setText("Loyalty leevl");
+        jLabel35.setText("Loyalty Level");
         jPanel8.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 120, 30));
 
         jLabel36.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -458,7 +458,7 @@ public class Customer extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Previous_Itemcode", "Item code", "Item Name", "Brand", "Amount"
+                "Previous Item Code", "Item code", "Item Name", "Brand", "Amount"
             }
         ) {
             boolean[] canEdit = new boolean [] {

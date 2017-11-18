@@ -17,9 +17,9 @@ import sales_package.bill_class;
  */
 public class Purchase extends javax.swing.JPanel {
 
-    Connection conn = null;
-    PreparedStatement pst = null;
-    ResultSet rs = null;
+    private Connection conn = null;
+    private PreparedStatement pst = null;
+    private ResultSet rs = null;
     private boolean loaded = false;
     /**
      * Creates new form Purchase
@@ -426,16 +426,14 @@ public class Purchase extends javax.swing.JPanel {
         if("".equals(itemname_box.getText()))
         {
             String itemid = itemid_box.getText();
-            String search = "SELECT item_code,item_name,brand,manufacture_date,warranty_period,discount,selling_price FROM item WHERE item_code LIKE '%"+itemid+"%'";
-
             try
             {
-                pst = conn.prepareStatement(search);
+                pst = conn.prepareStatement("SELECT item_code,item_name,brand,manufacture_date,"
+                        + "warranty_period,discount,selling_price FROM item WHERE item_code LIKE '%"+itemid+"%'");
                 rs = pst.executeQuery();
                 //purchase_table.setModel(DbUtils.resultSetToTableModel(rs));
                 //DefaultTableModel tabelrowadd = (DefaultTableModel) purchase_table.getModel();
                 //tabelrowadd.addRow(new Object[] {DbUtils.resultSetToTableModel(rs)});
-
             }
             catch (SQLException e1)
             {
@@ -446,11 +444,9 @@ public class Purchase extends javax.swing.JPanel {
         else if("".equals(itemid_box.getText()))
         {
             String itemname = itemname_box.getText();
-            String search2 = "SELECT item_code,item_name,brand,manufacture_date,warranty_period,discount,selling_price FROM item WHERE item_name LIKE '%"+itemname+"%'";
-
             try
             {
-                pst = conn.prepareStatement(search2);
+                pst = conn.prepareStatement("SELECT item_code,item_name,brand,manufacture_date,warranty_period,discount,selling_price FROM item WHERE item_name LIKE '%"+itemname+"%'");
                 rs = pst.executeQuery();
                 //purchase_table.setModel(DbUtils.resultSetToTableModel(rs));
 
@@ -484,15 +480,13 @@ public class Purchase extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void newcus_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newcus_btnActionPerformed
-        newcus nc1 = new newcus();
-        nc1.setVisible(true);
+        new newcus().setVisible(true);
         //this.setOpacity(0.5f);
         //com.sun.awt.AWTUtilities.setWindowOpacity(this, 0.5f); // change the opacity level of main frame
     }//GEN-LAST:event_newcus_btnActionPerformed
 
     private void searchcus_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchcus_btnActionPerformed
-        searchcus sc1 = new searchcus();
-        sc1.setVisible(true);
+        new searchcus().setVisible(true);
         //this.setOpacity(0.5f);
         //com.sun.awt.AWTUtilities.setWindowOpacity(this, 0.5f); // change the opacity level of main frame
     }//GEN-LAST:event_searchcus_btnActionPerformed
@@ -530,8 +524,8 @@ public class Purchase extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void purchase_save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchase_save_btnActionPerformed
-        bill_class bc2 = new bill_class();         //set bill number
-        sales_bill_num.setText(bc2.bill_num_increment());
+        //set bill number
+        sales_bill_num.setText(new bill_class().bill_num_increment());
     }//GEN-LAST:event_purchase_save_btnActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -539,19 +533,15 @@ public class Purchase extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void remove_tablerow_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remove_tablerow_btnActionPerformed
-        DefaultTableModel tabelrow = (DefaultTableModel) purchase_table.getModel(); //get selected row index
-        try{
-            int SelectedRowIndex = purchase_table.getSelectedRow();
-            tabelrow.removeRow(SelectedRowIndex);
+        DefaultTableModel tableRow = (DefaultTableModel) purchase_table.getModel(); //get selected row index
+        try
+        {
+            tableRow.removeRow(purchase_table.getSelectedRow());
         }
-        catch (Exception e) {
-
-            message_box mb1= new message_box();
-            mb1.setVisible(true);
-
-            //JOptionPane.showMessageDialog(null,"need to click a row");
+        catch (ArrayIndexOutOfBoundsException e)
+        {
+            JOptionPane.showMessageDialog(null,"You need to click a row.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-
     }//GEN-LAST:event_remove_tablerow_btnActionPerformed
 
 
