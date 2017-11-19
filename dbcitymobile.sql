@@ -277,18 +277,22 @@ CREATE TABLE `item` (
 --
 
 INSERT INTO `item` (`shippingID`, `itemID`, `itemName`, `brand`, `modelCode`, `sellingPrice`, `manufactureDate`, `warrantyPeriod`, `discount`, `status`) VALUES
-('SH0001', 'IT10000001', 'J7 Prime', 'Samsung', 'F0xA1', 37000, 'Sep 2, 2015', 365, '5.0%', 'not sold'),
-('SH0002', 'IT10000007', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'not sold'),
-('SH0002', 'IT10000008', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'not sold'),
-('SH0002', 'IT10000009', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'not sold'),
-('SH0002', 'IT10000010', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'not sold'),
+('SH0001', 'IT10000001', 'J7 Prime', 'Samsung', 'F0xA1', 37000, 'Sep 2, 2015', 365, '5.0%', 'sold'),
+('default', 'IT10000002', 'iPhone 6S', 'Apple', 'xxD02', 90000, 'Sep 1, 2017', 365, '0.0%', 'sold'),
+('default', 'IT10000004', 'm8', 'Huawei', 'JxDba', 24000, 'Sep 11, 2014', 365, '10.0%', 'sold'),
+('SH0002', 'IT10000005', 'm8', 'Huawei', 'JxDba', 24000, 'Sep 11, 2014', 365, '10.0%', 'sold'),
+('SH0002', 'IT10000006', 'm8', 'Huawei', 'JxDba', 24000, 'Sep 4, 2015', 0, '0.0%', 'sold'),
+('SH0002', 'IT10000007', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'replace'),
+('SH0002', 'IT10000008', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'replace'),
+('SH0002', 'IT10000009', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'sold'),
+('SH0002', 'IT10000010', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'replace'),
 ('SH0002', 'IT10000011', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'not sold'),
 ('SH0002', 'IT10000012', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'not sold'),
 ('SH0002', 'IT10000013', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'not sold'),
 ('SH0002', 'IT10000014', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'not sold'),
-('SH0002', 'IT10000015', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'not sold'),
-('SH0002', 'IT10000016', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'not sold'),
-('SH0002', 'IT10000017', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'not sold'),
+('SH0002', 'IT10000015', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'sold'),
+('SH0002', 'IT10000016', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'sold'),
+('SH0002', 'IT10000017', 'Lumia 406', 'Nokia', 'Nokx1', 21000, 'Sep 30, 2013', 183, '0.0%', 'sold'),
 ('SH0003', 'IT10000018', 's5', 'Samsung', 's5Xz3', 51000, 'Sep 26, 2014', 183, '5.0%', 'not sold'),
 ('SH0003', 'IT10000019', 's5', 'Samsung', 's5Xz3', 51000, 'Sep 26, 2014', 183, '5.0%', 'not sold'),
 ('SH0003', 'IT10000020', 's5', 'Samsung', 's5Xz3', 51000, 'Sep 26, 2014', 183, '0.0%', 'not sold'),
@@ -297,7 +301,7 @@ INSERT INTO `item` (`shippingID`, `itemID`, `itemName`, `brand`, `modelCode`, `s
 ('SH0003', 'IT10000023', 's5', 'Samsung', 's5Xz3', 51000, 'Sep 26, 2014', 183, '0.0%', 'not sold'),
 ('SH0003', 'IT10000024', 'S8 Plus', 'Samsung', 'mm01G', 111000, 'Aug 21, 2017', 730, '0.0%', 'not sold'),
 ('SH0003', 'IT10000025', 'S8 Plus', 'Samsung', 'mm01G', 111000, 'Aug 21, 2017', 730, '0.0%', 'not sold'),
-('SH0003', 'IT10000026', 'S8 Plus', 'Samsung', 'mm01G', 111000, 'Aug 21, 2017', 730, '0.0%', 'not sold'),
+('SH0003', 'IT10000026', 'S8 Plus', 'Samsung', 'mm01G', 111000, 'Aug 21, 2017', 730, '0.0%', 'sold'),
 ('SH0003', 'IT10000027', 'S8 Plus', 'Samsung', 'mm01G', 111000, 'Aug 21, 2017', 730, '0.0%', 'not sold'),
 ('SH0003', 'IT10000028', 'S8 Plus', 'Samsung', 'mm01G', 111000, 'Aug 21, 2017', 730, '0.0%', 'not sold'),
 ('SH0003', 'IT10000029', 'S8 Plus', 'Samsung', 'mm01G', 111000, 'Aug 21, 2017', 730, '0.0%', 'not sold'),
@@ -336,16 +340,8 @@ INSERT INTO `item` (`shippingID`, `itemID`, `itemName`, `brand`, `modelCode`, `s
 ('SH0003', 'IT10000062', 'J7 Prime', 'Samsung', 'F0xA1', 111000, 'Aug 21, 2017', 730, '0.0%', 'not sold'),
 ('SH0003', 'IT10000063', 'J7 Prime', 'Samsung', 'F0xA1', 111000, 'Aug 21, 2017', 730, '0.0%', 'not sold'),
 ('SH0003', 'IT10000064', 'J7 Prime', 'Samsung', 'F0xA1', 111000, 'Aug 21, 2017', 730, '0.0%', 'not sold'),
-('SH0003', 'IT10000065', 'J7 Prime', 'Samsung', 'F0xA1', 111000, 'Aug 21, 2017', 730, '0.0%', 'not sold'),
 ('SH0003', 'IT10000066', 'J7 Prime', 'Samsung', 'F0xA1', 111000, 'Aug 21, 2017', 730, '0.0%', 'not sold'),
-('SH0001', 'IT10000068', 'P9', 'Huawei', 'vv2c', 23000, 'Nov 5, 2017', 365, '0.0%', 'not sold'),
-('SH0001', 'IT10000069', 'iPhone 6s', 'Appule', 'ccv', 112000, 'Nov 1, 2017', 365, '0.0%', 'not sold'),
-('SH0001', 'IT10000070', 'iPhone 7Plus', 'Appule', 'ccvd', 139000, 'Nov 1, 2017', 365, '0.0%', 'not sold'),
-('SH0004', 'IT10000071', 'iPhone 5S', 'Appule', 'fdfd', 1234, 'Nov 5, 2017', 0, '0.0%', 'not sold'),
-('SH0001', 'IT10000072', 'iPhone 5S', 'Appule', 'fdfd', 12343, 'Nov 5, 2017', 0, '0.0%', 'not sold'),
-('SH0001', 'IT10000073', 'Note 8', 'Samsung', 'gGcs5', 120000, 'Nov 5, 2017', 365, '0.0%', 'not sold'),
-('SH0007', 'IT10000074', 'Tab 8.0', 'Huawei', 'bbc', 60000, 'Nov 12, 2017', 365, '0.0%', 'not sold'),
-('SH0001', 'IT10000075', 'Galaxy', 'Samsung', 'Sams1', 100, 'Nov 14, 2017', 100, '10.0%', 'not sold');
+('default', 'IT10000067', 'J7 ', 'Samsung', 'Sd098', 50000, 'Sep 1, 2017', 365, '5.0%', 'not sold');
 
 --
 -- Triggers `item`
@@ -499,7 +495,7 @@ CREATE TABLE `reorder` (
   `reOrderID` varchar(10) NOT NULL,
   `vendorID` varchar(10) NOT NULL,
   `brand` varchar(20) NOT NULL,
-  `itemName` varchar(20) NOT NULL,
+  `modelCode` varchar(20) NOT NULL,
   `qty` int(11) NOT NULL,
   `totalCost` double NOT NULL,
   `RequestDate` varchar(20) NOT NULL,
@@ -510,9 +506,20 @@ CREATE TABLE `reorder` (
 -- Dumping data for table `reorder`
 --
 
-INSERT INTO `reorder` (`reOrderID`, `vendorID`, `brand`, `itemName`, `qty`, `totalCost`, `RequestDate`, `RequestTime`) VALUES
-('RE10000001', 'V0001', 'Samsung', 'A5', 2, 2, '16 November 2017', '3:38 PM'),
-('RE10000002', 'V0002', 'Appule', 'iPhone 6s', 2, 200, '17 November 2017', '1:36 AM');
+INSERT INTO `reorder` (`reOrderID`, `vendorID`, `brand`, `modelCode`, `qty`, `totalCost`, `RequestDate`, `RequestTime`) VALUES
+('RE10000001', 'VENDOR01', 'Samsung', 'F0xA1', 10, 350, '23 September 2017', '7:20 PM'),
+('RE10000002', 'V0001', 'asds', 'sdsdsd', 1, 2, '25 September 2017', '3:50 PM'),
+('RE10000003', 'V0001', 'asds', 'sdsdsd', 1, 2, '25 September 2017', '3:50 PM'),
+('RE10000004', 'V0001', 's', 's', 2, 4, '25 September 2017', '3:52 PM'),
+('RE10000005', 'V0001', 'sdsd', 'jk', 1, 1, '25 September 2017', '4:12 PM'),
+('RE10000006', 'V0001', 'msms', 'sd', 2, 4, '25 September 2017', '4:20 PM'),
+('RE10000007', 'V0001', 'sad', 'sad', 1, 1, '25 September 2017', '4:36 PM'),
+('RE10000008', 'V0003', 'asd', 'sadasd', 2, 40, '25 September 2017', '4:42 PM'),
+('RE10000009', 'V0001', 'Samsung', 'asdasd', 2, 2, '25 September 2017', '7:37 PM'),
+('RE10000010', 'V0001', 'Samsung', 'A0xF1', 2, 40000, '25 September 2017', '9:49 PM'),
+('RE10000011', 'V0001', 'Samsung', 'FF0xa', 2, 180000, '26 September 2017', '11:57 AM'),
+('RE10000012', 'V0001', 'sss', 'sss', 2, 4, '26 September 2017', '3:52 PM'),
+('RE10000013', 'V0001', 'aaa', 'Sdf0A', 2, 60000, '26 September 2017', '4:42 PM');
 
 -- --------------------------------------------------------
 
@@ -841,188 +848,6 @@ ALTER TABLE `repaircheckout`
 --
 ALTER TABLE `repair_customer`
   MODIFY `cust_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-CREATE TABLE `adminuser` (
-  `id` int(11) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `adminuser`
---
-
-INSERT INTO `adminuser` (`id`, `username`, `password`) VALUES
-(1, 'admin', 'admin');
-
---
--- Table structure for table `orders`
---
-
-CREATE TABLE `orders` (
-  `id` int(11) NOT NULL,
-  `productId` varchar(11) NOT NULL,
-  `product` varchar(50) NOT NULL,
-  `price` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `discount` int(11) NOT NULL,
-  `total` int(11) NOT NULL,
-  `user` varchar(50) NOT NULL,
-  `buyDate` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`id`, `productId`, `product`, `price`, `quantity`, `discount`, `total`, `user`, `buyDate`) VALUES
-(29, '10010', 'SAMSUNG J2', 20000, 1, 10, 18000, 'aaa', '2017-09-23 11:39:30'),
-(30, '10010', 'Iphone 6s', 82000, 1, 10, 73800, 'aaa', '2017-09-23 12:44:10'),
-(31, '10010', 'SAMSUNG J2', 20000, 2, 10, 36000, 'pesh', '2017-09-24 01:31:28'),
-(32, '10011', 'Iphone 6s', 82000, 1, 10, 73800, 'sonal', '2017-09-24 02:51:47'),
-(33, '10010', 'SAMSUNG J2', 20000, 2, 10, 36000, 'sonal', '2017-09-24 03:01:01'),
-(34, '10011', 'Iphone 6s', 82000, 1, 10, 73800, 'mala', '2017-09-24 08:02:42'),
-(35, '10011', 'Iphone 6s', 82000, 1, 10, 73800, 'mala', '2017-09-24 08:08:19'),
-(36, '10011', 'Iphone 6s', 82000, 1, 10, 73800, 'mala', '2017-09-24 08:08:28'),
-(37, '10011', 'Iphone 6s', 82000, 1, 10, 73800, 'mala', '2017-09-24 23:51:35'),
-(38, '10013', 'SAMSUNG J2', 94900, 1, 10, 85410, 'mala', '2017-09-25 01:02:46'),
-(39, '10010', 'Nokia 8', 50000, 1, 10, 45000, 'mala', '2017-09-25 01:21:44'),
-(40, '10010', 'Nokia 8', 50000, 1, 10, 45000, 'mala', '2017-09-25 01:22:56'),
-(41, '10010', 'Nokia 8', 50000, 1, 10, 45000, 'mala', '2017-09-25 01:23:04'),
-(42, '10018', 'OPPO F3', 35900, 1, 10, 32310, 'mala', '2017-09-26 08:09:04'),
-(43, '10018', 'OPPO F3', 35900, 1, 10, 32310, 'mala', '2017-09-26 08:09:37'),
-(44, '10018', 'OPPO F3', 35900, 1, 10, 32310, 'mala', '2017-09-26 08:10:03'),
-(45, '10019', 'LG V20', 79900, 1, 10, 71910, 'mala', '2017-09-26 08:10:47'),
-(46, '10011', 'Iphone 6s', 82000, 1, 10, 73800, 'mala', '2017-09-26 08:11:07'),
-(47, '10018', 'OPPO F3', 35900, 1, 10, 32310, 'mala', '2017-09-26 08:19:15'),
-(48, '10018', 'OPPO F3', 35900, 1, 10, 32310, 'sanka', '2017-09-26 08:40:14'),
-(49, '10011', 'Iphone 6s', 82000, 1, 10, 73800, 'aa', '0000-00-00 00:00:00'),
-(50, '10011', 'Iphone 6s', 82000, 1, 10, 73800, 'pesha', '0000-00-00 00:00:00'),
-(51, '10011', 'Iphone 6s', 82000, 1, 10, 73800, 'sana', '0000-00-00 00:00:00'),
-(52, '10011', 'Iphone 6s', 82000, 1, 10, 73800, 'mala', '0000-00-00 00:00:00'),
-(53, '10011', 'Iphone 6s', 82000, 1, 10, 73800, 'mala', '0000-00-00 00:00:00');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `rating`
---
-
-CREATE TABLE `rating` (
-  `id` int(11) NOT NULL,
-  `name` varchar(40) NOT NULL,
-  `rating` varchar(50) NOT NULL,
-  `rating_1` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `rating`
---
-
-INSERT INTO `rating` (`id`, `name`, `rating`, `rating_1`) VALUES
-(4, 'sepali', 'VERY SATISFIED', 'DEFINETLY'),
-(5, 'sepali', 'VERY SATISFIED', 'DEFINETLY'),
-(6, 'sanka', 'SATISFIED', 'PROBABLY');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user`
---
-
-CREATE TABLE `user` (
-  `id` int(11) NOT NULL,
-  `firstName` varchar(50) NOT NULL,
-  `lastName` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `hashedPassword` varchar(50) NOT NULL,
-  `lastLogin` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`id`, `firstName`, `lastName`, `email`, `hashedPassword`, `lastLogin`) VALUES
-(1, 'Chamara', 'Siriwardena', 'chamara@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', '0000-00-00 00:00:00'),
-(2, 'mala', 'perera', 'mala@gmail.com', '6216f8a75fd5bb3d5f22b6f9958cdede3fc086c2', '2017-09-29 00:42:34'),
-(3, 'sanka', 'karu', 'sanka@gmail.com', '6216f8a75fd5bb3d5f22b6f9958cdede3fc086c2', '2017-09-26 08:33:19'),
-(4, 'aaa', 'bbb', 'aaa@gmail.com', '6216f8a75fd5bb3d5f22b6f9958cdede3fc086c2', '0000-00-00 00:00:00'),
-(5, 'pesh', 'herath', 'pesh@gmail.com', '6216f8a75fd5bb3d5f22b6f9958cdede3fc086c2', '0000-00-00 00:00:00'),
-(6, 'sonal', 'rathnayaka', 'sonal@gmail.com', '6216f8a75fd5bb3d5f22b6f9958cdede3fc086c2', '0000-00-00 00:00:00'),
-(7, 'sonali_00', 'rathnayaka', 'sonali@gmail.com', '6216f8a75fd5bb3d5f22b6f9958cdede3fc086c2', '0000-00-00 00:00:00'),
-(8, 'sonali', 'rathnayaka', 'sonalika@gmail.com', '1c6637a8f2e1f75e06ff9984894d6bd16a3a36a9', '0000-00-00 00:00:00'),
-(9, 'aa', 'bb', 'ab@gmail.com', '6216f8a75fd5bb3d5f22b6f9958cdede3fc086c2', '2017-09-26 08:59:15'),
-(10, 'bunty', 'perera', 'bunty@gmail.com', '33f552949e2755ac09ff7ee60ebd4fda5c809673', '2017-09-26 08:44:17'),
-(11, 'pesha', 'njali', 'pesha@gmail.com', '0570f07980c2dc99002c78e6948c2fa025323bdb', '2017-09-27 00:23:58'),
-(12, 'sana', 'karu', 'sana@gmai.com', '2d02423239ebd21ca00d5ef5accfec26910609e9', '2017-09-27 01:57:25');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `adminuser`
---
-ALTER TABLE `adminuser`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `devices`
---
-ALTER TABLE `devices`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `orders`
---
-ALTER TABLE `orders`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `rating`
---
-ALTER TABLE `rating`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `adminuser`
---
-ALTER TABLE `adminuser`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `devices`
---
-ALTER TABLE `devices`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
---
--- AUTO_INCREMENT for table `orders`
---
-ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
---
--- AUTO_INCREMENT for table `rating`
---
-ALTER TABLE `rating`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT for table `user`
---
-ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
