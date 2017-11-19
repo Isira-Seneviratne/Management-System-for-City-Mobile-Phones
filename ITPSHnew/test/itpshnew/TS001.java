@@ -15,7 +15,7 @@ import org.junit.runners.Suite;
  * @author isira
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({itpshnew.DateTimeFunctionsTest.class})
+@Suite.SuiteClasses({itpshnew.TC001.class, itpshnew.TC002.class, itpshnew.TC003.class})
 public class TS001 {
 
     @BeforeClass
