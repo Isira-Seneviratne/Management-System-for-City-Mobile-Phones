@@ -36,7 +36,7 @@ public class HR extends javax.swing.JPanel {
          ArrayList<employee> tablelist1= new ArrayList<>();
             try
             {
-                String x = jTextField21.getText();
+                String x = "";//jTextField21.getText();
                 String sql = "SELECT EmpID,EmpName,dob,EmpAddress,EmpEmail,EmpPhone,JobID,JobDate,Basic_Sal,otRate FROM currentemployee  where JobID='"+x+"' ";
                 pst = con.prepareStatement(sql);
                 rs = pst.executeQuery();
@@ -57,7 +57,7 @@ public class HR extends javax.swing.JPanel {
     public ArrayList<attendance>tablelist(){
          ArrayList<attendance> tablelist= new ArrayList<>();
             try{
-             String x=jTextField21.getText();
+             String x="";//jTextField21.getText();
              String sql="SELECT EmpID,Date,Othours,WorkingHours FROM dailyattendance ";
              pst=con.prepareStatement(sql);
              rs= pst.executeQuery();

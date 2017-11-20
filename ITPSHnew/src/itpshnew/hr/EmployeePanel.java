@@ -7,6 +7,7 @@ package itpshnew.hr;
 
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -313,6 +314,8 @@ public class EmployeePanel extends HR {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void showtable(){}
+    
     private void jtableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtableMouseClicked
         try{
             DefaultTableModel model=(DefaultTableModel)jtable.getModel();

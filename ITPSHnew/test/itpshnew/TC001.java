@@ -33,7 +33,7 @@ public class TC001 {
     @Test
     public void testGetValidDate() {
         System.out.println("getDate - Valid");
-        String expResult = "19 November 2017";
+        String expResult = "20 November 2017";
         String result = DateTimeFunctions.getDate();
         assertEquals(expResult, result);
     }

@@ -33,7 +33,7 @@ public class TC003 {
     @Test
     public void testGetValidDay() {
         System.out.println("getDay - Valid");
-        int expResult = 19;
+        int expResult = 20;
         int result = DateTimeFunctions.getDay();
         assertEquals(expResult, result);
     }
