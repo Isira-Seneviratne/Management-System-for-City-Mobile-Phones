@@ -5,6 +5,22 @@
  */
 package itpshnew;
 
+import itpshnew.sales.Customer;
+import itpshnew.sales.Purchase;
+import itpshnew.sales.SalesReports;
+import itpshnew.sales.Warranty;
+import itpshnew.stockcontrol.Calculator;
+import itpshnew.stockcontrol.Item;
+import itpshnew.stockcontrol.StockReports;
+import itpshnew.stockcontrol.Stocks;
+import itpshnew.distribution.VendorRecord;
+import itpshnew.distribution.AddVendor;
+import itpshnew.distribution.RetailRecord;
+import itpshnew.financialsystem.TodayFinancialSystem;
+import itpshnew.financialsystem.MonthFinancialSystem;
+import itpshnew.hr.AttendancePanel;
+import itpshnew.hr.EmployeePanel;
+import itpshnew.hr.Salary;
 import java.awt.Color;
 import java.awt.event.*;
 import java.io.*;
@@ -14,8 +30,8 @@ import javax.swing.*;
  *
  * @author isira
  */
-public class Main extends javax.swing.JFrame {
-    
+public class Main extends javax.swing.JFrame implements FocusListener
+{
     private MonthFinancialSystem mfs;
     private TodayFinancialSystem tfs;
     
@@ -32,6 +48,10 @@ public class Main extends javax.swing.JFrame {
     private Warranty w;
     private Customer cus;
     
+    private AttendancePanel ap;
+    private EmployeePanel ep;
+    private Salary sal;
+    
     private TimerThread t;
     /**
      * Creates new form Main
@@ -41,6 +61,8 @@ public class Main extends javax.swing.JFrame {
     
     public Main(String name, MouseEvent e)
     {
+        addFocusListener(this); 
+        
         mfs = new MonthFinancialSystem();
         tfs = new TodayFinancialSystem();
         
@@ -57,6 +79,10 @@ public class Main extends javax.swing.JFrame {
         salesr = new SalesReports();
         w = new Warranty();
         
+        ap = new AttendancePanel();
+        ep = new EmployeePanel();
+        sal = new Salary();
+        
         setEnabledVisible(mfs, false);
         setEnabledVisible(tfs, false);
         setEnabledVisible(av, false);
@@ -69,10 +95,14 @@ public class Main extends javax.swing.JFrame {
         setEnabledVisible(p, false);
         setEnabledVisible(salesr, false);
         setEnabledVisible(w, false);
+        setEnabledVisible(ap, false);
+        setEnabledVisible(ep, false);
+        setEnabledVisible(sal, false);
         
         initComponents();
         t = new TimerThread(time);
         t.start();
+        
         if(name.equals("Finance"))
             topic6MouseClicked(e);
         else if(name.equals("Distribution"))
@@ -81,10 +111,12 @@ public class Main extends javax.swing.JFrame {
             topic2MouseClicked(e);
         else if(name.equals("Sales"))
             topic4MouseClicked(e);
+        else if(name.equals("HR"))
+            topic7MouseClicked(e);
     }
     
     public Main()
-    {
+    { 
         mfs = new MonthFinancialSystem();
         tfs = new TodayFinancialSystem();
         
@@ -101,6 +133,10 @@ public class Main extends javax.swing.JFrame {
         salesr = new SalesReports();
         w = new Warranty();
         
+        ap = new AttendancePanel();
+        ep = new EmployeePanel();
+        sal = new Salary();
+        
         setEnabledVisible(mfs, false);
         setEnabledVisible(tfs, false);
         setEnabledVisible(av, false);
@@ -113,10 +149,14 @@ public class Main extends javax.swing.JFrame {
         setEnabledVisible(p, false);
         setEnabledVisible(salesr, false);
         setEnabledVisible(w, false);
+        setEnabledVisible(ap, false);
+        setEnabledVisible(ep, false);
+        setEnabledVisible(sal, false);
         
         initComponents();
         t = new TimerThread(time);
         t.start();
+        addFocusListener(this);
     }
     
     /**
@@ -459,6 +499,11 @@ public class Main extends javax.swing.JFrame {
         sidepanel.add(topic6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 290, 60));
 
         topic7.setBackground(new java.awt.Color(0, 153, 153));
+        topic7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                topic7MouseClicked(evt);
+            }
+        });
         topic7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         bar7.setOpaque(false);
@@ -480,6 +525,11 @@ public class Main extends javax.swing.JFrame {
         name6.setForeground(new java.awt.Color(255, 255, 255));
         name6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         name6.setText("HR");
+        name6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                name6MouseClicked(evt);
+            }
+        });
         topic7.add(name6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 9, 230, 40));
 
         pic6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_User_Group_Man_Man_40px.png"))); // NOI18N
@@ -1150,6 +1200,14 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_name7MouseClicked
 
+    private void name6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_name6MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_name6MouseClicked
+
+    private void topic7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topic7MouseClicked
+        name6MouseClicked(evt);
+    }//GEN-LAST:event_topic7MouseClicked
+
     private void setLabelColor(JLabel label) //set the colour after  click
     {
         label.setBackground(new Color (0,153,153));
@@ -1230,6 +1288,7 @@ public class Main extends javax.swing.JFrame {
         resetComp(w);
         resetComp(cus);
     }
+    
     /**
      * @param args the command line arguments
      */
@@ -1324,4 +1383,16 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel vendor;
     private javax.swing.JLabel warranty;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void focusGained(FocusEvent fe) {
+        if(!System.getProperty("os.name").equals("Linux"))
+            setOpacity(1f);
+    }
+
+    @Override
+    public void focusLost(FocusEvent fe) {
+        if(!System.getProperty("os.name").equals("Linux"))
+            setOpacity(0.7f);
+    }
 }
