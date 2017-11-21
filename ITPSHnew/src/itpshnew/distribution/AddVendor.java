@@ -8,7 +8,6 @@ package itpshnew.distribution;
 
 import java.sql.*;
 import javax.swing.*;
-import net.proteanit.sql.DbUtils;
 /**
  *
  * @author Bhanu
@@ -368,27 +367,28 @@ public class AddVendor extends Distribution {
     }//GEN-LAST:event_jTextField36ActionPerformed
 
     private void search_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_btnActionPerformed
-        String key = jTextField40.getText();
-        String search = "select Vendor_name,Shipping_Cost_ph,address,email,telephone FROM vendor "
-        +"where Vendor_ID LIKE '%"+key+"%'";
+       
         try {
+             String key = jTextField40.getText();
+            String search = "select Vendor_ID,Vendor_name,Shipping_Cost_ph,Address,Email,Telephone FROM vendor "
+                +"where Vendor_ID = '"+key+"'";
+            
             pst = con.prepareStatement(search);
             rs = pst.executeQuery();
-            vendoradd_table.setModel(DbUtils.resultSetToTableModel(rs));
+            rs.beforeFirst();
             if(rs.next())
             {
-            jTextField33.setText(rs.getString("Vendor_name"));
-            jTextField34.setText(rs.getString("address"));
-            jTextField35.setText(rs.getString("email"));
-            jTextField36.setText(rs.getString("telephone"));
-            jTextField37.setText(rs.getString("Shipping_Cost_ph"));
+                jTextField33.setText(rs.getString("Vendor_name"));
+                jTextField34.setText(rs.getString("address"));
+                jTextField35.setText(rs.getString("email"));
+                jTextField36.setText(rs.getString("telephone"));
+                jTextField37.setText(rs.getString("Shipping_Cost_ph"));
             }
-            else{
+            else
+            {
                 JOptionPane.showMessageDialog(this, "Reached end of resultset.",
-                "Error", JOptionPane.ERROR_MESSAGE);
-                
+                "Error", JOptionPane.ERROR_MESSAGE);    
             }
-
         }
         catch(NullPointerException npe)
         {
@@ -401,7 +401,6 @@ public class AddVendor extends Distribution {
                 "Error", JOptionPane.ERROR_MESSAGE);
             se.printStackTrace();
         }
-        tableload(vendoradd_table,"select * FROM vendor");
     }//GEN-LAST:event_search_btnActionPerformed
 
     private void reset_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_btnActionPerformed
@@ -425,7 +424,7 @@ public class AddVendor extends Distribution {
             VID=jTextField38.getText();
             vName=jTextField33.getText();
             address=jTextField34.getText();
-            if(jTextField30.getText().matches("^[A-Za-z]{1,}+@+[A-Za-z]{1,}+\\.+com$"))
+            if(jTextField35.getText().matches("^[A-Za-z]{1,}+@+[A-Za-z]{1,}+\\.+com$"))
               email=jTextField35.getText();
             else
             {
@@ -442,14 +441,22 @@ public class AddVendor extends Distribution {
 
             Statement add_vendor = con.createStatement();
 
-            add_vendor.execute("update vendor set vName='"+vName+"',address='"+address+"',email='"+email+"',"
-                + "phone='"+phone+"',Shipping_Cost_ph='"+shipcost+"' where Vendor_ID='"+VID+"'");
+            add_vendor.execute("update vendor set Vendor_name='"+vName+"',Address='"+address+"',Email='"+email+"',"
+                + "Telephone='"+phone+"',Shipping_Cost_ph='"+shipcost+"' where Vendor_ID='"+VID+"'");
             JOptionPane.showMessageDialog(this, " Insertion successful","Vendor has been updated.", JOptionPane.INFORMATION_MESSAGE);
+            
+            jTextField33.setEditable(false);
+            jTextField34.setEditable(false);
+            jTextField35.setEditable(false);
+            jTextField36.setEditable(false);
+            jTextField37.setEditable(false);
+        
             tableload(vendoradd_table,"select * FROM vendor");
         }
         catch(SQLException se)
         {
             JOptionPane.showMessageDialog(this, " Database Insert Error","Unable to update DB", JOptionPane.ERROR_MESSAGE);
+            se.printStackTrace();
         }
         catch(NumberFormatException e)
         {
