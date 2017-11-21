@@ -679,14 +679,19 @@ CREATE TABLE `useraccount` (
 -- Table structure for table `vendor`
 --
 
+DROP TABLE IF EXISTS `vendor`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `vendor` (
   `Vendor_ID` varchar(10) NOT NULL DEFAULT '',
-  `Vendor_name` varchar(10) DEFAULT NULL,
-  `Address` varchar(10) DEFAULT NULL,
-  `Email` varchar(50) DEFAULT NULL,
-  `Telephone` int(11) DEFAULT NULL,
-  `Shipping_Cost_ph` float DEFAULT NULL
+  `Vendor_name` varchar(25) DEFAULT NULL,
+  `Address` varchar(25) DEFAULT NULL,
+  `Email` varchar(30) DEFAULT NULL,
+  `Telephone` int(10) DEFAULT NULL,
+  `Shipping_Cost_ph` float DEFAULT NULL,
+  PRIMARY KEY (`Vendor_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `vendor`
