@@ -41,9 +41,7 @@ public class RetailRecord extends Distribution {
         jPanel12 = new javax.swing.JPanel();
         jLabel57 = new javax.swing.JLabel();
         jTextField48 = new javax.swing.JTextField();
-        jLabel60 = new javax.swing.JLabel();
         jLabel62 = new javax.swing.JLabel();
-        jTextField49 = new javax.swing.JTextField();
         jTextField51 = new javax.swing.JTextField();
         jLabel63 = new javax.swing.JLabel();
         jTextField52 = new javax.swing.JTextField();
@@ -67,17 +65,12 @@ public class RetailRecord extends Distribution {
 
         jLabel57.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         jLabel57.setText("Retail ID");
-        jPanel12.add(jLabel57, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 110, 30));
-        jPanel12.add(jTextField48, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 220, 25));
-
-        jLabel60.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel60.setText("Date");
-        jPanel12.add(jLabel60, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 110, 30));
+        jPanel12.add(jLabel57, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 110, 30));
+        jPanel12.add(jTextField48, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 220, 25));
 
         jLabel62.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel62.setText("Item Model");
         jPanel12.add(jLabel62, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 150, 30));
-        jPanel12.add(jTextField49, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 220, 25));
         jPanel12.add(jTextField51, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 220, 25));
 
         jLabel63.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
@@ -185,20 +178,39 @@ public class RetailRecord extends Distribution {
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
 
-        try{
-            String SID = jTextField54.getText();
-            String RID = jTextField48.getText();
-            String recdate = jTextField49.getText();
-            String modelCode = jTextField51.getText();
-            String qty = jTextField52.getText();
-            String itemcost = jTextField53.getText();
-            String type = "Retail";
+        try
+        {
+            String SID, VID, modelCode, qty, itemcost, type;
+            if(jTextField48.getText().matches("V\\d{3,}"))
+                VID = jTextField48.getText();
+            else
+            {
+                JOptionPane.showMessageDialog(null,"Incorrect Retail ID format", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if( jTextField54.getText().matches("S\\d{3,}"))
+                SID = jTextField54.getText();
+            else
+            {
+                JOptionPane.showMessageDialog(null,"Incorrect SID format", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            modelCode = jTextField51.getText();
+            qty = jTextField52.getText();
+            itemcost = jTextField53.getText();
+            type = "Retail";
+            Statement validate_vendor = con.createStatement();
+            if(validate_vendor.executeQuery("select 1 from vendor where Vendor_ID = '"+VID+"'").next())
+            {
+                validate_vendor.executeQuery("Insert into shipping_rec values('"+SID+"','"+VID+"',,'"
+                    +modelCode+"','"+qty+"','','"+itemcost+"','"
+                    +type+"',"+DateTimeFunctions.getDate()
+                    +",'"+DateTimeFunctions.getMonth()+"',"+DateTimeFunctions.getYear()+")");
+                JOptionPane.showMessageDialog(this, "The retail shipping record has been inserted.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Insertion succesful","The retail shipping record has been inserted.", JOptionPane.INFORMATION_MESSAGE);
+                tableload(retail_rectable,"select * FROM shipping_rec where ship_type='Retail'");
 
-            Statement add_vendorrec = con.createStatement();
-
-            add_vendorrec.executeQuery("Insert into Ship_Rec values('"+SID+"','"+RID+"','"+recdate+"','"+modelCode+"','"+qty+"','"+itemcost+"','"+type+"')");
-            JOptionPane.showMessageDialog(this, "The retail shipping record has been inserted.","Insertion successful", JOptionPane.INFORMATION_MESSAGE);
-            tableload(retail_rectable,"select * FROM shipping_rec where ship_type='Retail'");
+            }
         }
         
         catch(NumberFormatException e)
@@ -206,16 +218,20 @@ public class RetailRecord extends Distribution {
             JOptionPane.showMessageDialog(this, "You have attempted to store blank or invalid numbers. Please enter valid numbers.",
                 "Error", JOptionPane.ERROR_MESSAGE);
         }
+        catch(NullPointerException npe)
+        {
+            JOptionPane.showMessageDialog(this, "A database connection was not properly established.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+        }
         catch(SQLException se)
         {
-            JOptionPane.showMessageDialog(this, "Database Insert Error","Unable to Insert into DB", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Unable to insert into DB","DB insert error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         jTextField54.setText("");
         jTextField48.setText("");
-        jTextField49.setText("");
         jTextField51.setText("");
         jTextField52.setText("");
         jTextField53.setText("");
@@ -254,7 +270,6 @@ public class RetailRecord extends Distribution {
     private javax.swing.JButton jButton13;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel57;
-    private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel62;
     private javax.swing.JLabel jLabel63;
     private javax.swing.JLabel jLabel64;
@@ -262,7 +277,6 @@ public class RetailRecord extends Distribution {
     private javax.swing.JPanel jPanel12;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jTextField48;
-    private javax.swing.JTextField jTextField49;
     private javax.swing.JTextField jTextField51;
     private javax.swing.JTextField jTextField52;
     private javax.swing.JTextField jTextField53;
