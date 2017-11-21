@@ -681,7 +681,7 @@ CREATE TABLE `useraccount` (
 
 CREATE TABLE `vendor` (
   `Vendor_ID` varchar(10) NOT NULL DEFAULT '',
-  `Vendor_name` varchar(10) DEFAULT NULL,
+  `Vendor_name` varchar(25) DEFAULT NULL,
   `Address` varchar(10) DEFAULT NULL,
   `Email` varchar(50) DEFAULT NULL,
   `Telephone` int(11) DEFAULT NULL,
@@ -848,6 +848,292 @@ ALTER TABLE `repaircheckout`
 --
 ALTER TABLE `repair_customer`
   MODIFY `cust_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+--
+-- Table structure for table `adminuser`
+--
+
+CREATE TABLE `adminuser` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `adminuser`
+--
+
+INSERT INTO `adminuser` (`id`, `username`, `password`) VALUES
+(1, 'admin', 'admin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `devices`
+--
+
+CREATE TABLE `devices` (
+  `id` int(20) NOT NULL,
+  `mob_brand` varchar(40) NOT NULL,
+  `mob_name` varchar(40) NOT NULL,
+  `memory` varchar(10) NOT NULL,
+  `os_version` varchar(15) NOT NULL,
+  `display` varchar(10) NOT NULL,
+  `dimension` varchar(50) NOT NULL,
+  `camera` varchar(50) NOT NULL,
+  `device_condition` varchar(30) NOT NULL,
+  `network` varchar(60) NOT NULL,
+  `sound` varchar(50) NOT NULL,
+  `warrenty` varchar(20) NOT NULL,
+  `battery` varchar(50) NOT NULL,
+  `price` float NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 ROW_FORMAT=FIXED;
+
+--
+-- Dumping data for table `devices`
+--
+
+INSERT INTO `devices` (`id`, `mob_brand`, `mob_name`, `memory`, `os_version`, `display`, `dimension`, `camera`, `device_condition`, `network`, `sound`, `warrenty`, `battery`, `price`) VALUES
+(2, 'Apple', 'iphone 6s', '32GB', 'iOS', '4.7', '138.3 x 67.1 x 7.1 ', '12, 5', 'New', 'GSM/CDMA/HSPA/LTE', '16-bit/44.1kHz audio', '1 ', 'Up to 240 h (3G)', 95600),
+(3, 'Samsung', 'Galaxy S8', '64GB', 'Android 7.0', '5.8 ', '148.9 x 68.1 x 8 ', '12 , 8', 'New', 'GSM/HSPA/LTE', '32-bit/384kHz audio', '2 ', 'Up to 20 h (3G)', 98900),
+(4, 'Huawei', 'Honor P10', '64GB', 'Android 7.0', '5.15 ', '147.3 x 70.9 x 7.5 ', 'Dual 20 + 12 , 8 ', 'New', 'GSM/HSPA/LTE', 'Vibration; MP3, WAV ringtones', '2 ', '3200mAH', 40000),
+(5, 'Nokia', '8', '64GB', 'Android 7.1.1', '5.3 ', '151.5 x 73.7 x 7.9 ', 'Dual 13 , 13 ', 'New', 'GSM/HSPA/LTE', '24-bit/192kHz audio,Nokia OZO audio', '1 ', '3090mAh,Endurance 78h', 50000),
+(6, 'Sony', 'Xperia XA1 Ultra', '32GB', 'Android 7.0', '6.0', '165 x 79 x 8.1 ', '23 , 16 ', 'New', 'GSM/HSPA/LTE', 'Vibration; MP3, WAV ringtones', '1 ', 'Up to 658 h', 52900),
+(7, 'HTC', 'Desire 825', '16GB', 'Android 6.0', '5.5 ', '156.9 x 76.9 x 7.4 ', '13 , 5 ', 'Used', 'GSM/HSPA/LTE', '24-bit/192kHz audio', 'No ', '2700 mAh', 20000),
+(8, 'Microsoft', 'Lumia 950 Dual Sim', '32GB', 'Windows 10', '5.7', '151.9 x 78.4 x 8.1', '20 , 5 ', 'New', 'GSM/HSPA/LTE', 'Vibration; MP3, WAV ringtones', '1', 'Up to 288 h (3G)', 45900),
+(9, 'Oppo', 'F3', '64GB', 'Android 6.0', '5.5 ', '153.3 x 75.2 x 7.3', '13 , Dual 16 ', 'New', 'GSM/HSPA/LTE', 'Vibration; MP3, WAV ringtones', '1 ', 'Endurance 68h', 35900),
+(10, 'LG', 'V20', '32GB', 'Android 7.0', '5.7 ', '159.7 x 78.1 x 7.6 ', 'Dual 16, 5 ', 'New', 'GSM/HSPA/LTE', '32-bit/192kHz audio', '1 ', 'Endurance 68h', 79900),
+(11, 'Apple', 'iphone 6s', '16GB', 'iOS', '4.7', '138.3 x 67.1 x 7.1', '12, 5', 'New', 'GSM/CDMA/HSPA/LTE', '16-bit/44.1kHz audio', '1', 'Up to 240 h (3G)', 80000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `productId` varchar(11) NOT NULL,
+  `product` varchar(50) NOT NULL,
+  `price` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `discount` int(11) NOT NULL,
+  `total` int(11) NOT NULL,
+  `user` varchar(50) NOT NULL,
+  `buyDate` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `productId`, `product`, `price`, `quantity`, `discount`, `total`, `user`, `buyDate`) VALUES
+(29, '10010', 'SAMSUNG J2', 20000, 1, 10, 18000, 'aaa', '2017-09-23 11:39:30'),
+(30, '10010', 'Iphone 6s', 82000, 1, 10, 73800, 'aaa', '2017-09-23 12:44:10'),
+(31, '10010', 'SAMSUNG J2', 20000, 2, 10, 36000, 'pesh', '2017-09-24 01:31:28'),
+(32, '10011', 'Iphone 6s', 82000, 1, 10, 73800, 'sonal', '2017-09-24 02:51:47'),
+(33, '10010', 'SAMSUNG J2', 20000, 2, 10, 36000, 'sonal', '2017-09-24 03:01:01'),
+(34, '10011', 'Iphone 6s', 82000, 1, 10, 73800, 'mala', '2017-09-24 08:02:42'),
+(35, '10011', 'Iphone 6s', 82000, 1, 10, 73800, 'mala', '2017-09-24 08:08:19'),
+(36, '10011', 'Iphone 6s', 82000, 1, 10, 73800, 'mala', '2017-09-24 08:08:28'),
+(37, '10011', 'Iphone 6s', 82000, 1, 10, 73800, 'mala', '2017-09-24 23:51:35'),
+(38, '10013', 'SAMSUNG J2', 94900, 1, 10, 85410, 'mala', '2017-09-25 01:02:46'),
+(39, '10010', 'Nokia 8', 50000, 1, 10, 45000, 'mala', '2017-09-25 01:21:44'),
+(40, '10010', 'Nokia 8', 50000, 1, 10, 45000, 'mala', '2017-09-25 01:22:56'),
+(41, '10010', 'Nokia 8', 50000, 1, 10, 45000, 'mala', '2017-09-25 01:23:04'),
+(42, '10018', 'OPPO F3', 35900, 1, 10, 32310, 'mala', '2017-09-26 08:09:04'),
+(43, '10018', 'OPPO F3', 35900, 1, 10, 32310, 'mala', '2017-09-26 08:09:37'),
+(44, '10018', 'OPPO F3', 35900, 1, 10, 32310, 'mala', '2017-09-26 08:10:03'),
+(45, '10019', 'LG V20', 79900, 1, 10, 71910, 'mala', '2017-09-26 08:10:47'),
+(46, '10011', 'Iphone 6s', 82000, 1, 10, 73800, 'mala', '2017-09-26 08:11:07'),
+(47, '10018', 'OPPO F3', 35900, 1, 10, 32310, 'mala', '2017-09-26 08:19:15'),
+(48, '10018', 'OPPO F3', 35900, 1, 10, 32310, 'sanka', '2017-09-26 08:40:14'),
+(49, '10011', 'Iphone 6s', 82000, 1, 10, 73800, 'aa', '0000-00-00 00:00:00'),
+(50, '10011', 'Iphone 6s', 82000, 1, 10, 73800, 'pesha', '0000-00-00 00:00:00'),
+(51, '10011', 'Iphone 6s', 82000, 1, 10, 73800, 'sana', '0000-00-00 00:00:00'),
+(52, '10011', 'Iphone 6s', 82000, 1, 10, 73800, 'mala', '0000-00-00 00:00:00'),
+(53, '10011', 'Iphone 6s', 82000, 1, 10, 73800, 'mala', '0000-00-00 00:00:00'),
+(54, '10012', 'SAMSUNG S8', 99900, 1, 10, 89910, 'sanka', '2017-11-20 17:49:11');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rating`
+--
+
+CREATE TABLE `rating` (
+  `id` int(11) NOT NULL,
+  `name` varchar(40) NOT NULL,
+  `rating` varchar(50) NOT NULL,
+  `rating_1` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rating`
+--
+
+INSERT INTO `rating` (`id`, `name`, `rating`, `rating_1`) VALUES
+(4, 'sepali', 'VERY SATISFIED', 'DEFINETLY'),
+(5, 'sepali', 'VERY SATISFIED', 'DEFINETLY'),
+(6, 'sanka', 'SATISFIED', 'PROBABLY');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblproduct`
+--
+
+CREATE TABLE `tblproduct` (
+  `id` int(8) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `code` varchar(255) NOT NULL,
+  `image` varchar(200) NOT NULL,
+  `price` double(10,2) NOT NULL,
+  `quantity` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tblproduct`
+--
+
+INSERT INTO `tblproduct` (`id`, `name`, `code`, `image`, `price`, `quantity`) VALUES
+(28, 'SAMSUNG S3', 'S001', 'iPhone7.jpg', 5900.00, 0),
+(30, 'HUWAEI', 'HUE011', 'huawei-y6-2.jpg', 13800.00, 10),
+(31, 'O2 600', '01525', 'O2.png', 19000.00, 100),
+(32, 'Etel 120V', '01251', 'Etel.png', 21000.00, 500),
+(33, 'SAMSUNG -S Duos 3', 'SAM001', 'samsung-s-duos-3.jpg', 9900.00, 100),
+(34, 'SAMSUNG -On 7', 'SAM0012', 'samsung-on-7.jpg', 17000.00, 100),
+(35, 'SAMSUNG - J7', 'SAM0013', 'samsung-j7.jpg', 35000.00, 100),
+(36, 'SAMSUNG-S6 4G', 'SAM00134', 'samsung-s6-32gb-4g-lte.jpg', 38000.00, 100),
+(37, 'SAMSUNG - J7Note 7', 'SAM0015', 'samsung-note-7-with-gear-vr.jpg', 40000.00, 100),
+(38, 'SAMSUNG-S6 Edge', 'SAM0016', 'samsung-s6-edge-plus.jpg', 41000.00, 100),
+(39, 'SAMSUNG - Z 1', 'SAM00137', 'samsung-z-1.jpg', 51000.00, 100),
+(40, 'SAMSUNG-S5 Neo', 'SAM0018', 'samsung-s-5-neo.jpg', 37000.00, 100),
+(41, 'SAMSUNG-galaxy 7', 'SAM00139', 'samsung-samsung-galaxy-note-7.jpg', 38900.00, 100),
+(42, 'SAMSUNG-J1', 'SAM0020', 'samsung-j-1.jpg', 9000.00, 100),
+(43, 'SAMSUNG-J 3', 'SAM0021', 'samsung-samsung-galaxy-j-3.jpg', 22000.00, 100),
+(44, 'SAMSUNG-On 5', 'SAM0022', 'samsung-on-5.jpg', 27000.00, 1000),
+(45, 'SAMSUNG-J5', 'SAM0023', 'samsung-j5.jpg', 23000.00, 100),
+(46, 'SAMSUNG-Note 4', 'SAM0024', 'samsung-note-4.jpg', 43000.00, 100),
+(47, 'HUWAEI-Y 3ii', 'HUE0011', 'huawei-y-3ii.jpg', 10900.00, 100),
+(48, 'HUWAEI-Y 5ii', 'HUE0012', 'huwawei-y-5ii.jpg', 15000.00, 100),
+(49, 'HUWAEI-G Play', 'HUE00123', 'huawei-g-play.jpg', 21000.00, 100),
+(50, 'HUWAEI-Y 6ii', 'HUE014', 'huawei-y-6ii.jpg', 24000.00, 100),
+(51, 'HUWAEI-GR 5', 'HUE015', 'huawei-gr-5.jpg', 29000.00, 100),
+(52, 'HUWAEI-GR 5Mini', 'HUE016', 'huawei-gr-5mini.jpg', 31000.00, 100);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `firstName` varchar(50) NOT NULL,
+  `lastName` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `hashedPassword` varchar(50) NOT NULL,
+  `lastLogin` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `firstName`, `lastName`, `email`, `hashedPassword`, `lastLogin`) VALUES
+(1, 'Chamara', 'Siriwardena', 'chamara@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', '0000-00-00 00:00:00'),
+(2, 'mala', 'perera', 'mala@gmail.com', '6216f8a75fd5bb3d5f22b6f9958cdede3fc086c2', '2017-09-29 00:42:34'),
+(3, 'sanka', 'karu', 'sanka@gmail.com', '6216f8a75fd5bb3d5f22b6f9958cdede3fc086c2', '2017-09-26 08:33:19'),
+(4, 'aaa', 'bbb', 'aaa@gmail.com', '6216f8a75fd5bb3d5f22b6f9958cdede3fc086c2', '0000-00-00 00:00:00'),
+(5, 'pesh', 'herath', 'pesh@gmail.com', '6216f8a75fd5bb3d5f22b6f9958cdede3fc086c2', '0000-00-00 00:00:00'),
+(6, 'sonal', 'rathnayaka', 'sonal@gmail.com', '6216f8a75fd5bb3d5f22b6f9958cdede3fc086c2', '0000-00-00 00:00:00'),
+(7, 'sonali_00', 'rathnayaka', 'sonali@gmail.com', '6216f8a75fd5bb3d5f22b6f9958cdede3fc086c2', '0000-00-00 00:00:00'),
+(8, 'sonali', 'rathnayaka', 'sonalika@gmail.com', '1c6637a8f2e1f75e06ff9984894d6bd16a3a36a9', '0000-00-00 00:00:00'),
+(9, 'aa', 'bb', 'ab@gmail.com', '6216f8a75fd5bb3d5f22b6f9958cdede3fc086c2', '2017-09-26 08:59:15'),
+(10, 'bunty', 'perera', 'bunty@gmail.com', '33f552949e2755ac09ff7ee60ebd4fda5c809673', '2017-09-26 08:44:17'),
+(11, 'pesha', 'njali', 'pesha@gmail.com', '0570f07980c2dc99002c78e6948c2fa025323bdb', '2017-09-27 00:23:58'),
+(12, 'sana', 'karu', 'sana@gmai.com', '2d02423239ebd21ca00d5ef5accfec26910609e9', '2017-09-27 01:57:25'),
+(13, 'sanka', 'karuna', 'hehehe@gmail.com', '303d75834e97e9af00e56e3ac37d2f691ba979ab', '2017-11-20 17:48:34');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `adminuser`
+--
+ALTER TABLE `adminuser`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `devices`
+--
+ALTER TABLE `devices`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `rating`
+--
+ALTER TABLE `rating`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tblproduct`
+--
+ALTER TABLE `tblproduct`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `product_code` (`code`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `adminuser`
+--
+ALTER TABLE `adminuser`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `devices`
+--
+ALTER TABLE `devices`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+--
+-- AUTO_INCREMENT for table `rating`
+--
+ALTER TABLE `rating`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `tblproduct`
+--
+ALTER TABLE `tblproduct`
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

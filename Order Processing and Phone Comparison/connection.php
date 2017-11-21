@@ -1,6 +1,6 @@
 <?php
 
-$connection = mysqli_connect('localhost','root','abcd1234','dbcitymobile');
+$connection = mysqli_connect('localhost','root','','citymobile');
 
 
 //checking the connection
