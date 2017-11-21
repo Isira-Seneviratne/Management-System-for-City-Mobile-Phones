@@ -229,13 +229,11 @@ public class VendorRecord extends Distribution {
                 }
                 else{
                     JOptionPane.showMessageDialog(null,"Enter non existing SID ", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
                 }
             }
             else
             {
                 JOptionPane.showMessageDialog(null,"Enter existing VID", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
             }
         }
         

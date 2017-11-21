@@ -69,12 +69,12 @@ public class AddVendor extends Distribution {
         jTextField35 = new javax.swing.JTextField();
         jTextField36 = new javax.swing.JTextField();
         jTextField37 = new javax.swing.JTextField();
-        search = new javax.swing.JButton();
+        search_btn = new javax.swing.JButton();
         reset_btn = new javax.swing.JButton();
         jLabel49 = new javax.swing.JLabel();
         jTextField38 = new javax.swing.JTextField();
+        save_btn2 = new javax.swing.JButton();
         edit_btn = new javax.swing.JButton();
-        clear_btn1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         addvendor.setBackground(new java.awt.Color(202, 254, 227));
@@ -119,8 +119,6 @@ public class AddVendor extends Distribution {
         jLabel43.setText("Shipping Costs");
         jPanel9.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 150, 30));
         jPanel9.add(jTextField40, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 220, 25));
-
-        jTextField50.setText("    ");
         jPanel9.add(jTextField50, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 220, 25));
         jPanel9.add(jTextField29, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 220, 25));
         jPanel9.add(jTextField30, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 220, 25));
@@ -219,15 +217,15 @@ public class AddVendor extends Distribution {
         jTextField37.setEditable(false);
         jPanel10.add(jTextField37, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 220, 25));
 
-        search.setBackground(new java.awt.Color(31, 233, 133));
-        search.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        search.setText("Search");
-        search.addActionListener(new java.awt.event.ActionListener() {
+        search_btn.setBackground(new java.awt.Color(31, 233, 133));
+        search_btn.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        search_btn.setText("Search");
+        search_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchActionPerformed(evt);
+                search_btnActionPerformed(evt);
             }
         });
-        jPanel10.add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, 110, 35));
+        jPanel10.add(search_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, 110, 35));
 
         reset_btn.setBackground(new java.awt.Color(31, 233, 133));
         reset_btn.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
@@ -250,25 +248,25 @@ public class AddVendor extends Distribution {
         });
         jPanel10.add(jTextField38, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 220, 30));
 
+        save_btn2.setBackground(new java.awt.Color(31, 233, 133));
+        save_btn2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        save_btn2.setText("Save");
+        save_btn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                save_btn2ActionPerformed(evt);
+            }
+        });
+        jPanel10.add(save_btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 320, 110, 35));
+
         edit_btn.setBackground(new java.awt.Color(31, 233, 133));
         edit_btn.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        edit_btn.setText("Save");
+        edit_btn.setText("Edit");
         edit_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 edit_btnActionPerformed(evt);
             }
         });
-        jPanel10.add(edit_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 320, 110, 35));
-
-        clear_btn1.setBackground(new java.awt.Color(31, 233, 133));
-        clear_btn1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        clear_btn1.setText("Edit");
-        clear_btn1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clear_btn1ActionPerformed(evt);
-            }
-        });
-        jPanel10.add(clear_btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 110, 35));
+        jPanel10.add(edit_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 110, 35));
 
         addvendor.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 70, 470, 370));
 
@@ -305,10 +303,16 @@ public class AddVendor extends Distribution {
 
         try
         {
-            String VID = jTextField40.getText();
-            String vName = jTextField50.getText();
-            String address = jTextField29.getText();
-            String email;
+            String VID,vName,address,email;
+            if(jTextField40.getText().matches("V\\d{3,}"))
+                VID=jTextField40.getText();
+            else
+            {
+                JOptionPane.showMessageDialog(null,"Incorrect VID format", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            vName=jTextField50.getText();
+            address=jTextField29.getText();
             if(jTextField30.getText().matches("^[A-Za-z]{1,}+@+[A-Za-z]{1,}+\\.+com$"))
             email = jTextField30.getText();
             else
@@ -318,17 +322,20 @@ public class AddVendor extends Distribution {
             }
             String phone = jTextField31.getText();
             String shipcost = jTextField32.getText();
-
-            Statement add_vendor = con.createStatement();
-            add_vendor.executeQuery("Insert into Vendor values('"+VID+"','"+vName+"','"+address+"','"+email+"','"+phone+"','"+shipcost+"')");
+            Statement validate_vendor = con.createStatement();
+            if(!validate_vendor.executeQuery("select 1 from vendor where Vendor_ID = '"+VID+"'").next())
+            {
+                Statement add_vendor = con.createStatement();
+            add_vendor.execute("Insert into vendor values('"+VID+"','"+vName+"','"+address+"','"+email+"','"+phone+"','"+shipcost+"')");
             JOptionPane.showMessageDialog(this, " Insertion successful","Vendor has been inserted.", JOptionPane.INFORMATION_MESSAGE);
             tableload(vendoradd_table,"select * FROM vendor");
-
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null,"Enter non existing VID ", "Error", JOptionPane.ERROR_MESSAGE);        
+            }
         }
-        catch(SQLException se)
-        {
-            JOptionPane.showMessageDialog(this, "Database Insert Error","Unable to Insert into DB", JOptionPane.ERROR_MESSAGE);
-        }
+        
         catch(NumberFormatException e)
         {
             JOptionPane.showMessageDialog(this, "You have attempted to store blank or invalid numbers. Please enter valid numbers.",
@@ -338,6 +345,11 @@ public class AddVendor extends Distribution {
         {
             JOptionPane.showMessageDialog(this, "A database connection was not properly established.",
                 "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        catch(SQLException se)
+        {
+            JOptionPane.showMessageDialog(this, "Database Insert Error","Unable to Insert into DB", JOptionPane.ERROR_MESSAGE);
+            se.printStackTrace();
         }
     }//GEN-LAST:event_save_btnActionPerformed
 
@@ -355,14 +367,27 @@ public class AddVendor extends Distribution {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField36ActionPerformed
 
-    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
+    private void search_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_btnActionPerformed
         String key = jTextField40.getText();
-        String search = "select vendorID,vendor_name,shipcost,address,email,telephone FROM vendor "
-        +"where vendorID LIKE '%"+key+"%'";
+        String search = "select Vendor_name,Shipping_Cost_ph,address,email,telephone FROM vendor "
+        +"where Vendor_ID LIKE '%"+key+"%'";
         try {
             pst = con.prepareStatement(search);
             rs = pst.executeQuery();
             vendoradd_table.setModel(DbUtils.resultSetToTableModel(rs));
+            if(rs.next())
+            {
+            jTextField33.setText(rs.getString("Vendor_name"));
+            jTextField34.setText(rs.getString("address"));
+            jTextField35.setText(rs.getString("email"));
+            jTextField36.setText(rs.getString("telephone"));
+            jTextField37.setText(rs.getString("Shipping_Cost_ph"));
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Reached end of resultset.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+                
+            }
 
         }
         catch(NullPointerException npe)
@@ -372,11 +397,12 @@ public class AddVendor extends Distribution {
         }
         catch(SQLException se)
         {
-            JOptionPane.showMessageDialog(this, "An error occurred while writing the financial report to the database.",
+            JOptionPane.showMessageDialog(this, "An error occurred while connecting to database.",
                 "Error", JOptionPane.ERROR_MESSAGE);
+            se.printStackTrace();
         }
         tableload(vendoradd_table,"select * FROM vendor");
-    }//GEN-LAST:event_searchActionPerformed
+    }//GEN-LAST:event_search_btnActionPerformed
 
     private void reset_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_btnActionPerformed
         jTextField33.setText("");
@@ -391,20 +417,33 @@ public class AddVendor extends Distribution {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField38ActionPerformed
 
-    private void edit_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edit_btnActionPerformed
+    private void save_btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_btn2ActionPerformed
 
-        try{
-            String VID = jTextField38.getText();
-            String vName = jTextField33.getText();
-            String address = jTextField34.getText();
-            String email = jTextField35.getText();
-            String phone = jTextField36.getText();
-            String shipcost = jTextField37.getText();
+        try
+        {
+            String VID,vName,address,email,phone,shipcost;
+            VID=jTextField38.getText();
+            vName=jTextField33.getText();
+            address=jTextField34.getText();
+            if(jTextField30.getText().matches("^[A-Za-z]{1,}+@+[A-Za-z]{1,}+\\.+com$"))
+              email=jTextField35.getText();
+            else
+            {
+                JOptionPane.showMessageDialog(this, "Enter a valid email");
+                return;
+            }
+            if(jTextField36.getText().matches("\\d{10}"))
+                phone=jTextField36.getText();
+            else{
+                JOptionPane.showMessageDialog(this, "Enter a valid phone number");
+                return;
+            }
+            shipcost=jTextField37.getText();
 
             Statement add_vendor = con.createStatement();
 
-            add_vendor.execute("update Vendor set vName='"+vName+"',address='"+address+"',email='"+email+"',"
-                + "phone='"+phone+"',shipcost='"+shipcost+"' where VID='"+VID+"'");
+            add_vendor.execute("update vendor set vName='"+vName+"',address='"+address+"',email='"+email+"',"
+                + "phone='"+phone+"',Shipping_Cost_ph='"+shipcost+"' where Vendor_ID='"+VID+"'");
             JOptionPane.showMessageDialog(this, " Insertion successful","Vendor has been updated.", JOptionPane.INFORMATION_MESSAGE);
             tableload(vendoradd_table,"select * FROM vendor");
         }
@@ -417,21 +456,20 @@ public class AddVendor extends Distribution {
             JOptionPane.showMessageDialog(this, "You have attempted to store blank or invalid numbers. Please enter valid numbers.",
                 "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_edit_btnActionPerformed
+    }//GEN-LAST:event_save_btn2ActionPerformed
 
-    private void clear_btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clear_btn1ActionPerformed
+    private void edit_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edit_btnActionPerformed
         jTextField33.setEditable(true);
         jTextField34.setEditable(true);
         jTextField35.setEditable(true);
         jTextField36.setEditable(true);
         jTextField37.setEditable(true);
-    }//GEN-LAST:event_clear_btn1ActionPerformed
+    }//GEN-LAST:event_edit_btnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel addvendor;
     private javax.swing.JButton clear_btn;
-    private javax.swing.JButton clear_btn1;
     private javax.swing.JButton edit_btn;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel39;
@@ -464,7 +502,8 @@ public class AddVendor extends Distribution {
     private javax.swing.JButton print;
     private javax.swing.JButton reset_btn;
     private javax.swing.JButton save_btn;
-    private javax.swing.JButton search;
+    private javax.swing.JButton save_btn2;
+    private javax.swing.JButton search_btn;
     private javax.swing.JTable vendoradd_table;
     // End of variables declaration//GEN-END:variables
 }
