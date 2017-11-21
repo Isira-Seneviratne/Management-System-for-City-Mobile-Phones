@@ -1,5 +1,5 @@
 <?php
-	include "db.php"
+include "db.php"
 ?>
 
 <html>
@@ -58,27 +58,27 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="col-sm-4 logo">
 					<a href="index.html"><img src="images/logo.png" alt=""></a>	
 				</div>
-<?php
-	if (!isset($_SESSION['firstName']))
-	{
-		echo '<a href="login.php">Login</a>'; 
-		echo '<br>';
-	}
-	else
-	{
-		echo 'Welcome '.$_SESSION['firstName'];
-		echo '<br>';
-	}
+		<?php
 
-	if (!isset($_SESSION['firstName']))
-	{
-		echo '<a href="registration.php">Register </a>';
-	}
+if (!isset($_SESSION['firstName']))
+	{echo '<a href="login.php">Login</a>'; 
+	echo '<br>';}
 	else
-	{
-		echo '<a href="logout.php">Log out </a>';
-	}
+	{echo 'Welcome '.$_SESSION['firstName'];
+ 	echo '<br>';
+}
+
+if (!isset($_SESSION['firstName']))
+{echo '<a href="registration.php">Register </a>';}
+	else
+{echo '<a href="logout.php">Log out </a>';}
+
+	
+	
 ?>
+
+
+
 					<!--<div class="cart box_1">
 						<a href="checkout.html">
 						<h3> <div class="total">
@@ -234,6 +234,10 @@ td{
 
   tr{background-color:#D7DBDD  }
 </style>
+
+   
+      
+
       <table id="datatable-responsive"
                  class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
                  width="100%">
@@ -255,31 +259,40 @@ td{
                          <th>Battery</th>
                          <th>Price
                          (Rs)</th>
+                       
+                         
                      </tr>
                  </thead>
                  <tbody>
                       <?php
-                           $id="";
-                           $sql1 = "SELECT * FROM devices";
-                           $result = mysqli_query($conn, $sql1);
-                           while ($row = mysqli_fetch_array($result)) {
-                                $id=$row['id'];
-                                echo "<tr>
-                                <td>{$row['mob_brand']} {$row['mob_name']} {$row['memory']}</td>
-                                <td>{$row['os_version']}</td>
-                                <td>{$row['display']}</td>
-                                <td>{$row['dimension']}</td>
-                                <td>{$row['camera']}</td>
-                                <td>{$row['device_condition']}</td>
-                                <td>{$row['network']}</td>
-                                <td>{$row['sound']}</td>
-                                <td>{$row['warrenty']}</td>
-                                <td>{$row['battery']}</td>
-                                <td>{$row['price']}</td>
-                                </tr>";   
-							}
-						?>       
+
+                                $id="";
+                                $sql1 = "SELECT * FROM devices";
+                                $result = mysqli_query($conn, $sql1);
+                                while ($row = mysqli_fetch_array($result)) {
+
+                                    $id=$row['id'];
+                                    echo "<tr>
+                                        
+                                        <td>{$row['mob_brand']} {$row['mob_name']} {$row['memory']}</td>
+                                        <td>{$row['os_version']}</td>
+                                        <td>{$row['display']}</td>
+                                        <td>{$row['dimension']}</td>
+                                        <td>{$row['camera']}</td>
+                                        <td>{$row['device_condition']}</td>
+                                        <td>{$row['network']}</td>
+                                        <td>{$row['sound']}</td>
+                                        <td>{$row['warrenty']}</td>
+                                        <td>{$row['battery']}</td>
+                                        <td>{$row['price']}</td>
+                                        
+                                            </tr>";   
+                                            }
+                                            ?>       
                 </tbody>
+
+
+
             </table>
             <script>
 	function myFunction() {
@@ -337,6 +350,17 @@ function sortTable() {
   }
 }
 </script>
+  
+ 
+
+
+
+
+
+
+
+
+
        </div>
  </div>
    </div>
@@ -369,7 +393,9 @@ function sortTable() {
 						<li><a href="#">APPLE</a></li>
 						<li><a href="#">HUAWEI</a></li>
 						<li><a href="#">LG</a></li>
+						
 					</ul>
+					
 				</div>
 				<div class="col-md-3 footer-bottom-cate cate-bottom">
 					<h6>Our Address</h6>

@@ -10,46 +10,47 @@ if (!isset($_SESSION['user_id'])) {
 <?php 
 $result ="";
 $error = array();
-if (isset($_POST['submit']))
-{
-	if (empty($_POST['id']))
-	{
-		$error[] = 'Product ID invalid';
-	}
+	if (isset($_POST['submit'])) {
+		if (empty($_POST['id'])) {
+			$error[] = 'product id invalid';
+			
+		}
 
-	if (empty($_POST['product'])) {
-		$error[] = 'Product name invalid';
-	}
+		if (empty($_POST['product'])) {
+			$error[] = 'product name invalid';
+		}
+	
+		if (empty($_POST['price'])) {
+			$error[] = 'price id invalid';
+		}
 
-	if (empty($_POST['price'])) {
-		$error[] = 'Price invalid';
-	}
+		if (empty($_POST['quantity'])) {
+			$error[] = 'quantity id invalid';
+		}
 
-	if (empty($_POST['quantity'])) {
-		$error[] = 'Quantity invalid';
-	}
+		if (empty($_POST['discount'])) {
+			$error[] = 'discount id invalid';
+		}
 
-	if (empty($_POST['discount'])) {
-		$error[] = 'Discount id invalid';
-	}
+		if (empty($_POST['total'])) {
+			$error[] = 'total id invalid';
+		}
 
-	if (empty($_POST['total'])) {
-		$error[] = 'Total id invalid';
-	}
+				if (!empty($error)) {
+					echo 'Database errors';
+				}
+				else {
+				
+				$id = mysqli_real_escape_string($connection, $_POST['id']);
+				$product = mysqli_real_escape_string($connection, $_POST['product']);
+				$price = mysqli_real_escape_string($connection, $_POST['price']);
+				$quantity = mysqli_real_escape_string($connection, $_POST['quantity']);
+				$discount = mysqli_real_escape_string($connection, $_POST['discount']);
+				$total = mysqli_real_escape_string($connection, $_POST['total']);
+				$user = $_SESSION['firstName'];
+		
+				$query = "INSERT INTO orders (productId,product,price,quantity,discount,total,user) VALUES ('{$id}','{$product}','{$price}','{$quantity}','{$discount}','{$total}','{$user}')";
 
-	if (!empty($error)) {
-		echo 'Database errors';
-	}
-	else
-	{
-		$id = mysqli_real_escape_string($connection, $_POST['id']);
-		$product = mysqli_real_escape_string($connection, $_POST['product']);
-		$price = mysqli_real_escape_string($connection, $_POST['price']);
-		$quantity = mysqli_real_escape_string($connection, $_POST['quantity']);
-		$discount = mysqli_real_escape_string($connection, $_POST['discount']);
-		$total = mysqli_real_escape_string($connection, $_POST['total']);
-		$user = $_SESSION['firstName'];
-		$query = "INSERT INTO orders (productId,product,price,quantity,discount,total,user) VALUES ('{$id}','{$product}','{$price}','{$quantity}','{$discount}','{$total}','{$user}')";
 				$result = mysqli_query($connection, $query);
 
 				//if ($result) {
@@ -58,7 +59,18 @@ if (isset($_POST['submit']))
 				//}
 				//else
 				//	{echo 'data not enter';}
-	}
+
+
+
+				}
+				
+
+
+
+
+
+
+
 }
  ?>
 <!DOCTYPE html>
@@ -123,25 +135,22 @@ function bill(){
 
 
 <?php
-	if (!isset($_SESSION['firstName']))
-	{
-		echo '<a href="login.php">Login</a>'; 
-		echo '<br>';
-	}
-	else
-	{
-		echo 'Welcome '.$_SESSION['firstName'];
-		echo '<br>';
-	}
 
-	if (!isset($_SESSION['firstName']))
-	{
-		echo '<a href="registration.php">Register </a>';
-	}
+if (!isset($_SESSION['firstName']))
+	{echo '<a href="login.php">Login</a>'; 
+	echo '<br>';}
 	else
-	{
-		echo '<a href="logout.php">Log out </a>';
-	}
+	{echo 'Welcome '.$_SESSION['firstName'];
+ 	echo '<br>';
+}
+
+if (!isset($_SESSION['firstName']))
+{echo '<a href="registration.php">Register </a>';}
+	else
+{echo '<a href="logout.php">Log out </a>';}
+
+	
+	
 ?>
 
 
