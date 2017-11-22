@@ -3,12 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2017 at 04:23 PM
--- Server version: 5.7.11
+-- Generation Time: Nov 10, 2017 at 04:23 PM SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+-- Server version: 5.7.11 SET time_zone = "+00:00";
 -- PHP Version: 5.6.19
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -19,7 +16,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `dbcitymobile`
 --
-
+CREATE DATABASE dbcitymobile;
+USE dbcitymobile;
 -- --------------------------------------------------------
 
 --
@@ -342,31 +340,6 @@ INSERT INTO `item` (`shippingID`, `itemID`, `itemName`, `brand`, `modelCode`, `s
 ('SH0003', 'IT10000064', 'J7 Prime', 'Samsung', 'F0xA1', 111000, 'Aug 21, 2017', 730, '0.0%', 'not sold'),
 ('SH0003', 'IT10000066', 'J7 Prime', 'Samsung', 'F0xA1', 111000, 'Aug 21, 2017', 730, '0.0%', 'not sold'),
 ('default', 'IT10000067', 'J7 ', 'Samsung', 'Sd098', 50000, 'Sep 1, 2017', 365, '5.0%', 'not sold');
-
---
--- Triggers `item`
---
-DELIMITER $$
-CREATE TRIGGER `ffs` AFTER DELETE ON `item` FOR EACH ROW BEGIN
-  declare codez integer;
-  declare qty integer;
-  select OLD.modelCode INTO @codez;
-  
-  
-  select qtyInHand INTO @qty from availablestock WHERE availablestock.modelCode = @codez;
-  IF (@qty > 1) THEN
-    UPDATE availablestock
-    SET qtyInHand = qtyInHand - 1
-    WHERE availablestock.modelCode = @codez;
-    
-  ELSE  
-    DELETE FROM availablestock WHERE availablestock.modelCode = @codez; 
-  END IF;
-END
-$$
-DELIMITER ;
-
--- --------------------------------------------------------
 
 --
 -- Table structure for table `job`
@@ -1995,3 +1968,27 @@ ALTER TABLE `repair_customer`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+--
+-- Triggers `item`
+--
+DELIMITER $$
+CREATE TRIGGER `ffs` AFTER DELETE ON `item` FOR EACH ROW BEGIN
+  declare codez integer;
+  declare qty integer;
+  select OLD.modelCode INTO @codez;
+  
+  
+  select qtyInHand INTO @qty from availablestock WHERE availablestock.modelCode = @codez;
+  IF (@qty > 1) THEN
+    UPDATE availablestock
+    SET qtyInHand = qtyInHand - 1
+    WHERE availablestock.modelCode = @codez;
+    
+  ELSE  
+    DELETE FROM availablestock WHERE availablestock.modelCode = @codez; 
+  END IF;
+END
+$$ DELIMITER ;
+
+-- --------------------------------------------------------
