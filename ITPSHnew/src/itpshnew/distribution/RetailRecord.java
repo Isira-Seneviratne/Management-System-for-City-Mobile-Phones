@@ -26,7 +26,27 @@ public class RetailRecord extends Distribution {
     {
         initComponents();
         loaded = true;
-        tableload(retail_rectable,"select * FROM shipping_rec where ship_type='Retail'");
+        tableload(retail_rectable,"select Shipping_ID,Vendor_ID,Item_ID,ship_type,item_cost,Day,Month,Year FROM shipping_rec where ship_type='Retail'");
+        try
+        {
+        Statement stmt1 = con.createStatement( );
+        ResultSet a = stmt1.executeQuery("select Vendor_ID from vendor");
+        while(a.next())
+        {
+            jComboBox1.addItem(a.getString("Vendor_ID"));
+        }
+        a = stmt1.executeQuery("select modelCode from item");
+        while(a.next())
+        {
+            jComboBox2.addItem(a.getString("modelCode"));
+        }
+        }
+        catch(SQLException se)
+        {
+            JOptionPane.showMessageDialog(this, "Unable to connect into DB","DB insert error", JOptionPane.ERROR_MESSAGE);
+            se.printStackTrace();
+        }
+        
     }
     
     /**
@@ -41,9 +61,7 @@ public class RetailRecord extends Distribution {
         retailrecord = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         jLabel57 = new javax.swing.JLabel();
-        jTextField48 = new javax.swing.JTextField();
         jLabel62 = new javax.swing.JLabel();
-        jTextField51 = new javax.swing.JTextField();
         jLabel63 = new javax.swing.JLabel();
         jTextField52 = new javax.swing.JTextField();
         jLabel64 = new javax.swing.JLabel();
@@ -53,6 +71,8 @@ public class RetailRecord extends Distribution {
         jButton11 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
         retail_rectable = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
@@ -67,12 +87,10 @@ public class RetailRecord extends Distribution {
         jLabel57.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         jLabel57.setText("Retail ID");
         jPanel12.add(jLabel57, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 110, 30));
-        jPanel12.add(jTextField48, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 220, 25));
 
         jLabel62.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel62.setText("Item Model");
         jPanel12.add(jLabel62, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 150, 30));
-        jPanel12.add(jTextField51, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 220, 25));
 
         jLabel63.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         jLabel63.setText("Quantity");
@@ -80,8 +98,8 @@ public class RetailRecord extends Distribution {
         jPanel12.add(jTextField52, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 40, 220, 25));
 
         jLabel64.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jLabel64.setText("Cost");
-        jPanel12.add(jLabel64, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, 150, 30));
+        jLabel64.setText("Item Price");
+        jPanel12.add(jLabel64, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, 150, 30));
         jPanel12.add(jTextField53, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 140, 220, 25));
 
         jLabel65.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
@@ -118,6 +136,10 @@ public class RetailRecord extends Distribution {
             }
         });
         jPanel12.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 90, 100, 30));
+
+        jPanel12.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 220, -1));
+
+        jPanel12.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 220, -1));
 
         retailrecord.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 1050, 280));
 
@@ -182,13 +204,7 @@ public class RetailRecord extends Distribution {
         try
         {
             String SID, VID, modelCode, qty, itemcost, type;
-            if(jTextField48.getText().matches("V\\d{3,}"))
-                VID = jTextField48.getText();
-            else
-            {
-                JOptionPane.showMessageDialog(null,"Incorrect Retail ID format", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
+            VID = jComboBox1.getSelectedItem().toString();
             if( jTextField54.getText().matches("S\\d{3,}"))
                 SID = jTextField54.getText();
             else
@@ -196,7 +212,7 @@ public class RetailRecord extends Distribution {
                 JOptionPane.showMessageDialog(null,"Incorrect SID format", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            modelCode = jTextField51.getText();
+            modelCode = jComboBox2.getSelectedItem().toString();
             qty = jTextField52.getText();
             if(!jTextField53.getText().equals(""))                
                 itemcost = jTextField53.getText();
@@ -242,8 +258,6 @@ public class RetailRecord extends Distribution {
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         jTextField54.setText("");
-        jTextField48.setText("");
-        jTextField51.setText("");
         jTextField52.setText("");
         jTextField53.setText("");
     }//GEN-LAST:event_jButton12ActionPerformed
@@ -251,7 +265,7 @@ public class RetailRecord extends Distribution {
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
 
         try{
-            String modelCode=jTextField51.getText();
+            String modelCode=jComboBox2.getSelectedItem().toString();
             Statement stmt1 = con.createStatement( );
             ResultSet a = stmt1.executeQuery("select sellingPrice from item where modelCode='"+modelCode+"'");
             a.next();
@@ -281,6 +295,8 @@ public class RetailRecord extends Distribution {
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel57;
     private javax.swing.JLabel jLabel62;
@@ -289,8 +305,6 @@ public class RetailRecord extends Distribution {
     private javax.swing.JLabel jLabel65;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField48;
-    private javax.swing.JTextField jTextField51;
     private javax.swing.JTextField jTextField52;
     private javax.swing.JTextField jTextField53;
     private javax.swing.JTextField jTextField54;
