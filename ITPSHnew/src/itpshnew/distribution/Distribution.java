@@ -21,7 +21,7 @@ public abstract class Distribution extends javax.swing.JPanel {
      * Creates new form Distribution
      */
     protected Connection con;
-    protected PreparedStatement pst = null;
+    protected Statement pst = null;
     protected ResultSet rs = null;
     protected boolean loaded = false;
     
@@ -41,8 +41,8 @@ public abstract class Distribution extends javax.swing.JPanel {
     {
         try
         {
-            pst = con.prepareStatement(s);
-            rs = pst.executeQuery();
+            pst = con.createStatement();
+            rs = pst.executeQuery(s);
             t.setModel(DbUtils.resultSetToTableModel(rs));
         }
         catch(SQLException e1)
