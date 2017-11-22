@@ -98,29 +98,14 @@ public class Item extends StockControl {
         jPanel4.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 70, -1, 50));
 
         txtship.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        txtship.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtshipActionPerformed(evt);
-            }
-        });
         jPanel4.add(txtship, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 220, 25));
 
         txtid.setEditable(false);
         txtid.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtid.setBorder(null);
-        txtid.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtidActionPerformed(evt);
-            }
-        });
         jPanel4.add(txtid, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 220, 25));
 
         txtname.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        txtname.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtnameActionPerformed(evt);
-            }
-        });
         jPanel4.add(txtname, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 220, 25));
 
         jLabel42.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
@@ -318,18 +303,6 @@ public class Item extends StockControl {
     }// </editor-fold>//GEN-END:initComponents
 
     
-    private void txtshipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtshipActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtshipActionPerformed
-
-    private void txtidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtidActionPerformed
-
-    private void txtnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtnameActionPerformed
-
     private void purchase_save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchase_save_btnActionPerformed
         tableLoad(jTable3, "select * from item");
 

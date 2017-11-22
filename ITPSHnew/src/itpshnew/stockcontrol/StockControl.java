@@ -59,18 +59,6 @@ public abstract class StockControl extends javax.swing.JPanel {
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
     }// </editor-fold>//GEN-END:initComponents
-
-    
-
-    
-   
-    
-    
-    
-   
-   
-   
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }
