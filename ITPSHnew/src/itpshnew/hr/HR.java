@@ -19,6 +19,7 @@ public class HR extends javax.swing.JPanel {
     PreparedStatement pst =null;
     ResultSet rs= null;
     ResultSet rs1= null;
+    protected boolean loaded = true;
     /**
      * Creates new form HR1
      */

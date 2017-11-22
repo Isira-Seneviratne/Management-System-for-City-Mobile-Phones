@@ -5,22 +5,12 @@
  */
 package itpshnew;
 
-import itpshnew.sales.Customer;
-import itpshnew.sales.Purchase;
-import itpshnew.sales.SalesReports;
-import itpshnew.sales.Warranty;
-import itpshnew.stockcontrol.Calculator;
-import itpshnew.stockcontrol.Item;
-import itpshnew.stockcontrol.StockReports;
-import itpshnew.stockcontrol.Stocks;
-import itpshnew.distribution.VendorRecord;
-import itpshnew.distribution.AddVendor;
-import itpshnew.distribution.RetailRecord;
-import itpshnew.financialsystem.TodayFinancialSystem;
-import itpshnew.financialsystem.MonthFinancialSystem;
-import itpshnew.hr.AttendancePanel;
-import itpshnew.hr.EmployeePanel;
-import itpshnew.hr.Salary;
+import itpshnew.sales.*;
+import itpshnew.stockcontrol.*;
+import itpshnew.distribution.*;
+import itpshnew.financialsystem.*;
+import itpshnew.hr.*;
+import itpshnew.repair.*;
 import java.awt.Color;
 import java.awt.event.*;
 import java.io.*;
@@ -51,6 +41,10 @@ public class Main extends javax.swing.JFrame implements FocusListener
     private AttendancePanel ap;
     private EmployeePanel ep;
     private Salary sal;
+    
+    private RepairCheckout repcheck;
+    private RepairCustomer repcus;
+    private RepairPhone repphone;
     
     private TimerThread t;
     /**
@@ -83,6 +77,10 @@ public class Main extends javax.swing.JFrame implements FocusListener
         ep = new EmployeePanel();
         sal = new Salary();
         
+        repcheck = new RepairCheckout();
+        repcus = new RepairCustomer();
+        repphone = new RepairPhone();
+        
         setEnabledVisible(mfs, false);
         setEnabledVisible(tfs, false);
         setEnabledVisible(av, false);
@@ -113,6 +111,8 @@ public class Main extends javax.swing.JFrame implements FocusListener
             topic4MouseClicked(e);
         else if(name.equals("HR"))
             topic7MouseClicked(e);
+        else if(name.equals("Repair"))
+            topic6MouseClicked(e);
     }
     
     public Main()
@@ -136,6 +136,10 @@ public class Main extends javax.swing.JFrame implements FocusListener
         ap = new AttendancePanel();
         ep = new EmployeePanel();
         sal = new Salary();
+        
+        repcheck = new RepairCheckout();
+        repcus = new RepairCustomer();
+        repphone = new RepairPhone();
         
         setEnabledVisible(mfs, false);
         setEnabledVisible(tfs, false);
@@ -332,6 +336,11 @@ public class Main extends javax.swing.JFrame implements FocusListener
         sidepanel.add(topic2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 290, 60));
 
         topic3.setBackground(new java.awt.Color(0, 153, 153));
+        topic3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                topic3MouseClicked(evt);
+            }
+        });
         topic3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         bar3.setOpaque(false);
@@ -353,6 +362,11 @@ public class Main extends javax.swing.JFrame implements FocusListener
         name2.setForeground(new java.awt.Color(255, 255, 255));
         name2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         name2.setText("  Repair");
+        name2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                name2MouseClicked(evt);
+            }
+        });
         topic3.add(name2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 9, 260, 40));
 
         pic2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Maintenance_40px.png"))); // NOI18N
@@ -1207,6 +1221,14 @@ public class Main extends javax.swing.JFrame implements FocusListener
     private void topic7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topic7MouseClicked
         name6MouseClicked(evt);
     }//GEN-LAST:event_topic7MouseClicked
+
+    private void name2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_name2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_name2MouseClicked
+
+    private void topic3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topic3MouseClicked
+        name2MouseClicked(evt);
+    }//GEN-LAST:event_topic3MouseClicked
 
     private void setLabelColor(JLabel label) //set the colour after  click
     {

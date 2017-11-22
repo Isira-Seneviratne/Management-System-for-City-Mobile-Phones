@@ -457,8 +457,8 @@ public class TodayFinancialSystem extends FinancialSystem {
                 s.execute("INSERT INTO daily_finances VALUES("+DateTimeFunctions.getDay()
                     +", '"+DateTimeFunctions.getMonth()+"', "+DateTimeFunctions.getYear()+", "
                     +RepRev+", "+RepCost+", "+RepProf+", "+SalesRev+", "+SalesCost+", "+SalesProf
-                    +", "+DisRev+", "+DisCost+", "+DisProf+", "+HRCost+", "+UtilityCost
-                    +", "+TotRev+", "+TotCost+", "+TotProf+")");
+                    +", "+DisRev+", "+DisCost+", "+DisProf+", "+HRCost+", "
+                    +", "+TotRev+", "+TotCost+", "+TotProf+", "+UtilityCost+")");
                 JOptionPane.showMessageDialog(this, "Successfully inserted record for "
                         +DateTimeFunctions.getDate()+".", "Insertion successful", JOptionPane.INFORMATION_MESSAGE);
             }
