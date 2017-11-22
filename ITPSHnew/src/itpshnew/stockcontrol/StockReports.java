@@ -7,8 +7,7 @@ package itpshnew.stockcontrol;
 
 import java.sql.SQLException;
 import net.sf.jasperreports.engine.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -24,6 +23,7 @@ public class StockReports extends StockControl {
      * Creates new form Reports
      */
     public StockReports() {
+        super();
         initComponents();
     }
 
@@ -247,57 +247,67 @@ public class StockReports extends StockControl {
     private void jLabel26MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel26MouseClicked
         boolean flag = false;
         String key = txtrpt.getText();
-        try {
+        try
+        {
             double val = Double.parseDouble(key);
 
-            if (val < 0 || key.equals("-0")) {
+            if (val < 0 || key.equals("-0"))
+            {
                 JOptionPane.showMessageDialog(null, "Year cannot be negative");
                 flag = true;
                 txtrpt.setText("");
             }
-        } catch (NumberFormatException e) {
+        }
+        catch (NumberFormatException e)
+        {
             JOptionPane.showMessageDialog(null, "Please enter a valid Year");
             flag = true;
             txtrpt.setText("");
         }
 
-        if (flag == false) {
-
-            try {
-                String z1 = "SELECT * FROM financial_reports where Year_issued = '" + key + "'";
-                pst = conn.prepareStatement(z1);
+        if (flag == false)
+        {
+            try
+            {
+                pst = conn.prepareStatement("SELECT * FROM financial_reports where Year_issued = '" + key + "'");
                 rs = pst.executeQuery();
                 jTable7.setModel(DbUtils.resultSetToTableModel(rs));
-            } catch (SQLException ex) {
+            }
+            catch (SQLException ex)
+            {
                 Logger.getLogger(StockControl.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_jLabel26MouseClicked
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        try {
-            String q = "select * FROM financial_reports";
-
-            pst = conn.prepareStatement(q);
-
+        try
+        {
+            pst = conn.prepareStatement("select * FROM financial_reports");
             rs = pst.executeQuery();
             jTable7.setModel(DbUtils.resultSetToTableModel(rs));
-
-        } catch (Exception e1) {
+        }
+        catch (SQLException e1)
+        {
+            JOptionPane.showMessageDialog(null, "Unable to get monthly financial records.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        try {
+        try
+        {
             String month = comboMonth.getSelectedItem().toString();
-            HashMap jasperParameter = new HashMap();
             Map parameters = new HashMap();
-            parameters.put("RequestDate",month);
-            JasperReport jasperReport = null;
-            JasperCompileManager.compileReportToFile("D:\\Versions\\StockControl v10.0\\src\\reports\\reorders.jrxml","D:\\Versions\\StockControl v10.0\\src\\reports\\reorders.jasper");
-            JasperFillManager.fillReportToFile("D:\\Versions\\StockControl v10.0\\src\\reports\\reorders.jasper","D:\\Versions\\StockControl v10.0\\src\\reports\\reorders.jrprint",parameters,conn);
-            JasperViewer.viewReport("D:\\Versions\\StockControl v10.0\\src\\reports\\reorders.jrprint", false, false);
-        } catch (JRException ex) {
+            parameters.put("RequestDate","'%"+month+"%'");
+            JasperCompileManager.compileReportToFile("reports/reorders.jrxml", "reports/reorders.jasper");
+            JasperFillManager.fillReportToFile("reports/reorders.jasper",
+                    "reports/reorders.jrprint",parameters,conn);
+            JOptionPane.showMessageDialog(null, "Report successfully generated.", "Error", JOptionPane.ERROR_MESSAGE);
+            JasperViewer.viewReport("reports/reorders.jrprint", false, false);
+        }
+        catch (JRException ex)
+        {
+            JOptionPane.showMessageDialog(null, "An error occurred while generating the report.", "Error", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
         }
     }//GEN-LAST:event_jButton15ActionPerformed
@@ -319,8 +329,7 @@ public class StockReports extends StockControl {
         try
         {
             JasperCompileManager.compileReportToFile("reports/item.jrxml", "reports/item.jasper");
-            JasperFillManager.fillReportToFile("reports/item.jasper",
-                    "reports/item.jrprint", null, conn);
+            JasperFillManager.fillReportToFile("reports/item.jasper", "reports/item.jrprint", null, conn);
             JasperViewer.viewReport("reports/item.jrprint", false, false);
         }
         catch(JRException e)

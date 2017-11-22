@@ -6,9 +6,14 @@
 package itpshnew.distribution;
 
 
+import itpshnew.DateTimeFunctions;
 import java.sql.*;
+import java.util.Calendar;
 import javax.swing.*;
-import net.proteanit.sql.DbUtils;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.view.JasperViewer;
 /**
  *
  * @author Bhanu
@@ -28,7 +33,23 @@ public class AddVendor extends Distribution {
         initComponents();
         loaded = true;
         tableload(vendoradd_table,"select * FROM vendor");
+        try
+        {
+        Statement stmt1 = con.createStatement( );
+        ResultSet a = stmt1.executeQuery("select Vendor_ID from vendor");
+        while(a.next())
+        {
+            jComboBox1.addItem(a.getString("Vendor_ID"));
+        }
+       
+        }
+        catch(SQLException se)
+        {
+            JOptionPane.showMessageDialog(this, "Unable to connect into DB","DB insert error", JOptionPane.ERROR_MESSAGE);
+            se.printStackTrace();
+        }
     }
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -72,9 +93,9 @@ public class AddVendor extends Distribution {
         search_btn = new javax.swing.JButton();
         reset_btn = new javax.swing.JButton();
         jLabel49 = new javax.swing.JLabel();
-        jTextField38 = new javax.swing.JTextField();
         save_btn2 = new javax.swing.JButton();
         edit_btn = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
 
         addvendor.setBackground(new java.awt.Color(202, 254, 227));
@@ -84,13 +105,13 @@ public class AddVendor extends Distribution {
         print.setBackground(new java.awt.Color(48, 214, 48));
         print.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         print.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itpshnew/images/icons8_Print_40px.png"))); // NOI18N
-        print.setText("  Print");
+        print.setText("Generate Report");
         print.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 printActionPerformed(evt);
             }
         });
-        addvendor.add(print, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 660, 200, 50));
+        addvendor.add(print, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 660, 320, 50));
 
         jPanel9.setBackground(new java.awt.Color(100, 199, 150));
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -101,7 +122,7 @@ public class AddVendor extends Distribution {
 
         jLabel39.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel39.setText("Vendor Name");
-        jPanel9.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 110, 30));
+        jPanel9.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 130, 30));
 
         jLabel40.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel40.setText("Address");
@@ -116,8 +137,8 @@ public class AddVendor extends Distribution {
         jPanel9.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 150, 30));
 
         jLabel43.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel43.setText("Shipping Costs");
-        jPanel9.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 150, 30));
+        jLabel43.setText("<html>Shipping Costs<br>\n(per hour)\n</html>");
+        jPanel9.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 150, 50));
         jPanel9.add(jTextField40, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 220, 25));
         jPanel9.add(jTextField50, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 220, 25));
         jPanel9.add(jTextField29, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 220, 25));
@@ -197,8 +218,8 @@ public class AddVendor extends Distribution {
         jPanel10.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 150, 30));
 
         jLabel48.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel48.setText("Shipping Costs");
-        jPanel10.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 150, 30));
+        jLabel48.setText("<html>Shipping Costs<br>\n(per hour)\n</html>");
+        jPanel10.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 150, 50));
 
         jTextField34.setEditable(false);
         jPanel10.add(jTextField34, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 220, 25));
@@ -241,13 +262,6 @@ public class AddVendor extends Distribution {
         jLabel49.setText("Search ID");
         jPanel10.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 90, 40));
 
-        jTextField38.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField38ActionPerformed(evt);
-            }
-        });
-        jPanel10.add(jTextField38, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 220, 30));
-
         save_btn2.setBackground(new java.awt.Color(31, 233, 133));
         save_btn2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         save_btn2.setText("Save");
@@ -267,6 +281,8 @@ public class AddVendor extends Distribution {
             }
         });
         jPanel10.add(edit_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 110, 35));
+
+        jPanel10.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 190, 30));
 
         addvendor.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 70, 470, 370));
 
@@ -292,7 +308,7 @@ public class AddVendor extends Distribution {
     }// </editor-fold>//GEN-END:initComponents
 
     private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
-        // TODO add your handling code here:
+        genIReport();
     }//GEN-LAST:event_printActionPerformed
 
     private void jTextField31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField31ActionPerformed
@@ -368,27 +384,27 @@ public class AddVendor extends Distribution {
     }//GEN-LAST:event_jTextField36ActionPerformed
 
     private void search_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_btnActionPerformed
-        String key = jTextField40.getText();
-        String search = "select Vendor_name,Shipping_Cost_ph,address,email,telephone FROM vendor "
-        +"where Vendor_ID LIKE '%"+key+"%'";
+       
         try {
-            pst = con.prepareStatement(search);
-            rs = pst.executeQuery();
-            vendoradd_table.setModel(DbUtils.resultSetToTableModel(rs));
-            if(rs.next())
+             String key = jComboBox1.getSelectedItem().toString();
+            String search = "select Vendor_ID,Vendor_name,Shipping_Cost_ph,Address,Email,Telephone FROM vendor "
+                +"where Vendor_ID = '"+key+"'";
+            
+            pst=con.createStatement();
+            rs = pst.executeQuery(search);
+            if(pst.getResultSet().next())
             {
-            jTextField33.setText(rs.getString("Vendor_name"));
-            jTextField34.setText(rs.getString("address"));
-            jTextField35.setText(rs.getString("email"));
-            jTextField36.setText(rs.getString("telephone"));
-            jTextField37.setText(rs.getString("Shipping_Cost_ph"));
+                jTextField33.setText(rs.getString("Vendor_name"));
+                jTextField34.setText(rs.getString("address"));
+                jTextField35.setText(rs.getString("email"));
+                jTextField36.setText(rs.getString("telephone"));
+                jTextField37.setText(rs.getString("Shipping_Cost_ph"));
             }
-            else{
-                JOptionPane.showMessageDialog(this, "Reached end of resultset.",
+            else
+            {
+                JOptionPane.showMessageDialog(this, "No Results.",
                 "Error", JOptionPane.ERROR_MESSAGE);
-                
             }
-
         }
         catch(NullPointerException npe)
         {
@@ -401,7 +417,6 @@ public class AddVendor extends Distribution {
                 "Error", JOptionPane.ERROR_MESSAGE);
             se.printStackTrace();
         }
-        tableload(vendoradd_table,"select * FROM vendor");
     }//GEN-LAST:event_search_btnActionPerformed
 
     private void reset_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_btnActionPerformed
@@ -410,22 +425,17 @@ public class AddVendor extends Distribution {
         jTextField35.setText("");
         jTextField36.setText("");
         jTextField37.setText("");
-        jTextField38.setText("");
     }//GEN-LAST:event_reset_btnActionPerformed
-
-    private void jTextField38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField38ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField38ActionPerformed
 
     private void save_btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_btn2ActionPerformed
 
         try
         {
             String VID,vName,address,email,phone,shipcost;
-            VID=jTextField38.getText();
+            VID=jComboBox1.getSelectedItem().toString();
             vName=jTextField33.getText();
             address=jTextField34.getText();
-            if(jTextField30.getText().matches("^[A-Za-z]{1,}+@+[A-Za-z]{1,}+\\.+com$"))
+            if(jTextField35.getText().matches("^[A-Za-z]{1,}+@+[A-Za-z]{1,}+\\.+com$"))
               email=jTextField35.getText();
             else
             {
@@ -442,14 +452,22 @@ public class AddVendor extends Distribution {
 
             Statement add_vendor = con.createStatement();
 
-            add_vendor.execute("update vendor set vName='"+vName+"',address='"+address+"',email='"+email+"',"
-                + "phone='"+phone+"',Shipping_Cost_ph='"+shipcost+"' where Vendor_ID='"+VID+"'");
+            add_vendor.execute("update vendor set Vendor_name='"+vName+"',Address='"+address+"',Email='"+email+"',"
+                + "Telephone='"+phone+"',Shipping_Cost_ph='"+shipcost+"' where Vendor_ID='"+VID+"'");
             JOptionPane.showMessageDialog(this, " Insertion successful","Vendor has been updated.", JOptionPane.INFORMATION_MESSAGE);
+            
+            jTextField33.setEditable(false);
+            jTextField34.setEditable(false);
+            jTextField35.setEditable(false);
+            jTextField36.setEditable(false);
+            jTextField37.setEditable(false);
+        
             tableload(vendoradd_table,"select * FROM vendor");
         }
         catch(SQLException se)
         {
             JOptionPane.showMessageDialog(this, " Database Insert Error","Unable to update DB", JOptionPane.ERROR_MESSAGE);
+            se.printStackTrace();
         }
         catch(NumberFormatException e)
         {
@@ -466,11 +484,27 @@ public class AddVendor extends Distribution {
         jTextField37.setEditable(true);
     }//GEN-LAST:event_edit_btnActionPerformed
 
+    public void genIReport()
+    {
+        try
+        {
+            JasperCompileManager.compileReportToFile("reports/Vendor_Report.jrxml", "reports/Vendor_Report.jasper");
+            JasperFillManager.fillReportToFile("reports/Vendor_Report.jasper",
+                    "reports/Vendor_Report.jrprint", null, con);
+            JasperViewer.viewReport("reports/Vendor_Report.jrprint", false, false);
+        }
+        catch(JRException e)
+        {
+            JOptionPane.showMessageDialog(this, "Unable to generate report.", "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel addvendor;
     private javax.swing.JButton clear_btn;
     private javax.swing.JButton edit_btn;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel40;
@@ -496,7 +530,6 @@ public class AddVendor extends Distribution {
     private javax.swing.JTextField jTextField35;
     private javax.swing.JTextField jTextField36;
     private javax.swing.JTextField jTextField37;
-    private javax.swing.JTextField jTextField38;
     private javax.swing.JTextField jTextField40;
     private javax.swing.JTextField jTextField50;
     private javax.swing.JButton print;

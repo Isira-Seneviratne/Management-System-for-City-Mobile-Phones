@@ -6,6 +6,7 @@
 package itpshnew.hr;
 
 import java.sql.SQLException;
+import java.text.DateFormatSymbols;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -185,54 +186,16 @@ public class Salary extends HR {
 
         String empid=jTextField32.getText();
         int mo=jMonthChooser1.getMonth()+1;
-        String Str1=Integer.toString(mo);
-        switch (mo) {
-            case 1:
-                Str1="January";
-                break;
-            case 2:
-                Str1="February";
-                break;
-            case 3:
-                Str1="March";
-                break;
-            case 4:
-                Str1="April";
-                break;
-            case 5:
-                Str1="May";
-                break;
-            case 6:
-                Str1="June";
-                break;
-            case 7:
-                Str1="July";
-                break;
-            case 8:
-                Str1="August";
-                break;
-            case 9:
-                Str1="September";
-                break;
-            case 10:
-                Str1="October";
-                break;
-            case 11:
-                Str1="November";
-                break;
-            case 12:
-                Str1="December";
-                break;
-            default:
-                break;
-        }
+        String Str1=new DateFormatSymbols().getMonths()[mo];
 
-        try{
+        try
+        {
             String sql="SELECT WorkingHours,OtHours FROM monthlyatttendance WHERE EmpID='"+empid+"' and Month='"+Str1+"'";
             pst=con.prepareStatement(sql);
             rs=pst.executeQuery();
 
-            while(rs.next()){
+            while(rs.next())
+            {
                 String workHours=rs.getString("WorkingHours");
                 String OtHours=rs.getString("OtHours");
                 int x=Integer.parseInt(OtHours);
@@ -273,12 +236,12 @@ public class Salary extends HR {
                     double netSal=grossSal-epf;
                     String NetSal=String.valueOf( netSal);
                     jTextField8.setText(NetSal);
-
                 }
-
             }
-        }catch(Exception e){
-            System.out.println(e);
+        }
+        catch(SQLException e)
+        {
+            JOptionPane.showMessageDialog(this, "An error occurred while getting the current employees.", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_save_btn8ActionPerformed
@@ -293,47 +256,7 @@ public class Salary extends HR {
         // String month =  Date_Format.format(jMonthChooser1.ge());
 
         int mo=jMonthChooser1.getMonth()+1;
-        String Str1=Integer.toString(mo);
-        switch (mo) {
-            case 1:
-                Str1="january";
-                break;
-            case 2:
-                Str1="February";
-                break;
-            case 3:
-                Str1="March";
-                break;
-            case 4:
-                Str1="April";
-                break;
-            case 5:
-                Str1="May";
-                break;
-            case 6:
-                Str1="June";
-                break;
-            case 7:
-                Str1="July";
-                break;
-            case 8:
-                Str1="August";
-                break;
-            case 9:
-                Str1="September";
-                break;
-            case 10:
-                Str1="October";
-                break;
-            case 11:
-                Str1="November";
-                break;
-            case 12:
-                Str1="December";
-                break;
-            default:
-                break;
-        }
+        String Str1=new DateFormatSymbols().getMonths()[mo];
 
         String grosssal= jTextField14.getText();
         String epf = jTextField13.getText();

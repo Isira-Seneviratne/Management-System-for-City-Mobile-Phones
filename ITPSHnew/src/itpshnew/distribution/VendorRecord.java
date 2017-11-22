@@ -8,6 +8,10 @@ package itpshnew.distribution;
 import itpshnew.DateTimeFunctions;
 import java.sql.*;
 import javax.swing.*;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.view.JasperViewer;
 /**
  *
  * @author Bhanu
@@ -27,6 +31,26 @@ public class VendorRecord extends Distribution {
         initComponents();
         loaded = true;
         tableload(vendor_rectable,"select * FROM shipping_rec where ship_type='Vendor'");
+        try
+        {
+        Statement stmt1 = con.createStatement( );
+        ResultSet a = stmt1.executeQuery("select Vendor_ID from vendor");
+        while(a.next())
+        {
+            jComboBox1.addItem(a.getString("Vendor_ID"));
+        }
+        
+        a = stmt1.executeQuery("select modelCode from item");
+        while(a.next())
+        {
+            jComboBox2.addItem(a.getString("modelCode"));
+        }
+        }
+        catch(SQLException se)
+        {
+            JOptionPane.showMessageDialog(this, "Unable to connect into DB","DB insert error", JOptionPane.ERROR_MESSAGE);
+            se.printStackTrace();
+        }
     }
 
     /**
@@ -41,11 +65,9 @@ public class VendorRecord extends Distribution {
         vendorrecord = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         jLabel50 = new javax.swing.JLabel();
-        jTextField39 = new javax.swing.JTextField();
         jLabel53 = new javax.swing.JLabel();
         jLabel55 = new javax.swing.JLabel();
         jTextField42 = new javax.swing.JTextField();
-        jTextField44 = new javax.swing.JTextField();
         jLabel56 = new javax.swing.JLabel();
         jTextField45 = new javax.swing.JTextField();
         jLabel58 = new javax.swing.JLabel();
@@ -57,6 +79,8 @@ public class VendorRecord extends Distribution {
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         vendor_rectable = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
@@ -74,17 +98,15 @@ public class VendorRecord extends Distribution {
         jLabel50.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel50.setText("Vendor ID");
         jPanel11.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 110, 30));
-        jPanel11.add(jTextField39, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 220, 25));
 
         jLabel53.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel53.setText("Time Taken");
-        jPanel11.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 110, 30));
+        jLabel53.setText("Time Taken(hrs)");
+        jPanel11.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 150, 30));
 
         jLabel55.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel55.setText("Item Model");
         jPanel11.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 150, 30));
         jPanel11.add(jTextField42, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 80, 220, 25));
-        jPanel11.add(jTextField44, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 220, 25));
 
         jLabel56.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel56.setText("Quantity");
@@ -92,14 +114,18 @@ public class VendorRecord extends Distribution {
         jPanel11.add(jTextField45, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 40, 220, 25));
 
         jLabel58.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel58.setText("Cost");
+        jLabel58.setText("Item Cost");
         jPanel11.add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 230, 150, 30));
+
+        jTextField46.setEditable(false);
         jPanel11.add(jTextField46, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 230, 220, 25));
 
         jLabel54.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel54.setText("Shipping ID");
         jPanel11.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 110, 30));
         jPanel11.add(jTextField43, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 220, 25));
+
+        jTextField47.setEditable(false);
         jPanel11.add(jTextField47, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 180, 220, 25));
 
         jLabel59.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -135,6 +161,10 @@ public class VendorRecord extends Distribution {
             }
         });
         jPanel11.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 130, 100, 30));
+
+        jPanel11.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 220, -1));
+
+        jPanel11.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 220, -1));
 
         vendorrecord.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 1050, 280));
 
@@ -184,13 +214,8 @@ public class VendorRecord extends Distribution {
         try
         {
             String SID, VID, modelCode, qty, shipcost, itemcost, type;
-            if(jTextField39.getText().matches("V\\d{3,}"))
-                VID = jTextField39.getText();
-            else
-            {
-                JOptionPane.showMessageDialog(null,"Incorrect VID format", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
+            VID = jComboBox1.getSelectedItem().toString();
+            
             if( jTextField43.getText().matches("S\\d{3,}"))
                 SID = jTextField43.getText();
             else
@@ -198,7 +223,7 @@ public class VendorRecord extends Distribution {
                 JOptionPane.showMessageDialog(null,"Incorrect SID format", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            modelCode = jTextField44.getText();
+            modelCode = jComboBox2.getSelectedItem().toString();
             qty = jTextField45.getText();
             if(!jTextField47.getText().equals(""))                
                 shipcost = jTextField47.getText();
@@ -256,8 +281,6 @@ public class VendorRecord extends Distribution {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         jTextField43.setText("");
-        jTextField39.setText("");
-        jTextField44.setText("");
         jTextField45.setText("");
         jTextField42.setText("");
         jTextField47.setText("");
@@ -268,10 +291,9 @@ public class VendorRecord extends Distribution {
 
         try
         {
-            String VID = jTextField39.getText();
+            String VID = jComboBox1.getSelectedItem().toString();
             int timetaken = Integer.parseInt(jTextField42.getText());
-            String modelcode=jTextField44.getText();
-
+            String modelcode=jComboBox2.getSelectedItem().toString();
             Statement stmt1 = con.createStatement( );
             ResultSet rsd = stmt1.executeQuery("select Shipping_Cost_ph from vendor where Vendor_ID='"+VID+"'");
             rsd.next();
@@ -297,7 +319,18 @@ public class VendorRecord extends Distribution {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void print1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print1ActionPerformed
-        // TODO add your handling code here:
+        try
+        {
+            JasperCompileManager.compileReportToFile("reports/Shipping_Vendor_Report.jrxml", "reports/Shipping_Report.jasper");
+            JasperFillManager.fillReportToFile("reports/Shipping_Vendor_Report.jasper",
+                    "reports/Shipping_Vendor_Report.jrprint", null, con);
+            JasperViewer.viewReport("reports/Shipping_Vendor_Report.jrprint", false, false);
+        }
+        catch(JRException e)
+        {
+            JOptionPane.showMessageDialog(this, "Unable to generate report.", "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_print1ActionPerformed
 
 
@@ -305,6 +338,8 @@ public class VendorRecord extends Distribution {
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel53;
@@ -315,10 +350,8 @@ public class VendorRecord extends Distribution {
     private javax.swing.JLabel jLabel59;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField39;
     private javax.swing.JTextField jTextField42;
     private javax.swing.JTextField jTextField43;
-    private javax.swing.JTextField jTextField44;
     private javax.swing.JTextField jTextField45;
     private javax.swing.JTextField jTextField46;
     private javax.swing.JTextField jTextField47;

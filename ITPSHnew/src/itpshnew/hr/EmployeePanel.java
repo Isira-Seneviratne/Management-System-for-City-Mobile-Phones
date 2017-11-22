@@ -125,11 +125,6 @@ public class EmployeePanel extends HR {
                 jtableMouseClicked(evt);
             }
         });
-        jtable.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jtablePropertyChange(evt);
-            }
-        });
         jScrollPane1.setViewportView(jtable);
 
         employee_panel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 1040, 90));
@@ -156,11 +151,6 @@ public class EmployeePanel extends HR {
         jPanel2.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 110, 30));
 
         namenbox.setText("           ");
-        namenbox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                namenboxActionPerformed(evt);
-            }
-        });
         jPanel2.add(namenbox, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 180, 25));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -188,12 +178,6 @@ public class EmployeePanel extends HR {
         jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 110, 30));
         jPanel2.add(addressnbox, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, 180, 25));
         jPanel2.add(emailnbox, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, 180, 25));
-
-        mobilenbox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mobilenboxActionPerformed(evt);
-            }
-        });
         jPanel2.add(mobilenbox, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, 180, 25));
         jPanel2.add(empidnbox, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 180, 25));
         jPanel2.add(jobidnbox, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 310, 180, 25));
@@ -317,19 +301,20 @@ public class EmployeePanel extends HR {
     private void showtable(){}
     
     private void jtableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtableMouseClicked
-        try{
+        try
+        {
             DefaultTableModel model=(DefaultTableModel)jtable.getModel();
             int r = jtable.getSelectedRow();
             SimpleDateFormat Date_Format = new SimpleDateFormat("yyyy-MM-dd");
 
             String name = jtable.getValueAt(r, 0).toString();
-            Date dob = new SimpleDateFormat("yyyy-MM-dd").parse((String)model.getValueAt(r, 1).toString());
+            Date dob = Date_Format.parse((String)model.getValueAt(r, 1).toString());
             String address= jtable.getValueAt(r, 2).toString();
             String email =jtable.getValueAt(r, 3).toString();
             String mobile=jtable.getValueAt(r, 4).toString();
             String empid= jtable.getValueAt(r, 5).toString();
             String jobid= jtable.getValueAt(r,6).toString();
-            Date jobDate = new SimpleDateFormat("yyyy-MM-dd").parse((String)model.getValueAt(r, 7).toString());
+            Date jobDate = Date_Format.parse((String)model.getValueAt(r, 7).toString());
             String bsal=jtable.getValueAt(r,8).toString();
             String rate=jtable.getValueAt(r,9).toString();
             System.out.println(name);
@@ -345,20 +330,19 @@ public class EmployeePanel extends HR {
             jTextField1.setText(bsal);
             jTextField2.setText(rate);
 
-        }catch(Exception e){
+        }
+        catch(Exception e)
+        {
             System.out.println(e);
         }
     }//GEN-LAST:event_jtableMouseClicked
-
-    private void jtablePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jtablePropertyChange
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtablePropertyChange
 
     private void refreshbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshbtnActionPerformed
         // TODO add your handling code here:
         //refresh
         DefaultTableModel model=(DefaultTableModel)jtable.getModel();
-        while(model.getRowCount()>0){
+        while(model.getRowCount()>0)
+        {
             model.setRowCount(0);
         }
 
@@ -376,14 +360,6 @@ public class EmployeePanel extends HR {
 
     }//GEN-LAST:event_refreshbtnActionPerformed
 
-    private void namenboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namenboxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_namenboxActionPerformed
-
-    private void mobilenboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mobilenboxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mobilenboxActionPerformed
-
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
@@ -398,7 +374,8 @@ public class EmployeePanel extends HR {
         valid.isMail(emailnbox.getText(),jLabel15);
         valid.isContact(mobilenbox.getText(),jLabel16);
         boolean bool =valid.doublecheck(jTextField1.getText());
-        if(bool==true){
+        if(bool==true)
+        {
             jLabel34.setText("Please Enter Valid Salary");
         }
         else{

@@ -22,7 +22,7 @@ public class validation {
     jLabel.setText("Please enter a value");
     }
     else{
-    jLabel.setText("");;
+    jLabel.setText("");
     }
     }
     
