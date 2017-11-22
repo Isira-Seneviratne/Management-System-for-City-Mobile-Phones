@@ -8,6 +8,10 @@ package itpshnew.distribution;
 import itpshnew.DateTimeFunctions;
 import java.sql.*;
 import javax.swing.*;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.view.JasperViewer;
 /**
  *
  * @author Bhanu
@@ -97,7 +101,7 @@ public class VendorRecord extends Distribution {
 
         jLabel53.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel53.setText("Time Taken(hrs)");
-        jPanel11.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 80, 150, 30));
+        jPanel11.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 150, 30));
 
         jLabel55.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel55.setText("Item Model");
@@ -112,12 +116,16 @@ public class VendorRecord extends Distribution {
         jLabel58.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel58.setText("Item Cost");
         jPanel11.add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 230, 150, 30));
+
+        jTextField46.setEditable(false);
         jPanel11.add(jTextField46, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 230, 220, 25));
 
         jLabel54.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel54.setText("Shipping ID");
         jPanel11.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 110, 30));
         jPanel11.add(jTextField43, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 220, 25));
+
+        jTextField47.setEditable(false);
         jPanel11.add(jTextField47, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 180, 220, 25));
 
         jLabel59.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -311,7 +319,18 @@ public class VendorRecord extends Distribution {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void print1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print1ActionPerformed
-        // TODO add your handling code here:
+        try
+        {
+            JasperCompileManager.compileReportToFile("reports/Shipping_Vendor_Report.jrxml", "reports/Shipping_Report.jasper");
+            JasperFillManager.fillReportToFile("reports/Shipping_Vendor_Report.jasper",
+                    "reports/Shipping_Vendor_Report.jrprint", null, con);
+            JasperViewer.viewReport("reports/Shipping_Vendor_Report.jrprint", false, false);
+        }
+        catch(JRException e)
+        {
+            JOptionPane.showMessageDialog(this, "Unable to generate report.", "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_print1ActionPerformed
 
 

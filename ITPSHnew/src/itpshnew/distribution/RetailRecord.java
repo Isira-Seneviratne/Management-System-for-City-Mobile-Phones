@@ -8,6 +8,10 @@ package itpshnew.distribution;
 import itpshnew.DateTimeFunctions;
 import java.sql.*;
 import javax.swing.*;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.view.JasperViewer;
 /**
  *
  * @author Bhanu
@@ -100,6 +104,8 @@ public class RetailRecord extends Distribution {
         jLabel64.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         jLabel64.setText("Item Price");
         jPanel12.add(jLabel64, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, 150, 30));
+
+        jTextField53.setEditable(false);
         jPanel12.add(jTextField53, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 140, 220, 25));
 
         jLabel65.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
@@ -287,7 +293,18 @@ public class RetailRecord extends Distribution {
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void print2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print2ActionPerformed
-        // TODO add your handling code here:
+        try
+        {
+            JasperCompileManager.compileReportToFile("reports/Shipping_Retail_Report.jrxml", "reports/Shipping_Report.jasper");
+            JasperFillManager.fillReportToFile("reports/Shipping_Retail_Report.jasper",
+                    "reports/Shipping_Retail_Report.jrprint", null, con);
+            JasperViewer.viewReport("reports/Shipping_Retail_Report.jrprint", false, false);
+        }
+        catch(JRException e)
+        {
+            JOptionPane.showMessageDialog(this, "Unable to generate report.", "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_print2ActionPerformed
 
 
